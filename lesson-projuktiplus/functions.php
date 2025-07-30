@@ -43,6 +43,9 @@ add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
 
 
 function lessonlms_theme_register(){
+    
+    add_theme_support('post-thumbnails');
+
     add_theme_support('custom-logo',array(
         'height' => 34,
         'width'=> 85,

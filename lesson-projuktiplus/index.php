@@ -421,151 +421,64 @@
                 </div>
 
 
-                <div class="blog-wrapper">
-                    <!----- blog-1 ----->
-                    <div class="sngle-blog blog-1">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img1.png" alt="course-1">
-                        </div>
+             <div class="blog-wrapper">
+    <?php
+    $blog_posts = new WP_Query(array(
+        'post_type' => 'post',
+        'posts_per_page' => 6,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+    ));
 
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
+    if ($blog_posts->have_posts()) :
+        while ($blog_posts->have_posts()) : $blog_posts->the_post();
+    ?>
+            <div class="sngle-blog">
+                <div class="img">
+                    <a href="<?php the_permalink(); ?>">
+                        <?php
+                        if (has_post_thumbnail()) {
+                            the_post_thumbnail('large');
+                        } else {
+                            echo '<img src="' . get_template_directory_uri() . '/assets/images/blog-img1.png" alt="Default Image">';
+                        }
+                        ?>
+                    </a>
+                </div>
 
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn read-more">Read More</div>
-                        </div>
+                <div class="single-blog-details">
+                    <div class="date">
+                        <div class="yellow-cercel"></div>
+                        <span><?php echo get_the_date('d F Y'); ?></span>
                     </div>
 
-                    <!----- blog-2 ----->
-                    <div class="sngle-blog blog-2">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img2.png" alt="course-1">
-                        </div>
+                    <hr>
 
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
-
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn black-btn read-more">Read More</div>
-                        </div>
+                    <div class="blog-title">
+                        <span>
+                            <a href="<?php the_permalink(); ?>">
+                                <?php the_title(); ?>
+                            </a>
+                        </span>
                     </div>
 
-                    <!----- blog-3 ----->
-                    <div class="sngle-blog blog-3">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img3.png" alt="course-1">
-                        </div>
-
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
-
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn black-btn read-more">Read More</div>
-                        </div>
-                    </div>
-
-                    <!----- blog-1 ----->
-                    <div class="sngle-blog blog-4">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img1.png" alt="course-1">
-                        </div>
-
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
-
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn black-btn read-more">Read More</div>
-                        </div>
-                    </div>
-
-                    <!----- blog-2 ----->
-                    <div class="sngle-blog blog-4">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img2.png" alt="course-1">
-                        </div>
-
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
-
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn black-btn read-more">Read More</div>
-                        </div>
-                    </div>
-
-                    <!----- blog-3 ----->
-                    <div class="sngle-blog blog-6">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog-img3.png" alt="course-1">
-                        </div>
-
-                        <div class="single-blog-details">
-                            <!----- blog-details ----->
-                            <div class="date">
-                                <div class="yellow-cercel"></div>
-                                <span>21 November 2021</span>
-                            </div>
-
-                            <hr>
-
-                            <div class="blog-title">
-                                <span>How to become a pro web designer in 2022 and get remot job?</span>
-                            </div>
-
-                            <!----- btn ----->
-                            <div class="yellow-bg-btn black-btn read-more">Read More</div>
-                        </div>
+                    <div class="yellow-bg-btn read-more">
+                        <a href="<?php the_permalink(); ?>">
+                            <?php _e('Read More', 'lessonlms'); ?>
+                        </a>
                     </div>
                 </div>
+            </div>
+    <?php
+        endwhile;
+        wp_reset_postdata();
+    else :
+        echo '<p>' . __('No Blog post found', 'lessonlms') . '</p>';
+    endif;
+    ?>
+</div>
+
             </div>
         </section>
     </main>
