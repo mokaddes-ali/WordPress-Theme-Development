@@ -249,3 +249,110 @@ function lessonlms_customize_register($wp_customize) {
       ));
 }
 add_action('customize_register','lessonlms_customize_register');
+
+
+
+
+
+function mytheme_customize_register($wp_customize) {
+    // Quote Section
+    $wp_customize->add_section('blog_quote_section', array(
+        'title' => __('Blog Quote Section', 'mytheme'),
+        'priority' => 30,
+    ));
+    
+    $wp_customize->add_setting('blog_quote_text', array(
+        'default' => 'Cleaning is more than just visiting places—it\'s about creating lasting memories, discovering new cultures experiencing the extraordinary.',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_quote_text', array(
+        'label' => __('Quote Text', 'mytheme'),
+        'section' => 'blog_quote_section',
+        'type' => 'textarea',
+    ));
+    
+    $wp_customize->add_setting('blog_quote_author', array(
+        'default' => 'Don Guidelines',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_quote_author', array(
+        'label' => __('Quote Author', 'mytheme'),
+        'section' => 'blog_quote_section',
+        'type' => 'text',
+    ));
+    
+    // Secondary Image Section
+    $wp_customize->add_section('blog_secondary_section', array(
+        'title' => __('Blog Secondary Section', 'mytheme'),
+        'priority' => 31,
+    ));
+    
+    $wp_customize->add_setting('blog_secondary_image');
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'blog_secondary_image', array(
+        'label' => __('Secondary Image', 'mytheme'),
+        'section' => 'blog_secondary_section',
+        'settings' => 'blog_secondary_image',
+    )));
+    
+    $wp_customize->add_setting('blog_secondary_text', array(
+        'default' => 'Cleaning is more than just visiting places—it\'s about creating lasting memories, discovering new cultures, and experiencing the extraordinary.',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_secondary_text', array(
+        'label' => __('Secondary Text', 'mytheme'),
+        'section' => 'blog_secondary_section',
+        'type' => 'textarea',
+    ));
+    
+    // Author Section
+    $wp_customize->add_section('blog_author_section', array(
+        'title' => __('Blog Author Section', 'mytheme'),
+        'priority' => 32,
+    ));
+    
+    $wp_customize->add_setting('blog_author_image');
+    
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'blog_author_image', array(
+        'label' => __('Author Image', 'mytheme'),
+        'section' => 'blog_author_section',
+        'settings' => 'blog_author_image',
+    )));
+    
+    $wp_customize->add_setting('blog_author_title', array(
+        'default' => 'CEO & CO-FOUNDER',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_author_title', array(
+        'label' => __('Author Title', 'mytheme'),
+        'section' => 'blog_author_section',
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting('blog_author_name', array(
+        'default' => 'Lurch Schpellchek',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_author_name', array(
+        'label' => __('Author Name', 'mytheme'),
+        'section' => 'blog_author_section',
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting('blog_author_bio', array(
+        'default' => 'We believe that fresh clean clothes bring confidence and comfort. With a passion for quality and convenience, we provide top-notch laundry & dry cleaning services tailored to meet your needs.',
+        'transport' => 'refresh',
+    ));
+    
+    $wp_customize->add_control('blog_author_bio', array(
+        'label' => __('Author Bio', 'mytheme'),
+        'section' => 'blog_author_section',
+        'type' => 'textarea',
+    ));
+}
+add_action('customize_register', 'mytheme_customize_register');
