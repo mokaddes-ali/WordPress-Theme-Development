@@ -21,7 +21,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/header-logo.png" alt="<?php echo esc_attr(get_bloginfo('name'))?>" />
               </a>
             <?php endif; ?>
-                </div>
+            </div>
 
                 <!----- main-menu and button ----->
                 <div class="menu-button-wrapper">
