@@ -1359,8 +1359,10 @@ footer {
 
 .single-blog-img {
   width: 100%;
-  max-height: 300px;
+  height: 400px;
+  max-height: 420px;
   object-fit: cover;
+  display: block;
   margin-bottom: 20px;
 }
 
@@ -1369,11 +1371,25 @@ footer {
   line-height: 1.6;
 }
 
-.tags span{
+.tags span {
   background: #f0f0f0;
-  padding: 2px 5px;
-  border-radius: 8%;
-  margin-right: 15px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.tags span a {
+  text-decoration: none;
+  color: #333;
+}
+
+.tags span:hover {
+  background: #ff6b6b;
+}
+
+.tags span:hover a {
+  color: #fff;
 }
 
 .blog-share{
@@ -1638,6 +1654,14 @@ textarea {
 }
 
 
+ .sidebar-divider{
+  background:#FFB900;
+  height: 3px;
+  width: 50px;
+  margin-bottom: 15px;
+  margin-top: -5px;
+
+ }
 /* serach */
 .search-box {
   display: flex;
