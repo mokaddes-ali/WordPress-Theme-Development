@@ -13,6 +13,10 @@ function lessonlms_theme_enqueue_styles() {
     // box icon 
      wp_enqueue_style('boxicons-css', 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', array(), '2.1.4');
 
+     //font-awesome icon 
+     wp_enqueue_style('font-awesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css', array(), '7.0.0');
+
+
 
   // Responsive CSS
   wp_enqueue_style('responsive-style-css', get_template_directory_uri() . '/assets/css/responsive.css', array(), time());
@@ -356,3 +360,8 @@ function mytheme_customize_register($wp_customize) {
     ));
 }
 add_action('customize_register', 'mytheme_customize_register');
+
+// rank_math_the_breadcrumb
+if (function_exists('rank_math_the_breadcrumbs')) {
+    rank_math_the_breadcrumbs();
+}
