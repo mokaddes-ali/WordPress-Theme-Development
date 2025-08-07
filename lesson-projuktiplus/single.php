@@ -155,90 +155,65 @@ get_header();
 
 
 
-      <!-- Comment Section -->
+<!-- Comment Section -->
 <div class="comments">
-
   <?php
   $get_comment_count = get_comments_number();
-  if ($get_comment_count > 0) {
+  if ($get_comment_count > 0):
     echo '<h3>Comments: (' . esc_html($get_comment_count) . ')</h3>';
     echo '<div class="divider"></div>';
+  endif;
+
+  $comments = get_comments([
+    'post_id' => get_the_ID(),
+    'status' => 'approve',
+    'orderby' => 'comment_date',
+    'order' => 'ASC',
+  ]);
+
+   function render_comments($comments, $parent = 0, $depth = 0) {
+    foreach ($comments as $comment) {
+      if ((int)$comment->comment_parent === (int)$parent) {
+        ?>
+      <div class="comment-item <?php echo $parent > 0 ? 'reply depth-' . $depth : ''; ?>" id="comment-<?php echo $comment->comment_ID; ?>">
+          <?php echo get_avatar($comment, 50); ?>
+          <div class="comment-content">
+            <div class="comment-header">
+              <strong><?php echo esc_html($comment->comment_author); ?></strong>
+              <span class="time"><?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) ?> ago</span>
+            </div>
+            <p><?php echo esc_html($comment->comment_content); ?></p>
+
+            <button class="reply-btn" data-comment-id="<?php echo $comment->comment_ID; ?>">Reply</button>
+            <div class="reply-form-container" id="reply-form-<?php echo $comment->comment_ID; ?>"></div>
+
+            <?php render_comments($comments, $comment->comment_ID, $depth + 1); ?>
+          </div>
+        </div>
+        <?php
+      }
+    }
   }
 
-$comments_per_page = 8;
-$paged = isset($_GET['cpage']) ? (int)$_GET['cpage'] : 1;
-
-$args = array(
-  'post_id' => get_the_ID(),
-  'status' => 'approve',
-  'orderby' => 'comment_date',
-  'order' => 'ASC',
-  'parent' => 0,
-  'number' => $comments_per_page,
-  'offset' => ($paged - 1) * $comments_per_page,
-);
-
-$parent_comments = get_comments($args);
-$total_comments = get_comments([
-  'post_id' => get_the_ID(),
-  'status' => 'approve',
-  'parent' => 0,
-  'count' => true,
-]);
-
-$total_pages = ceil($total_comments / $comments_per_page);
-?>
-
-
-  <?php if ($parent_comments) : ?>
-  <div class="comment-list">
-    <?php foreach ($parent_comments as $comment) : ?>
-      <div class="comment-item" id="comment-<?php echo $comment->comment_ID; ?>">
-        <div class="comment-left">
-          <?php echo get_avatar($comment, 70); ?>
-        </div>
-        <div class="comment-right">
-          <div class="comment-header">
-            <strong><?php echo esc_html($comment->comment_author); ?></strong>
-            <span class="time"><?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) . ' ago'; ?></span>
-          </div>
-          <p class="comment-text"><?php echo esc_html($comment->comment_content); ?></p>
-          <a href="#" class="reply-btn"><i class="fa fa-reply"></i> Reply</a>
-        </div>
-      </div>
-
-      <?php
-      // Show replies
-      $replies = get_comments([
-        'post_id' => get_the_ID(),
-        'status' => 'approve',
-        'order' => 'ASC',
-        'parent' => $comment->comment_ID
-      ]);
-      ?>
-      <?php if ($replies) : ?>
-        <?php foreach ($replies as $reply) : ?>
-          <div class="comment-item reply" id="comment-<?php echo $reply->comment_ID; ?>">
-            <div class="comment-left">
-              <?php echo get_avatar($reply, 60); ?>
-            </div>
-            <div class="comment-right">
-              <div class="comment-header">
-                <strong><?php echo esc_html($reply->comment_author); ?></strong>
-                <span class="time"><?php echo esc_html(human_time_diff(strtotime($reply->comment_date), current_time('timestamp'))) . ' ago'; ?></span>
-              </div>
-              <p class="comment-text"><?php echo esc_html($reply->comment_content); ?></p>
-              <a href="#" class="reply-btn"><i class="fa fa-reply"></i> Reply</a>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      <?php endif; ?>
-    <?php endforeach; ?>
-  </div>
-<?php endif; ?>
-
+  if ($comments) {
+    echo '<div class="comment-list">';
+    render_comments($comments);
+    echo '</div>';
+  }
+  ?>
 </div>
 
+<!-- Hidden Reply Form Template -->
+<div id="hidden-reply-form" style="display: none;">
+  <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post" class="reply-form">
+    <input type="text" name="author" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="comment" rows="4" placeholder="Your Reply" required></textarea>
+    <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
+    <input type="hidden" name="comment_parent" value="0" class="comment_parent_input" />
+    <button type="submit">Submit Reply</button>
+  </form>
+</div>
 
 
  <!-- Comment form -->
@@ -255,18 +230,11 @@ $total_pages = ceil($total_comments / $comments_per_page);
             'class_submit' => 'comment-button',
             'label_submit' => 'Post Comment'
        ]);
-   ?>
+   
+  ?>
       <?php endwhile; else: ?>
       <p>No posts found.</p>
     <?php endif; ?>
-
-
-    <?php if ($paged < $total_pages): ?>
-  <div class="see-more-container" style="text-align:center; margin-top:20px;">
-    <a href="?cpage=<?php echo $paged + 1; ?>" class="see-more-btn" style="padding:10px 20px; background:#f56a6a; color:#fff; border-radius:5px; display:inline-block;">See More Comments</a>
-  </div>
-<?php endif; ?>
-
 
   </div>
 
