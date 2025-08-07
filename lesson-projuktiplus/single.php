@@ -164,55 +164,67 @@ get_header();
     echo '<div class="divider"></div>';
   endif;
 
-  $comments = get_comments([
+  $parent_comments = get_comments([
     'post_id' => get_the_ID(),
     'status' => 'approve',
     'orderby' => 'comment_date',
     'order' => 'ASC',
+    'parent' => 0
   ]);
+  ?>
 
-   function render_comments($comments, $parent = 0, $depth = 0) {
-    foreach ($comments as $comment) {
-      if ((int)$comment->comment_parent === (int)$parent) {
-        ?>
-      <div class="comment-item <?php echo $parent > 0 ? 'reply depth-' . $depth : ''; ?>" id="comment-<?php echo $comment->comment_ID; ?>">
-          <?php echo get_avatar($comment, 50); ?>
-          <div class="comment-content">
+  <?php if ($parent_comments): ?>
+    <div class="comment-list">
+      <?php foreach ($parent_comments as $comment): ?>
+        <div class="comment-item" id="comment-<?php echo $comment->comment_ID; ?>">
+          <div class="comment-left">
+            <?php echo get_avatar($comment, 70, ['class' => 'comment-avatar-image']); ?>
+          </div>
+          <div class="comment-right">
             <div class="comment-header">
               <strong><?php echo esc_html($comment->comment_author); ?></strong>
-              <span class="time"><?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) ?> ago</span>
+              <span class="time">
+                <?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) ?> ago
+              </span>
             </div>
-            <p><?php echo esc_html($comment->comment_content); ?></p>
+            <p class="comment-text"><?php echo esc_html($comment->comment_content); ?></p>
+            <a href="#" class="reply-btn">
+              <i class="fa-solid fa-reply"></i> Reply
+            </a>
 
-            <button class="reply-btn" data-comment-id="<?php echo $comment->comment_ID; ?>">Reply</button>
-            <div class="reply-form-container" id="reply-form-<?php echo $comment->comment_ID; ?>"></div>
+            <!-- Replies -->
+            <?php
+            $replies = get_comments([
+              'post_id' => get_the_ID(),
+              'status' => 'approve',
+              'orderby' => 'comment_date',
+              'order' => 'ASC',
+              'parent' => $comment->comment_ID
+            ]);
+            ?>
+            <?php if ($replies): ?>
+              <?php foreach ($replies as $reply): ?>
+                <div class="comment-item reply" id="comment-<?php echo $reply->comment_ID; ?>">
+                  <?php echo get_avatar($reply, 50); ?>
+                  <div class="comment-content">
+                    <div class="comment-header">
+                      <strong><?php echo esc_html($reply->comment_author); ?></strong>
+                      <span class="time"><?php echo esc_html(human_time_diff(strtotime($reply->comment_date), current_time('timestamp'))) ?> ago</span>
+                    </div>
+                    <p><?php echo esc_html($reply->comment_content); ?></p>
+                    <button class="reply-btn">
+                      <i class="fa-solid fa-reply"></i> Reply
+                    </button>
+                  </div>
+                </div>
+              <?php endforeach; ?>
+            <?php endif; ?>
 
-            <?php render_comments($comments, $comment->comment_ID, $depth + 1); ?>
           </div>
         </div>
-        <?php
-      }
-    }
-  }
-
-  if ($comments) {
-    echo '<div class="comment-list">';
-    render_comments($comments);
-    echo '</div>';
-  }
-  ?>
-</div>
-
-<!-- Hidden Reply Form Template -->
-<div id="hidden-reply-form" style="display: none;">
-  <form action="<?php echo site_url('/wp-comments-post.php'); ?>" method="post" class="reply-form">
-    <input type="text" name="author" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="comment" rows="4" placeholder="Your Reply" required></textarea>
-    <input type="hidden" name="comment_post_ID" value="<?php echo get_the_ID(); ?>" />
-    <input type="hidden" name="comment_parent" value="0" class="comment_parent_input" />
-    <button type="submit">Submit Reply</button>
-  </form>
+      <?php endforeach; ?>
+    </div>
+  <?php endif; ?>
 </div>
 
 

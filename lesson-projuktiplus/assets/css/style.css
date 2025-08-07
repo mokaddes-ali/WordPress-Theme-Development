@@ -1531,7 +1531,6 @@ footer {
   gap: 15px;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #ddd;
 }
 
 /* Avatar */
@@ -1584,7 +1583,7 @@ footer {
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: #0073aa;
+  color: #02121a;
   background: none;
   border: none;
   padding: 6px 0;
@@ -1601,7 +1600,6 @@ footer {
 /* First-level reply */
 .comment-item.reply {
   margin-left: 40px;
-  border-left: 2px solid #ddd;
   padding-left: 15px;
   padding-top: 15px;
   margin-top: 15px;
