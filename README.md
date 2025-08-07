@@ -46,7 +46,7 @@ The theme will support the following features:
 
 ---
 
-## 📂 Folder Structure (Optional Example)
+## 📂 Folder Structure (Example)
 
 ```bash
 theme-name/
