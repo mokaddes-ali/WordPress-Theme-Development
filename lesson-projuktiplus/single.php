@@ -143,73 +143,130 @@ get_header();
             </div>
           </div>
         </div>
-        <!-- Comment Section -->
-        <div class="comments">
-          <?php
-          $get_comment_count = get_comments_number();
-          if($get_comment_count > 0){
-            echo ' <h3>Comments: (' . $get_comment_count . ')</h3>';
-          }
 
-          wp_list_comments(array(
-               'style' => 'div',
-               'avatar_size' => 50,
-               'callback' => null,
-          ), get_comments(array(
-            'post_id' => get_the_ID()
-          )));
-          ?>
-         
-          <div class="divider"></div>
+            <!-- //  show comment list
+          // wp_list_comments(array(
+          //      'style' => 'div',
+          //      'avatar_size' => 50,
+          //      'callback' => null,
+          // ), get_comments(array(
+          //   'post_id' => get_the_ID()
+          // ))); -->
 
-          <!-- Comment 1 -->
-          <div class="comment-item">
-            <img src="https://i.pravatar.cc/40?img=1" alt="User 1">
-            <div class="comment-content">
-              <strong>John Doe</strong> - <span class="time">2 days ago</span>
-              <p>Great blog post. Really informative and helpful.</p>
-              <button class="reply-btn">
-                <i class="fa-solid fa-reply"></i> Reply
-              </button>
+
+
+      <!-- Comment Section -->
+<div class="comments">
+
+  <?php
+  $get_comment_count = get_comments_number();
+  if ($get_comment_count > 0) {
+    echo '<h3>Comments: (' . esc_html($get_comment_count) . ')</h3>';
+    echo '<div class="divider"></div>';
+  }
+
+$comments_per_page = 8;
+$paged = isset($_GET['cpage']) ? (int)$_GET['cpage'] : 1;
+
+$args = array(
+  'post_id' => get_the_ID(),
+  'status' => 'approve',
+  'orderby' => 'comment_date',
+  'order' => 'ASC',
+  'parent' => 0,
+  'number' => $comments_per_page,
+  'offset' => ($paged - 1) * $comments_per_page,
+);
+
+$parent_comments = get_comments($args);
+$total_comments = get_comments([
+  'post_id' => get_the_ID(),
+  'status' => 'approve',
+  'parent' => 0,
+  'count' => true,
+]);
+
+$total_pages = ceil($total_comments / $comments_per_page);
+?>
+
+
+  <?php if ($parent_comments) : ?>
+  <div class="comment-list">
+    <?php foreach ($parent_comments as $comment) : ?>
+      <div class="comment-item" id="comment-<?php echo $comment->comment_ID; ?>">
+        <div class="comment-left">
+          <?php echo get_avatar($comment, 70); ?>
+        </div>
+        <div class="comment-right">
+          <div class="comment-header">
+            <strong><?php echo esc_html($comment->comment_author); ?></strong>
+            <span class="time"><?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) . ' ago'; ?></span>
+          </div>
+          <p class="comment-text"><?php echo esc_html($comment->comment_content); ?></p>
+          <a href="#" class="reply-btn"><i class="fa fa-reply"></i> Reply</a>
+        </div>
+      </div>
+
+      <?php
+      // Show replies
+      $replies = get_comments([
+        'post_id' => get_the_ID(),
+        'status' => 'approve',
+        'order' => 'ASC',
+        'parent' => $comment->comment_ID
+      ]);
+      ?>
+      <?php if ($replies) : ?>
+        <?php foreach ($replies as $reply) : ?>
+          <div class="comment-item reply" id="comment-<?php echo $reply->comment_ID; ?>">
+            <div class="comment-left">
+              <?php echo get_avatar($reply, 60); ?>
+            </div>
+            <div class="comment-right">
+              <div class="comment-header">
+                <strong><?php echo esc_html($reply->comment_author); ?></strong>
+                <span class="time"><?php echo esc_html(human_time_diff(strtotime($reply->comment_date), current_time('timestamp'))) . ' ago'; ?></span>
+              </div>
+              <p class="comment-text"><?php echo esc_html($reply->comment_content); ?></p>
+              <a href="#" class="reply-btn"><i class="fa fa-reply"></i> Reply</a>
             </div>
           </div>
+        <?php endforeach; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </div>
+<?php endif; ?>
 
-          <!-- Comment 2 -->
-          <div class="comment-item reverse">
-            <div class="comment-content">
-              <strong>Jane Smith</strong> - <span class="time">2 days ago</span>
-              <p>Thanks for sharing this content!</p>
-              <button class="reply-btn">
-                <i class="fa-solid fa-reply"></i> Reply
-              </button>
-            </div>
-            <img src="https://i.pravatar.cc/40?img=2" alt="User 2">
-          </div>
-        </div>
+</div>
 
 
-        <div class="leave-comment">
-          <h3>Leave a Comment</h3>
-          <div class="divider"></div>
-          <form>
-            <div class="form-row">
-              <input type="text" placeholder="Your Name">
-              <input type="email" placeholder="Your Email">
-            </div>
-            <div class="form-row">
-              <textarea placeholder="Your Comment"></textarea>
-            </div>
-            <div class="comment-button-wrapper">
-              <button class="comment-button">
-                <i class="fa-solid fa-paper-plane"></i> Submit
-              </button>
-            </div>
 
-          </form>
-        </div>
+ <!-- Comment form -->
+   <?php 
+       comment_form([
+            'fields' => [
+              'author' => '<div class="form-row"><input type="text" id="author" name="author"  placeholder="Your Name">',
+              'email' => '<input type="email" id="email" name="email" placeholder="Your Email">
+            </div>'
+            ],
+            'comment_field' => '<div class="form-row">
+              <textarea id="comment" name="comment" placeholder="Your Comment"></textarea>
+            </div>',
+            'class_submit' => 'comment-button',
+            'label_submit' => 'Post Comment'
+       ]);
+   ?>
       <?php endwhile; else: ?>
       <p>No posts found.</p>
     <?php endif; ?>
+
+
+    <?php if ($paged < $total_pages): ?>
+  <div class="see-more-container" style="text-align:center; margin-top:20px;">
+    <a href="?cpage=<?php echo $paged + 1; ?>" class="see-more-btn" style="padding:10px 20px; background:#f56a6a; color:#fff; border-radius:5px; display:inline-block;">See More Comments</a>
+  </div>
+<?php endif; ?>
+
 
   </div>
 

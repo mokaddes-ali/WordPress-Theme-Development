@@ -10,8 +10,19 @@
  * 
  */
 
+ 
+   
+
 function mediplus_theme_style(){
-    wp_enqueue_style('custom_style', get_stylesheet_directory_uri() . '/assets/custom-style.css');
+      // box icon
+      wp_enqueue_style('boxicons-css', 'https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css', array(), '2.1.4');
+
+     //font-awesome icon 
+     wp_enqueue_style('font-awesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css', array(), '7.0.0');
+
+    wp_enqueue_style('custom_style', get_stylesheet_directory_uri() . '/assets/custom-style.css',array(), time());
+        //Main CSS
+    wp_enqueue_style('main-style', get_stylesheet_uri());
 }
 add_action('wp_enqueue_scripts', 'mediplus_theme_style');
 

@@ -93,4 +93,21 @@ jQuery(document).ready(function($){
         }
     ]
     });
+
+
+
+
+    // reply button
+     $('.reply-btn').on('click', function (e) {
+      e.preventDefault();
+
+      var commentId = $(this).data('common-id');
+      var targetForm = $('#reply-form-' + commentId);
+
+      // Onno shob form hide kore dibo
+      $('.reply-form-container').not(targetForm).slideUp();
+
+      // Ei form ta toggle korbo
+      targetForm.slideToggle();
+    });
 });
