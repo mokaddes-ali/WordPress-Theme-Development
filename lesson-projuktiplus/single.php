@@ -251,7 +251,7 @@ get_header();
   </div>
 
   <!-- Right Section Sidebar -->
-  <?php get_template_part('sections/sidebar'); ?>
+ <?php get_sidebar(); ?>
 
 </section>
 

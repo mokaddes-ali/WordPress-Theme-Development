@@ -71,24 +71,20 @@ add_action('after_setup_theme','lessonlms_theme_register');
 
 // Wideget and Sidebar
 
-function lessonlms_widgets_init() {
-	register_sidebar( array(
-		'name'          => __( 'Primary Sidebar', 'theme_name' ),
-		'id'            => 'sidebar-1',
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
-	register_sidebar( array(
-		'name'          => __( 'Secondary Sidebar', 'theme_name' ),
-		'id'            => 'sidebar-2',
-		'before_widget' => '<ul><li id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</li></ul>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
+function lessonlms_register_sidebar() {
+          register_sidebar([
+            'name' => __('Blog Sidebar', 'lessonlms'),
+             'id' => 'blog-sidebar',
+              'description'   => __( 'Add widgets here to appear in your sidebar.', 'lessonlms' ),
+              'before_widget' => ' <div class="card">',
+              'after_widget'  => '</div>',
+              'before_title'  => '<h4 class="blog-detail-right-heading">', 
+             'after_title'   => '</h4><div class="sidebar-divider"></div>',
+
+
+          ]);
 }
+add_action('widgets_init', 'lessonlms_register_sidebar');
 
 
 function lessonlms_customize_register($wp_customize) {
