@@ -51,19 +51,20 @@ get_header();
           ?>
         </div>
 
-        <div class="tags">
-          <strong>Tags:</strong>
-          <?php
-          if (get_the_tags()) {
-            the_tags('<span>', '</span><span>', '</span>');
-          } else {
-            echo '<span>No Tags</span>';
-          }
-          ?>
-          <!-- <span>Web Design</span>
-      <span>Development</span>
-      <span>Design</span> -->
-        </div>
+      <div class="tags">
+  <strong>Tags:</strong>
+  <?php
+    $tags = get_the_tags();
+    if ($tags) {
+      foreach ($tags as $tag) {
+        echo '<span>' . esc_html($tag->name) . '</span>';
+      }
+    } else {
+      echo '<span>No Tags</span>';
+    }
+  ?>
+</div>
+
 
         <div class="blog-share">
           <div class="share">

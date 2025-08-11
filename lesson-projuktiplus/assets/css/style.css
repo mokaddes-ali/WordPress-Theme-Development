@@ -1810,6 +1810,37 @@ textarea {
 }
 
 
+/* //category */
+
+.category-list ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  /* border-bottom: 1px solid #ddd; */
+  font-size: 16px;
+}
+
+
+/* tags */
+
+.tags a {
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-right: 10px;
+  margin-bottom: 8px;
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tags a:hover {
+  background: #ff6b6b;
+  color: #fff;
+}
+
 
 
 

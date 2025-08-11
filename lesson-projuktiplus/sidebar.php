@@ -55,27 +55,29 @@
     ?>
 </div>
 
-<?php endif; ?>
 
-
- <div class="card">
+<div class="card category-widget">
   <h4 class="blog-detail-right-heading"><?php echo __('Categories', 'lessonlms'); ?></h4>
   <div class="sidebar-divider"></div>
-
-  <?php 
+  <div class="category-list">
+ <ul>
+    <?php 
     wp_list_categories([
       'title_li'   => '',
       'show_count' => true,
-      'style'      => 'div',  
-      'separator'  => '',    
     ]);
   ?>
+
+ </ul>
+ </div>
+
 </div>
 
 <div class="card">
   <h4 class="blog-detail-right-heading"><?php echo __('Tags', 'lessonlms'); ?></h4>
   <div class="sidebar-divider"></div>
 
+<div class="tags">
   <?php 
     wp_tag_cloud([
       'smallest' => 12,
@@ -87,6 +89,17 @@
     ]);
   ?>
 </div>
+
+
+</div>
+
+
+<?php endif; ?>
+
+
+
+
+
 
 
 
