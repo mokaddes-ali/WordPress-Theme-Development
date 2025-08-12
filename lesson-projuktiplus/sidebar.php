@@ -1,17 +1,23 @@
-  <?php if(is_active_sidebar('blog-sidebar')):?>
-        <?php dynamic_sidebar('blog-sidebar');?>
-    <?php else: ?>
-  
+
   
   <div class="right">
 
+    <?php if(is_active_sidebar('blog-sidebar')):?>
+    <!-- default sidebar come from sidebar -->
+        <?php dynamic_sidebar('blog-sidebar');?>
+    <?php else: ?>
+      
     <div class="card">
-      <h4 class="blog-detail-right-heading">Search Posts</h4>
+      <h4 class="blog-detail-right-heading">
+         <?php 
+           echo __('Search Posts', 'lessonlms')
+           ?>
+        </h4>
           <div class="sidebar-divider"></div>
-     <div class="search-box">
-  <input type="text" placeholder="Search here...">
-  <button><i class="fa-solid fa-magnifying-glass"></i></button>
-</div>
+     <form role="search" action="<?php echo esc_url(home_url('/'));?>" method="get" class="search-box">
+         <input type="search" name="s" placeholder="<?php esc_attr_e('Search here...', 'lessonlms') ?>" value="<?php get_search_query(); ?>" required>
+         <button><i class="fa-solid fa-magnifying-glass"></i></button>
+       </form>
 
     </div>
 
@@ -93,8 +99,8 @@
 
 </div>
 
+  <?php endif; ?>
 
-<?php endif; ?>
 
 
 
@@ -105,7 +111,11 @@
 
 
     <div class="card">
-      <h4 class="blog-detail-right-heading">Follow Us</h4>
+      <h4 class="blog-detail-right-heading">
+        <?php 
+         echo __('Follow Us', 'lessonlms')
+      ?>
+      </h4>
         <div class="sidebar-divider"></div>
      <div class="social-icons">
   <!-- Facebook -->

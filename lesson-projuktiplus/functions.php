@@ -69,7 +69,7 @@ add_action('after_setup_theme','lessonlms_theme_register');
 
 
 
-// Wideget and Sidebar
+// <!-- // Wideget and Sidebar -->
 
 function lessonlms_register_sidebar() {
           register_sidebar([
