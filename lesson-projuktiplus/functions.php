@@ -175,19 +175,64 @@ function lessonlms_customize_register($wp_customize) {
       'type'=> 'url',
   ));
 
-     //Watch Button Text
-  $wp_customize->add_setting('watch_button_text',array(
-      'default'=> 'Watch Video',
-  ));
-
-  $wp_customize->add_control('watch_button_text',array(
-      'label'=> __('Vedio Button Text','lessonlms'),
-      'section'=> 'hero_section',
-      'type'=> 'text',
-  ));
 
 
-     
+    //   Recent engagement
+       $wp_customize->add_setting('recent_engagement_text',array(
+           'default'=> 'Recent engagement',
+       ));
+
+       $wp_customize->add_control('recent_engagement_text',array(
+           'label'=> __('Recent Engagement Text','lessonlms'),
+           'section'=> 'hero_section',
+           'type'=> 'text',
+       ));
+
+       // students count
+            $wp_customize->add_setting('student_count_text',array(
+                'default' => '50K', 'lessonlms'
+            ));
+
+            $wp_customize->add_control('student_count_text',array(
+                'label'=> __('Student Count Text','lessonlms'),
+                'section'=> 'hero_section',
+                'type'=> 'text',
+            ));
+
+    //    students label
+
+    $wp_customize->add_setting('student_label_text',array(
+        'default' => 'Students',
+    ));
+
+    $wp_customize->add_control('student_label_text',array(
+        'label'=> __('Student Label Text','lessonlms'),
+        'section'=> 'hero_section',
+        'type'=> 'text',
+    ));
+
+    // Cources Count
+    $wp_customize->add_setting('course_count_text',array(
+        'default' => '70+', 'lessonlms'
+    ));
+
+    $wp_customize->add_control('course_count_text', array(
+        'label' => __('Course Count Text','lessonlms'),
+        'section' => 'hero_section',
+        'type' => 'text',
+    ));
+
+    // Courses Label
+    $wp_customize->add_setting('course_label_text',array(
+        'default' => 'Courses',
+    ));
+
+    $wp_customize->add_control('course_label_text',array(
+        'label'=> __('Course Label Text','lessonlms'),
+        'section'=> 'hero_section',
+        'type'=> 'text',
+    ));
+
    // ======================
   //  Blog Section Start
   // ======================

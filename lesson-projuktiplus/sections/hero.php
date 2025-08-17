@@ -86,10 +86,14 @@
                         </div>
 
                         <div class="engagement">
-                            <span>Recent engagement</span>
+                            <span>
+                                <?php echo esc_html(get_theme_mod('recent_engagement_text', 'Recent engagement'));?>
+                            </span>
                             <div class="engagement-wrapper">
-                                <h3>50K <span>Students</span></h3>
-                                <h3>70+ <span>Courses</span></h3>
+                                <h3>
+                                    <?php echo esc_html(get_theme_mod('student_count_text', '50K')); ?>
+                                     <span><?php echo esc_html(get_theme_mod('student_label_text', 'Students')); ?></span></h3>
+                                <h3><?php echo esc_html(get_theme_mod('course_count_text', '70+')); ?> <span><?php echo esc_html(get_theme_mod('course_label_text', 'Courses')); ?></span></h3>
                             </div>
                         </div>
                     </div>
