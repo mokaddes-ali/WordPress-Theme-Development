@@ -20,8 +20,8 @@
                                 </svg>
 
                                 <div class="text">
-                                    <span>20 Courses</span>
-                                    <p>UI/UX Design</p>
+                                    <span><?php echo esc_html(get_theme_mod('uiux_design_count', '20')); ?> Courses</span>
+                                    <p><?php echo esc_html(get_theme_mod('uiux_design_label', 'UI/UX Design')); ?></p>
                                 </div>
                             </div>
 
@@ -33,8 +33,8 @@
                                 </svg>
 
                                 <div class="text">
-                                    <span>20 Courses</span>
-                                    <p>Development</p>
+                                    <span><?php echo esc_html(get_theme_mod( 'development_count', '20' )); ?> Courses</span>
+                                    <p><?php echo esc_html(get_theme_mod( 'development_label_text', 'Development' )); ?></p>
                                 </div>
                             </div>
 
@@ -45,8 +45,8 @@
                                 </svg>
 
                                 <div class="text">
-                                    <span>30 Courses</span>
-                                    <p>Marketing</p>
+                                    <span><?php echo esc_html(get_theme_mod('marketing_count')); ?> Courses</span>
+                                    <p><?php echo esc_html(get_theme_mod('marketing_label_text')); ?></p>
                                 </div>
                             </div>
                         </div>

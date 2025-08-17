@@ -233,6 +233,77 @@ function lessonlms_customize_register($wp_customize) {
         'type'=> 'text',
     ));
 
+
+     // UI/UX Design Count
+    $wp_customize->add_setting('uiux_design_count',array(
+        'default' => '20', 'lessonlms'
+    ));
+
+    $wp_customize->add_control('uiux_design_count', array(
+        'label' => __('UI/UX Design Count','lessonlms'),
+        'section' => 'hero_section',
+        'type' => 'number',
+    ));
+
+    // UI/UX Design Label
+    $wp_customize->add_setting('uiux_design_label',array(
+        'default' => 'UI/UX Design',
+    ));
+
+    $wp_customize->add_control('uiux_design_label',array(
+        'label'=> __('UI/UX Design Label','lessonlms'),
+        'section'=> 'hero_section',
+        'type'=> 'text',
+    ));
+
+     // Development Count
+    $wp_customize->add_setting('development_count',array(
+        'default' => '30', 'lessonlms'
+    ));
+
+    $wp_customize->add_control('development_count', array(
+        'label' => __('Development Count Text','lessonlms'),
+        'section' => 'hero_section',
+        'type' => 'number',
+    ));
+
+    // Development Count Label
+    $wp_customize->add_setting('development_label_text',array(
+        'default' => 'Development',
+    ));
+
+    $wp_customize->add_control('development_label_text',array(
+        'label'=> __('Development Label Text','lessonlms'),
+        'section'=> 'hero_section',
+        'type'=> 'text',
+    ));
+
+
+
+     // Marketing Count
+    $wp_customize->add_setting('marketing_count',array(
+        'default' => '20', 'lessonlms'
+    ));
+
+    $wp_customize->add_control('marketing_count', array(
+        'label' => __('Marketing Count','lessonlms'),
+        'section' => 'hero_section',
+        'type' => 'number',
+    ));
+
+    // Marketing Count Label
+    $wp_customize->add_setting('marketing_label_text',array(
+        'default' => 'Marketing',
+    ));
+
+    $wp_customize->add_control('marketing_label_text',array(
+        'label'=> __('Marketing Label Text','lessonlms'),
+        'section'=> 'hero_section',
+        'type'=> 'text',
+    ));
+
+
+
    // ======================
   //  Blog Section Start
   // ======================
