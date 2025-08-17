@@ -2,7 +2,7 @@
 <div id="comments" class="comments-area">
 <?php 
 
-if(!comments_open() && get_comments_number() && get_type_supports(get_post_type(), 'comments')):
+if(!comments_open() && get_comments_number() && post_type_supports(get_post_type(), 'comments')):
 ?>
 <p class="no-comments">
     <?php 
@@ -21,6 +21,7 @@ if(file_exists($custom_comment_form_path)){
     comment_form();
 }
 ?>
+
 
 </div>
 

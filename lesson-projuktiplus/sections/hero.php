@@ -4,7 +4,11 @@
                 <div class="hero-wrapper">
                     <!----- img box ----->
                     <div class="hero-img-box">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/heor-img.png" alt="hero-img">
+                        <?php if (get_theme_mod('hero_image')) : ?>
+                            <img src="<?php echo esc_url(get_theme_mod('hero_image')); ?>" alt="<?php echo esc_attr(get_bloginfo('name'));?>">
+                        <?php else : ?>
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/heor-img.png" alt="hero-img">
+                        <?php endif; ?>
 
                         <!----- absolute card box ----->
                         <div class="card-box">
@@ -50,18 +54,34 @@
 
                     <!----- text box ----->
                     <div class="hero-text-box">
-                        <h1>Learn without limits and spread knowledge.</h1>
-                        <p>Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.</p>
+                        <h1>
+                            <?php 
+                            echo esc_html(get_theme_mod('hero_section_title', 'Learn without limits and spread knowledge.'));
+                            ?>
+                        </h1>
+                        <p>
+                            <?php
+                            echo esc_html(get_theme_mod('hero_section_description', 'Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.'));
+                            ?>
+                        </p>
 
                         <div class="hero-btns">
-                            <div class="yellow-bg-btn See-Courses-btn">See Courses</div>
+                            <div class="yellow-bg-btn See-Courses-btn">
+                                <a href="<?php echo esc_url(get_theme_mod('courses_button_url', '#')); ?>">
+                                    <?php echo esc_html(get_theme_mod('courses_button_text', 'See Courses')); ?>
+                                </a>
+                            </div>
                             <div class="watch-video-btn">
                                 <div class="play-btn">
                                     <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.9861 5.99998L0.974093 11.1753L0.998162 0.783001L9.9861 5.99998Z" fill="#FFB900"/>
                                     </svg>
                                 </div>
-                                <span>Watch Video</span>
+                                <span>
+                                    <a href="<?php echo esc_url(get_theme_mod('watch_button_url', '#')); ?>">
+                                        <?php echo esc_html(get_theme_mod('watch_button_text', 'Watch Video')); ?>
+                                    </a>
+                                </span>
                             </div>
                         </div>
 

@@ -87,299 +87,281 @@ function lessonlms_register_sidebar() {
 add_action('widgets_init', 'lessonlms_register_sidebar');
 
 
+
 function lessonlms_customize_register($wp_customize) {
 
-
-  // Blog Section Start
-
-   $wp_customize->add_section('blog_settings', array(
-        'title'=> __('Blog Settings','lessonlms'),
-        'priority' => 120,
-      ));
-
-
-      // Blog Section Title
-      $wp_customize->add_setting('blog_section_title',array(
-        'default'=> 'Our Blog',
-      ));
-
-      $wp_customize->add_control('blog_section_title',array(
-        'label'=> __('Blog Section Title','lessonlms'),
-        'section'=> 'blog_settings',
-        'type'=> 'text',
-      ));
-
-
-       // Blog Section Description
-      $wp_customize->add_setting('blog_section_description',array(
-        'default'=> 'Read our regular travel blog and know the latest update of tour and travel',
-      ));
-
-      $wp_customize->add_control('blog_section_description',array(
-        'label'=> __('Blog Section Description','lessonlms'),
-        'section'=> 'blog_settings',
-        'type'=> 'textarea',
-      ));
-
-      // Footer Section Start
-      $wp_customize->add_section('footer_settings', array(
-        'title'=> __('Footer Settings','lessonlms'),
-        'priority' => 120,
-      ));
-
-
-      // Footer Logo
-       $wp_customize->add_setting('footer_logo');
-       $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo',array(
-        'label'=> __('Footer Logo','lessonlms'),
-        'settings'=> 'footer_logo',
-        'section'=> 'footer_settings',
-       )));
-
-
-      //  Social Media Link
-
-      $socials = array('twitter','facebook','linkedin','instagram');
-      foreach ($socials as $social) {
-        $wp_customize->add_setting("footer_{$social}_link", array(
-          "default"=> '#',
-        ));
-        $wp_customize->add_control("footer_{$social}_link", array(
-        "label"=> sprintf( __("%s URL","lessonlms"), ucfirst($social)),
-        "section"=> "footer_settings",
-        "type"=> 'url',
-        ));
-      }
-
-      
-      // About Text
-      $wp_customize->add_setting('footer_about_text',array(
-        'default'=> 'Need to help for your dream Career? trust us. With Lesson, study becomes a lot easier with us.',
-      ));
-
-      $wp_customize->add_control('footer_about_text',array(
-        'label'=> __('About Text','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'textarea',
-      ));
-
-
-       // Footer Menu 1 Title
-      $wp_customize->add_setting('footer_menu1_title',array(
-        'default'=> 'Company',
-      ));
-
-      $wp_customize->add_control('footer_menu1_title',array(
-        'label'=> __('Footer Menu1 Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-        // Footer Menu 2 Title
-      $wp_customize->add_setting('footer_menu2_title',array(
-        'default'=> 'Support',
-      ));
-
-      $wp_customize->add_control('footer_menu2_title',array(
-        'label'=> __('Footer Menu2 Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-          // Footer Address
-      $wp_customize->add_setting('footer_address',array(
-        'default'=> 'Address',
-      ));
-
-      $wp_customize->add_control('footer_address',array(
-        'label'=> __('Address Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-          // Footer  Location
-      $wp_customize->add_setting('footer_location_title',array(
-        'default'=> 'Location:',
-      ));
-
-      $wp_customize->add_control('footer_location_title',array(
-        'label'=> __('Location Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-      // Footer  Location Description
-      $wp_customize->add_setting('footer_location_description',array(
-        'default'=> '27 Division St, New York, NY 10002, USA',
-      ));
-
-      $wp_customize->add_control('footer_location_description',array(
-        'label'=> __('Location Description','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-      
-          // Footer  Email Title
-      $wp_customize->add_setting('footer_email_title',array(
-        'default'=> 'Email:',
-      ));
-
-      $wp_customize->add_control('footer_email_title',array(
-        'label'=> __('Email Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-      // Footer Email
-      $wp_customize->add_setting('footer_email',array(
-        'default'=> 'email@gmail.com',
-      ));
-
-      $wp_customize->add_control('footer_email',array(
-        'label'=> __('Footer Email','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'email',
-      ));
-
-
-          // Footer  Phone Title
-      $wp_customize->add_setting('footer_phone_title',array(
-        'default'=> 'Phone:',
-      ));
-
-      $wp_customize->add_control('footer_phone_title',array(
-        'label'=> __('Phone Title','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'text',
-      ));
-
-
-      // Footer Phone Description
-      $wp_customize->add_setting('footer_phone_description',array(
-        'default'=> '+ 000 1234 567 890',
-      ));
-
-      $wp_customize->add_control('footer_phone_description',array(
-        'label'=> __('Phone Description','lessonlms'),
-        'section'=> 'footer_settings',
-        'type'=> 'tel',
-      ));
-}
-add_action('customize_register','lessonlms_customize_register');
-
-
-
-
-
-function mytheme_customize_register($wp_customize) {
-    // Quote Section
-    $wp_customize->add_section('blog_quote_section', array(
-        'title' => __('Blog Quote Section', 'mytheme'),
+  // ======================
+  // Hero Section
+  // ======================
+    $wp_customize->add_section('hero_section', array(
+        'title' => __('Hero Settings', 'lessonlms'),
         'priority' => 30,
     ));
-    
-    $wp_customize->add_setting('blog_quote_text', array(
-        'default' => 'Cleaning is more than just visiting places—it\'s about creating lasting memories, discovering new cultures experiencing the extraordinary.',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_quote_text', array(
-        'label' => __('Quote Text', 'mytheme'),
-        'section' => 'blog_quote_section',
-        'type' => 'textarea',
-    ));
-    
-    $wp_customize->add_setting('blog_quote_author', array(
-        'default' => 'Don Guidelines',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_quote_author', array(
-        'label' => __('Quote Author', 'mytheme'),
-        'section' => 'blog_quote_section',
-        'type' => 'text',
-    ));
-    
-    // Secondary Image Section
-    $wp_customize->add_section('blog_secondary_section', array(
-        'title' => __('Blog Secondary Section', 'mytheme'),
-        'priority' => 31,
-    ));
-    
-    $wp_customize->add_setting('blog_secondary_image');
-    
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'blog_secondary_image', array(
-        'label' => __('Secondary Image', 'mytheme'),
-        'section' => 'blog_secondary_section',
-        'settings' => 'blog_secondary_image',
-    )));
-    
-    $wp_customize->add_setting('blog_secondary_text', array(
-        'default' => 'Cleaning is more than just visiting places—it\'s about creating lasting memories, discovering new cultures, and experiencing the extraordinary.',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_secondary_text', array(
-        'label' => __('Secondary Text', 'mytheme'),
-        'section' => 'blog_secondary_section',
-        'type' => 'textarea',
-    ));
-    
-    // Author Section
-    $wp_customize->add_section('blog_author_section', array(
-        'title' => __('Blog Author Section', 'mytheme'),
-        'priority' => 32,
-    ));
-    
-    $wp_customize->add_setting('blog_author_image');
-    
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'blog_author_image', array(
-        'label' => __('Author Image', 'mytheme'),
-        'section' => 'blog_author_section',
-        'settings' => 'blog_author_image',
-    )));
-    
-    $wp_customize->add_setting('blog_author_title', array(
-        'default' => 'CEO & CO-FOUNDER',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_author_title', array(
-        'label' => __('Author Title', 'mytheme'),
-        'section' => 'blog_author_section',
-        'type' => 'text',
-    ));
-    
-    $wp_customize->add_setting('blog_author_name', array(
-        'default' => 'Lurch Schpellchek',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_author_name', array(
-        'label' => __('Author Name', 'mytheme'),
-        'section' => 'blog_author_section',
-        'type' => 'text',
-    ));
-    
-    $wp_customize->add_setting('blog_author_bio', array(
-        'default' => 'We believe that fresh clean clothes bring confidence and comfort. With a passion for quality and convenience, we provide top-notch laundry & dry cleaning services tailored to meet your needs.',
-        'transport' => 'refresh',
-    ));
-    
-    $wp_customize->add_control('blog_author_bio', array(
-        'label' => __('Author Bio', 'mytheme'),
-        'section' => 'blog_author_section',
-        'type' => 'textarea',
-    ));
+
+      // Hero Image
+  $wp_customize->add_setting('hero_image', array(
+    'default' => get_template_directory_uri() . '/assets/images/heor-img.png',
+  ));
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'hero_image',array(
+      'label'=> __('Hero Image','lessonlms'),
+      'settings'=> 'hero_image',
+      'section'=> 'hero_section',
+  )));
+
+    //Hero Section Title
+  $wp_customize->add_setting('hero_section_title',array(
+      'default'=> 'Learn without limits and spread knowledge.',
+  ));
+
+  $wp_customize->add_control('hero_section_title',array(
+      'label'=> __('Hero Title','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'text',
+  ));
+
+  // Hero Section Description
+  $wp_customize->add_setting('hero_section_description',array(
+      'default'=> 'Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.',
+  ));
+
+  $wp_customize->add_control('hero_section_description',array(
+      'label'=> __('Hero Description','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'textarea',
+  ));
+
+    //Courses Button Text
+  $wp_customize->add_setting('courses_button_text',array(
+      'default'=> 'See Courses',
+  ));
+
+  $wp_customize->add_control('courses_button_text',array(
+      'label'=> __('Courses Button Text','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'text',
+  ));
+
+    //Courses Button URL
+  $wp_customize->add_setting('courses_button_url',array(
+      'default'=> '#',
+  ));
+
+  $wp_customize->add_control('courses_button_url',array(
+      'label'=> __('Courses Button URL','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'url',
+  ));
+
+
+     //Watch Button Text
+  $wp_customize->add_setting('watch_button_text',array(
+      'default'=> 'Watch Video',
+  ));
+
+  $wp_customize->add_control('watch_button_text',array(
+      'label'=> __('Vedio Button Text','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'text',
+  ));
+
+    //Courses Button URL
+  $wp_customize->add_setting('watch_button_url',array(
+      'default'=> '#',
+  ));
+
+  $wp_customize->add_control('watch_button_url',array(
+      'label'=> __('Vedio Button URL','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'url',
+  ));
+
+     //Watch Button Text
+  $wp_customize->add_setting('watch_button_text',array(
+      'default'=> 'Watch Video',
+  ));
+
+  $wp_customize->add_control('watch_button_text',array(
+      'label'=> __('Vedio Button Text','lessonlms'),
+      'section'=> 'hero_section',
+      'type'=> 'text',
+  ));
+
+
+     
+   // ======================
+  //  Blog Section Start
+  // ======================
+  $wp_customize->add_section('blog_settings', array(
+      'title'=> __('Blog Settings','lessonlms'),
+      'priority' => 90,
+  ));
+
+  // Blog Section Title
+  $wp_customize->add_setting('blog_section_title',array(
+      'default'=> 'Our Blog',
+  ));
+
+  $wp_customize->add_control('blog_section_title',array(
+      'label'=> __('Blog Section Title','lessonlms'),
+      'section'=> 'blog_settings',
+      'type'=> 'text',
+  ));
+
+  // Blog Section Description
+  $wp_customize->add_setting('blog_section_description',array(
+      'default'=> 'Read our regular travel blog and know the latest update of tour and travel',
+  ));
+
+  $wp_customize->add_control('blog_section_description',array(
+      'label'=> __('Blog Section Description','lessonlms'),
+      'section'=> 'blog_settings',
+      'type'=> 'textarea',
+  ));
+
+   // ======================
+  // Footer Section Start
+  // ======================
+  $wp_customize->add_section('footer_settings', array(
+      'title'=> __('Footer Settings','lessonlms'),
+      'priority' => 120,
+  ));
+
+  // Footer Logo
+  $wp_customize->add_setting('footer_logo');
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo',array(
+      'label'=> __('Footer Logo','lessonlms'),
+      'settings'=> 'footer_logo',
+      'section'=> 'footer_settings',
+  )));
+
+  // Social Media Link
+  $socials = array('twitter','facebook','linkedin','instagram');
+  foreach ($socials as $social) {
+      $wp_customize->add_setting("footer_{$social}_link", array(
+          "default"=> '#',
+      ));
+      $wp_customize->add_control("footer_{$social}_link", array(
+          "label"=> sprintf( __("%s URL","lessonlms"), ucfirst($social)),
+          "section"=> "footer_settings",
+          "type"=> 'url',
+      ));
+  }
+
+  // Footer About Text
+  $wp_customize->add_setting('footer_about_text',array(
+      'default'=> 'Need to help for your dream Career? trust us. With Lesson, study becomes a lot easier with us.',
+  ));
+
+  $wp_customize->add_control('footer_about_text',array(
+      'label'=> __('About Text','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'textarea',
+  ));
+
+  // Footer Menu 1 Title
+  $wp_customize->add_setting('footer_menu1_title',array(
+      'default'=> 'Company',
+  ));
+
+  $wp_customize->add_control('footer_menu1_title',array(
+      'label'=> __('Footer Menu1 Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Menu 2 Title
+  $wp_customize->add_setting('footer_menu2_title',array(
+      'default'=> 'Support',
+  ));
+
+  $wp_customize->add_control('footer_menu2_title',array(
+      'label'=> __('Footer Menu2 Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Address
+  $wp_customize->add_setting('footer_address',array(
+      'default'=> 'Address',
+  ));
+
+  $wp_customize->add_control('footer_address',array(
+      'label'=> __('Address Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Location
+  $wp_customize->add_setting('footer_location_title',array(
+      'default'=> 'Location:',
+  ));
+
+  $wp_customize->add_control('footer_location_title',array(
+      'label'=> __('Location Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Location Description
+  $wp_customize->add_setting('footer_location_description',array(
+      'default'=> '27 Division St, New York, NY 10002, USA',
+  ));
+
+  $wp_customize->add_control('footer_location_description',array(
+      'label'=> __('Location Description','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Email Title
+  $wp_customize->add_setting('footer_email_title',array(
+      'default'=> 'Email:',
+  ));
+
+  $wp_customize->add_control('footer_email_title',array(
+      'label'=> __('Email Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Email
+  $wp_customize->add_setting('footer_email',array(
+      'default'=> 'email@gmail.com',
+  ));
+
+  $wp_customize->add_control('footer_email',array(
+      'label'=> __('Footer Email','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'email',
+  ));
+
+  // Footer Phone Title
+  $wp_customize->add_setting('footer_phone_title',array(
+      'default'=> 'Phone:',
+  ));
+
+  $wp_customize->add_control('footer_phone_title',array(
+      'label'=> __('Phone Title','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'text',
+  ));
+
+  // Footer Phone Description
+  $wp_customize->add_setting('footer_phone_description',array(
+      'default'=> '+ 000 1234 567 890',
+  ));
+
+  $wp_customize->add_control('footer_phone_description',array(
+      'label'=> __('Phone Description','lessonlms'),
+      'section'=> 'footer_settings',
+      'type'=> 'tel',
+  ));
+
+
 }
-add_action('customize_register', 'mytheme_customize_register');
+
+add_action('customize_register','lessonlms_customize_register');
+
 
 // rank_math_the_breadcrumb
 if (function_exists('rank_math_the_breadcrumbs')) {

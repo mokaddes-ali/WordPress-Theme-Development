@@ -1,6 +1,7 @@
  <footer>
         <div class="container">
             <div class="footer-wrapper">
+                <!-- edit footer -->
                 <!----- about company ----->
                 <div class="about-company">
                     <div class="f-logo">
