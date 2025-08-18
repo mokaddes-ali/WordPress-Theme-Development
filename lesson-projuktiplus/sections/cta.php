@@ -38,7 +38,9 @@ $cta_image = get_theme_mod('cta_image', get_template_directory_uri() . '/assets/
 
                     <!----- img box ----->
                     <div class="cta-img">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/cta-right.png" alt="">
+                        <?php if($cta_image): ?>
+                            <img src="<?php echo esc_url($cta_image); ?>" alt="<?php echo esc_attr($cta_title); ?>">
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
