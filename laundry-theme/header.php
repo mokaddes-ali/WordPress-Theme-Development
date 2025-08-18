@@ -9,3 +9,7 @@
 <?php wp_head();?>
 </head>
 <body <?php body_class();?>></body>
+
+<?php 
+get_template_part('sections/header-top');
+?>

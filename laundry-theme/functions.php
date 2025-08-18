@@ -89,7 +89,51 @@ function laundry_clean_customize_register($wp_customize){
         'section' => 'company_information',
         'type' => 'email',
     ));
+
+    // Company Social Media Link
+
+    //Facebook
+    $wp_customize->add_setting('company_facebook', array(
+        'default' => __('https://www.facebook.com/', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('company_facebook', array(
+        'label' => __('Company Facebook Link', 'laundry_clean'),
+        'section' => 'company_information',
+        'type' => 'url',
+    ));
+
+    // LinkedIn
+    $wp_customize->add_setting('company_linkedin', array(
+        'default' => __('https://www.linkedin.com/', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('company_linkedin', array(
+        'label' => __('Company LinkedIn Link', 'laundry_clean'),
+        'section' => 'company_information',
+        'type' => 'url',
+    ));
+
+    // Twitter
+    $wp_customize->add_setting('company_twitter', array(
+        'default' => __('https://www.twitter.com/', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('company_twitter', array(
+        'label' => __('Company Twitter Link', 'laundry_clean'),
+        'section' => 'company_information',
+        'type' => 'url',
+    ));
+
+    // Pinterest
+    $wp_customize->add_setting('company_pinterest', array(
+        'default' => __('https://www.pinterest.com/', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('company_pinterest', array(
+        'label' => __('Company Pinterest Link', 'laundry_clean'),
+        'section' => 'company_information',
+        'type' => 'url',
+    ));
 }
+
+
 
 add_action('customize_register', 'laundry_clean_customize_register');
 
