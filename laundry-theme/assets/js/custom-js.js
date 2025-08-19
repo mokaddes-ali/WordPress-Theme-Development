@@ -26,31 +26,22 @@ jQuery(document).ready(function($){
   });
 
 
-    /*----- courses section slick add -----*/
     $(".hero-slick-items").slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 1200,
+        autoplaySpeed: 1500,
         dots: false,
-        arrows: true,
-        prevArrow: "<span class='left-arrow'><i class='bx bx-chevron-left'></i></span>",
-        nextArrow: "<span class='right-arrow'><i class='bx bx-chevron-right'></i></span>",
+        arrows: false,
         responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1
-                }
-            },
-            {
-                breakpoint: 576,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
+            { breakpoint: 768, settings: { slidesToShow: 1 } },
+            { breakpoint: 576, settings: { slidesToShow: 1 } }
         ]
     });
+
+    $('#custom-prev').click(function() { $('.hero-slick-items').slick('slickPrev'); });
+    $('#custom-next').click(function() { $('.hero-slick-items').slick('slickNext'); });
+
 
     /*----- testimonial section slick -----*/
     $(".testimonial-items").slick({

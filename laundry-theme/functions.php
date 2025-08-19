@@ -18,45 +18,31 @@ add_action('wp_head', 'laundry_clean_debug_init');
 
 
 
-function laundry_clean_enqueue_scripts()
-{
-    // Register CSS
-    wp_register_style(
-        'tailwind-css',
-        get_template_directory_uri() . '/assets/tailwindcss/output.css',
-        [],
-        filemtime(get_template_directory() . '/assets/tailwindcss/output.css'),
-        'all'
-    );
+function laundry_clean_enqueue_scripts() {
+    // Tailwind & style
+    wp_enqueue_style('tailwind-css', get_template_directory_uri() . '/assets/tailwindcss/output.css', [], filemtime(get_template_directory() . '/assets/tailwindcss/output.css'));
+    wp_enqueue_style('style-css', get_template_directory_uri() . '/style.css', [], filemtime(get_template_directory() . '/style.css'));
 
-    wp_register_style(
-        'style-css',
-        get_template_directory_uri() . '/style.css',
-        [],
-        filemtime(get_template_directory() . '/style.css'),
-        'all'
-    );
+    // Slick CSS
+    wp_enqueue_style('slick-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', [], '1.9.0');
+    wp_enqueue_style('slick-theme-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css', [], '1.9.0');
 
-
-    // Register Script
-    wp_register_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', [], filemtime(get_template_directory() . '/assets/js/custom-js.js'), true);
-
-
-    //   enqueue_style
-
-    wp_enqueue_style('style-css');
-    wp_enqueue_style('tailwind-css');
-
-    //   enqueue_script
+    // jQuery (WordPress already includes it)
     wp_enqueue_script('jquery');
-    wp_enqueue_script('custom-js');
-}
 
-add_action("wp_enqueue_scripts", "laundry_clean_enqueue_scripts");
+    // Slick JS
+    wp_enqueue_script('slick-js', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', ['jquery'], '1.9.0', true);
+
+    // Custom JS (after Slick)
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', ['jquery', 'slick-js'], filemtime(get_template_directory() . '/assets/js/custom-js.js'), true);
+}
+add_action('wp_enqueue_scripts', 'laundry_clean_enqueue_scripts');
+
 
 
 function laundry_clean_setup_theme()
 {
+      if (wp_get_theme()->get('TextDomain') === 'laundry_clean') {
     add_theme_support('post-thumbnails');
 
     add_theme_support('custom-logo', array(
@@ -68,6 +54,7 @@ function laundry_clean_setup_theme()
         'laundry_clean_header_menu' => __('Laundry Clean Header Menu', 'laundry_clean'),
         'laundry_clean_mobile_menu' => __('Laundry Clean Mobile Menu', 'laundry_clean')
     ));
+}
 }
 add_action('after_setup_theme', 'laundry_clean_setup_theme');
 
@@ -111,15 +98,88 @@ function laundry_clean_slider_init()
             'title',
             'editor',
             'thumbnail',
-            'excerpt',
-            'custom-fields',
-            'page-attributes'
         )
     );
     register_post_type('slider', $args);
 }
 add_action('init', 'laundry_clean_slider_init');
 
+
+
+// Add Custom Meta Box for Slider
+function laundry_clean_slider_meta_box()
+{
+    add_meta_box(
+        'slider_meta_box',
+        __('Slider Settings', 'laundry_clean'),
+        'laundry_clean_slider_meta_box_callback',
+        'slider',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'laundry_clean_slider_meta_box');
+
+// Callback function for meta box fields
+function laundry_clean_slider_meta_box_callback($post)
+{
+    // Existing fields
+    $slider_type       = get_post_meta($post->ID, '_slider_type', true) ?: 'Dry Clean Experts';
+    $slider_button_text  = get_post_meta($post->ID, '_slider_button_text', true) ?: 'Book Laundry Now!';
+    $slider_button_link  = get_post_meta($post->ID, '_slider_button_link', true) ?: 'https://example.com/book-laundry-now';
+    $slider_avatar       = get_post_meta($post->ID, '_slider_avatar', true) ?: '';
+    $slider_rating       = get_post_meta($post->ID, '_slider_rating', true) ?: '5';
+    $slider_rating_text  = get_post_meta($post->ID, '_slider_rating_text', true) ?: '8k Clients Reviews.';
+
+    ?>
+    <p>
+        <label for="slider_type"><?php _e('Slider Type:', 'laundry_clean'); ?></label><br>
+        <input type="text" name="slider_type" id="slider_type" value="<?php echo esc_attr($slider_type); ?>" class="widefat">
+    </p>
+    <p>
+        <label for="slider_button_text"><?php _e('Button Text:', 'laundry_clean'); ?></label><br>
+        <input type="text" name="slider_button_text" id="slider_button_text" value="<?php echo esc_attr($slider_button_text); ?>" class="widefat">
+    </p>
+    <p>
+        <label for="slider_button_link"><?php _e('Button Link:', 'laundry_clean'); ?></label><br>
+        <input type="text" name="slider_button_link" id="slider_button_link" value="<?php echo esc_attr($slider_button_link); ?>" class="widefat">
+    </p>
+    <hr>
+    <p>
+        <label for="slider_avatar"><?php _e('Avatar Image URL:', 'laundry_clean'); ?></label><br>
+        <input type="text" name="slider_avatar" id="slider_avatar" value="<?php echo esc_attr($slider_avatar); ?>" class="widefat">
+        <small><?php _e('Enter image URL or upload via Media Library and copy link.', 'laundry_clean'); ?></small>
+    </p>
+    <p>
+        <label for="slider_rating"><?php _e('Rating (1-5):', 'laundry_clean'); ?></label><br>
+        <input type="number" name="slider_rating" id="slider_rating" value="<?php echo esc_attr($slider_rating); ?>" min="1" max="5">
+    </p>
+    <p>
+        <label for="slider_rating_text"><?php _e('Rating Text:', 'laundry_clean'); ?></label><br>
+        <input type="text" name="slider_rating_text" id="slider_rating_text" value="<?php echo esc_attr($slider_rating_text); ?>" class="widefat">
+    </p>
+    <?php
+}
+
+// Save Meta Box Data
+function laundry_clean_save_slider_meta($post_id)
+{
+    $fields = [
+        'slider_type'        => '_slider_type',
+        'slider_button_text' => '_slider_button_text',
+        'slider_button_link' => '_slider_button_link',
+        'slider_avatar'       => '_slider_avatar',
+        'slider_rating'       => '_slider_rating',
+        'slider_rating_text'  => '_slider_rating_text',
+    ];
+
+    foreach ($fields as $form_field => $meta_key) {
+        if (array_key_exists($form_field, $_POST)) {
+            update_post_meta($post_id, $meta_key, sanitize_text_field($_POST[$form_field]));
+        }
+    }
+}
+add_action('save_post', 'laundry_clean_save_slider_meta');
 
 
 
