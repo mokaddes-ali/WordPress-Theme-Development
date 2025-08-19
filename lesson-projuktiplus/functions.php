@@ -47,7 +47,8 @@ add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
 
 
 function lessonlms_theme_register(){
-    
+
+     if (wp_get_theme()->get('TextDomain') === 'lessonlms') {
     add_theme_support('post-thumbnails');
 
     add_theme_support('custom-logo',array(
@@ -61,7 +62,7 @@ function lessonlms_theme_register(){
      'footer_menu1' => __('Footer Menu1','lessonlms'),
       'footer_menu2' => __('Footer Menu2','lessonlms'),
     ));
-
+     }
 }
 
 add_action('after_setup_theme','lessonlms_theme_register');
