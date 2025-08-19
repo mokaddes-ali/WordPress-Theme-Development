@@ -1,5 +1,9 @@
+
+
 <!-- Hero Section -->
-<section class="relative w-full mt-20 h-[30rem] md:h-[38rem] lg:h-[48rem]  xl:h-[40.5rem]  2xl:h-[52.5rem] overflow-hidden">
+<section class="hero-slick-items relative w-full mt-20 h-[30rem] md:h-[38rem] lg:h-[48rem]  xl:h-[40.5rem]  2xl:h-[52.5rem] overflow-hidden">
+
+
   <!-- Background Image -->
   <div class="absolute inset-0 z-0 w-full h-full aspect-[1920/840] sm:aspect-[1920/840] md:aspect-[1920/840] lg:aspect-[1920/840] xl:aspect-[1920/840] 2xl:aspect-[1920/840]">
     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Image_here.png" alt="Background" class="w-full h-full object-cover" />
@@ -63,4 +67,6 @@
       </div>
     </div>
   </div>
+
+  
 </section>

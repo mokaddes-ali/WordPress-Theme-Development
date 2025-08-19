@@ -11,7 +11,7 @@
 </head>
 <body <?php body_class();?>></body>
 
-<?php 
+<?php
 get_template_part('sections/header-top');
 ?>
 
@@ -27,7 +27,7 @@ get_template_part('sections/header-top');
     <nav class="laundry_header-menu bg-white flex items-center justify-center gap-4 lg:gap-6 2xl:gap-12 w-full py-2 pl-[4px] h-[21px]">
      <?php
      wp_nav_menu(array(
-         'theme_location' => 'header_menu',
+         'theme_location' => 'laundry_clean_header_menu',
          'fallback_cb' => function(){
             echo ' <ul class="flex justify-center text-[#142137] font-medium text-[16px] font-poppins hover:text-blue-600 transition">
         <li><a href="#" class="flex items-center gap-[4px] hover:text-blue-600 transition">Home

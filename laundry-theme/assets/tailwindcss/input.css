@@ -21,7 +21,7 @@
 }
 
 .laundry_header-menu > div > ul li a{
-    @apply text-gray-700 font-semibold text-base xl:text-xl px-2 lg:px-4 py-2;
+    @apply text-gray-700 font-semibold text-base px-2 lg:px-4 py-2;
 }
 
 .laundry_header-menu > div > ul li a:hover {
@@ -33,7 +33,7 @@
 }
 
 .laundry_header-menu > div > ul li ul{
-    @apply absolute flex flex-col bg-black shadow-lg rounded-md h-auto min-w-48 w-auto max-w-80 px-2 py-3 opacity-0 invisible transition-all duration-500 ease-in-out;
+    @apply absolute flex flex-col bg-black shadow-lg rounded-md h-auto min-w-48 w-auto max-w-80 px-2 py-3 opacity-0 invisible transition-all duration-300;
 }
 
 .laundry_header-menu > div > ul li ul a{
