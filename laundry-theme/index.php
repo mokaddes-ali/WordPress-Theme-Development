@@ -5,6 +5,8 @@
  */
 get_header();
 ?>
-    <h2 class="text-red-400">Hello </h2>
+<?php 
+//  get_template_part('sections/hero');
+?>
 
 <?php get_footer(); ?>

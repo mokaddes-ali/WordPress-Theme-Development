@@ -8,13 +8,10 @@
 
 function laundry_clean_enqueue_scripts()
 {
-
-    
-    // Slick CSS
-    wp_register_style('slick-css', get_template_directory_uri() . 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', array(), '1.9.0', 'all');
-
-
-    wp_register_style('tailwind-css', get_template_directory_uri() . '/assets/tailwindcss/output.css', [], false, 'all');
+    // Register CSS
+    wp_register_style('tailwind-css', get_template_directory_uri() . '/assets/tailwindcss/output.css', [],  
+    filemtime(get_template_directory() . '/assets/tailwindcss/output.css'),
+    'all');
 
 wp_register_style(
     'style-css',
@@ -26,23 +23,37 @@ wp_register_style(
 
 
     // Register Script
-    wp_register_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js', [], filemtime(get_template_directory() . '/assets/js/custom-js'), true);
+    wp_register_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', [], filemtime(get_template_directory() . '/assets/js/custom-js.js'), true);
 
-      // jQuery
-    wp_enqueue_script('jquery');
    
     //   enqueue_style
     
     wp_enqueue_style('style-css');
     wp_enqueue_style('tailwind-css');
-    wp_enqueue_style('slick-css');
 
     //   enqueue_script
+    wp_enqueue_script('jquery');
     wp_enqueue_script('custom-js');
 }
 
 add_action("wp_enqueue_scripts", "laundry_clean_enqueue_scripts");
 
+
+function laundry_clean_setup_theme(){
+
+    add_theme_support('post_thumbnails');
+    add_theme_support('custom-logo', array(
+        'height' => 40,
+        'width' => 120,
+    ));
+
+    register_nav_menus(array(
+        'header_menu' => __('Header Menu', 'laundry_clean'),
+        'mobile_menu' => __('Mobile Menu', 'laundry_clean')
+    ));
+
+}
+add_action('after_setup_theme', 'laundry_clean_setup_theme');
 function laundry_clean_customize_register($wp_customize){
     // Company Information Settings
     $wp_customize->add_section('company_information', array(
@@ -132,8 +143,6 @@ function laundry_clean_customize_register($wp_customize){
         'type' => 'url',
     ));
 }
-
-
 
 add_action('customize_register', 'laundry_clean_customize_register');
 

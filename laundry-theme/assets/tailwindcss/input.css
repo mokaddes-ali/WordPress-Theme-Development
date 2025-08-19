@@ -8,3 +8,7 @@
 @theme{
     --font-poppins:"Poppins", 'sans-serif';
 }
+
+.laundry_header-menu > div > ul {
+    @apply flex flex-row justify-center gap-6 w-full py-2 pl-[4px] h-[21px];
+}
