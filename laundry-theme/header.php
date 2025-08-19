@@ -16,15 +16,15 @@ get_template_part('sections/header-top');
 ?>
 
 <!-- header  -->
-<header class="header w-full top-0 left-0 z-50 px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-3 md:py-[20px] flex items-center justify-between gap-12 2xl:gap-[286px]">
+<header class="header absolute top-[90px left-0 w-full z-50 px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-3 md:py-[20px] flex items-center justify-between gap-12 md:gap-3 2xl:gap-32">
   <!-- logo -->
-  <div class="logo w-4/12 md:w-3/12 h-[40px] flex items-center">
+  <div class="logo w-4/12 md:w-2/12 h-[40px] flex items-center">
     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo (1).png" />
   </div>
 
   <!-- Navbar menu -->
-  <div class="w-7/12 flex justify-center">
-    <nav class="laundry_header-menu bg-white justify-center gap-6 w-full py-2 pl-[4px] h-[21px]">
+  <div class="hidden md:flex w-full md:w-8/12 lg:w-7/12 items-center justify-center">
+    <nav class="laundry_header-menu bg-white flex items-center justify-center gap-4 lg:gap-6 2xl:gap-12 w-full py-2 pl-[4px] h-[21px]">
      <?php
      wp_nav_menu(array(
          'theme_location' => 'header_menu',
@@ -68,7 +68,7 @@ get_template_part('sections/header-top');
   </div>
 
   <!-- nav button -->
-  <div class="navbar-btn w-4/12 -mt-[3px] flex items-center md:justify-end">
+  <div class="navbar-btn w-4/12 md:w-2/12 lg:w-3/12 -mt-[3px] flex items-center md:justify-between lg:justify-end">
     <button
       class="w-auto p-4 h-[44px] flex items-center gap-1 md:gap-2 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-sm md:text-[15px] font-medium rounded">
       Schedule a Pickup
@@ -113,5 +113,3 @@ get_template_part('sections/header-top');
     <li><a href="#" class="hover:text-orange-400">Contact</a></li>
   </ul>
 </div>
-
-<h2 class="text-red-400">Hello World</h2>

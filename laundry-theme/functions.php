@@ -54,6 +54,7 @@ function laundry_clean_setup_theme(){
 
 }
 add_action('after_setup_theme', 'laundry_clean_setup_theme');
+
 function laundry_clean_customize_register($wp_customize){
     // Company Information Settings
     $wp_customize->add_section('company_information', array(

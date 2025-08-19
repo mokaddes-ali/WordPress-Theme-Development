@@ -9,6 +9,55 @@
     --font-poppins:"Poppins", 'sans-serif';
 }
 
-.laundry_header-menu > div > ul {
-    @apply flex flex-row justify-center gap-6 w-full py-2 pl-[4px] h-[21px];
+@layer base {
+  body {
+    @apply m-0 p-0 bg-white;
+  }
 }
+
+
+.laundry_header-menu > div > ul {
+    @apply flex items-center;
+}
+
+.laundry_header-menu > div > ul li a{
+    @apply text-gray-700 font-semibold text-base xl:text-xl px-2 lg:px-4 py-2;
+}
+
+.laundry_header-menu > div > ul li a:hover {
+    @apply bg-blue-300 text-red-300;
+}
+
+.laundry_header-menu > div > ul li {
+    @apply relative;
+}
+
+.laundry_header-menu > div > ul li ul{
+    @apply absolute flex flex-col bg-black shadow-lg rounded-md h-auto min-w-48 w-auto max-w-80 px-2 py-3 opacity-0 invisible transition-all duration-500 ease-in-out;
+}
+
+.laundry_header-menu > div > ul li ul a{
+    @apply text-white hover:bg-white hover:text-black font-semibold text-base px-4 py-2 block;
+
+}
+
+.laundry_header-menu > div > ul li ul ul{
+    @apply right-full xl:left-full top-0 bg-black shadow-lg rounded-md mt-2 xl:ml-3;
+}
+.laundry_header-menu > div > ul li:hover ul,
+.laundry_header-menu > div > ul li:hover ul li:hover ul{
+    @apply opacity-100 visible;
+
+}
+
+.laundry_header-menu > div > ul li:hover ul ul{
+    @apply opacity-0 invisible;
+
+}
+
+
+.laundry_header-menu > div > ul li ul a:hover,
+.laundry_header-menu > div > ul li:hover > a{
+    @apply bg-white text-black font-semibold text-base px-4 py-2 block;
+}
+
