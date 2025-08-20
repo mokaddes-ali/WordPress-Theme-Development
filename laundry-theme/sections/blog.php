@@ -1,0 +1,114 @@
+<?php 
+
+
+$blog_title = get_theme_mod('blog_section_title', __('Latest News & Blog', 'laundry_clean'));
+$blog_description = get_theme_mod('blog_section_description', __('Clothing Care & Laundry Best Practices.', 'laundry_clean'));
+$blog_button_text = get_theme_mod('blog_button_text', __('See More Blog', 'laundry_clean'));
+$blog_button_url = get_theme_mod('blog_button_url', site_url('/index.php/blog/'));
+
+
+$blog_posts = new WP_Query(array(
+  'post_type' => 'post',
+  'posts_per_page' => 4,
+  'orderby' => 'date',
+  'order' => 'DESC',
+));
+
+?>
+<!-- Blog Section -->
+<section class="blog-area w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-16 md:py-24 lg:py-[149px] flex flex-col gap-5">
+
+  <!-- Latest News Label -->
+  <div class="w-[194px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)] py-2 px-3 font-poppins">
+    <span class="w-[5px] h-[5px] bg-[#142137] flex-shrink-0 aspect-square"></span>
+    <?php if($blog_title): ?>
+        <?php echo esc_html($blog_title); ?>
+    <?php endif; ?>
+  </div>
+
+  <!-- Heading and Button -->
+  <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+    <h1 class="text-[#142137] font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight tracking-tight text-center md:text-left lg:leading-[64px] lg:tracking-[-1.08px] font-poppins max-w-[660px]">
+       <?php if($blog_description): ?>
+        <?php echo esc_html($blog_description); ?>
+    <?php endif; ?>
+    </h1>
+    <button class="w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group mt-0 md:mt-[60px]">
+      <?php if($blog_button_text): ?>
+        <a href="<?php echo esc_url($blog_button_url); ?>">
+          <?php echo esc_html($blog_button_text); ?>
+        </a>
+      <?php endif; ?>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none" class="transition-transform duration-300 group-hover:translate-x-1">
+        <path d="M1 7L13 7" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M8 13L14 7L8 1" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Blog Cards -->
+  <div class="blog-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-9">
+    <?php 
+      if($blog_posts->have_posts()) :
+        while($blog_posts->have_posts()) : $blog_posts->the_post();
+    ?>
+
+    <!-- First Card -->
+    <div class="w-full h-auto bg-white overflow-hidden font-poppins relative">
+      <div class="w-full aspect-[3/2] overflow-hidden relative">
+        <a href="<?php the_permalink(); ?>">
+
+        <?php 
+        if(has_post_thumbnail()) {
+          the_post_thumbnail('full', ['class' => 'w-full h-full object-cover']);
+        }else{
+          echo '<img src="<?php echo get_template_directory_uri(); ?>/assets/images/blog1.png" alt="Card Image" class="w-full h-full object-cover" />';
+        }
+        ?>
+        </a>
+        
+        <div class="absolute top-5 right-5 bg-[#4375E7] text-white text-[15px] font-medium leading-[26px] w-[98px] h-[26px] flex items-center justify-center rounded-sm">
+          <?php echo esc_html('Eco Wash', 'laundry_clean'); ?>
+        </div>
+      </div>
+      <div class="pt-4 flex justify-start gap-[18px] text-[15px] font-medium text-[rgba(20,33,55,0.7)] leading-[26px]">
+        <div class="flex items-center gap-[4px]">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
+            <path d="M17 9C17 13.416 13.416 17 9 17C4.584 17 1 13.416 1 9C1 4.584 4.584 1 9 1C13.416 1 17 4.584 17 9Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M11.9681 11.5442L9.4881 10.0642C9.0561 9.8082 8.7041 9.1922 8.7041 8.6882V5.4082" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>
+            <?php echo get_the_date('M d, Y'); ?>
+          </span>
+        </div>
+        <div class="flex items-center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            <path d="M14.1752 12.8638L14.4872 15.3918C14.5672 16.0558 13.8552 16.5197 13.2872 16.1757L9.93546 14.1838C9.56749 14.1838 9.20752 14.1598 8.85554 14.1118C9.4475 13.4158 9.79947 12.5358 9.79947 11.5838C9.79947 9.31185 7.8316 7.47192 5.39976 7.47192C4.47182 7.47192 3.61588 7.73589 2.90392 8.19989C2.87992 7.99989 2.87192 7.79989 2.87192 7.59189C2.87192 3.95195 6.03171 1 9.93546 1C13.8392 1 16.999 3.95195 16.999 7.59189C16.999 9.75185 15.8871 11.6638 14.1752 12.8638Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9.79943 11.5836C9.79943 12.5356 9.44746 13.4156 8.8555 14.1116C8.06355 15.0716 6.80762 15.6875 5.39971 15.6875L3.31185 16.9275C2.95987 17.1435 2.5119 16.8475 2.5599 16.4395L2.75988 14.8636C1.68795 14.1196 1 12.9276 1 11.5836C1 10.1756 1.75196 8.93564 2.90388 8.19965C3.61583 7.73565 4.47177 7.47168 5.39971 7.47168C7.83156 7.47168 9.79943 9.31161 9.79943 11.5836Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span><?php
+        $count = get_comments_number(); 
+        echo esc_html( $count ) . ' ';
+    ?>
+            <?php echo esc_html__('Comment', 'laundry_clean'); ?></span>
+        </div>
+      </div>
+      <div class="w-full h-[1px] bg-[rgba(0,0,0,0.2)] mt-4"></div>
+      <div class="pt-4">
+        <h2 class="text-[#142137] text-xl md:text-2xl font-semibold leading-[1.3] tracking-tight">
+          <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        </h2>
+      </div>
+       <?php
+                endwhile;
+                wp_reset_postdata();
+            else:
+                echo '<p class="text-center text-red-500 text-2xl">' . __('No Blog post found', 'laundry_clean') . '</p>';
+            endif;
+            ?>
+    </div>
+
+   
+
+  </div>
+</section>

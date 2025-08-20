@@ -67,7 +67,7 @@
             <?php
                 endwhile;
                 wp_reset_postdata();
-            else:
+                else:
                 echo '<p>' . __('No Blog post found', 'lessonlms') . '</p>';
             endif;
             ?>

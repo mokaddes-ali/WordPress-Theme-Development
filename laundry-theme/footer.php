@@ -16,10 +16,10 @@
     $terms_of_service_url = get_permalink(get_theme_mod('terms_of_service_page'));
 ?>
 
-<footer class="footer-area w-full font-poppins text-white px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-12 md:py-16 lg:py-[90px] bg-[#142137]">
+<footer class="footer-area w-full font-poppins text-white px-[10%] lg:px-[5%] xl:px-[5%] 2xl:px-[8%] py-12 md:py-16 lg:py-[90px] bg-[#142137]">
 
     <!-- Only for mobile, sm,md,and lg device subscribe form and social icon -->
-    <div class="w-full mb-10 px-16 xl:hidden ">
+    <div class="w-full mb-10 ml-0 sm:-ml-6 px-6 lg:px-28 xl:hidden ">
         <!-- heading and social icon -->
         <div class="heading-social-icon mb-9 w-full flex justify-between items-center">
             <div class="heading">
@@ -87,7 +87,7 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 ">
+    <div class="ml-0 lg:ml-20 xl:ml-0  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 ">
         <!-- First Column -->
         <div class="w-full flex flex-col items-center sm:items-start gap-2">
             <?php if($footer_logo) : ?>
@@ -155,7 +155,7 @@
             wp_nav_menu(array(
                 'theme_location' => 'laundry_clean_footer1_ourservice',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px]">
+                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>Laundry Service</li>
                         <li>Dry Cleaning</li>
                         <li>Ironing</li>
@@ -179,7 +179,7 @@
           wp_nav_menu(array(
                 'theme_location' => 'laundry_clean_footer2_quicklinks',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px]">
+                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>About Us</li>
                         <li>Contact Us</li>
                         <li>Privacy Policy</li>
@@ -202,7 +202,7 @@
             wp_nav_menu(array(
                 'theme_location' => 'laundry_clean_footer3_commercial_service',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px]">
+                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>Airbnb Laundry</li>
                         <li>Restaurant Laundry</li>
                         <li>Workwear Laundry</li>

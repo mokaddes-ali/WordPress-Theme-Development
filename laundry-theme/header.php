@@ -68,7 +68,7 @@ get_template_part('sections/header-top');
   </div>
 
   <!-- nav button -->
-  <div class="navbar-btn w-4/12 md:w-2/12 lg:w-3/12 -mt-[3px] flex items-center md:justify-between lg:justify-end">
+  <div class="navbar-btn -mr-20 sm:-mr-40 md:-mr-0 w-5/12 md:w-2/12 lg:w-3/12 mt-1 flex items-center md:justify-between lg:justify-end">
     <button
       class="w-auto p-4 h-[44px] flex items-center gap-1 md:gap-2 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-sm md:text-[15px] font-medium rounded">
       Schedule a Pickup

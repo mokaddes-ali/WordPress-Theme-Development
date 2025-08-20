@@ -279,6 +279,58 @@ function laundry_clean_customize_register($wp_customize)
     ));
 
 
+    // Blog Section Settings
+
+    $wp_customize->add_section('blog_section', array(
+        'title' => __('Blog Settings', 'laundry_clean'),
+        'priority' => 130,
+    ));
+    //  Blog Section Title
+
+    $wp_customize->add_setting('blog_section_title', array(
+        'default' => __('Latest News & Blog', 'laundry_clean'),
+    ));
+
+       $wp_customize->add_control('blog_section_title', array(
+        'label' => __('Blog Title', 'laundry_clean'),
+        'section' => 'blog_section',
+        'type' => 'textarea',
+    ));
+ 
+    // Blog Section Description
+
+     $wp_customize->add_setting('blog_section_description', array(
+        'default' => __('Clothing Care & Laundry Best Practices.', 'laundry_clean'),
+    ));
+
+       $wp_customize->add_control('blog_section_description', array(
+        'label' => __('Blog Description', 'laundry_clean'),
+        'section' => 'blog_section',
+        'type' => 'textarea',
+    ));
+
+    // Blog Section Button Text
+
+    $wp_customize->add_setting('blog_button_text', array(
+        'default' => __('See More Blog', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('blog_button_text', array(
+        'label' => __('Blog Button Text', 'laundry_clean'),
+        'section' => 'blog_section',
+        'type' => 'text',
+    ));
+
+    // Blog Section Button URL
+
+    $wp_customize->add_setting('blog_button_url', array(
+        'default' => __('http://localhost/wordpress/index.php/blog/', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('blog_button_url', array(
+        'label' => __('Blog Button URL', 'laundry_clean'),
+        'section' => 'blog_section',
+        'type' => 'text',
+    ));
+
     // Footer Section Settings
 
     $wp_customize->add_section('footer_section', array(

@@ -1,5 +1,5 @@
 <!-- Navbar Top -->
-<section class="header-top w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-[0.625rem] bg-[#4375E7] h-[4rem] lg:h-[3.375rem] flex flex-col gap-3 lg:gap-0 items-center lg:flex-row lg:justify-between">  
+<section class="header-top w-full px-[10%] md:px-[15%] lg:px-[5%] 2xl:px-[8%] py-[0.625rem] bg-[#4375E7] h-[4rem] lg:h-[3.375rem] flex flex-col gap-3 lg:gap-0 items-center lg:flex-row lg:justify-between">  
 
   <!-- left -->
 <div class="follow-liink flex w-full justify-between lg:justify-start items-center lg:gap-[1.25rem]">
