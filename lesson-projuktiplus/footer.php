@@ -126,8 +126,7 @@
             </div>
 
             <div class="copyright-area">
-                 <p>Copyright &copy; <?php echo date('Y');?> <?php bloginfo('name');?> All rights
-        reserved</p>
+                 <p><?php echo esc_html__('Copyright', 'lessonLMS'); ?> &copy; <?php echo date('Y');?> <?php bloginfo('name');?> <?php echo esc_html__('All rights reserved', 'lessonLMS'); ?></p>
             </div>
         </div>
     </footer>

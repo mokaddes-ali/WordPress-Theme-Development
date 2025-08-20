@@ -57,10 +57,10 @@ function lessonlms_theme_register(){
     ));
 
     register_nav_menus(array(
-    'header_menu' => __('Header Menu','lessonlms'),
-    'mobile_menu' => __('Mobile Menu','lessonlms'),
-     'footer_menu1' => __('Footer Menu1','lessonlms'),
-      'footer_menu2' => __('Footer Menu2','lessonlms'),
+    'header_menu' => __('LMS Header Menu','lessonlms'),
+    'mobile_menu' => __('LMS Mobile Menu','lessonlms'),
+     'footer_menu1' => __('LMS Footer Menu1','lessonlms'),
+      'footer_menu2' => __('LMS Footer Menu2','lessonlms'),
     ));
      }
 }

@@ -8,10 +8,45 @@
 ?>
 
 
+
+
 <!-- Hero Section -->
 <section
-    class="hero-slick-items relative w-full mt-20 h-[30rem] md:h-[38rem] lg:h-[48rem]  xl:h-[40.5rem]  2xl:h-[52.5rem] overflow-hidden">
+    class=" relative w-full mt-20 h-[30rem] md:h-[38rem] lg:h-[48rem]  xl:h-[40.5rem]  2xl:h-[52.5rem] overflow-hidden">
+     <!-- Next and preview Button -->
+    <div class="absolute top-[50%] left-[85%] z-50 flex flex-col gap-2">
 
+<!-- Prev Button -->
+<button id="custom-prev" 
+  class="w-[54px] h-[54px] flex items-center justify-center rounded-full 
+          hover:bg-[#4375E7]
+         transition duration-300">
+<svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
+  <foreignObject x="-14" y="-14" width="82" height="82"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(7px);clip-path:url(#bgblur_0_59_22_clip_path);height:100%;width:100%"></div></foreignObject><rect data-figma-bg-blur-radius="14" width="54" height="54" rx="27" fill="white" fill-opacity="0.14"/>
+  <path d="M34 27H20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26.998 19.999L19.998 26.999L26.998 33.999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <defs>
+    <clipPath id="bgblur_0_59_22_clip_path" transform="translate(14 14)"><rect width="54" height="54" rx="27"/>
+  </clipPath></defs>
+</svg>
+</button>
+
+  <!-- Next Button -->
+   <button id="custom-next" 
+  class="w-[54px] h-[54px] flex items-center justify-center rounded-full 
+         hover:bg-[#4375E7]
+         transition duration-300">
+ <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
+  <rect width="54" height="54" rx="27" transform="matrix(-1 0 0 1 54 0)" fill="#4375E7"/>
+  <path d="M20 27.0007L34 27.0007" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 20.001L34 27.001L27 34.001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</button>
+
+    </div>
+
+    
+<div class="hero-slick-items">
       <?php 
      $slider_args = array(
   'post_type' => 'slider',
@@ -40,31 +75,6 @@ delivery to make your laundry experience as seamless as possible.';
 
 ?>
     <div class="hero-slick-single-item relative"> <!-- Slick Item Start -->
-    <!-- Next and preview Button -->
-    <div class="absolute top-[50%] left-[90%] z-20 flex flex-col gap-2">
-
-  <!-- Previous Button -->
-  <button id="custom-prev" class="">
-    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
-  <foreignObject x="-14" y="-14" width="82" height="82"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(7px);clip-path:url(#bgblur_0_59_22_clip_path);height:100%;width:100%"></div></foreignObject><rect data-figma-bg-blur-radius="14" width="54" height="54" rx="27" fill="white" fill-opacity="0.14"/>
-  <path d="M34 27H20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M26.998 19.999L19.998 26.999L26.998 33.999" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <defs>
-    <clipPath id="bgblur_0_59_22_clip_path" transform="translate(14 14)"><rect width="54" height="54" rx="27"/>
-  </clipPath></defs>
-</svg>
-  </button>
-
-  <!-- Next Button -->
-  <button id="custom-next" class="">
-    <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54" fill="none">
-  <rect width="54" height="54" rx="27" transform="matrix(-1 0 0 1 54 0)" fill="#4375E7"/>
-  <path d="M20 27.0007L34 27.0007" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M27 20.001L34 27.001L27 34.001" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-  </button>
-
-    </div>
 
     <!-- Background Image -->
     <div
@@ -160,5 +170,5 @@ delivery to make your laundry experience as seamless as possible.';
   endforeach;
   wp_reset_postdata();
   ?>
-
+</div>
 </section>

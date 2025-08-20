@@ -51,8 +51,12 @@ function laundry_clean_setup_theme()
     ));
 
     register_nav_menus(array(
-        'laundry_clean_header_menu' => __('Laundry Clean Header Menu', 'laundry_clean'),
-        'laundry_clean_mobile_menu' => __('Laundry Clean Mobile Menu', 'laundry_clean')
+        'laundry_clean_header_menu' => __('Laundry Header Menu', 'laundry_clean'),
+        'laundry_clean_mobile_menu' => __('Laundry Mobile Menu', 'laundry_clean'),
+        // Footer Menu
+        'laundry_clean_footer1_ourservice' => __('Laundry Footer One Our Services', 'laundry_clean'),
+        'laundry_clean_footer2_quick_links' => __('Laundry Footer Two Quick Links', 'laundry_clean'),
+        'laundry_clean_footer3_commercial_service' => __('Laundry Footer Three Commercial Service', 'laundry_clean')
     ));
 }
 }
@@ -272,6 +276,81 @@ function laundry_clean_customize_register($wp_customize)
         'label' => __('Company Pinterest Link', 'laundry_clean'),
         'section' => 'company_information',
         'type' => 'url',
+    ));
+
+
+    // Footer Section Settings
+
+    $wp_customize->add_section('footer_section', array(
+        'title' => __('Footer Settings', 'laundry_clean'),
+        'priority' => 140,
+    ));
+
+    // Footer Logo
+     $wp_customize->add_setting('footer_logo', array(
+        'default' => get_template_directory_uri() . '/assets/images/footerlogo.png',
+     ));
+
+     $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'footer_logo', array(
+         'label' => __('Footer Logo', 'laundry_clean'),
+         'section' => 'footer_section',
+         'settings' => 'footer_logo',
+     )));
+
+     // Footer Description
+    $wp_customize->add_setting('footer_description', array(
+        'default' => __('Fusce non ellus nege purus fermentum commodo nunc ame alique Suspendisse poten In eu ipsum massa.', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('footer_description', array(
+        'label' => __('Footer Description', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'textarea',
+    ));
+
+    // Footer menu 1
+    $wp_customize->add_setting('footer_menu1_title', array(
+        'default' => __('Our Services', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('footer_menu1_title', array(
+        'label' => __('Footer Menu 1 Title', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+    // Footer Menu 2
+    $wp_customize->add_setting('footer_menu2_title', array(
+        'default' => __('Quick Links', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('footer_menu2_title', array(
+        'label' => __('Footer Menu 2 Title', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+    // Footer Menu 3
+    $wp_customize->add_setting('footer_menu3_title', array(
+        'default' => __('Commercial Services', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('footer_menu3_title', array(
+        'label' => __('Footer Menu 3 Title', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('newsletter_title', array(
+        'default' => __('Newsletters', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('newsletter_title', array(
+        'label' => __('Newsletter Title', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'text',
+    ));
+
+    $wp_customize->add_setting('newsletter_description', array(
+        'default' => __('Sign up and receive our special offers.', 'laundry_clean'),
+    ));
+    $wp_customize->add_control('newsletter_description', array(
+        'label' => __('Newsletter Description', 'laundry_clean'),
+        'section' => 'footer_section',
+        'type' => 'textarea',
     ));
 }
 
