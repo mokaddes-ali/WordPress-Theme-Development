@@ -43,7 +43,14 @@ add_action('wp_enqueue_scripts', 'laundry_clean_enqueue_scripts');
 function laundry_clean_setup_theme()
 {
       if (wp_get_theme()->get('TextDomain') === 'laundry_clean') {
-    add_theme_support('post-thumbnails');
+    add_theme_support('post-thumbnails'); // Global Post Thumbnails
+//     add_theme_support( 'post-thumbnails', array( 'post' ) );          // Posts only
+// add_theme_support( 'post-thumbnails', array( 'page' ) );          // Pages only
+
+
+     /** post formats */
+    $post_formats = array('aside','image','gallery','video','audio','link','quote','status');
+    add_theme_support( 'post-formats', $post_formats);
 
     add_theme_support('custom-logo', array(
         'height' => 40,
