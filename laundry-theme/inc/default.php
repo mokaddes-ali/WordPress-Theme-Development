@@ -22,10 +22,11 @@ function laundryclean_setup_theme()
     register_nav_menus(array(
         'laundryclean_header_menu' => __('Laundry Header Menu', 'laundryclean'),
         'laundryclean_mobile_menu' => __('Laundry Mobile Menu', 'laundryclean'),
+        
         // Footer Menu
-        'laundryclean_footer1_ourservice' => __('Laundry Footer One Our Services', 'laundryclean'),
-        'laundryclean_footer2_quick_links' => __('Laundry Footer Two Quick Links', 'laundryclean'),
-        'laundryclean_footer3_commercial_service' => __('Laundry Footer Three Commercial Service', 'laundryclean')
+        'laundry_footer1_ourservice' => __('Laundry Footer Our Services', 'laundryclean'),
+        'laundry_footer2_quick_links' => __('Laundry Footer  Quick Links', 'laundryclean'),
+        'laundry_footer3_commercial_service' => __('Laundry Footer Commercial Service', 'laundryclean')
     ));
 }
 }

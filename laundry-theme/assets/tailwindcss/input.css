@@ -61,6 +61,15 @@
     @apply bg-white text-black font-semibold text-base px-4 py-2 block;
 }
 
+/* 
+Mobile Menu Styles
+*/
+.mobile-menu {
+    @apply flex flex-row items-center h-screen overflow-auto;
+}
+.menu-new-laundry-container ul ul{
+    @apply flex ml-12;
+}
 /*==============
 left logo and right logo settings
 ================*/

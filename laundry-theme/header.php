@@ -129,7 +129,7 @@
 
 
 
-        <!-- Mobile Nav Button -->
+        <!-- Mobile Nav Menu and Button -->
         <div class="flex gap-6 md:hidden">
                 <button class="relative w-48 p-2 h-[44px] flex items-center justify-center gap-2 rounded-md overflow-hidden
                 border border-[rgba(20,33,55,0.14)] bg-white text-[#142137] font-poppins text-sm md:text-[15px] font-medium 
@@ -157,34 +157,80 @@
                         </svg>
                     </span>
                 </button>
-           <!-- Mobile Nav Toggle -->
-<div class="md:hidden flex items-center gap-4">
-  <!-- Hidden Checkbox -->
-  <input type="checkbox" id="menu-toggle" class="peer hidden" />
+
+  <!-- Mobile Nav Toggle -->
+<div class="md:hidden relative">
 
   <!-- Hamburger Button -->
-  <label for="menu-toggle" class="cursor-pointer z-50 p-2">
+  <button id="menuBtn" class="z-50 p-2">
     <!-- Open Icon -->
-    <svg class="w-8 h-8 peer-checked:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+    <svg id="openIcon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
     </svg>
-    <!-- Close Icon -->
-    <svg class="w-8 h-8 hidden peer-checked:block" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </label>
+  </button>
 
-  <!-- Fullscreen Menu -->
-  <div class="fixed inset-0 bg-black/80 flex flex-col items-center justify-center space-y-6 text-white text-2xl
-              opacity-0 invisible scale-95 transition-all duration-500 ease-in-out
-              peer-checked:opacity-100 peer-checked:visible peer-checked:scale-100 z-40">
-    <a href="#" class="hover:text-orange-400 transition">Home</a>
-    <a href="#" class="hover:text-orange-400 transition">About</a>
-    <a href="#" class="hover:text-orange-400 transition">Services</a>
-    <a href="#" class="hover:text-orange-400 transition">Portfolio</a>
-    <a href="#" class="hover:text-orange-400 transition">Contact</a>
-  </div>
+  
 </div>
+<!-- Fullscreen Menu -->
+  <div id="navPhone" class="mobile-menu absolute top-16 right-0 w-full h-screen p-5 bg-black/80 flex flex-col items-center space-y-4 text-white text-xl opacity-0 invisible scale-95 transition-all duration-500 ease-in-out z-40">
+    <!-- Top Close Button -->
+    <button id="menuClose" class="absolute top-0 right-0 p-2 text-white">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <?php wp_nav_menu(array(
+        'theme_location' => 'laundryclean_mobile_menu',
+        'fallback_cb' => function(){
+            echo '
+                <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
+              Home
+             <span>
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"       stroke-width="1.5"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+               </svg>
+             </span>
+           </a>
+
+          <a href="#" class="">
+            About Us
+          </a>
+
+         <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
+           Service
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"   stroke-width="1.5"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </span>
+          </a>
+
+          <a href="#" class=" flex items-center  gap-1 hover:text-blue-600 transition">Pages
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </span>
+          </a>
+          <a href="#" class="flex items-center  gap-1 hover:text-blue-600 transition">Blog
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </span>
+          </a>
+    
+          <a href="#" class="hover:text-blue-600 transition">Contact</a>
+            ';
+        }
+    )); ?>
+
+
+  </div>
 
         </div>
     </header>

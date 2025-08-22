@@ -1,5 +1,11 @@
 <?php 
 
+/**
+ * Blog Section
+ *
+ * @package LaundryTheme
+ */
+
 $blog_title = get_theme_mod('blog_section_title', __('Latest News & Blog', 'laundryclean'));
 $blog_description = get_theme_mod('blog_section_description', __('Clothing Care & Laundry Best Practices.', 'laundryclean'));
 $blog_button_text = get_theme_mod('blog_button_text', __('See More Blog', 'laundryclean'));

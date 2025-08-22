@@ -1,3 +1,11 @@
+<?php 
+/**
+ * Header Top Section
+ *
+ * @package LaundryTheme
+ */
+?>
+
 <!-- Navbar Top -->
 <section class="header-top w-full px-[10%] md:px-[15%] lg:px-[5%] 2xl:px-[8%] py-[0.625rem] bg-[#4375E7] h-[4rem] lg:h-[3.375rem] flex flex-col gap-3 lg:gap-4 items-center lg:flex-row lg:justify-between">  
 

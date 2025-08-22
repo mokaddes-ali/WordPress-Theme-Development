@@ -1,11 +1,16 @@
 jQuery(document).ready(function($){
     /*----- menu icon toggle -----*/
    $(document).ready(function () {
-  $("#menuBtn").click(function () {
-    $("#navPhone").toggleClass("active");
-    $("#openIcon").toggleClass("hidden");
-    $("#closeIcon").toggleClass("hidden");
-  });
+ function toggleMenu() {
+      $("#navPhone").toggleClass("opacity-100 opacity-0 visible invisible scale-100 scale-95");
+      $("#openIcon").toggleClass("show");
+    }
+
+    // Open/Close toggle button
+    $("#menuBtn").click(function() {toggleMenu();});
+
+    // Top close button
+    $("#menuClose").click(function() {toggleMenu();});
 });
 
 // console.log("Hello World");
