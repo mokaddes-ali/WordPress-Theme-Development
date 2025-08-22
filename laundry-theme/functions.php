@@ -19,5 +19,6 @@ include_once get_template_directory() . '/inc/slider.register.php';
 // Include Customizer Settings
 include_once get_template_directory() . '/inc/customizer.php';
 
+//Include Custom Tags
 
-
+include_once get_template_directory() . '/inc/custom.tag.php';

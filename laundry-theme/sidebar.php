@@ -7,10 +7,12 @@
                 <!-- search section -->
                 <div
                     class="w-6/12 bg-[#EBEFF3] p-4 sm:p-5 text-[#142137] font-poppins text-xl font-semibold leading-relaxed  tracking-tight">
-                    <h2 class="mb-3">Search</h2>
+                    <h2 class="mb-3">
+                        <?php echo __('Search', 'laundryclean') ?>
+                    </h2>
 
-                    <div class="relative w-full md:w-[318px] mb-6 md:mb-0">
-                        <input type="text" placeholder="Search Here...."
+                    <form role="search" action="<?php echo esc_url(home_url('/')); ?>" method="get" class="relative w-full md:w-[318px] mb-6 md:mb-0">
+                        <input name="s" type="text" placeholder="<?php echo esc_attr_e('Search Here....', 'laundryclean') ?>" value="<?php get_search_query(); ?>" required
                             class="w-full h-11 md:h-[44px] border border-[#1421371A] bg-transparent text-[#142137B3] font-poppins text-sm md:text-[15px] font-normal leading-relaxed md:leading-[26px] pl-4 pr-12 outline-none" />
 
                         <!-- Icon inside input -->
@@ -25,7 +27,7 @@
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
-                    </div>
+                    </form>
                 </div>
 
                 <!-- Follow Us Card -->
@@ -33,7 +35,7 @@
                     <!-- Title -->
                     <h2
                         class="text-xl md:text-[24px] font-semibold leading-relaxed md:leading-[34px] mb-3 tracking-tight md:tracking-[-0.48px]">
-                        Follow Us
+                        <?php echo __('Follow Us', 'laundryclean'); ?>
                     </h2>
 
                     <!-- Icons Row -->
@@ -94,8 +96,8 @@
                 class="search-area hidden lg:flex md:flex-col md:w-auto lg:w-[380px] md:h-[165px]  bg-[#EBEFF3] p-6 text-[#142137] font-poppins text-xl md:text-[24px] font-semibold leading-relaxed md:leading-[34px] tracking-tight md:tracking-[-0.48px]">
                 <h2 class="mb-6">Search</h2>
 
-                <div class="relative w-full lg:w-[318px] mb-6 md:mb-0">
-                    <input type="text" placeholder="Search Here...."
+                <form role="search" action="<?php echo esc_url(home_url('/')); ?>" method="get" class="relative w-full lg:w-[318px] mb-6 md:mb-0">
+                    <input name="s" value="<?php echo esc_attr_e(get_search_query()); ?>" type="text" placeholder="<?php echo __('Search Here....', 'laundryclean'); ?>"
                         class="w-full h-11 md:h-[44px] border border-[#1421371A] bg-transparent text-[#142137B3] font-poppins text-sm md:text-[15px] font-normal leading-relaxed md:leading-[26px] pl-4 pr-12 outline-none" />
 
                     <!-- Icon inside input -->
@@ -109,24 +111,43 @@
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
-                </div>
+                </form>
             </div>
 
             <!-- Recent Posts Card -->
-            <div class="w-full lg:w-[380px] h-auto lg:h-[469px] bg-[#EBEFF3] p-5 md:p-6 text-[#142137] font-poppins">
+            <div class="w-full lg:w-[380px] h-auto bg-[#EBEFF3] p-5 md:p-6 text-[#142137] font-poppins">
                 <!-- Title -->
                 <h2
                     class="text-xl md:text-[24px] font-semibold leading-relaxed md:leading-[34px] mb-6 md:mb-[26px] tracking-tight md:tracking-[-0.48px]">
-                    Recent Posts
+                    <?php echo __('Recent Posts', 'laundryclean'); ?>
                 </h2>
+                
 
                 <!-- Post Rows -->
                 <div class="flex flex-row flex-wrap gap-4 lg:flex-col lg:flex-nowrap md:gap-6">
+                    <?php 
+                $recent_posts = wp_get_recent_posts([
+                    'numberposts' => 3, 
+                    'post_status' => 'publish',
+                    'order' => 'DESC',
+                    'orderby' => 'date',
+                    'post_type' => 'post'
+                ]);
+
+                foreach($recent_posts as $posts):
+                    setup_postdata($posts);
+                ?>
                     <!-- Single Row -->
                     <div class="flex gap-5 items-center">
                         <!-- Left: Image -->
                         <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post1.png" />
+                            <a href="<?php echo get_permalink($posts['ID']); ?>">
+                                <?php if(has_post_thumbnail($posts['ID'])):?>
+                                    <?php echo get_the_post_thumbnail($posts['ID'], 'thumbnail');
+                                else: ?>
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post1.png" alt="<?php echo esc_attr(get_the_title($posts['post_title'])); ?>" />
+                                <?php endif;?>
+                            </a>
                         </div>
 
                         <!-- Right: Content -->
@@ -148,90 +169,23 @@
                                         stroke="#142137" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
                                 </svg>
-                                <span>June 29, 2025</span>
+                                <span>
+                                    <?php echo get_the_date('M d, Y'); ?>
+                                </span>
                             </div>
                             <!-- Title -->
                             <h3 class="text-[18px] font-medium leading-[28px] tracking-[-0.36px] mt-1">
-                                Natural Laundry <br /> Detergents Explained.
+                                <a href="<?php echo get_permalink($posts['ID']); ?>">
+                                    <?php echo esc_html($posts['post_title']); ?>
+                                </a>
                             </h3>
                         </div>
                     </div>
 
-                    <!-- Single Row -->
-                    <div class="flex gap-5 items-center">
-                        <!-- Left: Image -->
-                        <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post2.png" />
-                        </div>
-
-                        <!-- Right: Content -->
-                        <div class="flex-1">
-                            <!-- Date -->
-                            <div class="flex items-center gap-1.5 text-[15px] text-[#142137B3] leading-[26px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20"
-                                    fill="none">
-                                    <path d="M5.5 1V3.69865" stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M12.6953 1V3.69865" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.59766 10.8955H11.7941" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.59766 14.4932H9.09541" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M12.6942 2.34961C15.6897 2.51153 17.1919 3.65396 17.1919 7.88184V13.4411C17.1919 17.1472 16.2924 19.0003 11.7946 19.0003H6.3973C1.89955 19.0003 1 17.1472 1 13.4411V7.88184C1 3.65396 2.50225 2.52052 5.49775 2.34961H12.6942Z"
-                                        stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                <span>March 25, 2025</span>
-                            </div>
-                            <!-- Title -->
-                            <h3 class="text-[18px] font-medium leading-[28px] tracking-[-0.36px] mt-1">
-                                15 Reasons Let Experts
-                                <br /> Handle Dry Cleaning.
-                            </h3>
-                        </div>
-                    </div>
-
-                    <!-- Single Row -->
-                    <div class="flex gap-5 items-center">
-                        <!-- Left: Image -->
-                        <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post3.png" />
-                        </div>
-
-                        <!-- Right: Content -->
-                        <div class="flex-1">
-                            <!-- Date -->
-                            <div class="flex items-center gap-1.5 text-[15px] text-[#142137B3] leading-[26px]">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20"
-                                    fill="none">
-                                    <path d="M5.5 1V3.69865" stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M12.6953 1V3.69865" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.59766 10.8955H11.7941" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.59766 14.4932H9.09541" stroke="#142137" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M12.6942 2.34961C15.6897 2.51153 17.1919 3.65396 17.1919 7.88184V13.4411C17.1919 17.1472 16.2924 19.0003 11.7946 19.0003H6.3973C1.89955 19.0003 1 17.1472 1 13.4411V7.88184C1 3.65396 2.50225 2.52052 5.49775 2.34961H12.6942Z"
-                                        stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                <span>April 16, 2025</span>
-                            </div>
-                            <!-- Title -->
-                            <h3 class="text-[18px] font-medium leading-[28px] tracking-[-0.36px] mt-1">
-                                Complete Guide to
-
-                                <br /> Green & Natural Laundry.
-                            </h3>
-                        </div>
-                    </div>
+                <?php endforeach;
+                wp_reset_postdata();
+                 ?>
                 </div>
-
-
             </div>
 
             <!-- Category Card -->
@@ -239,13 +193,54 @@
                 <!-- Title -->
                 <h2
                     class="text-xl md:text-[24px] font-semibold leading-relaxed md:leading-[34px] mb-6 tracking-tight md:tracking-[-0.48px]">
-                    Categories
+                    <?php echo __('Categories', 'laundryclean'); ?>
                 </h2>
 
                 <!-- Category List -->
                 <div class="grid grid-cols-2 lg:grid-cols-1 gap-4">
                     <!-- Single Category -->
-                    <div
+<?php 
+$categories = get_categories([
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+    'hide_empty' => true,
+]);
+
+if ( ! empty( $categories ) ) :
+    foreach ( $categories as $category ) :
+        $cat_link  = esc_url( get_category_link( $category->term_id ) );
+        $cat_name  = esc_html( $category->name );
+        $cat_count = esc_html( $category->count );
+
+        // Check if this category is active (current queried category)
+        $is_active = ( is_category() && get_queried_object_id() === $category->term_id );
+
+        if ( $is_active ) :
+            ?>
+            <div class="h-[46px] flex items-center justify-between bg-[#4375E7] border border-[#14213723] px-4">
+                <a href="<?php echo $cat_link; ?>" class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
+                        <circle opacity="0.5" cx="2" cy="2" r="2" fill="#142137" />
+                    </svg>
+                    <span class="text-[15px] text-white font-medium leading-[26px]"><?php echo $cat_name; ?></span>
+                </a>
+                <span class="text-[15px] text-white font-medium leading-[26px]">(<?php echo $cat_count; ?>)</span>
+            </div>
+        <?php else : ?>
+            <div class="h-[46px] flex items-center justify-between bg-[#F5F5F5] border border-[#14213723] px-4">
+                <a href="<?php echo $cat_link; ?>" class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="4" height="4" viewBox="0 0 4 4" fill="none">
+                        <circle opacity="0.5" cx="2" cy="2" r="2" fill="#142137" />
+                    </svg>
+                    <span class="text-[15px] text-[#142137] font-medium leading-[26px]"><?php echo $cat_name; ?></span>
+                </a>
+                <span class="text-[15px] text-[#142137] font-medium leading-[26px]">(<?php echo $cat_count; ?>)</span>
+            </div>
+        <?php 
+        endif;
+    endforeach;
+else :
+    echo '<div
                         class="h-[46px] flex items-center justify-between border border-[#14213723] bg-transparent px-4.5">
                         <div class="flex items-center gap-2">
                             <!-- Dot Icon -->
@@ -311,7 +306,10 @@
                             </span>
                         </div>
                         <span class="text-[15px] text-[#142137B3] font-medium leading-[26px]">(7)</span>
-                    </div>
+                    </div>';
+endif;
+?>
+
                 </div>
 
             </div>
@@ -321,35 +319,23 @@
                 <!-- Title -->
                 <h2
                     class="text-xl md:text-[24px] font-semibold leading-relaxed md:leading-[34px] mb-4 tracking-tight md:tracking-[-0.48px]">
-                    Popular Tags
+                    <?php echo  __('Popular Tags', 'laundryclean'); ?>
                 </h2>
 
                 <!-- Tag List -->
-                <div class="flex mt-3 md:mt-4 flex-wrap gap-2 md:gap-3">
-                    <!-- Row 1 - 4 Tags -->
-                    <span
-                        class="w-[67px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Fresh</span>
-                    <span
-                        class="w-[89px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-white border border-[#14213723] bg-[#4375E7] flex items-center justify-center">Flawless</span>
-                    <span
-                        class="w-[72px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Clean</span>
-                    <span
-                        class="w-[66px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Crisp</span>
+                  <?php
+                      wp_tag_cloud([
+                          'smallest'  => 12,
+                          'largest'   => 12,
+                          'unit'      => 'px',
+                          'number'    => 15,
+                          'format'    => 'flat',
+                          'separator' => " ",
+                      ]);
+                
+                  ?>
+               
 
-                    <!-- Row 2 - 3 Tags -->
-                    <span
-                        class="w-[55px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Rent</span>
-                    <span
-                        class="w-[126px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Fresh
-                        Clothes</span>
-                    <span
-                        class="w-[89px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Flawless</span>
-
-                    <!-- Row 3 - 1 Tag -->
-                    <span
-                        class="w-[94px] h-[28px] text-[15px] font-medium leading-[26px] tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center">Our
-                        Care</span>
-                </div>
             </div>
 
             <!-- Follow Us Card -->
@@ -364,10 +350,7 @@
                 <!-- Icons Row -->
                 <div class="flex items-center gap-2 md:gap-2.5">
 
-                    <!-- Icons Row -->
-                    <div class="flex items-center gap-2.5">
-                        <!-- Example Icons (use react-icons in React) -->
-                        <a href="#"
+                        <a href="<?php echo esc_html(get_theme_mod('company_facebook'));?>" target="_blank" rel="noopener noreferrer"
                             class="flex items-center justify-center bg-white rounded-full shadow hover:bg-orange-500 hover:text-white transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"
                                 fill="none">
@@ -378,7 +361,7 @@
                             </svg>
                         </a>
 
-                        <a href="#"
+                        <a href="<?php echo esc_html(get_theme_mod('company_twitter'));?>" target="_blank" rel="noopener noreferrer"
                             class=" flex items-center justify-center bg-white rounded-full shadow hover:bg-orange-500 hover:text-white transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"
                                 fill="none">
@@ -389,7 +372,7 @@
                             </svg>
                         </a>
 
-                        <a href="#"
+                        <a href="<?php echo esc_html(get_theme_mod('company_linkedin'));?>" target="_blank" rel="noopener noreferrer"
                             class="flex items-center justify-center bg-white rounded-full shadow hover:bg-orange-500 hover:text-white transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"
                                 fill="none">
@@ -404,7 +387,7 @@
                             </svg>
                         </a>
 
-                        <a href="#"
+                        <a href="<?php echo esc_html(get_theme_mod('company_pinterest'));?>" target="_blank" rel="noopener noreferrer"
                             class="flex items-center justify-center bg-white rounded-full shadow hover:bg-orange-500 hover:text-white transition">
                             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50"
                                 fill="none">
@@ -414,7 +397,6 @@
                                     fill="white" />
                             </svg>
                         </a>
-                    </div>
                 </div>
 
             </div>
