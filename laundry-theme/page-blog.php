@@ -25,7 +25,7 @@ get_template_part('sections/pagesTitle');
             <div class="w-full fle-shrink-0 bg-[#EBEFF3]">
                 <!-- Image Section -->
                 <div class="w-full h-auto aspect-[1160/570]">
-                    <img src="./assets/images/blogBig1.png" alt="images" class="w-full h-full object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blogBig1.png" alt="images" class="w-full h-full object-cover" />
                 </div>
 
                 <!-- Text Section -->
@@ -263,7 +263,7 @@ get_template_part('sections/pagesTitle');
                 <div class="relative w-full h-auto aspect-[1160/570]">
                      <!-- vedio button -->
                 <div class="absolute top-[35%] left-[45.5%]">
-                    <img src="./assets/images/Video.png" alt="vedio button" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Video.png" alt="vedio button" />
                 </div>
                     <img src="./assets/images/blogBig2.png" alt="images" class="w-full h-full object-cover" />
                 </div>
@@ -278,7 +278,7 @@ get_template_part('sections/pagesTitle');
 
                             <!-- Avatar -->
                             <div class="flex items-center gap-3">
-                                <img src="./assets/images/postclient1.jpg"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/postclient1.jpg"
                                     class="w-12 h-12 rounded-full object-cover" />
                                 <!-- Name -->
                                 <h2 class="text-[#142137] font-poppins text-[18px] font-semibold">
@@ -307,7 +307,7 @@ get_template_part('sections/pagesTitle');
                         <!-- Avatar -->
                         <div
                             class="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 aspect-square rounded-2 bg-[#CFD4C6] bg-cover bg-no-repeat">
-                            <img src="./assets/images/postclient1.jpg" />
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/postclient1.jpg" />
                         </div>
 
                         <!-- Name -->
@@ -471,14 +471,14 @@ get_template_part('sections/pagesTitle');
             <div class="relative mt-[60px] w-full h-auto flex-shrink-0 bg-[#EBEFF3]">
                 <!-- Image Section -->
                 <div class="w-full h-auto aspect-[1160/570]">
-                    <img src="./assets/images/blogBig3.png" alt="images" class="h-full w-full object-cover" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blogBig3.png" alt="images" class="h-full w-full object-cover" />
                 </div>
 
                 <!-- Array Buttons -->
                 <div
                     class="absolute top-[29%] left-0 right-0 transform -translate-y-1/2 flex justify-between px-[30px]">
-                    <img src="./assets/images/arrayleft.png" alt="array left" class="cursor-pointer" />
-                    <img src="./assets/images/arrayright.png" alt="array right" class="cursor-pointer" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrayleft.png" alt="array left" class="cursor-pointer" />
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/arrayright.png" alt="array right" class="cursor-pointer" />
                 </div>
 
                 <!-- Text Section -->
@@ -491,7 +491,7 @@ get_template_part('sections/pagesTitle');
 
                             <!-- Avatar -->
                             <div class="flex items-center gap-3">
-                                <img src="./assets/images/postclient1.jpg"
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/postclient1.jpg"
                                     class="w-12 h-12 rounded-full object-cover" />
                                 <!-- Name -->
                                 <h2 class="text-[#142137] font-poppins text-[18px] font-semibold">
@@ -520,7 +520,7 @@ get_template_part('sections/pagesTitle');
                         <!-- Avatar -->
                         <div
                             class="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 aspect-square rounded-2 bg-[#CFD4C6] bg-cover bg-no-repeat">
-                            <img src="./assets/images/postclient1.jpg" />
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/postclient1.jpg" />
                         </div>
 
                         <!-- Name -->

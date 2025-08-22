@@ -7,7 +7,7 @@
   <!-- Social Icons -->
   <div class="social-icon flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-[1.125rem]">
     <h3 class="text-white font-poppins text-xs sm:text-sm  lg:text-[1rem] font-medium leading-none">
-      <?php echo esc_html_e('Follow Us:', 'laundry_clean'); ?>
+      <?php echo esc_html_e('Follow Us:', 'laundryclean'); ?>
     </h3>
       <!-- Facebook -->
    <a href="<?php echo esc_url(get_theme_mod('company_facebook')); ?>" target="_blank" rel="noopener noreferrer">
@@ -110,7 +110,7 @@
       </svg>
    <a href="mailto:<?php echo get_theme_mod('company_email', 'example@gmail.com'); ?>" 
    class="text-white font-poppins text-xs sm:text-sm lg:text-[1rem] font-medium leading-none whitespace-nowrap">
-    <?php echo esc_html__('Email:', 'laundry_clean'); ?>
+    <?php echo esc_html__('Email:', 'laundryclean'); ?>
     <?php echo esc_html(get_theme_mod('company_email', 'example@gmail.com')); ?>
 </a>
 

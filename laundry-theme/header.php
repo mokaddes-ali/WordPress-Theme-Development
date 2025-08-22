@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html style="scroll-behavior: smooth;" <?php language_attributes();?> >
+<html style="scroll-behavior: smooth;" <?php language_attributes();?> class="no-js">
 <head>
     <meta charset="<?php bloginfo('charset');?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php bloginfo('name');?>- <?php bloginfo('description');?></title>
-  
-
 
 <?php wp_head();?>
 </head>
@@ -27,7 +24,7 @@ get_template_part('sections/header-top');
     <nav class="laundry_header-menu bg-white flex items-center justify-center gap-4 lg:gap-6 2xl:gap-12 w-full py-2 pl-[4px] h-[21px]">
      <?php
      wp_nav_menu(array(
-         'theme_location' => 'laundry_clean_header_menu',
+         'theme_location' => 'laundryclean_header_menu',
          'fallback_cb' => function(){
             echo ' <ul class="flex justify-center text-[#142137] font-medium text-[16px] font-poppins hover:text-blue-600 transition">
         <li><a href="#" class="flex items-center gap-[4px] hover:text-blue-600 transition">Home

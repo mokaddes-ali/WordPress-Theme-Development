@@ -126,7 +126,7 @@
                     <div class="flex gap-5 items-center">
                         <!-- Left: Image -->
                         <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="./assets/images/post1.png" />
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post1.png" />
                         </div>
 
                         <!-- Right: Content -->
@@ -161,7 +161,7 @@
                     <div class="flex gap-5 items-center">
                         <!-- Left: Image -->
                         <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="./assets/images/post2.png" />
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post2.png" />
                         </div>
 
                         <!-- Right: Content -->
@@ -197,7 +197,7 @@
                     <div class="flex gap-5 items-center">
                         <!-- Left: Image -->
                         <div class="w-[90px] h-[100px] aspect-[9/10] flex-shrink-0 bg-gray-300">
-                            <img src="./assets/images/post3.png" />
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/post3.png" />
                         </div>
 
                         <!-- Right: Content -->

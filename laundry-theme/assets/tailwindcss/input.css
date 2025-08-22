@@ -61,3 +61,13 @@
     @apply bg-white text-black font-semibold text-base px-4 py-2 block;
 }
 
+
+
+
+/* ============
+blog-cards design
+============ */
+
+.blog-cards ul{
+    @apply
+}

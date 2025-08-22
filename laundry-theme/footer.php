@@ -2,14 +2,14 @@
 <!-- Footer Section -->
 <?php 
     $footer_logo = get_theme_mod('footer_logo', get_template_directory_uri() . '/assets/images/footerlogo.png');
-    $footer_description = get_theme_mod('footer_description', __('Fusce non ellus nege purus fermentum commodo nunc ame alique Suspendisse poten In eu ipsum massa.', 'laundry_clean'));
-    $footer_menu1_title = get_theme_mod('footer_menu1_title', __('Our Services', 'laundry_clean'));
-    $footer_menu2_title = get_theme_mod('footer_menu2_title', __('Quick Links', 'laundry_clean'));
-    $footer_menu3_title = get_theme_mod('footer_menu3_title', __('Commercial Service', 'laundry_clean'));
+    $footer_description = get_theme_mod('footer_description', __('Fusce non ellus nege purus fermentum commodo nunc ame alique Suspendisse poten In eu ipsum massa.', 'laundryclean'));
+    $footer_menu1_title = get_theme_mod('footer_menu1_title', __('Our Services', 'laundryclean'));
+    $footer_menu2_title = get_theme_mod('footer_menu2_title', __('Quick Links', 'laundryclean'));
+    $footer_menu3_title = get_theme_mod('footer_menu3_title', __('Commercial Service', 'laundryclean'));
 
-    $newsletter_title = get_theme_mod('newsletter_title', __('Newsletters', 'laundry_clean'));
+    $newsletter_title = get_theme_mod('newsletter_title', __('Newsletters', 'laundryclean'));
 
-    $newsletter_description = get_theme_mod('newsletter_description', __('Sign up and receive our special offers.', 'laundry_clean'));
+    $newsletter_description = get_theme_mod('newsletter_description', __('Sign up and receive our special offers.', 'laundryclean'));
 
     // Privacy Policy and Terms of Service pages
     $privacy_policy_url = get_privacy_policy_url();
@@ -114,7 +114,7 @@
                 </div>
                 <div>
                     <p class="text-[#4375E7] text-[15px] font-medium leading-[24px] tracking-[-0.3px]">
-                        <?php echo __('Hotline:', 'laundry_clean') ?>
+                        <?php echo __('Hotline:', 'laundryclean') ?>
                     </p>
                     <p class="text-white text-base font-semibold leading-[24px] tracking-[-0.32px]">
                         <a href="tel:<?php echo esc_html(get_theme_mod('company_phone', '2349873543670')); ?>"><?php echo esc_html(get_theme_mod('company_phone', '(234) 987 - 354 - 3670')); ?></a>
@@ -135,7 +135,7 @@
                 </div>
                 <div>
                     <p class="text-[#4375E7] text-[15px] font-medium leading-[24px] tracking-[-0.3px]">
-                        <?php echo __('Email:', 'laundry_clean') ?>
+                        <?php echo __('Email:', 'laundryclean') ?>
                     </p>
                     <p class="text-white text-base font-semibold leading-[24px] tracking-[-0.32px]">
                         <a href="mailto:<?php echo esc_html(get_theme_mod('company_email', 'example@gmail.com')); ?>"><?php echo esc_html(get_theme_mod('company_email', 'example@gmail.com')); ?></a>
@@ -153,7 +153,7 @@
             </h3>
            <?php 
             wp_nav_menu(array(
-                'theme_location' => 'laundry_clean_footer1_ourservice',
+                'theme_location' => 'laundryclean_footer1_ourservice',
                 'fallback_cb' => function(){
                     echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>Laundry Service</li>
@@ -177,7 +177,7 @@
             </h3>
           <?php
           wp_nav_menu(array(
-                'theme_location' => 'laundry_clean_footer2_quicklinks',
+                'theme_location' => 'laundryclean_footer2_quicklinks',
                 'fallback_cb' => function(){
                     echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>About Us</li>
@@ -200,7 +200,7 @@
             </h3>
             <?php
             wp_nav_menu(array(
-                'theme_location' => 'laundry_clean_footer3_commercial_service',
+                'theme_location' => 'laundryclean_footer3_commercial_service',
                 'fallback_cb' => function(){
                     echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
                         <li>Airbnb Laundry</li>
@@ -278,14 +278,14 @@
         <div class="w-full h-px  bg-white/10"></div>
         <div class="footer-bottom flex flex-col md:flex-row justify-between items-center gap-4">
             <h2 class="text-white/70 text-base font-normal leading-[26px]">
-                 <?php echo esc_html__('Copyright', 'laundry_clean'); ?> &copy; <?php echo date('Y');?> <?php bloginfo('name');?> <?php echo esc_html__('All rights reserved', 'laundry_clean'); ?></h2>
+                 <?php echo esc_html__('Copyright', 'laundryclean'); ?> &copy; <?php echo date('Y');?> <?php bloginfo('name');?> <?php echo esc_html__('All rights reserved', 'laundryclean'); ?></h2>
             <p class="text-base font-normal leading-[26px]">
                 <span class="text-white/70">
-                    <a href="<?php echo $privacy_policy_url ? esc_url($privacy_policy_url) : '#'; ?>"><?php esc_html_e('Privacy Policy', 'laundry_clean'); ?></a>
+                    <a href="<?php echo $privacy_policy_url ? esc_url($privacy_policy_url) : '#'; ?>"><?php esc_html_e('Privacy Policy', 'laundryclean'); ?></a>
                 </span>
                 <span class="text-white/70 mx-[14px]">|</span>
                 <span class="text-white">
-                    <a href="<?php echo $terms_of_service_url ? esc_url($terms_of_service_url) : '#'; ?>"><?php esc_html_e('Term of Service', 'laundry_clean'); ?></a>
+                    <a href="<?php echo $terms_of_service_url ? esc_url($terms_of_service_url) : '#'; ?>"><?php esc_html_e('Term of Service', 'laundryclean'); ?></a>
                 </span>
             </p>
         </div>
