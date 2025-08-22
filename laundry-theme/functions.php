@@ -33,7 +33,7 @@ function laundryclean_setup_theme()
     if (wp_get_theme()->get('TextDomain') === 'laundryclean') {
 
     // Enable post thumbnails for posts and pages
-    add_theme_support( 'post-thumbnails', array( 'post','page' ) );
+    add_theme_support( 'post-thumbnails', array( 'post','page','slider' ) );
 
     
     // Enable dynamic title tag support
@@ -42,11 +42,6 @@ function laundryclean_setup_theme()
      /** post formats */
     $post_formats = array('gallery','video','quote');
     add_theme_support( 'post-formats', $post_formats);
-
-    add_theme_support('custom-logo', array(
-        'height' => 40,
-        'width' => 120,
-    ));
 
     register_nav_menus(array(
         'laundryclean_header_menu' => __('Laundry Header Menu', 'laundryclean'),
@@ -61,11 +56,9 @@ function laundryclean_setup_theme()
 add_action('after_setup_theme', 'laundryclean_setup_theme');
 
 
-
-
 // Register Slider Custom Post Type
 
-function laundryclean_slider_init()
+function laundryclean_slider_register()
 {
     $labels = array(
         'name'                  => __('Sliders', 'laundryclean'),
@@ -94,7 +87,7 @@ function laundryclean_slider_init()
         'capability_type'       => 'post',
         'has_archive'           => false,
         'hierarchical'          => false,
-        'menu_position'         => 3,
+        'menu_position'         => 5,
         'menu_icon'             => 'dashicons-images-alt2',
         'supports' => array(
             'title',
@@ -104,7 +97,7 @@ function laundryclean_slider_init()
     );
     register_post_type('slider', $args);
 }
-add_action('init', 'laundryclean_slider_init');
+add_action('init', 'laundryclean_slider_register');
 
 
 
@@ -188,6 +181,7 @@ add_action('save_post', 'laundryclean_save_slider_meta');
 
 function laundryclean_customize_register($wp_customize)
 {
+
     // Company Information Settings
     $wp_customize->add_section('company_information', array(
         'title' => __('Company Information', 'laundryclean'),
@@ -276,6 +270,61 @@ function laundryclean_customize_register($wp_customize)
         'type' => 'url',
     ));
 
+
+    /**=============================
+     * Header Settings
+     *=============================*/
+    $wp_customize->add_section('header_section', array(
+        'title' => __('Header Settings', 'laundryclean'),
+        'priority' => 120,
+    ));
+
+    // Header Logo
+    $wp_customize->add_setting('header_logo', array(
+        'default' => get_template_directory_uri() . '/assets/images/Logo (1).png',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'header_logo', array(
+        'label' => __('Header Logo', 'laundryclean'),
+        'section' => 'header_section',
+        'settings' => 'header_logo',
+        'height' => 40,
+        'width' => 140,
+    )));
+
+    // Menu Position
+    $wp_customize->add_setting('menu_position', array(
+        'default' => 'left_logo',
+    ));
+    $wp_customize->add_control('menu_position', array(
+        'label' => __('Menu Position', 'laundryclean'),
+        'section' => 'header_section',
+        'type' => 'radio',
+        'choices' => array(
+            'left_logo' => __('Left Logo', 'laundryclean'),
+            'right_logo' => __('Right Logo', 'laundryclean'),
+        ),
+    ));
+
+
+    // Header Button Text
+    $wp_customize->add_setting('header_button_text', array(
+        'default' => __('Schedule a Pickup', 'laundryclean'),
+    ));
+    $wp_customize->add_control('header_button_text', array(
+        'label' => __('Header Button Text', 'laundryclean'),
+        'section' => 'header_section',
+        'type' => 'text',
+    ));
+
+    // Header Button URL
+    $wp_customize->add_setting('header_button_url', array(
+        'default' => __('http://localhost/wordpress/index.php/schedule-a-pickup/', 'laundryclean'),
+    ));
+    $wp_customize->add_control('header_button_url', array(
+        'label' => __('Header Button URL', 'laundryclean'),
+        'section' => 'header_section',
+        'type' => 'url',
+    ));
 
     // Blog Section Settings
 

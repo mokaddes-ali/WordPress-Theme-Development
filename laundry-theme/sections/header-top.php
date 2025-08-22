@@ -1,12 +1,12 @@
 <!-- Navbar Top -->
-<section class="header-top w-full px-[10%] md:px-[15%] lg:px-[5%] 2xl:px-[8%] py-[0.625rem] bg-[#4375E7] h-[4rem] lg:h-[3.375rem] flex flex-col gap-3 lg:gap-0 items-center lg:flex-row lg:justify-between">  
+<section class="header-top w-full px-[10%] md:px-[15%] lg:px-[5%] 2xl:px-[8%] py-[0.625rem] bg-[#4375E7] h-[4rem] lg:h-[3.375rem] flex flex-col gap-3 lg:gap-4 items-center lg:flex-row lg:justify-between">  
 
   <!-- left -->
 <div class="follow-liink flex w-full justify-between lg:justify-start items-center lg:gap-[1.25rem]">
   
   <!-- Social Icons -->
-  <div class="social-icon flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-[1.125rem]">
-    <h3 class="text-white font-poppins text-xs sm:text-sm  lg:text-[1rem] font-medium leading-none">
+  <div class="social-icon flex items-center justify-center gap-2  xl:gap-[1.125rem]">
+    <h3 class="text-white font-poppins text-xs sm:text-sm  md:text-base font-medium leading-none">
       <?php echo esc_html_e('Follow Us:', 'laundryclean'); ?>
     </h3>
       <!-- Facebook -->

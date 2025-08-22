@@ -145,8 +145,8 @@ delivery to make your laundry experience as seamless as possible.';
                 <div class="flex flex-col gap-[0.5rem] sm:gap-[0.625rem]">
                     <div class="flex items-center text-yellow-400">
                         <?php if($slider_rating): ?>
-                        <?php $total_stars = 5;
-            for($i = 1; $i <= $total_stars; $i++): ?>
+                        <?php $total_stars = $slider_rating;
+                       for($i = 1; $i <= $total_stars; $i++): ?>
                         <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 20 20"
                             fill="currentColor" class="text-yellow-400">
                             <path
