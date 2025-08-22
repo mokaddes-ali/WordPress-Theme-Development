@@ -3,7 +3,6 @@
 $blog_title = get_theme_mod('blog_section_title', __('Latest News & Blog', 'laundryclean'));
 $blog_description = get_theme_mod('blog_section_description', __('Clothing Care & Laundry Best Practices.', 'laundryclean'));
 $blog_button_text = get_theme_mod('blog_button_text', __('See More Blog', 'laundryclean'));
-$blog_button_url = get_theme_mod('blog_button_url', site_url('/index.php/blog/'));
 
 
 $blog_posts = new WP_Query(array(
@@ -37,7 +36,7 @@ $blog_posts = new WP_Query(array(
         <button
             class="w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group mt-0 md:mt-[60px]">
             <?php if($blog_button_text): ?>
-            <a href="<?php echo esc_url($blog_button_url); ?>">
+            <a href="<?php echo get_permalink(get_option('post_per_page')) ?>">
                 <?php echo esc_html($blog_button_text); ?>
             </a>
             <?php endif; ?>
