@@ -2,7 +2,6 @@
     get_header();
 ?>
 
-
 <?php 
 get_template_part('sections/pagesTitle');
 ?>
@@ -10,11 +9,17 @@ get_template_part('sections/pagesTitle');
  <section class="blog-section mx-auto w-full px-[2.5%] md:px-[3.5%] lg:px-[5%] 2xl:px-[8%] pt-6 md:pt-8 lg:pt-10 xl:pt-16 flex flex-col-reverse md:flex-row gap-4 md:gap-6 xl:gap-12 overflow-hidden">
     <!-- Blog Left Content -->
     <div class="blog-left  w-full md:w-8/12">
+
+    <?php if(have_posts()): while(have_posts()): the_post();?>
         <!-- First Card -->
         <div class="w-full">
             <!-- Image Section -->
             <div class="w-full h-auto aspect-[1160/570]">
+              <?php if(has_post_thumbnail()): ?>
+                <?php the_post_thumbnail('full', ['class' => 'w-full h-full object-cover']); ?>
+              <?php else: ?>
                 <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/blogdetail1.png" alt="Blog detail image" class="w-full h-full object-cover" />
+              <?php endif; ?>
             </div>
 
             <!-- Text Section -->
@@ -23,15 +28,22 @@ get_template_part('sections/pagesTitle');
                 <div class="flex flex-wrap items-center gap-3 md:gap-[13px]">
                     <!-- Avatar -->
                     <div class="w-10 h-10 md:w-[54px] md:h-[54px] flex-shrink-0 rounded-[6px] bg-[#CFD4C6] overflow-hidden">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/postclient1.jpg" class="w-full h-full object-cover" />
+                      <?php 
+                      $author_id = get_the_author_meta('ID');
+                      $author_avatar = get_avatar_url($author_id);
+                      if(!$author_avatar) {
+                        $author_avatar = get_template_directory_uri() . '/assets/images/postclient1.jpg';
+                      }
+                      ?>
+                        <img src="<?php echo esc_url($author_avatar); ?>" class="w-full h-full object-cover" alt="<?php echo esc_attr(get_the_author()); ?>" />
                     </div>
 
                     <!-- Name -->
-                    <h2 class="text-[#142137] font-poppins text-base md:text-[18px] font-semibold leading-none">Miles Tone</h2>
+                    <h2 class="text-[#142137] font-poppins text-base md:text-[18px] font-semibold leading-none"><?php echo esc_html(get_the_author()); ?></h2>
 
                     <!-- Service Type -->
                     <div class="text-[rgba(20,33,55,0.60)] pl-2 md:pl-[10px] flex gap-1 md:gap-[5px] items-center text-center font-poppins text-sm md:text-[16px] font-medium leading-[26px]">
-                       <!-- Phone Icon -->
+                       <!-- Icon -->
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none"
                 class="w-[22px] h-[22px] flex-shrink-0 aspect-square">
                 <path
@@ -41,7 +53,7 @@ get_template_part('sections/pagesTitle');
                   d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                   fill="#1D92CD" />
               </svg>
-                        <h1>Laundry Services</h1>
+                        <h1><?php echo esc_html(get_the_category()[0]->name); ?></h1>
                     </div>
 
                     <!-- Date -->
@@ -62,7 +74,9 @@ get_template_part('sections/pagesTitle');
                 <path d="M5.75195 13.5994H9.35213" stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10"
                   stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-                        <h2>March 16, 2025</h2>
+                        <h2>
+                          <?php echo esc_html(get_the_date('F d, Y')); ?>
+                        </h2>
                     </div>
 
                     <!-- Comment Count -->
@@ -81,18 +95,45 @@ get_template_part('sections/pagesTitle');
                 <path d="M6.04849 9.13973H6.0586" stroke="#1D92CD" stroke-width="2" stroke-linecap="round"
                   stroke-linejoin="round" />
               </svg>
-                        <h2>02 Comment</h2>
+                        <h2>
+                           <?php
+                              $comments_count = get_comments_number(); 
+                               $comments_open  = comments_open();
+
+                                if ( ! $comments_open ) {
+   
+                                  $comment = esc_html__('Comments are closed', 'laundryclean');
+                                   } else {
+                                  if ( $comments_count === 0 ) {
+                                  $comment = esc_html__('No Comments', 'laundryclean');
+                                  } elseif ( $comments_count === 1 ) {
+                                  $comment = esc_html__('1 Comment', 'laundryclean');
+                                  } else {
+                                  $comment = esc_html($comments_count) . ' ' . esc_html__('Comments', 'laundryclean');
+                                 }
+
+                                $comment = '<a href="' . esc_url(get_comments_link()) . '">' . $comment . '</a>';
+                               }
+
+                            echo $comment;
+
+                             ?>
+
+                        </h2>
                     </div>
                 </div>
 
                 <!-- Second Row - Title -->
                 <div class="text-[#142137] -mt-1 md:-mt-[3px] mb-1 md:mb-[4px] font-poppins text-2xl md:text-3xl lg:text-[34px] font-semibold leading-tight md:leading-[64px] tracking-tight md:tracking-[-0.68px]">
-                    <h1>How to Keep Your Garments Fresh & Clean Laundry Tips.</h1>
+                    <h1>
+                      <?php echo esc_html(get_the_title()); 
+                      ?>
+                    </h1>
                 </div>
 
                 <!-- Third Row - Description -->
                 <div class="text-[rgba(20,33,55,0.70)] font-poppins text-base md:text-[16px] font-normal leading-relaxed md:leading-[26px]">
-                    Cleaning is more than just visiting places—it's about creating lasting memories, discovering new cultures, and experiencing the extrinary. From breathtaking landscapes to immersive local adventures, we curate seamless travel experiences tailored to your dreams. Whether you seek relaxation, adventure, or cultural exploration, we are here to turn your journey into a story worth telling. Sed consectetur lobortis arcu, ut fringilla dolor lobortis et. Maecenas ut tincidunt enim. Mauris eu condimentum.
+                    <?php echo esc_html(the_content()); ?>
                 </div>
 
              <!-- Four Row Section -->
@@ -150,7 +191,11 @@ get_template_part('sections/pagesTitle');
                 
             </div>
         </div>
-
+         <?php endwhile; else: ?>
+          <p class="text-gray-700 text-base leading-relaxed max-w-4xl">
+            <?php esc_html_e('No comments found.', 'laundryclean'); ?>
+          </p>
+       <?php endif; ?>
        <!-- Second Card -->
 <div class="relative bg-[#EBEFF3] rounded-lg mt-5 lg:mt-10 p-4 md:p-6 flex flex-col items-center text-center gap-6">
 

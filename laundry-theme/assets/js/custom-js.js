@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){
+  
     /*----- menu icon toggle -----*/
    $(document).ready(function () {
  function toggleMenu() {
@@ -117,3 +118,29 @@ jQuery(document).ready(function($){
     $('#reply-form-' + commentId).find('.comment_parent_input').val(commentId);
   });
 });
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Example Box animation
+gsap.from(".box1", {
+  scrollTrigger: ".box1",
+  x: -200,
+  opacity: 0,
+  duration: 1
+});
+
+// Counter example
+gsap.fromTo("#counter1", 
+  { innerText: 0 }, 
+  { 
+    innerText: 1500, 
+    duration: 2, 
+    snap: { innerText: 1 },
+    scrollTrigger: { trigger: "#counter1", start: "top 80%" }
+  }
+);
+
+
+  console.log("GSAP is working!");
+

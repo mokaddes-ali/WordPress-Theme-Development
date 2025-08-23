@@ -19,7 +19,12 @@ function laundryclean_enqueue_scripts() {
     // Slick JS
     wp_enqueue_script('slick-js', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', ['jquery'], '1.9.0', true);
 
-    // Custom JS after Slick
-    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', ['jquery', 'slick-js'], filemtime(get_template_directory() . '/assets/js/custom-js.js'), true);
+    // GSAP
+    wp_enqueue_script('gsap', get_template_directory_uri() . '/assets/js/gsap.min.js', [], null, true);
+    wp_enqueue_script('gsap-scrolltrigger', get_template_directory_uri() . '/assets/js/ScrollTrigger.min.js', ['gsap'], null, true);
+
+    // Custom JS
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom-js.js', ['jquery', 'slick-js', 'gsap', 'gsap-scrolltrigger'], filemtime(get_template_directory() . '/assets/js/custom-js.js'), true);
 }
 add_action('wp_enqueue_scripts', 'laundryclean_enqueue_scripts');
+
