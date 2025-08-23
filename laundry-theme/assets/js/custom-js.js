@@ -14,8 +14,6 @@ jQuery(document).ready(function($){
     $("#menuClose").click(function() {toggleMenu();});
 });
 
-// console.log("Hello World");
-
   //scroll button
 
     $(window).on('load scroll', function () {
@@ -36,8 +34,9 @@ jQuery(document).ready(function($){
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 1500,
+        autoplaySpeed: 2000,
         dots: false,
+        pauseOnHover: false,
         arrows: false,
         responsive: [
             { breakpoint: 768, settings: { slidesToShow: 1 } },
@@ -117,29 +116,56 @@ jQuery(document).ready(function($){
     // Set parent ID
     $('#reply-form-' + commentId).find('.comment_parent_input').val(commentId);
   });
-});
 
+
+
+  $('.gallery-container').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        responsive: [
+            { breakpoint: 640, settings: { slidesToShow: 1 } },   // sm
+            { breakpoint: 768, settings: { slidesToShow: 2 } },   // md
+            { breakpoint: 1024, settings: { slidesToShow: 3 } },  // lg
+            { breakpoint: 1280, settings: { slidesToShow: 4 } },  // xl
+            { breakpoint: 1536, settings: { slidesToShow: 5 } }   // 2xl
+        ]
+    });
+    });
+
+
+// GSap For Animation
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Example Box animation
-gsap.from(".box1", {
-  scrollTrigger: ".box1",
-  x: -200,
-  opacity: 0,
-  duration: 1
+
+document.querySelectorAll(".counter").forEach(counter => {
+  const endValue = +counter.getAttribute("data-count");
+  const suffix = counter.getAttribute("data-suffix") || "";
+
+  gsap.fromTo(counter,
+    { innerText: 10 },
+    { 
+      innerText: endValue,
+      duration: 1,
+      ease: "power1.inOut",
+      snap: { innerText: 2 },
+      scrollTrigger: {
+        trigger: counter,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      onUpdate: function() {
+        counter.innerText = Math.floor(counter.innerText) + suffix;
+      }
+    }
+  );
 });
 
-// Counter example
-gsap.fromTo("#counter1", 
-  { innerText: 0 }, 
-  { 
-    innerText: 1500, 
-    duration: 2, 
-    snap: { innerText: 1 },
-    scrollTrigger: { trigger: "#counter1", start: "top 80%" }
-  }
-);
 
 
   console.log("GSAP is working!");

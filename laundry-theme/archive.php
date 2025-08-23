@@ -26,7 +26,7 @@ style="background-image: url('<?php echo get_template_directory_uri() . '/assets
 
     <!-- Blog Title -->
     <h1 class="text-white text-4xl sm:text-5xl md:text-[50px] lg:text-[60px] font-semibold leading-[1.2] sm:leading-[1.3] md:leading-[1.4] lg:leading-[110px] tracking-[-0.8px] sm:tracking-[-1px] lg:tracking-[-1.2px] font-poppins mb-4 sm:mb-6">
-      Blog
+      Archive for Tag
     </h1>
 
     <!-- Background Badge -->

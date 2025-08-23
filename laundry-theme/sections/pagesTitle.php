@@ -1,11 +1,18 @@
   <!-- Blog Hero Area -->
 <section class="relative mt-20 mx-auto w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-12 md:py-16 lg:py-20 xl:py-24 h-[250px] sm:h-[300px] md:h-[350px] lg:h-[370px] bg-cover bg-center bg-no-repeat "
-  style="background-image: url('<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/bg.png');">
+style="background-image: url('<?php 
+    if(has_post_thumbnail()) {
+        echo esc_url(get_the_post_thumbnail_url()); 
+    } else {
+        echo esc_url(get_template_directory_uri() . '/assets/images/bg.png'); 
+    }
+?>');
+  ">
   <div class="container mx-auto text-white h-full flex flex-col justify-center">
 
     <!-- Blog Title -->
     <h1 class="text-white text-4xl sm:text-5xl md:text-[50px] lg:text-[60px] font-semibold leading-[1.2] sm:leading-[1.3] md:leading-[1.4] lg:leading-[110px] tracking-[-0.8px] sm:tracking-[-1px] lg:tracking-[-1.2px] font-poppins mb-4 sm:mb-6">
-      Blog Details
+      <?php echo esc_html( get_the_title() ); ?>
     </h1>
 
     <!-- Background Badge -->
@@ -23,7 +30,7 @@
       <div class="flex items-center gap-1 sm:gap-2">
         <!-- Home Text -->
         <span class="text-white text-xs sm:text-sm md:text-[16px] font-medium leading-none tracking-[-0.24px] sm:tracking-[-0.28px] md:tracking-[-0.32px] font-[Poppins]">
-          Home
+          <a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'laundryclean'); ?></a>
         </span>
 
         <!-- Dot Separator -->
@@ -33,7 +40,7 @@
 
         <!-- Blog Text -->
         <span class="flex text-white text-xs md:text-[16px] font-medium leading-none tracking-[-0.24px] md:tracking-[-0.32px] font-poppins">
-          Blog Details
+          <?php echo esc_html( get_the_title() ); ?>
         </span>
       </div>
     </div>

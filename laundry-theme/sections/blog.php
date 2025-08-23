@@ -22,7 +22,7 @@
 
 ?>
 <!-- Blog Section -->
-<section class="blog-area w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-16 md:py-24 lg:py-[149px] flex flex-col gap-5">
+<section class="blog-area w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-16 md:py-24 lg:py-[149px] flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
 
      <!-- Latest News Label -->
      <div
@@ -34,7 +34,7 @@
     </div>
 
     <!-- Heading and Button -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
          <h1
              class="text-[#142137] font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight tracking-tight text-center md:text-left lg:leading-[64px] lg:tracking-[-1.08px] font-poppins max-w-[660px]">
             <?php if($blog_sub_title): ?>
@@ -44,7 +44,7 @@
          <button
             class="w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group mt-0 md:mt-[60px]">
             <?php if($blog_button_text): ?>
-            <a href="<?php echo get_permalink(get_option('post_per_page')) ?>">
+            <a href="<?php echo get_permalink(get_option('page_for_posts')) ?>">
                 <?php echo esc_html($blog_button_text); ?>
             </a>
             <?php endif; ?>
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div
-                 class="pt-4 flex justify-start gap-[18px] text-[15px] font-medium text-[rgba(20,33,55,0.7)] leading-[26px]">
+                 class="pt-4 flex justify-start gap-2 text-[15px] font-medium text-[rgba(20,33,55,0.7)] leading-[26px]">
                 <div class="flex items-center gap-[4px]">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none">
                         <path
@@ -107,7 +107,7 @@
                      $comments_open  = comments_open();
 
                     if ( ! $comments_open ) {
-                       $comment = esc_html__('Comments are closed', 'laundryclean');
+                       $comment = esc_html__('Comment close', 'laundryclean');
                    } else {
                    if ( $comments_count === 0 ) {
                          $comment = esc_html__('No Comments', 'laundryclean');

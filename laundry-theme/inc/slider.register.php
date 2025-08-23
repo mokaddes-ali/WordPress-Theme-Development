@@ -66,7 +66,7 @@ function laundryclean_slider_meta_box_callback($post)
     // Existing fields
     $slider_type       = get_post_meta($post->ID, '_slider_type', true) ?: 'Dry Clean Experts';
     $slider_button_text  = get_post_meta($post->ID, '_slider_button_text', true) ?: 'Book Laundry Now!';
-    $slider_button_link  = get_post_meta($post->ID, '_slider_button_link', true) ?: 'https://example.com/book-laundry-now';
+    $slider_button_link  = get_post_meta($post->ID, '_slider_button_link', true) ?: 'http://localhost/wordpress/';
     $slider_avatar       = get_post_meta($post->ID, '_slider_avatar', true) ?: '';
     $slider_rating       = get_post_meta($post->ID, '_slider_rating', true) ?: '5';
     $slider_rating_text  = get_post_meta($post->ID, '_slider_rating_text', true) ?: '8k Clients Reviews.';
