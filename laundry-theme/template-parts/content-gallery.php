@@ -1,38 +1,21 @@
-
-<?php
-/**
- * Template part for displaying posts with Gallery format
- */
-?>
-
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-    
-    <!-- Post Title -->
     <header class="entry-header">
-        <?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
+        <?php the_title('<h2 class="entry-title">', '</h2>'); ?>
     </header>
 
-    <!-- Gallery Images -->
     <div class="entry-gallery">
         <?php
-        $gallery = get_post_gallery( get_the_ID(), false );
-        if ( ! empty( $gallery['ids'] ) ) {
-            $ids = explode( ",", $gallery['ids'] );
-            echo '<div class="post-gallery">';
-            foreach ( $ids as $id ) {
-                $img = wp_get_attachment_image( $id, 'large' );
-                echo '<div class="gallery-item">' . $img . '</div>';
-            }
-            echo '</div>';
-        } else {
-            the_content(); // fallback
-        }
-        ?>
-    </div>
+        $content = get_the_content();
+        preg_match_all('/<img[^>]+src="([^">]+)"/i', $content, $matches);
 
-    <!-- Post Content -->
-    <div class="entry-content">
-        <?php the_excerpt(); ?>
+        if (!empty($matches[1])): ?>
+            <div class="gallery">
+                <?php foreach ($matches[1] as $img_url): ?>
+                    <div class="gallery-thumbnail">
+                        <img src="<?php echo esc_url($img_url); ?>" alt="">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
-
 </article>
