@@ -47,7 +47,6 @@ jQuery(document).ready(function($){
     $('#custom-prev').click(function() { $('.hero-slick-items').slick('slickPrev'); });
     $('#custom-next').click(function() { $('.hero-slick-items').slick('slickNext'); });
 
-
     /*----- testimonial section slick -----*/
     $(".testimonial-items").slick({
         slidesToShow: 1,
@@ -58,20 +57,20 @@ jQuery(document).ready(function($){
         arrows: false
     });
 
-    /*----- blog section slick add -----*/
-    $(".blog-wrapper").slick({ 
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        dots: true,
-        arrows: false,
-        pauseOnHover: false,
-          responsive: [
+   $(".blog-wrapper").slick({ 
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    dots: true,
+    arrows: false,
+    pauseOnHover: false,
+    infinite: true,
+    responsive: [
         {
             breakpoint: 1280,
             settings: {
-                slidesToShow: 2
+                slidesToShow: 4
             }
         },
         {
@@ -93,29 +92,7 @@ jQuery(document).ready(function($){
             }
         }
     ]
-    });
-
-
-
-// reply
-    $('.reply-btn').on('click', function (e) {
-    e.preventDefault();
-
-    // Clear old reply forms
-    $('.reply-form-container').empty();
-
-    // Get comment ID
-    let commentId = $(this).data('comment-id');
-
-    // Get form HTML
-    let formHtml = $('#hidden-reply-form').html();
-
-    // Insert form into correct reply container
-    $('#reply-form-' + commentId).html(formHtml);
-
-    // Set parent ID
-    $('#reply-form-' + commentId).find('.comment_parent_input').val(commentId);
-  });
+});
 
 
 
@@ -128,11 +105,11 @@ jQuery(document).ready(function($){
         autoplay: true,
         autoplaySpeed: 2000,
         responsive: [
-            { breakpoint: 640, settings: { slidesToShow: 1 } },   // sm
-            { breakpoint: 768, settings: { slidesToShow: 2 } },   // md
-            { breakpoint: 1024, settings: { slidesToShow: 3 } },  // lg
-            { breakpoint: 1280, settings: { slidesToShow: 4 } },  // xl
-            { breakpoint: 1536, settings: { slidesToShow: 5 } }   // 2xl
+            { breakpoint: 640, settings: { slidesToShow: 1 } },   
+            { breakpoint: 768, settings: { slidesToShow: 2 } },   
+            { breakpoint: 1024, settings: { slidesToShow: 3 } },  
+            { breakpoint: 1280, settings: { slidesToShow: 4 } },  
+            { breakpoint: 1536, settings: { slidesToShow: 5 } }  
         ]
     });
     });

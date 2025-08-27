@@ -12,10 +12,9 @@
        
        $blog_button_text = get_theme_mod('blog_button_text', __('See More Blog', 'laundryclean'));
 
-
        $blog_posts = new WP_Query(array(
        'post_type' => 'post',
-       'posts_per_page' => 8,
+       'posts_per_page' => 4,
        'orderby' => 'date',
        'order' => 'DESC',
     ));
@@ -101,30 +100,32 @@
                         <?php echo get_the_date('M d, Y'); ?>
                     </span>
                 </div>
-                <div class="flex items-center gap-1 hover:underline hover:underline-offset-auto">
+              <div class="flex items-center gap-1 hover:underline hover:underline-offset-auto">
                     <?php
-                     $comments_count = get_comments_number(); 
-                     $comments_open  = comments_open();
-
-                    if ( ! $comments_open ) {
-                       $comment = esc_html__('Comment close', 'laundryclean');
-                   } else {
-                   if ( $comments_count === 0 ) {
+                    $comments_count = get_comments_number();
+                     if($comments_count || comments_open()) : 
+                 
+                     if ( $comments_count === 0 ) {
                          $comment = esc_html__('No Comments', 'laundryclean');
-                    } elseif ( $comments_count === 1 ) {
+                      } elseif ( $comments_count === 1 ) {
                           $comment = esc_html__('1 Comment', 'laundryclean');
-                   } else {
+                       } else {
                        $comment = esc_html($comments_count) . ' ' . esc_html__('Comments', 'laundryclean');
-                  }
+                       }
 
-                   $comment = '<a href="' . esc_url(get_comments_link()) . '">' . $comment . '</a>';
-            }
+                        $comment = '<a href="' . esc_url(get_comments_link()) . '">' . $comment . '</a>';
+                        ?>
 
-           echo ' <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                    
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
             <path d="M14.1752 12.8638L14.4872 15.3918C14.5672 16.0558 13.8552 16.5197 13.2872 16.1757L9.93546 14.1838C9.56749 14.1838 9.20752 14.1598 8.85554 14.1118C9.4475 13.4158 9.79947 12.5358 9.79947 11.5838C9.79947 9.31185 7.8316 7.47192 5.39976 7.47192C4.47182 7.47192 3.61588 7.73589 2.90392 8.19989C2.87992 7.99989 2.87192 7.79989 2.87192 7.59189C2.87192 3.95195 6.03171 1 9.93546 1C13.8392 1 16.999 3.95195 16.999 7.59189C16.999 9.75185 15.8871 11.6638 14.1752 12.8638Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M9.79943 11.5836C9.79943 12.5356 9.44746 13.4156 8.8555 14.1116C8.06355 15.0716 6.80762 15.6875 5.39971 15.6875L3.31185 16.9275C2.95987 17.1435 2.5119 16.8475 2.5599 16.4395L2.75988 14.8636C1.68795 14.1196 1 12.9276 1 11.5836C1 10.1756 1.75196 8.93564 2.90388 8.19965C3.61583 7.73565 4.47177 7.47168 5.39971 7.47168C7.83156 7.47168 9.79943 9.31161 9.79943 11.5836Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>' . '<span>' . $comment . '</span>';
-             ?>
+          </svg>
+          <span><?php echo $comment; ?></span>
+
+
+             <?php endif; ?>
          </div>
         </div>
      <div class="w-full h-[1px] bg-[rgba(0,0,0,0.2)] mt-4"></div>

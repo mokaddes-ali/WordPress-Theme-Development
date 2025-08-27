@@ -4,6 +4,7 @@
     </header>
 
     <div class="entry-gallery">
-        
+        <h2><?php echo get_post_format(); ?></h2>
+
     </div>
 </article>

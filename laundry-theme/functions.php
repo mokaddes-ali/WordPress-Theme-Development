@@ -24,3 +24,4 @@ include_once get_template_directory() . '/inc/customizer.php';
 include_once get_template_directory() . '/inc/custom.tag.php';
 
 
+?>
