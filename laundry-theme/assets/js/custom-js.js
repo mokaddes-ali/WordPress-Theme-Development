@@ -47,6 +47,26 @@ jQuery(document).ready(function($){
     $('#custom-prev').click(function() { $('.hero-slick-items').slick('slickPrev'); });
     $('#custom-next').click(function() { $('.hero-slick-items').slick('slickNext'); });
 
+ // Slick init with SVG arrows
+    $('.blog-post-fade').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        dots: false,
+        pauseOnHover: false,
+        infinite: true,
+        speed: 700,
+        arrows: false,
+        fade: true,
+        cssEase: 'linear',
+      
+    });
+
+        $('#blog-prev').click(function() { $('.blog-post-fade').slick('slickPrev'); });
+    $('#blog-next').click(function() { $('.blog-post-fade').slick('slickNext'); });
+
+
     /*----- testimonial section slick -----*/
     $(".testimonial-items").slick({
         slidesToShow: 1,
