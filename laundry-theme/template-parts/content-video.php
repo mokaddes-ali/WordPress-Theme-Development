@@ -67,12 +67,14 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
                                         fill="#1D92CD" />
                                 </svg>
                                 <h1>
-                                     <?php
-                                 $categories = get_the_category();
-                    if (!empty($categories)) {
-                        echo esc_html($categories[0]->name);
-                    }
-                    ?>
+                                    <a href="<?php esc_html(the_permalink()); ?>">
+                                        <?php
+                                        $categories = get_the_category();
+                                        if (!empty($categories)) {
+                                            echo esc_html($categories[0]->name);
+                                        }
+                                        ?>
+                                    </a>
                                 </h1>
                             </div>
                         </div>
@@ -107,12 +109,16 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
                                     d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                                     fill="#1D92CD" />
                             </svg>
-                            <h1> <?php
-                    $categories = get_the_category();
-                    if (!empty($categories)) {
-                        echo esc_html($categories[0]->name);
-                    }
-                    ?></h1>
+                            <h1>
+                                  <a href="<?php esc_html(the_permalink()); ?>">
+                                        <?php
+                                        $categories = get_the_category();
+                                        if (!empty($categories)) {
+                                            echo esc_html($categories[0]->name);
+                                        }
+                                        ?>
+                                    </a>
+                                </h1>
                         </div>
                          
                          <!-- mobile device only -->
@@ -237,7 +243,12 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
                     <!-- Second Row - Title -->
                     <div
                         class="text-[#142137] font-poppins text-[34px] font-semibold leading-[64px] tracking-[-0.68px]">
-                        <h1><?php the_title(); ?></h1>
+                        <h1>
+                             <a href="<?php esc_html(the_permalink()); ?>">
+                                        <?php esc_html(the_title()); ?>
+                              </a>
+                        
+                        </h1>
 
                     </div>
 

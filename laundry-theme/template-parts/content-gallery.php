@@ -48,17 +48,22 @@ $images = $matches[1];
         <div class="blog-post-fade w-full h-auto">
             <?php foreach ($images as $img_url): ?>
                 <div class="w-full flex justify-center">
+                         <a href="<?php esc_html(the_permalink()); ?>">
                     <img src="<?php echo esc_url($img_url); ?>" 
                          alt="<?php echo esc_attr(get_the_title()); ?>" 
                          class="w-full h-[350px] lg:h-[410px] 2xl:h-[550px] object-cover" />
+                                </a>
                 </div>
             <?php endforeach; ?>
+     
         </div>
     <?php elseif (has_post_thumbnail()): ?>
         <div class="w-full h-auto aspect-[1160/570]">
+            <a href="<?php esc_html(the_permalink()); ?>">
             <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(), 'medium')); ?>" 
                  alt="<?php echo esc_attr(get_the_title()); ?>" 
                  class="w-full h-full object-cover" />
+            </a>
         </div>
     <?php endif; ?>
 
@@ -94,12 +99,15 @@ $images = $matches[1];
                                         d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                                         fill="#1D92CD" />
                                 </svg>
-                    <?php
+                                <a href="<?php esc_html(the_permalink()); ?>">
+                                    <?php
                     $categories = get_the_category();
                     if (!empty($categories)) {
                         echo esc_html($categories[0]->name);
                     }
                     ?>
+                                </a>
+                    
                 </div>
             </div>
              
@@ -130,11 +138,13 @@ $images = $matches[1];
                                         d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                                         fill="#1D92CD" />
                                 </svg>
-                <?php
-                if (!empty($categories)) {
-                    echo esc_html($categories[0]->name);
-                }
-                ?>
+                                <a href="<?php esc_html(the_permalink()); ?>">
+                                    <?php
+                                    if (!empty($categories)) {
+                                        echo esc_html($categories[0]->name);
+                                    }
+                                    ?>
+                                </a>
             </div>
 
             <!-- Date and Comment Count -->
@@ -183,7 +193,10 @@ $images = $matches[1];
 
         <!-- Second Row - Title -->
         <h1 class="text-[#142137] font-poppins text-[34px] font-semibold leading-[64px] tracking-[-0.68px]">
-            <?php the_title(); ?>
+            <a href="<?php esc_html(the_permalink()); ?>">
+                <?php esc_html(the_title()); ?>
+            </a>
+            
         </h1>
 
         <!-- Third Row - Excerpt -->

@@ -40,14 +40,21 @@ add_filter('excerpt_length', 'laundryclean_excerpt_length');
 
 // default pagination function
 function laundryclean_all_pagenav(){
-    global $wp_query;
+    global $wp_query, $wp_rewrite;
+    $pages = '';
     $big   = 999999999;
     $max   = $wp_query->max_num_pages;
+    $total = 1;
     $current = max(1, get_query_var('paged'));
 
     if($max <= 1) return;
 
-    echo '<div class="flex items-center justify-center pt-16 pb-6">';
+     if($total == 1 && $max > 1) {
+        $pages = '<p class="pages"> Page ' . $current . ' <span>' . __('of', 'laundryclean') . '</span> ' . $max . '</p>';
+    }
+    echo '<div class="flex items-center justify-center pt-14 pb-2">' . $pages . '</div>';
+    echo '<div class="flex items-center justify-center pt-2 pb-6">';
+   
     echo '<div class="flex gap-2.5">';
 
     $links = paginate_links(array(
