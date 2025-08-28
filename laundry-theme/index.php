@@ -68,15 +68,14 @@ get_header();
 
     <!-- Blog Cards -->
     
-  <section class="blog-section mx-auto w-full px-[2.5%] md:px-[3.5%] lg:px-[5%] 2xl:px-[8%] pt-6 md:pt-8 lg:pt-10 xl:pt-16 flex flex-col-reverse md:flex-row gap-4 md:gap-6 xl:gap-12 overflow-hidden">
+  <section class="mx-auto w-full px-[2.5%] md:px-[3.5%] lg:px-[5%] 2xl:px-[8%] pt-6 md:pt-8 lg:pt-10 xl:pt-16 flex flex-col-reverse md:flex-row gap-4 md:gap-6 xl:gap-12">
    <!-- Blog Left Content -->
-    <div class="blog-left  w-full md:w-8/12">
+    <main class="blog-left  w-full md:w-8/12">
       
 <?php
-  $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     $args = array(
       'post_type' => 'post',
-      'posts_per_page' => 4,
+      'posts_per_page' => get_option('posts_per_page'),
       'post_status' => 'publish',
       'orderby' => 'date',
       'order' => 'DESC',
@@ -87,15 +86,24 @@ get_header();
     <?php while ( $blog_query->have_posts() ) : $blog_query->the_post(); ?>
         <?php get_template_part('template-parts/content', get_post_format()); ?>
     <?php endwhile; ?>
+
+      <!-- Pagination -->
+           <?php if ('laundryclean_all_pagenav') : laundryclean_all_pagenav(); else: ?>
+            <?php next_post_link(); ?>
+            <?php previous_post_link(); ?>
+            <?php endif;?>
+
 <?php else: ?>
-    <p>No posts found</p>
+    <p class="text-red-500 text-lg">
+        <?php esc_html_e('No posts found', 'laundry-theme'); ?></p>
 <?php endif; wp_reset_postdata(); ?>
 
 
-    </div>
+    </main>
 
-    <!-- Right Sidebar from sidebar.php -->
-<?php get_sidebar(); ?>
+    <!-- Right Sidebar from sidebar.php --> 
+        <?php get_sidebar(); ?>
+
 
 </section>
    
