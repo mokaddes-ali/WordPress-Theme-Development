@@ -21,7 +21,7 @@
 
 ?>
 <!-- Blog Section -->
-<section class="blog-area w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-16 md:py-24 lg:py-[149px] flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
+<section class="blog-area bg-[#FFF] w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
 
      <!-- Latest News Label -->
      <div
@@ -58,7 +58,7 @@
       </div>
 
     <!-- Blog Cards -->
-    <div
+     <div
         class="blog-cards grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr mt-9">
 
         <?php 

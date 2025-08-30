@@ -19,7 +19,7 @@
      ?>
 
     <!-- header  -->
-    <header class="
+    <header class="bg-[#FFF] 
     <?php if($header_class): ?>
       <?php echo esc_attr($header_class); ?>
     <?php endif; ?>
@@ -40,59 +40,7 @@
                 <?php
              wp_nav_menu(array(
             'theme_location' => 'laundryclean_header_menu',
-             'fallback_cb' => function(){
-              echo ' <ul class="flex justify-center items-center gap-3 lg:gap-6 xl:gap-10 text-[#142137] font-medium text-sm lg:text-base font-poppins transition">
-            <li>
-             <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
-              Home
-             <span>
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"       stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-               </svg>
-             </span>
-           </a>
-        </li>
-        <li class="hover:text-blue-600 transition">
-          <a href="#" class="">
-            About Us
-          </a>
-        </li>
-        <li class="">
-         <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
-           Service
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"   stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a>
-        </li>
-        <li class="">
-          <a href="#" class=" flex items-center  gap-1 hover:text-blue-600 transition">Pages
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a>
-        </li>
-        <li class="">
-          <a href="#" class="flex items-center  gap-1 hover:text-blue-600 transition">Blog
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a></li>
-        <li class="">
-          <a href="#" class="hover:text-blue-600 transition">Contact</a>
-        </li>
-       </ul>';
-         }
+             'fallback_cb' => false
        ));
        ?>
      </nav>

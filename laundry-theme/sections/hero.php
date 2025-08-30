@@ -7,7 +7,7 @@
  ?>
 
  <section
-      class=" relative w-full mt-20 h-[30rem] md:h-[38rem] lg:h-[48rem]  xl:h-[40.5rem]  2xl:h-[52.5rem] overflow-hidden">
+      class=" relative w-full mt-20 overflow-hidden">
      <!-- Next and preview Button -->
      <div class="absolute top-[50%] left-[85%] z-50 flex flex-col gap-2">
 
@@ -75,7 +75,6 @@
 
 
          <div class="hero-slick-single-item relative">
-             <!-- Slick Item Start -->
 
              <!-- Background Image -->
              <div
@@ -105,7 +104,7 @@
 
              <!-- Hero Content -->
              <div
-                 class="relative z-20 flex flex-col gap-[1.5rem] px-[2.5%] lg:px-[5%] 2xl:px-[8%] pt-[1.75rem] sm:pt-[2.25rem] md:pt-[6rem] 2xl:pt-[12rem] h-full pb-[3rem] sm:pb-[4rem] md:pb-[5rem] 2xl:pb-[12rem] mx-auto text-white">
+                 class="relative z-20 flex flex-col gap-[1.5rem] px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 mx-auto text-white">
 
                  <!-- Tag Box -->
                  <div

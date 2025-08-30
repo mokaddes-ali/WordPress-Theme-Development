@@ -40,12 +40,12 @@ $about_third_counter_text = get_theme_mod('about_third_counter_text', __('Compan
 
 
 <!-- About Company -->
-<section class="w-full mx-auto h-auto relative px-[2.5%] lg:px-[5%] 2xl:px-[8%] pt-5 md:pt-12 2xl:pt-20 flex flex-col md:flex-row gap-6 md:gap-6 lg:gap-[90px] 2xl:gap-52">
+<section class="w-full bg-[#FFF] mx-auto h-auto relative px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 flex flex-col md:flex-row gap-6 md:gap-6 lg:gap-[90px] 2xl:gap-52">
 
   <!-- about left -->
   <div class="flex flex-col items-center justify-center md:items-start md:justify-start gap-2 w-full md:w-6/12 md:gap-3 2xl:gap-5">
 
-    <div class=" w-[180px] sm:w-[200px] md:w-[208px] h-[29px] rounded-[30px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-[12px] sm:text-[14px] md:text-[16px] font-[500] leading-none text-[rgba(20,33,55,0.70)] py-2 px-[12px] font-poppins">
+    <div class=" w-auto lg:w-[208px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-[14px] sm:text-[14px] md:text-[16px] font-[500] leading-none text-[rgba(20,33,55,0.70)] py-2 px-[12px] font-poppins">
       <!-- Dot -->
       <span class="w-[5px] h-[5px] rounded-[10px] bg-[#142137] flex-shrink-0 aspect-square"></span>
       <?php if($about_title):?>
@@ -53,7 +53,7 @@ $about_third_counter_text = get_theme_mod('about_third_counter_text', __('Compan
       <?php endif; ?>
     </div>
 
-    <h1 class=" text-[#142137] w-full text-center md:text-start font-poppins text-[32px] sm:text-[40px] xl:text-[53px] font-semibold leading-[40px] sm:leading-[48px] md:leading-[56px] lg:leading-[64px] tracking-[-0.5px] sm:tracking-[-0.8px] lg:tracking-[-1.08px]">
+    <h1 class=" text-[#142137] w-full text-center md:text-start font-poppins text-[32px] sm:text-[40px] xl:text-[54px] font-semibold leading-[40px] sm:leading-[48px] md:leading-[56px] lg:leading-[64px] tracking-[-0.5px] sm:tracking-[-0.8px] lg:tracking-[-1.08px]">
       <?php if($about_subtitle):?>
         <?php echo esc_html($about_subtitle); ?>
       <?php endif; ?>

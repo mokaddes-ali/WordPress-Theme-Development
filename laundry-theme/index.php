@@ -68,9 +68,9 @@ get_header();
 
     <!-- Blog Cards -->
     
-  <section class="mx-auto w-full px-[2.5%] md:px-[3.5%] lg:px-[5%] 2xl:px-[8%] pt-6 md:pt-8 lg:pt-10 xl:pt-16 flex flex-col-reverse md:flex-row gap-4 md:gap-6 xl:gap-12">
+  <section class="mx-auto w-full px-[2.5%] md:px-[3.5%] lg:px-[5%] 2xl:px-[8%] pt-6 md:pt-8 lg:pt-10 xl:pt-16 flex flex-col-reverse lg:flex-row gap-4 md:gap-6 xl:gap-12">
    <!-- Blog Left Content -->
-    <main class="blog-left  w-full md:w-8/12">
+    <main class="blog-left  w-full lg:w-8/12">
       
 <?php
     $args = array(

@@ -68,14 +68,102 @@ jQuery(document).ready(function($){
 
 
     /*----- testimonial section slick -----*/
-    $(".testimonial-items").slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
+    $(".testimonial-items1").slick({
+        slidesToShow: 3,
         autoplay: true,
-        autoplaySpeed: 2000,
-        dots: true,
-        arrows: false
+        autoplaySpeed: 1000,
+        pauseOnHover: false,
+        infinite: true,
+        dots: false,
+         rtl: true,
+        centerMode: true,
+        centerPadding: '60px',
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 1280, settings: {
+              arrows: false,
+              slidesToShow: 3
+            }
+          },
+          {
+      breakpoint: 1024, settings: {
+        arrows: false,
+        slidesToShow: 2
+      }
+    },
+          {
+      breakpoint: 768, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 576, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }
+  ]
     });
+
+
+
+     $(".testimonial-items2").slick({
+        slidesToShow: 3,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        pauseOnHover: false,
+        infinite: true,
+        dots: false,
+         rtl: false,
+        centerMode: true,
+        centerPadding: '60px',
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 1280, settings: {
+              arrows: false,
+              slidesToShow: 3
+            }
+          },
+          {
+      breakpoint: 1024, settings: {
+        arrows: false,
+        slidesToShow: 2
+      }
+    },
+          {
+      breakpoint: 768, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 576, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }
+  ]
+    });
+
+
+   
 
    $(".blog-wrapper").slick({ 
     slidesToShow: 4,

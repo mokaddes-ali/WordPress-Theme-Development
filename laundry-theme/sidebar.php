@@ -1,5 +1,5 @@
  <!-- Blog Right Sidebar -->
-        <aside class="blog-sidebar lg:h-[1380px] lg:sticky lg:top-1 w-full lg:w-4/12 flex flex-col gap-6 md:gap-[27px]">
+        <aside class="blog-sidebar lg:h-[1480px] lg:sticky lg:top-1 w-full lg:w-4/12 flex flex-col gap-6 md:gap-[27px]">
 
             <!-- For mobile,sm, md device only -->
             <div class="flex flex-row h-[130px] gap-6 lg:hidden">
