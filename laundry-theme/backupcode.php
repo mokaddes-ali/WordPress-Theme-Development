@@ -11,7 +11,6 @@ style="background-image: url('<?php echo get_template_directory_uri() . '/assets
     <h1 class="text-white text-4xl sm:text-5xl md:text-[50px] lg:text-[60px] font-semibold leading-[1.2] sm:leading-[1.3] md:leading-[1.4] lg:leading-[110px] tracking-[-0.8px] sm:tracking-[-1px] lg:tracking-[-1.2px] font-poppins mb-4 sm:mb-6">
       Blog Details
     </h1>
-    <h2></h2>
 
     <!-- Background Badge -->
     <div class="w-[200px] sm:w-[230px] max-w-[240px] h-[34px] rounded-[195px] bg-white/10 backdrop-blur-[7px] flex items-center justify-center gap-[10px] px-3 sm:px-4">
