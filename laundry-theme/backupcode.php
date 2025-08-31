@@ -580,8 +580,7 @@ style="background-image: url('<?php echo get_template_directory_uri() . '/assets
         </div>
     </div>
 
-    <!-- Right Sidebar from sidebar.php -->
-<?php get_sidebar(); ?>
+
 
 </section>
 
