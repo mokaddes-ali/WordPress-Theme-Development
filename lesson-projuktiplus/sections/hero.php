@@ -67,9 +67,11 @@
 
                         <div class="hero-btns">
                             <div class="yellow-bg-btn See-Courses-btn">
-                                <a href="<?php echo esc_url(get_theme_mod('courses_button_url', '#')); ?>">
-                                    <?php echo esc_html(get_theme_mod('courses_button_text', 'See Courses')); ?>
+                                <a href="<?php echo esc_url( get_theme_mod( 'courses_button_url', 
+                                get_permalink( get_option('page_for_posts') ) ) ); ?>">
+                               <?php echo esc_html( get_theme_mod('courses_button_text', 'See Courses') ); ?>
                                 </a>
+
                             </div>
                             <div class="watch-video-btn">
                                 <div class="play-btn">
