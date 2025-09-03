@@ -2,7 +2,6 @@
 
 <section class="page-section">
     <div class="overlay">
-        <h3>Courses test Page</h3>
         <?php
         if (have_posts()):
             while (have_posts()) : the_post();

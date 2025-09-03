@@ -1,3 +1,15 @@
+ <?php 
+$footer_text = get_theme_mod(
+    'footer_about_text', 
+    'Need to help for your dream Career? trust us. With Lesson, study becomes a lot easier with us.'
+);
+$footer_logo = get_theme_mod('footer_logo', get_template_directory_uri() .'/assets/images/footer-logo.png');
+$footer_menu1_title = get_theme_mod('footer_menu1_title','Company');
+$footer_menu2_title = get_theme_mod('footer_menu2_title','Services');
+
+?>
+
+ 
  <footer>
         <div class="container">
             <div class="footer-wrapper">
@@ -6,14 +18,14 @@
                 <div class="about-company">
                     <div class="f-logo">
                        
-                       <?php if( get_theme_mod('footer_logo')):?>
-                        <img src="<?php echo esc_url(get_theme_mod('footer_logo'));  ?>"  alt="<?php echo esc_attr(get_bloginfo('name'))?>" >
+                       <?php if(!empty($footer_logo)):?>
+                        <img src="<?php echo esc_url($footer_logo); ?>"  alt="<?php echo esc_attr(get_bloginfo('name'))?>" >
                         <?php endif;?>
                     </div>
                       <!-- #region-->
-                        <?php if(get_theme_mod('footer_about_text')):?>
-                    <p><?php echo esc_html(get_theme_mod('footer_about_text'));?></p>
-                    <?php endif;?>
+                        <?php if(!empty($footer_text)): ?>
+                         <p><?php echo esc_html($footer_text); ?></p>
+                        <?php endif; ?>
 
                     <div class="social-links">
                         <!----- twitter ----->
@@ -52,8 +64,8 @@
 
                 <!----- company links ----->
                 <div class="footer-nav company">
-                    <?php if(get_theme_mod('footer_menu1_title')):?>
-                    <div><?php echo esc_html(get_theme_mod('footer_menu1_title'));?></div>
+                    <?php if(!empty($footer_menu1_title)):?>
+                    <div><?php echo esc_html($footer_menu1_title);?></div>
                     <?php endif;?>
                     <hr>
 
@@ -64,9 +76,9 @@
                 </div>
 
                 <div class="footer-nav support">
-                      <?php if(get_theme_mod('footer_menu2_title')):?>
-                    <div><?php echo esc_html(get_theme_mod('footer_menu2_title'));?></div>
-                    <?php endif;?>
+                     <?php if(!empty($footer_menu2_title)):?>
+                    <div><?php echo esc_html($footer_menu2_title);?></div>
+                     <?php endif;?>
                     <hr>
 
                       <?php
@@ -76,8 +88,18 @@
                 </div>
 
                 <div class="footer-nav address">
-                    <?php if(get_theme_mod('footer_address')):?>
-                    <div><?php echo esc_html(get_theme_mod('footer_address'));?></div>
+                    <?php 
+                    $footer_address = get_theme_mod("footer_address","Address");
+                    $footer_location_title = get_theme_mod('footer_location_title', 'Location:');
+                    $footer_location_description = get_theme_mod('footer_location_description', '27 Division St, New York, NY 10002, USA');
+                    $footer_email_title = get_theme_mod('footer_email_title', 'Email:');
+
+                    $footer_email = get_theme_mod('footer_email', 'email@gmail.com');
+                    $footer_phone_title = get_theme_mod('footer_phone_title','Phone:');
+                    $footer_phone_description = get_theme_mod('footer_phone_description', '+ 000 1234 567 890');
+                    ?>
+                    <?php if(!empty($footer_address)):?>
+                    <div><?php echo esc_html($footer_address);?></div>
                     <?php endif;?>
                     <hr>
 
@@ -85,11 +107,11 @@
                     <div class="address-details location">
                         <a href="https://maps.app.goo.gl/5QJbeQc3kLpr9bX49">
                             <span>
-                                <?php if(get_theme_mod('footer_location_title')):?>
-                    <strong><?php echo esc_html(get_theme_mod('footer_location_title'));?></strong>
+                                <?php if(!empty($footer_location_title)):?>
+                    <strong><?php echo esc_html($footer_location_title);?></strong>
                     <?php endif;?> 
-                    <?php if(get_theme_mod('footer_location_description')):?>
-                    <?php echo esc_html(get_theme_mod('footer_location_description'));?>
+                    <?php if(!empty($footer_location_description)):?>
+                    <?php echo esc_html($footer_location_description);?>
                     <?php endif;?>
                    </span>
                         </a>
@@ -97,13 +119,13 @@
 
                     <!----- email ----->
                     <div class="address-details email">
-                        <a href="mailto:<?php echo esc_html(get_theme_mod('footer_email_title'));?>">
+                        <a href="mailto:<?php echo esc_html($footer_email);?>">
                             <span>
-                                <?php if(get_theme_mod('footer_email_title')):?>
-                    <strong><?php echo esc_html(get_theme_mod('footer_email_title'));?></strong>
+                                <?php if($footer_email_title):?>
+                    <strong><?php echo esc_html($footer_email_title);?></strong>
                     <?php endif;?> 
-                    <?php if(get_theme_mod('footer_email')):?>
-                    <?php echo esc_html(get_theme_mod('footer_email'));?>
+                    <?php if($footer_email):?>
+                    <?php echo esc_html($footer_email);?>
                     <?php endif;?>
                    </span>
                         </a>
@@ -113,11 +135,11 @@
                     <div class="address-details phone">
                         <a href="tel:<?php echo esc_html(get_theme_mod('footer_phone_title'));?>">
                              <span>
-                                <?php if(get_theme_mod('footer_phone_title')):?>
-                    <strong><?php echo esc_html(get_theme_mod('footer_phone_title'));?></strong>
+                                <?php if($footer_phone_title):?>
+                    <strong><?php echo esc_html($footer_phone_title);?></strong>
                     <?php endif;?> 
-                    <?php if(get_theme_mod('footer_phone_description')):?>
-                    <?php echo esc_html(get_theme_mod('footer_phone_description'));?>
+                    <?php if($footer_phone_description):?>
+                    <?php echo esc_html($footer_phone_description);?>
                     <?php endif;?>
                    </span>
                         </a>
