@@ -1,12 +1,12 @@
 <!----- Courses section ----->
-        <section class="courses">
+        <section class="courses" style="margin-top: -100px; margin-bottom: -100px;">
             <div class="container">
                 <div class="heading courses-heading">
-                    <h2>Our popular courses</h2>
+                    <h2>All Courses</h2>
                     <p>Build new skills with new trendy courses and shine for the next future career.</p>
                 </div>
 
-                <div class="courses-wrapper slick-items"> <!----- added slick this line ----->
+                <div class="courses-all-wrapper">
                     <!----- course-1 ----->
                     <div class="course course-1 active-btn">
                         <div class="img">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
 
-                    <!----- course-1 ----->
+                      <!----- course-1 ----->
                     <div class="course course-1 active-btn">
                         <div class="img">
                             <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image1.png" alt="course-1">
@@ -199,14 +199,5 @@
                         </div>
                     </div>
                 </div>
-                   
-                <!-- cources button div -->
-                 <div class="" style="display: flex; margin-top:30px; align-items: center; justify-content: center;">
-                <div class="yellow-bg-btn See-Courses-btn">
-                                <a href="<?php echo esc_url( get_theme_mod( 'courses_button_url', 'http://localhost/wordpress/index.php/courses/') ); ?>">
-                               <?php echo esc_html( get_theme_mod('courses_button_text', 'See Courses') ); ?>
-                                </a>
-                            </div>
-                            </div>
             </div>
         </section>

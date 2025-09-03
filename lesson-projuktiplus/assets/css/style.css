@@ -2124,3 +2124,13 @@ textarea {
 .no-results-btn:hover {
     background: #1d4ed8;
 }
+
+
+
+
+/* add couces page design */
+.courses-all-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
