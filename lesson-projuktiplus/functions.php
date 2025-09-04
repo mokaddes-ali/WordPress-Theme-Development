@@ -114,19 +114,20 @@ echo '<div class="pagination-info">' . $pages . '</div>';
         'format'    => '?paged=%#%',
         'current'   => $current,
         'total'     => $max,
-        'prev_text' => '<span class="pagination-prev">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-                               fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M11 1 3 8l8 7"/>
-                          </svg> Previous
-                        </span>',
-        'next_text' => '<span class="pagination-next">
-                          Next 
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
-                               fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M5 1l8 7-8 7"/>
-                          </svg>
-                        </span>',
+        'prev_text' => '<div class="pagination-prev">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+</svg>
+
+                          
+
+                        </div>',
+        'next_text' => '<div class="pagination-next">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+</svg>
+
+                        </div>',
         'type'      => 'array',
     ));
 
