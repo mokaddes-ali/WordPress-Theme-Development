@@ -20,7 +20,7 @@
             </svg>
           </li>
             <li>
-              <a href="<?php echo esc_url($blog_page_url); ?>">
+              <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>">
               <?php echo esc_html__('Blog', 'lessonlms');?>
               </a>
             </li>
@@ -30,10 +30,13 @@
               </svg>
 
             </li>
-            <li><span class="current"><?php echo esc_html(wp_trim_words(get_the_title(), 8, '...'));?></span></li>
+            <li>
+              <span class="current">
+              <?php echo esc_html(wp_trim_words(get_the_title(), 8, '...'));?>
+            </span>
+          </li>
         </ul>
       </nav>
-      <!-- ✅ Breadcrumb End -->
     </div>
   </div>
 </section>
