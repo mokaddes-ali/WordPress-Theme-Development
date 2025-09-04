@@ -845,8 +845,6 @@ section.blog {
 
 .blog-heading {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 55px;
@@ -854,7 +852,6 @@ section.blog {
 
 .blog-heading h3 {
   color: #130606;
-  text-align: center;
   font-size: 38px;
   font-weight: 700;
   line-height: 126.316%;
@@ -864,7 +861,6 @@ section.blog {
 .blog-heading p {
   width: 448px;
   color: #696262;
-  text-align: center;
   font-size: 16px;
   font-weight: 400;
   line-height: 175%;
@@ -2134,3 +2130,91 @@ textarea {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li a,
+.pagination li span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.pagination li a:hover {
+  background: #f3b841;
+  color: #fff;
+}
+
+.pagination li span.current {
+  background: #f3b841;
+  color: #fff;
+  font-weight: bold;
+}
+
+.pagination-prev,
+.pagination-next {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 12px;
+  height: 50px;
+  width: 250px;
+  border-radius: 20px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease;
+}
+
+.pagination-prev:hover,
+.pagination-next:hover {
+  background: #f3b841;
+  color: #fff;
+}
+
+.pagination-prev svg,
+.pagination-next svg {
+  width: 14px;
+  height: 14px;
+}
+
+
+.pagination-info {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+
+
+.pages-count .current-page {
+  font-weight: bold;
+}
+
+.pages-count .sep {
+  margin: 0 5px;
+  color: #000;
+}
+
+.pages-count .total-page {
+  font-weight: 500;
+  color: #000;
+}
+
+

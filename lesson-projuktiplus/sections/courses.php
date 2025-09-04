@@ -6,7 +6,7 @@
                     <p>Build new skills with new trendy courses and shine for the next future career.</p>
                 </div>
 
-                <div class="courses-wrapper slick-items"> <!----- added slick this line ----->
+                <div class="courses-wrapper slick-items">
                     <!----- course-1 ----->
                     <div class="course course-1 active-btn">
                         <div class="img">
@@ -206,7 +206,7 @@
                                 <a href="<?php echo esc_url( get_theme_mod( 'courses_button_url', 'http://localhost/wordpress/index.php/courses/') ); ?>">
                                <?php echo esc_html( get_theme_mod('courses_button_text', 'See Courses') ); ?>
                                 </a>
-                            </div>
-                            </div>
+                        </div>
+                    </div>
             </div>
         </section>

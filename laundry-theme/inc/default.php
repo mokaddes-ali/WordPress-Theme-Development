@@ -84,7 +84,7 @@ function laundryclean_all_pagenav(){
             if(strpos($link, 'current') !== false){
                 echo str_replace(
                     'page-numbers current',
-                    'page-numbers current w-[44px] h-[44px] flex items-center justify-center rounded-md bg-[#4375E7] text-white text-[16px] font-medium leading-[26px] font-[Poppins]',
+                    'page-numbers current w-[44px] h-[44px] flex items-center justify-center rounded-md bg-[#4375E7] text-white text-[16px] font-medium leading-[26px] font-poppins',
                     $link
                 );
             } else {

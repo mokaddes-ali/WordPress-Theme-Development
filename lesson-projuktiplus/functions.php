@@ -88,6 +88,60 @@ function lessonlms_register_sidebar() {
 add_action('widgets_init', 'lessonlms_register_sidebar');
 
 
+// Default pagination
+
+function lessonlms_all_pagenav() {
+    global $wp_query, $wp_rewrite;
+    $pages = '';
+    $bigrandom = 999999999; 
+    $max = $wp_query->max_num_pages; 
+    $total = 1; 
+    $current = max(1, get_query_var('paged'));
+
+    if ($max <= 1) return;
+    if ($total == 1 && $max > 1) {
+    $pages = '<p class="pages-count">Page <span class="current-page">' . $current . '</span> 
+              <span class="sep">of</span> 
+              <span class="total-page">' . $max . '</span></p>';
+}
+
+echo '<div class="pagination-info">' . $pages . '</div>';
+
+    echo '<div class="pagination-wrapper">';
+
+    $links = paginate_links(array(
+        'base'      => str_replace($bigrandom, '%#%', esc_url(get_pagenum_link($bigrandom))),
+        'format'    => '?paged=%#%',
+        'current'   => $current,
+        'total'     => $max,
+        'prev_text' => '<span class="pagination-prev">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+                               fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M11 1 3 8l8 7"/>
+                          </svg> Previous
+                        </span>',
+        'next_text' => '<span class="pagination-next">
+                          Next 
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+                               fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5 1l8 7-8 7"/>
+                          </svg>
+                        </span>',
+        'type'      => 'array',
+    ));
+
+    if (is_array($links)) {
+        echo '<ul class="pagination">';
+        foreach ($links as $link) {
+            echo "<li>$link</li>";
+        }
+        echo '</ul>';
+    }
+
+    echo '</div>';
+}
+
+
 
 function lessonlms_customize_register($wp_customize) {
 
@@ -483,6 +537,24 @@ $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'cta_im
       'section'=> 'blog_settings',
       'type'=> 'textarea',
   ));
+
+    $wp_customize->add_setting('blog_button_text' ,array(
+        'default' => 'See Blogs',
+    ));
+    $wp_customize->add_control('blog_button_text',array(
+        'label' => __('Blog Button Text', 'lessonlms'),
+        'section' => 'blog_settings',
+         'type' => 'text',
+    ));
+
+       $wp_customize->add_setting('blog_button_url' ,array(
+        'default' => 'http://localhost/wordpress/index.php/blog/',
+    ));
+    $wp_customize->add_control('blog_button_url',array(
+        'label' => __('Blog Button URL', 'lessonlms'),
+        'section' => 'blog_settings',
+         'type' => 'url',
+    ));
 
    // ======================
   // Footer Section Start

@@ -199,5 +199,7 @@
                         </div>
                     </div>
                 </div>
+
+                <?php echo lessonlms_all_pagenav(); ?>
             </div>
         </section>
