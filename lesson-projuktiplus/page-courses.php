@@ -14,6 +14,6 @@
     </div>
 </section>
 
-<?php get_template_part('/sections/all.courses');?>
+<?php get_template_part('sections/all', 'courses'); ?>
 
 <?php get_footer(); ?>

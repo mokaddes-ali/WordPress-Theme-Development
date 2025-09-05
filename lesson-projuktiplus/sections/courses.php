@@ -10,15 +10,16 @@
                     <?php
                     $couses = new WP_Query(array(
                         "post_type"=> "courses",
-                        "post_per_page"=> 3,
+                        "posts_per_page" => 6,
                         "orderby"=> "date",
                         "order"=> "DESC",
                     ));
                      if($couses->have_posts()):
                         while( $couses->have_posts()): $couses->the_post();
 
-                        $rating = get_post_meta($couses->the_post()->ID,"rating", true);
-                        $price = get_post_meta($couses->the_post()->ID,"price", true);
+                       $rating = get_post_meta(get_the_ID(),"rating", true);
+                       $price  = get_post_meta(get_the_ID(),"price", true);
+
                         
                         $rating = !empty($rating) ? $rating :"0.00";
                         $price = !empty($price) ? $price : '0.00';
@@ -32,29 +33,30 @@
                                 alt="<?php echo esc_attr( get_the_title() ); ?>">
                               <?php else: ?>
                              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/courses-image1.png' ); ?>" alt="course-1">
-                        <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
 
 
                         <div class="course-details">
                             <!----- course title and rating ----->
                             <div class="flex">
-                                <span class="c-title">Basic web design</span>
+                                <span class="c-title"><?php echo esc_html(the_title());?></span>
 
                                 <div class="rating">
                                     <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
                                     </svg>
 
-                                    <span>4.5</span>
+                                    <span><?php echo esc_html($rating);?></span>
                                 </div>
                             </div>
 
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
+                            <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 10));?></p>
 
 
                             <!----- price and btn ----->
                             <div class="price-btn">
-                                <span class="price">$120.75</span>
+                                <span class="price">$<?php echo esc_html($price);?></span>
 
                                 <div class="yellow-bg-btn book-now">Book Now</div>
                             </div>
@@ -67,14 +69,16 @@
                     <?php endif; wp_reset_postdata();?>
 
                 </div>
-                   
+      
+                  
                 <!-- cources button div -->
-                 <div class="" style="display: flex; margin-top:30px; align-items: center; justify-content: center;">
+            <div class="" style="display: flex; margin-top:20px; align-items: center; justify-content: center;">
                 <div class="yellow-bg-btn See-Courses-btn">
-                                <a href="<?php echo esc_url( get_theme_mod( 'courses_button_url', 'http://localhost/wordpress/index.php/courses/') ); ?>">
-                               <?php echo esc_html( get_theme_mod('courses_button_text', 'See Courses') ); ?>
+                                <a href="<?php echo get_post_type_archive_link('courses');?>">
+                               <?php echo esc_html_e('See Courses', 'lessonlms'); ?>
                                 </a>
                         </div>
                     </div>
             </div>
+        </div>
         </section>
