@@ -169,7 +169,7 @@ function lessonlms_custome_courses_register(){
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'course' ),
+        'rewrite'            => array( 'slug' => 'courses' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -549,6 +549,33 @@ $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'cta_im
     'settings' => 'cta_image',
 )));
 
+
+     // ======================
+  //  Blog Page
+  // ======================
+ $wp_customize->add_section('blog_page_settings',array(
+    'title' => __('Blog Page Settings', 'lessonlms'),
+    'priority'=> 190,
+ ));
+  $wp_customize->add_setting('blog_page_title',array(
+      'default'=> 'Our All Blog',
+  ));
+
+   $wp_customize->add_control('blog_page_title',array(
+      'label'=> __('Blog Page Title','lessonlms'),
+      'section'=> 'blog_page_settings',
+      'type'=> 'text',
+  ));
+
+   $wp_customize->add_setting('blog_page_description',array(
+      'default'=> 'Read our regular travel blog and know the latest update of tour and travel',
+  ));
+
+  $wp_customize->add_control('blog_page_description',array(
+      'label'=> __('Blog Section Description','lessonlms'),
+      'section'=> 'blog_page_settings',
+      'type'=> 'textarea',
+  ));
 
    // ======================
   //  Blog Section Start

@@ -5,9 +5,8 @@
  */
 
 get_header();
+get_template_part("sections/pageTitle");
 ?>
-
-<?php get_template_part('sections/bloHeading'); ?>
 
 
 <section class="single-page-container">

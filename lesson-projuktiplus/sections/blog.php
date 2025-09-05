@@ -1,8 +1,7 @@
 <!----- our blog section ----->
 <section class="blog">
     <div class="container">
-
-                         <!-- cources button div -->
+    <!-- cources button div -->
     <div class="" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
 
         <div class="blog-heading">

@@ -58,7 +58,12 @@
                             <div class="price-btn">
                                 <span class="price">$<?php echo esc_html($price);?></span>
 
-                                <div class="yellow-bg-btn book-now">Book Now</div>
+                                <div class="yellow-bg-btn book-now">
+    <a href="<?php echo esc_url( get_permalink() ); ?>">
+        <?php esc_html_e('Book Now', 'lessonlms'); ?>
+    </a>
+</div>
+
                             </div>
                         </div>
                     </div>
@@ -74,7 +79,7 @@
                 <!-- cources button div -->
             <div class="" style="display: flex; margin-top:20px; align-items: center; justify-content: center;">
                 <div class="yellow-bg-btn See-Courses-btn">
-                                <a href="<?php echo get_post_type_archive_link('courses');?>">
+                                <a href="<?php echo get_post_type_archive_link('courses'); ?>">
                                <?php echo esc_html_e('See Courses', 'lessonlms'); ?>
                                 </a>
                         </div>
