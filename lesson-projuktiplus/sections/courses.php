@@ -7,11 +7,33 @@
                 </div>
 
                 <div class="courses-wrapper slick-items">
+                    <?php
+                    $couses = new WP_Query(array(
+                        "post_type"=> "courses",
+                        "post_per_page"=> 3,
+                        "orderby"=> "date",
+                        "order"=> "DESC",
+                    ));
+                     if($couses->have_posts()):
+                        while( $couses->have_posts()): $couses->the_post();
+
+                        $rating = get_post_meta($couses->the_post()->ID,"rating", true);
+                        $price = get_post_meta($couses->the_post()->ID,"price", true);
+                        
+                        $rating = !empty($rating) ? $rating :"0.00";
+                        $price = !empty($price) ? $price : '0.00';
+
+                        ?>
                     <!----- course-1 ----->
                     <div class="course course-1 active-btn">
                         <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image1.png" alt="course-1">
-                        </div>
+                           <?php if ( has_post_thumbnail() ): ?>
+                                <img src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'full' ) ); ?>" 
+                                alt="<?php echo esc_attr( get_the_title() ); ?>">
+                              <?php else: ?>
+                             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/courses-image1.png' ); ?>" alt="course-1">
+                        <?php endif; ?>
+
 
                         <div class="course-details">
                             <!----- course title and rating ----->
@@ -38,166 +60,12 @@
                             </div>
                         </div>
                     </div>
+                    <?php endwhile;?>
+                    <?php else:?>
+                        <h2>Courses Not Found</h2>
 
-                    <!----- course-2 ----->
-                    <div class="course course-2">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image2.png" alt="course-1">
-                        </div>
+                    <?php endif; wp_reset_postdata();?>
 
-                        <div class="course-details">
-                            <!----- course title and rating ----->
-                            <div class="flex">
-                                <span class="c-title">UI/UX design</span>
-
-                                <div class="rating">
-                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
-                                    </svg>
-
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
-
-
-                            <!----- price and btn ----->
-                            <div class="price-btn">
-                                <span class="price">$120.75</span>
-
-                                <div class="yellow-bg-btn black-btn book-now">Book Now</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!----- course-3 ----->
-                    <div class="course course-3">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image3.png" alt="course-1">
-                        </div>
-
-                        <div class="course-details">
-                            <!----- course title and rating ----->
-                            <div class="flex">
-                                <span class="c-title">Web App design</span>
-
-                                <div class="rating">
-                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
-                                    </svg>
-
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
-
-
-                            <!----- price and btn ----->
-                            <div class="price-btn">
-                                <span class="price">$120.75</span>
-
-                                <div class="yellow-bg-btn black-btn book-now">Book Now</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!----- course-1 ----->
-                    <div class="course course-1 active-btn">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image1.png" alt="course-1">
-                        </div>
-
-                        <div class="course-details">
-                            <!----- course title and rating ----->
-                            <div class="flex">
-                                <span class="c-title">Basic web design</span>
-
-                                <div class="rating">
-                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
-                                    </svg>
-
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
-
-
-                            <!----- price and btn ----->
-                            <div class="price-btn">
-                                <span class="price">$120.75</span>
-
-                                <div class="yellow-bg-btn book-now">Book Now</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!----- course-2 ----->
-                    <div class="course course-2">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image2.png" alt="course-1">
-                        </div>
-
-                        <div class="course-details">
-                            <!----- course title and rating ----->
-                            <div class="flex">
-                                <span class="c-title">UI/UX design</span>
-
-                                <div class="rating">
-                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
-                                    </svg>
-
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
-
-
-                            <!----- price and btn ----->
-                            <div class="price-btn">
-                                <span class="price">$120.75</span>
-
-                                <div class="yellow-bg-btn black-btn book-now">Book Now</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!----- course-3 ----->
-                    <div class="course course-3">
-                        <div class="img">
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/courses-image3.png" alt="course-1">
-                        </div>
-
-                        <div class="course-details">
-                            <!----- course title and rating ----->
-                            <div class="flex">
-                                <span class="c-title">Web App design</span>
-
-                                <div class="rating">
-                                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z" fill="#FEA31B"/>
-                                    </svg>
-
-                                    <span>4.5</span>
-                                </div>
-                            </div>
-
-                            <p>Get the best course, gain knowledge and shine for your future career.</p>
-
-
-                            <!----- price and btn ----->
-                            <div class="price-btn">
-                                <span class="price">$120.75</span>
-
-                                <div class="yellow-bg-btn black-btn book-now">Book Now</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                    
                 <!-- cources button div -->

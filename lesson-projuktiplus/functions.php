@@ -175,12 +175,12 @@ function lessonlms_custome_courses_register(){
         'hierarchical'       => false,
         'menu_icon'          => 'dashicons-welcome-learn-more',
         'menu_position'      => 20,
-        'supports'           => array( 'title', 'editor', 'thumbnail' ),
+        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
         'taxonomies'         => array( 'category', 'post_tag' ),
         'show_in_rest'       => true
     );
   
-    register_post_type('Courses', $args);
+    register_post_type('courses', $args);
 }
 add_action('init', 'lessonlms_custome_courses_register');
 
