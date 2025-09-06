@@ -18,7 +18,6 @@
          $blog_button_url = get_theme_mod('blog_button_url', get_permalink(get_option('page_for_posts')));
          $blog_button_text = get_theme_mod('blog_button_text', 'See Blogs');
          ?>
-
             <div class="yellow-bg-btn See-Courses-btn">
                                 <a href="<?php echo esc_url( $blog_button_url); ?>">
                                     <?php if($blog_button_text):?>
@@ -75,6 +74,7 @@
                     </div>
 
                     <div class="yellow-bg-btn read-more">
+                        
                         <a href="<?php the_permalink(); ?>">
                             <?php _e('Read More', 'lessonlms'); ?>
                         </a>

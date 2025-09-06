@@ -552,33 +552,6 @@ $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'cta_im
 )));
 
 
-     // ======================
-  //  Blog Page
-  // ======================
- $wp_customize->add_section('blog_page_settings',array(
-    'title' => __('Blog Page Settings', 'lessonlms'),
-    'priority'=> 190,
- ));
-  $wp_customize->add_setting('blog_page_title',array(
-      'default'=> 'Our All Blog',
-  ));
-
-   $wp_customize->add_control('blog_page_title',array(
-      'label'=> __('Blog Page Title','lessonlms'),
-      'section'=> 'blog_page_settings',
-      'type'=> 'text',
-  ));
-
-   $wp_customize->add_setting('blog_page_description',array(
-      'default'=> 'Read our regular travel blog and know the latest update of tour and travel',
-  ));
-
-  $wp_customize->add_control('blog_page_description',array(
-      'label'=> __('Blog Section Description','lessonlms'),
-      'section'=> 'blog_page_settings',
-      'type'=> 'textarea',
-  ));
-
    // ======================
   //  Blog Section Start
   // ======================
@@ -767,12 +740,62 @@ $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'cta_im
   ));
 
 
+
+       // ======================
+  //  Blog Page
+  // ======================
+ $wp_customize->add_section('blog_page_settings',array(
+    'title' => __('Blog Page Settings', 'lessonlms'),
+    'priority'=> 190,
+ ));
+  $wp_customize->add_setting('blog_page_title',array(
+      'default'=> 'Our All Blog',
+  ));
+
+   $wp_customize->add_control('blog_page_title',array(
+      'label'=> __('Blog Page Title','lessonlms'),
+      'section'=> 'blog_page_settings',
+      'type'=> 'text',
+  ));
+
+   $wp_customize->add_setting('blog_page_description',array(
+      'default'=> 'Read our regular travel blog and know the latest update of tour and travel',
+  ));
+
+  $wp_customize->add_control('blog_page_description',array(
+      'label'=> __('Blog Section Description','lessonlms'),
+      'section'=> 'blog_page_settings',
+      'type'=> 'textarea',
+  ));
+
+       // ======================
+  //  Courses Page
+  // ======================
+ $wp_customize->add_section('courses_page_settings',array(
+    'title' => __('Courses Page Settings', 'lessonlms'),
+    'priority'=> 180,
+ ));
+  $wp_customize->add_setting('courses_page_title',array(
+      'default'=> 'All Courses',
+  ));
+
+   $wp_customize->add_control('courses_page_title',array(
+      'label'=> __('Course Page Title','lessonlms'),
+      'section'=> 'courses_page_settings',
+      'type'=> 'text',
+  ));
+
+   $wp_customize->add_setting('courses_page_description',array(
+      'default'=> 'Build new skills with new trendy courses and shine for the next future career.',
+  ));
+
+  $wp_customize->add_control('courses_page_description',array(
+      'label'=> __('Course Section Description','lessonlms'),
+      'section'=> 'courses_page_settings',
+      'type'=> 'textarea',
+  ));
+
+
 }
 
 add_action('customize_register','lessonlms_customize_register');
-
-
-// rank_math_the_breadcrumb
-if (function_exists('rank_math_the_breadcrumbs')) {
-    rank_math_the_breadcrumbs();
-}

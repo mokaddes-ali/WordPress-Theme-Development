@@ -46,7 +46,7 @@
 
                                 <div class="text">
                                     <span><?php echo esc_html(get_theme_mod('marketing_count')); ?> Courses</span>
-                                    <p><?php echo esc_html(get_theme_mod('marketing_label_text')); ?></p>
+                                    <p><?php echo esc_html(get_theme_mod('marketing_label_text','Marketing')); ?></p>
                                 </div>
                             </div>
                         </div>

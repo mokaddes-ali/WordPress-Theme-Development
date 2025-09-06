@@ -1243,9 +1243,8 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 60px;
-  padding: 10px 80px;
+  padding: 60px 80px;
   margin: auto;
-  padding-bottom: 60px;
 }
 
 .left-single-blog {
@@ -2171,6 +2170,7 @@ textarea {
 .pagination-info {
   text-align: center;
   margin-bottom: 15px;
+  margin-top: 30px;
 }
 
 
@@ -2190,3 +2190,167 @@ textarea {
 }
 
 
+
+/* 
+=======================
+single courses design
+========================
+ */
+
+.single-courses {
+  background-color: #FFFCF4;
+  padding: 48px 0 59px 0;
+}
+
+.single-courses-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.single-courses-wrapper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+}
+
+.left-courses-image-details{
+  width: 70%;
+}
+
+.single-couses-image-box{
+  position: relative;
+  width: 100%;
+  height: 700px;
+}
+
+.single-couses-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.courses-card-box {
+  background-color: #FFFFFF;
+  width: 270px;
+  height: 244px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  border-radius: 12px;
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 55px;
+  left:100px;
+  padding: 24px;
+}
+
+
+
+
+.courses-card-items {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.courses-card-items .text span {
+  color: #5F5B53;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 185.714%;
+}
+
+.courses-card-items .text p {
+  color: #171100;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 166.667%;
+}
+
+.courses-card-items .text span {
+  color: #5F5B53;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 185.714%;
+}
+
+.courses-card-items .text p {
+  color: #171100;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 166.667%;
+}
+
+/* Right */
+
+.courses-card-right{
+  position: relative;
+  width: 30%;
+  height: 750px;
+}
+
+
+
+.course-right-info-card1 {
+  background-color: #FFFFFF;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  border-radius: 12px;
+  box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 0px;
+  left:0px;
+  padding: 24px;
+}
+.course-right-info-card1 h2{
+   color: #5F5B53;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 185.714%;
+
+}
+
+
+
+.course-right-info-card1-items {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.course-right-info-card1-items svg{
+  width: 25px;
+  height: 25px;
+  border: 100%;
+}
+
+.course-right-info-card1-items .text span {
+  color: #5F5B53;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 185.714%;
+}
+
+.course-right-info-card1-items .text p {
+  color: #171100;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 166.667%;
+}
+
+.course-right-info-card1-items .text span {
+  color: #5F5B53;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 185.714%;
+}
