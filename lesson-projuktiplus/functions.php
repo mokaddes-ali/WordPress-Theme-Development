@@ -90,102 +90,10 @@ function lessonlms_register_sidebar() {
 add_action('widgets_init', 'lessonlms_register_sidebar');
 
 
-// Default pagination
+include_once get_template_directory() .'/inc/pagination.php';
 
-function lessonlms_all_pagenav() {
-    global $wp_query, $wp_rewrite;
-    $pages = '';
-    $bigrandom = 999999999; 
-    $max = $wp_query->max_num_pages; 
-    $total = 1; 
-    $current = max(1, get_query_var('paged'));
-
-    if ($max <= 1) return;
-    if ($total == 1 && $max > 1) {
-    $pages = '<p class="pages-count">Page <span class="current-page">' . $current . '</span> 
-              <span class="sep">of</span> 
-              <span class="total-page">' . $max . '</span></p>';
-}
-
-echo '<div class="pagination-info">' . $pages . '</div>';
-
-    echo '<div class="pagination-wrapper">';
-
-    $links = paginate_links(array(
-        'base'      => str_replace($bigrandom, '%#%', esc_url(get_pagenum_link($bigrandom))),
-        'format'    => '?paged=%#%',
-        'current'   => $current,
-        'total'     => $max,
-        'prev_text' => '<div class="pagination-prev">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-</svg>
-
-                          
-
-                        </div>',
-        'next_text' => '<div class="pagination-next">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-</svg>
-
-                        </div>',
-        'type'      => 'array',
-    ));
-
-    if (is_array($links)) {
-        echo '<ul class="pagination">';
-        foreach ($links as $link) {
-            echo "<li>$link</li>";
-        }
-        echo '</ul>';
-    }
-
-    echo '</div>';
-}
-
-
-// Register Course 
-function lessonlms_custome_courses_register(){
-    $labels = array(
-        'name'                  => _x( 'Courses', 'Post type general name', 'lessonlms' ),
-        'singular_name'         => _x( 'Course', 'Post type singular name', 'lessonlms' ),
-        'menu_name'             => _x( 'Courses', 'Admin Menu text', 'lessonlms' ),
-        'name_admin_bar'        => _x( 'Course', 'Add New on Toolbar', 'lessonlms' ),
-        'add_new'               => __( 'Add New', 'lessonlms' ),
-        'add_new_item'          => __( 'Add New Course', 'lessonlms' ),
-        'new_item'              => __( 'New Course', 'lessonlms' ),
-        'edit_item'             => __( 'Edit Course', 'lessonlms' ),
-        'view_item'             => __( 'View Course', 'lessonlms' ),
-        'all_items'             => __( 'All Courses', 'lessonlms' ),
-        'search_items'          => __( 'Search Courses', 'lessonlms' ),
-        'parent_item_colon'     => __( 'Parent Courses:', 'lessonlms' ),
-        'not_found'             => __( 'No Courses found.', 'lessonlms' ),
-        'not_found_in_trash'    => __( 'No Courses found in Trash.', 'lessonlms' ),
-    );     
-    $args = array(
-        'labels'             => $labels,
-        'description'        => 'Courses custom post type.',
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'courses' ),
-        'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
-        'menu_icon'          => 'dashicons-welcome-learn-more',
-        'menu_position'      => 20,
-        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-        'taxonomies'         => array( 'category', 'post_tag' ),
-        'show_in_rest'       => true
-    );
-  
-    register_post_type('courses', $args);
-}
-add_action('init', 'lessonlms_custome_courses_register');
-
+include_once get_template_directory() .'/inc/CPT/courses.php';
+include_once get_template_directory() .'/inc/CPT/testimonial.php';
 
 function lessonlms_customize_register($wp_customize) {
 
