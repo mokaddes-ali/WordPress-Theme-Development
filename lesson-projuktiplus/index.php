@@ -46,19 +46,20 @@
             while ($blog_post->have_posts()) : $blog_post->the_post(); 
         ?>
             <div class="sngle-blog">
-                <div class="img">
-                    <a href="<?php the_permalink(); ?>">
-                        <?php
-                     if ( has_post_thumbnail() ) {
-                        $thumb_url = get_the_post_thumbnail_url(get_the_ID(), [370, 250]);
-                      echo '<img src="' . esc_url($thumb_url) . '" alt="' . esc_attr(get_the_title()) . '">';
-                     } else {
-                       echo '<img src="' . get_template_directory_uri() . '/assets/images/blog-img1.png" alt="Default Image">';
-                  }
-               ?>
-                    </a>
+               <div class="img">
+  <a href="<?php the_permalink(); ?>">
+    <?php
+      if ( has_post_thumbnail() ) {
+          the_post_thumbnail('post_custom-thumb', [
+              'alt' => esc_attr(get_the_title()),
+          ]);
+      } else {
+          echo '<img src="' . get_template_directory_uri() . '/assets/images/blog-img1.png" alt="Default Image">';
+      }
+    ?>
+  </a>
+</div>
 
-                </div>
 
                 <div class="single-blog-details">
                     <div class="date">

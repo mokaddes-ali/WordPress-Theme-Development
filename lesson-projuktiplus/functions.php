@@ -56,6 +56,8 @@ function lessonlms_theme_register(){
         'width'=> 85,
     ));
 
+     add_image_size('post_custom-thumb', 370, 250, true);
+
     register_nav_menus(array(
     'header_menu' => __('LMS Header Menu','lessonlms'),
     'mobile_menu' => __('LMS Mobile Menu','lessonlms'),
