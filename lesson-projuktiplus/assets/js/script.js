@@ -95,24 +95,24 @@ jQuery(document).ready(function($){
     });
 
 
+//  Initial active tab
+  $('.courses-tab').first().addClass('active');
+  $('.courses-tab-content').first().addClass('active');
+  updateDivider($('.courses-tab.active'));
 
-// reply
-    $('.reply-btn').on('click', function (e) {
-    e.preventDefault();
+  $('.courses-tab').click(function(){
+    $('.courses-tab').removeClass('active');
+    $(this).addClass('active');
 
-    // Clear old reply forms
-    $('.reply-form-container').empty();
+    $('.courses-tab-content').removeClass('active');
+    $('#' + $(this).data('tab')).addClass('active');
 
-    // Get comment ID
-    let commentId = $(this).data('comment-id');
-
-    // Get form HTML
-    let formHtml = $('#hidden-reply-form').html();
-
-    // Insert form into correct reply container
-    $('#reply-form-' + commentId).html(formHtml);
-
-    // Set parent ID
-    $('#reply-form-' + commentId).find('.comment_parent_input').val(commentId);
+    updateDivider($(this));
   });
+
+  function updateDivider(tab){
+    var width = tab.outerWidth();
+    var left = tab.position().left;
+    $('.tab-divider').css({width: width + 'px', left: left + 'px'});
+  }
 });
