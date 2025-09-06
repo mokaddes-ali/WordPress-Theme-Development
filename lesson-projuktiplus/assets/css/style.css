@@ -2202,54 +2202,116 @@ single courses design
   padding: 48px 0 59px 0;
 }
 
-.single-courses-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .single-courses-wrapper{
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 30px;
 
 }
 
 .left-courses-image-details{
-  width: 70%;
+  width: 60%;
+  padding: 0px 0px 20px 0px;
 }
 
 .single-couses-image-box{
   position: relative;
   width: 100%;
-  height: 700px;
 }
-
-.single-couses-image-box img {
+.single-couses-image-box img{
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  height: 650px;
+
 }
 
 
 .courses-card-box {
   background-color: #FFFFFF;
-  width: 270px;
-  height: 244px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   gap: 13px;
   border-radius: 12px;
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.05);
   position: absolute;
-  top: 55px;
-  left:100px;
+  top: 20px;
+  right:10px;
   padding: 24px;
 }
 
+.courses-card-items svg{
+  height: 26px;
+  width: 26px;
+}
+
+
+.course-price-list {
+  margin-bottom: 15px;
+}
+
+.course-price-list h2 {
+  font-size: 34px;
+  font-weight: bold;
+  color: black;
+}
+
+.course-price-list h3 {
+  font-size: 24px;
+  color: #888;
+  text-decoration: line-through;
+  margin: 5px 0;
+}
+
+.course-price-list p {
+  background: rgba(255, 0, 0, 0.7);
+  color: #fff;
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.enroll-btn a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFB900;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* hover bg animation */
+.enroll-btn a::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: #171100; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.enroll-btn a:hover::after {
+  transform: scaleX(1);
+}
+
+.enroll-btn a:hover {
+  color: #FFB900; 
+}
 
 
 
@@ -2269,24 +2331,11 @@ single courses design
 
 .courses-card-items .text p {
   color: #171100;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 166.667%;
-}
-
-.courses-card-items .text span {
-  color: #5F5B53;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 185.714%;
-}
-
-.courses-card-items .text p {
-  color: #171100;
-  font-size: 18px;
-  font-weight: 600;
   line-height: 166.667%;
 }
+
 
 /* Right */
 
