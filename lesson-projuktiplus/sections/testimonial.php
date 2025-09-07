@@ -23,7 +23,7 @@
                     <div class="student-details">
                         <?php if (has_post_thumbnail()) : ?>
                         <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID(),)); ?>"
-                            alt="<?php echo esc_attr(get_the_title()); ?>">
+                            alt="<?php echo esc_attr(get_the_title()); ?>" style="width:72px; height:72px; object-fit:cover; border-radius:9999px;">
                         <?php else : ?>
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/client-img.png"
                             alt="Client image">

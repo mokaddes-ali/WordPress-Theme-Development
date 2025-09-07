@@ -2,8 +2,30 @@
 <section class="courses">
     <div class="container">
         <div class="heading courses-heading">
-            <h2>Our popular courses</h2>
-            <p>Build new skills with new trendy courses and shine for the next future career.</p>
+            <?php 
+
+
+  // Courses Section Title
+  $course_section_title = get_theme_mod('course_section_title',
+      'Our popular courses');
+$course_section_description = get_theme_mod('course_section_description', 'Build new skills with new trendy courses and shine for the next future career.');
+
+
+?>
+            <h2>
+                <?php 
+                if( $course_section_title):
+                    echo esc_html( $course_section_title );
+                    endif;
+                ?>
+            </h2>
+            <p>
+                <?php 
+                if( $course_section_description):
+                    echo esc_html( $course_section_description );
+                endif;
+                ?>
+            </p>
         </div>
 
         <div class="courses-wrapper slick-items">

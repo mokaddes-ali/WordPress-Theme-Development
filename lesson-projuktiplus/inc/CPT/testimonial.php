@@ -38,5 +38,3 @@ function lessonlms_testimonial_register(){
     register_post_type('testimonials', $args );
 }
 add_action('init','lessonlms_testimonial_register');
-
-?>

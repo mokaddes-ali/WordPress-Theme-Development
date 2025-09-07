@@ -45,5 +45,3 @@ function lessonlms_custome_courses_register(){
     register_post_type('courses', $args);
 }
 add_action('init', 'lessonlms_custome_courses_register');
-
-?>
