@@ -15,6 +15,7 @@ include_once get_template_directory() . '/inc/enqueue.php';
 // Register Slider Custom Post Type
 
 include_once get_template_directory() . '/inc/CPT/slider.php';
+include_once get_template_directory() . '/inc/CPT/services.php';
 include_once get_template_directory() . '/inc/CPT/testimonial.php';
 
 // Include Customizer Settings

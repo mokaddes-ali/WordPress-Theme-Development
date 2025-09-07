@@ -9,7 +9,7 @@ function laundryclean_setup_theme()
     if (wp_get_theme()->get('TextDomain') === 'laundryclean') {
 
     // Enable post thumbnails for posts and pages
-    add_theme_support( 'post-thumbnails', array( 'post','page','slider' ) );
+    add_theme_support( 'post-thumbnails', array( 'post','page','slider','testimonials','services') );
 
     
     // Enable dynamic title tag support
