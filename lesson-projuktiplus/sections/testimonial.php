@@ -34,7 +34,7 @@
                     <div class="name">
                         <h3><?php echo esc_html(the_title()); ?></h3>
                         <span>
-                            <?php echo esc_html(get_post_meta(get_the_ID(), "student_designation", true)); ?>
+                            <?php echo esc_html(get_post_meta(get_the_ID(), "student_destination", true)); ?>
                         </span>
                     </div>
                 </div>

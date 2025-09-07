@@ -2,12 +2,12 @@
 get_header();
 ?>
 
-<section >
+
     <!-- section heading -->
     <?php get_template_part('sections/searchheading'); ?>
 
-
-  <div class="container " style="display: flex; gap: 40px;">
+<section >
+  <div class="container " style="display: flex; gap: 40px; padding: 40px 0px 40px 0px;">
     <!-- left bloge search details -->
     <div class="blog-details" style="width: 70%;">
     <?php
@@ -40,16 +40,8 @@ get_header();
     <?php
       endwhile;
     ?>
-
-      <div class="pagination">
-        <?php
-        global $wp_query;
-        echo paginate_links(array(
-          'total' => $wp_query->max_num_pages,
-          'current' => max(1,get_query_var('paged')),
-        ));
-        ?>
-      </div>
+       <!-- Pagination -->
+       <?php lessonlms_all_pagenav()?>
 
    <?php else : ?>
     <div class="no-results-box">

@@ -15,6 +15,7 @@
         <form role="search" action="<?php echo esc_url(home_url('/')); ?>" method="get" class="search-box">
             <input type="search" name="s" placeholder="<?php esc_attr_e('Search here...', 'lessonlms') ?>"
                 value="<?php get_search_query(); ?>" required>
+                 <input type="hidden" name="post_type" value="post" />
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
 
