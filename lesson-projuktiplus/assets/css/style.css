@@ -509,9 +509,16 @@ nav.main-menu-phone ul {
   box-shadow: 0px 18px 36px 0px rgba(0, 0, 0, 0.05);
 }
 
+.courses-image-size{
+  width: 100%;
+  height: 278px;
+  object-fit: cover;
+
+}
 .course .img {
   width: 100%;
   height: 278px;
+  overflow: hidden;
 }
 
 .course .img img {
@@ -888,6 +895,12 @@ section.blog {
 
 .sngle-blog:hover {
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.05);
+}
+
+.blog-image{
+  width: 100%;
+  height: 250px;
+  object-fit: cover !important; 
 }
 
 .sngle-blog .img img {
@@ -2522,3 +2535,48 @@ single courses design
   font-weight: 600;
   line-height: 166.667%;
 }
+
+
+.see-all-blog .container{
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+.blog-page-left{
+  width: 70%;
+}
+
+.blog-page-right{
+  width: 30%;
+}
+
+.blog-detials-section {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url("../assets/images/courses-image1.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.blog-detials-section .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* alpha value halka kore 0.2 */
+    display: flex;
+    align-items: center;
+}
+
+
+.blog-detials-section .container {
+    width: 100%;
+    padding: 0 20px;
+    color: #fff;
+}
+

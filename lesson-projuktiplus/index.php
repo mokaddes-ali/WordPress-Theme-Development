@@ -15,8 +15,9 @@ $blog_page_description = get_theme_mod("blog_page_description", "Read our regula
 ?>
 
 
-<section class="see-all-blog" style="padding: 80px 0px 80px 0px;">
+<section class="see-all-blog" style="padding: 60px 0px 60px 0px;">
     <div class="container">
+    <div class="blog-page-left">
         <div class="blog-heading">
             <h3>
                 <?php if ($blog_page_heading): ?>
@@ -31,7 +32,7 @@ $blog_page_description = get_theme_mod("blog_page_description", "Read our regula
         </div>
 
 
-        <div class="" style="display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); margin: 60px 0px;">
+        <div class="" style="display: grid; gap: 20px; grid-template-columns: repeat(2, 1fr);">
             <?php
             $args = array(
                 'post_type' => 'post',
@@ -93,6 +94,13 @@ $blog_page_description = get_theme_mod("blog_page_description", "Read our regula
             ?>
         </div>
         <?php echo lessonlms_all_pagenav(); ?>
+             
+        </div>
+       
+        <div class="blog-page-right">
+             <?php get_sidebar();?>
+        </div>
+        
 
     </div>
 

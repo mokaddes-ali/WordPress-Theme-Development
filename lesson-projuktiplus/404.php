@@ -1,4 +1,7 @@
 <?php
+/**
+ * Not Found Page
+ */
 get_header();
 
 ?>

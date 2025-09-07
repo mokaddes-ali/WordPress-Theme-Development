@@ -13,8 +13,10 @@ function lessonlms_theme_register(){
         'height' => 34,
         'width'=> 85,
     ));
-
-     add_image_size('post_custom-thumb', 370, 250, true);
+     
+    add_image_size('custom-courses-image',370,278,true);
+    add_image_size('custom-blog-image',370,250,true);
+    
 
     register_nav_menus(array(
     'header_menu' => __('LMS Header Menu','lessonlms'),

@@ -1,16 +1,15 @@
 <section class="blog-detials-section">
-<div class="overlay">
+  <div class="overlay">
     <div class="container">
-        <?php if(is_search()) :?>
-            <!-- Search Page Heading -->
-              <h1 class="page-title" data-aos="fade-down"
+      <?php if(is_search()) :?>
+          <!-- Search Page Heading -->
+          <h1 class="page-title" data-aos="fade-down"
              data-aos-easing="linear"
              data-aos-duration="1000">
-         <?php printf(esc_html__('Search Results for: %s', 'lessonlms'), '<span>' . get_search_query() . '</span>');?>
-        </h1>
-         <?php endif; ?>
+             <?php printf(esc_html__('Search Results for: %s', 'lessonlms'), '<span>' . get_search_query() . '</span>');?>
+          </h1>
+      <?php endif; ?>
 
-     <!-- ✅ Breadcrumb Start -->
       <nav class="custom-breadcrumb" aria-label="breadcrumb">
         <ul>
           <li>
@@ -45,7 +44,6 @@
           <?php endif; ?>
         </ul>
       </nav>
-      <!-- ✅ Breadcrumb End -->
     </div>
   </div>
 </section>
