@@ -4,7 +4,6 @@
  *
  * @package LaundryTheme
  */
-get_header();
 ?>
 <section class="team-area bg-[#FFF] w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-16 md:py-28 flex flex-col gap-8 md:gap-10">
 
@@ -192,4 +191,3 @@ get_header();
   </div>
 </section>
 
-<?php get_footer();?>

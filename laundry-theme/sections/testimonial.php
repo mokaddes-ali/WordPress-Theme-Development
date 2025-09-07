@@ -4,7 +4,7 @@
  */
 ?>
 
-<section class="blog-area w-full flex flex-col py-8 md:py-12 items-center justify-center gap-5">
+<section class="blog-area bg-[#ECF2FE] w-full flex flex-col py-8 md:py-12 items-center justify-center gap-5">
  <!-- heading -->
     <div class="heading px-[2.5%] lg:px-[5%] 2xl:px-[8%] flex flex-col gap-2 md:gap-4 justify-center items-center">
       <button
