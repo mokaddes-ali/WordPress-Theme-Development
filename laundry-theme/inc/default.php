@@ -33,11 +33,6 @@ function laundryclean_setup_theme()
 add_action('after_setup_theme', 'laundryclean_setup_theme');
 
 
-function laundryclean_excerpt_length($length){
-    return 42;
-}
-add_filter('excerpt_length', 'laundryclean_excerpt_length');
-
 
 function laundryclean_add_edit_form_multipart_encoding() {
 

@@ -129,52 +129,7 @@
     </button>
     <?php wp_nav_menu(array(
         'theme_location' => 'laundryclean_mobile_menu',
-        'fallback_cb' => function(){
-            echo '
-                <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
-              Home
-             <span>
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"       stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-               </svg>
-             </span>
-           </a>
-
-          <a href="#" class="">
-            About Us
-          </a>
-
-         <a href="#" class="flex items-center gap-1 hover:text-blue-600 transition">
-           Service
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"   stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a>
-
-          <a href="#" class=" flex items-center  gap-1 hover:text-blue-600 transition">Pages
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a>
-          <a href="#" class="flex items-center  gap-1 hover:text-blue-600 transition">Blog
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </span>
-          </a>
-    
-          <a href="#" class="hover:text-blue-600 transition">Contact</a>
-            ';
-        }
+        'fallback_cb' => false
     )); ?>
 
 

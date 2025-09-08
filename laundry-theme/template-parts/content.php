@@ -6,7 +6,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('w-full flex-shrink-0 bg-[#EBEFF3] mt-6'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('w-full my-3 flex-shrink-0 bg-[#EBEFF3] mt-6'); ?>>
 
     <!-- Image Section -->
     <div class="w-full h-auto aspect-[1160/570]">
@@ -121,19 +121,20 @@
 
                 <?php
                 $comments_count = get_comments_number();
-                if ($comments_count || comments_open()) :
-                    if ($comments_count === 0) {
+                if (comments_open()) :
+                    if ($comments_count == 0) {
                         $comment_text = __('No Comments', 'laundryclean');
-                    } elseif ($comments_count === 1) {
+                    } elseif ($comments_count == 1) {
                         $comment_text = __('1 Comment', 'laundryclean');
                     } else {
                         $comment_text = $comments_count . ' ' . __('Comments', 'laundryclean');
                     }
                 ?>
                     <div class="flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" fill="none">
-                            <path d="..." stroke="#1D92CD" stroke-width="2" />
-                        </svg>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            <path d="M14.1752 12.8638L14.4872 15.3918C14.5672 16.0558 13.8552 16.5197 13.2872 16.1757L9.93546 14.1838C9.56749 14.1838 9.20752 14.1598 8.85554 14.1118C9.4475 13.4158 9.79947 12.5358 9.79947 11.5838C9.79947 9.31185 7.8316 7.47192 5.39976 7.47192C4.47182 7.47192 3.61588 7.73589 2.90392 8.19989C2.87992 7.99989 2.87192 7.79989 2.87192 7.59189C2.87192 3.95195 6.03171 1 9.93546 1C13.8392 1 16.999 3.95195 16.999 7.59189C16.999 9.75185 15.8871 11.6638 14.1752 12.8638Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9.79943 11.5836C9.79943 12.5356 9.44746 13.4156 8.8555 14.1116C8.06355 15.0716 6.80762 15.6875 5.39971 15.6875L3.31185 16.9275C2.95987 17.1435 2.5119 16.8475 2.5599 16.4395L2.75988 14.8636C1.68795 14.1196 1 12.9276 1 11.5836C1 10.1756 1.75196 8.93564 2.90388 8.19965C3.61583 7.73565 4.47177 7.47168 5.39971 7.47168C7.83156 7.47168 9.79943 9.31161 9.79943 11.5836Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
                         <a href="<?php echo esc_url(get_comments_link()); ?>"><?php echo esc_html($comment_text); ?></a>
                     </div>
                 <?php endif; ?>

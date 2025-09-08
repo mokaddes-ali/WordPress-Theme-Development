@@ -6,7 +6,7 @@
  */
 ?>
     <!-- Second Card -->
-<article id="post-<?php the_ID(); ?>" <?php post_class('relative bg-[#EBEFF3] rounded-lg mt-5 lg:mt-10 p-4 md:p-6 flex flex-col items-center text-center gap-6'); ?>>  
+<article id="post-<?php the_ID(); ?>" <?php post_class('relative bg-[#EBEFF3] rounded-lg my-3 flex flex-col items-center text-center gap-6'); ?>>  
   <!-- SVG Icon -->
   <div class="w-8 h-8 md:w-10 md:h-10 mb-4">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 34 30" fill="none">
@@ -18,12 +18,16 @@
 
   <!-- Paragraph -->
   <p class="text-gray-700 text-base md:text-lg leading-relaxed max-w-4xl">
-   <?php the_excerpt(); ?>
+    <?php
+        $content = get_the_content();
+        $content_text = preg_replace('/<img[^>]+\>/i', '', $content);
+        echo esc_html( wp_trim_words( $content_text, 45 ) );
+       ?>
   </p>
 
   <!-- Heading -->
   <h2 class="text-[#142137] text-xl md:text-2xl font-medium tracking-tight mt-4">
-    <?php the_title(); ?>
+    <?php echo esc_html(the_title()); ?>
   </h2>
 
 </article>

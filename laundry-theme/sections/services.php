@@ -32,26 +32,29 @@
             endif;
             ?>
          </h1>
-         <button
-            class="w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] text-[#142137] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group mt-0 md:mt-[60px]">
-         
-            <a href="<?php echo esc_url(get_post_type_archive_link('services')); ?>">
-                
-                 <?php if($services_button_text):
+
+          <button
+    class="relative w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group overflow-hidden">
+
+    <!-- Background animation -->
+    <span
+        class="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out">
+    </span>
+
+    <!-- Button text and icon -->
+    <a href="<?php echo esc_url(get_post_type_archive_link('services')); ?>"
+       class="relative flex items-center gap-2 text-[#142137] group-hover:text-white transition-colors duration-500 z-10">
+          <?php if($services_button_text):
              echo esc_html($services_button_text);
             endif;
             ?>
-            </a>
-
-  
-            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"
-                class="transition-transform duration-300 group-hover:translate-x-1">
-                <path d="M1 7L13 7" stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                <path d="M8 13L14 7L8 1" stroke="#142137" stroke-width="1.5" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-          </button>
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none"
+             class="transition-colors duration-500 group-hover:stroke-white">
+            <path d="M1 7L13 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 13L14 7L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+</button>
       </div>
 
 
