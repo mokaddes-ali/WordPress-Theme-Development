@@ -223,6 +223,7 @@ jQuery(document).ready(function($){
     });
 
 
+
 // GSap For Animation
 
 gsap.registerPlugin(ScrollTrigger);

@@ -7,6 +7,7 @@
 
 // Include Default Theme Support
 include_once get_template_directory() . '/inc/default.php';
+include_once get_template_directory() .'/inc/pagination.php';
 
 // Include Enqueue Scripts
 
@@ -22,6 +23,7 @@ include_once get_template_directory() . '/inc/CPT/testimonial.php';
 include_once get_template_directory() . '/inc/customizer/top.header.php';
 include_once get_template_directory() . '/inc/customizer/header.php';
 include_once get_template_directory() . '/inc/customizer/about.php';
+include_once get_template_directory() . '/inc/customizer/services.php';
 include_once get_template_directory() . '/inc/customizer/blog.php';
 include_once get_template_directory() . '/inc/customizer/footer.php';
 

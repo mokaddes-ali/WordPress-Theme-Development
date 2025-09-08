@@ -20,32 +20,35 @@ function laundryclean_services_register()
         'menu_name'             => __('Services', 'laundryclean')
     );
 
-    $args = array(
-        'labels'                => $labels,
-        'description'           => __('Custom post type for homepage Services', 'laundryclean'),
-        'public'                => true,
-        'publicly_queryable'    => true,
-        'show_ui'               => true,
-        'show_in_menu'          => true,
-        'query_var'             => true,
-        'rewrite'               => array('slug' => 'services'),
-        'capability_type'       => 'post',
-        'has_archive'           => true,
-        'hierarchical'          => false,
-        'menu_position'         => 11,
-        'menu_icon'             => 'dashicons-format-quote',
-        'supports' => array(
-            'title',
-            'editor',
-            'thumbnail',
-        )
-    );
+   $args = array(
+    'labels'                => $labels,
+    'description'           => __('Custom post type for homepage Services', 'laundryclean'),
+    'public'                => true,
+    'publicly_queryable'    => true,
+    'show_ui'               => true,
+    'show_in_menu'          => true,
+    'query_var'             => true,
+    'rewrite'               => array('slug' => 'services'),
+    'capability_type'       => 'post',
+    'has_archive'           => true,
+    'hierarchical'          => false,
+    'menu_position'         => 11,
+    'menu_icon'             => 'dashicons-format-quote',
+    'supports'              => array(
+        'title',
+        'editor',
+        'thumbnail',
+        'excerpt',
+        'revisions'
+    ),
+);
+
     register_post_type('services', $args);
 }
 add_action('init', 'laundryclean_services_register');
 
 
-// Add Custom Meta Box for Slider
+// Add Custom Meta Box
 function laundryclean_services_meta_box()
 {
     add_meta_box(
@@ -59,30 +62,37 @@ function laundryclean_services_meta_box()
 }
 add_action('add_meta_boxes', 'laundryclean_services_meta_box');
 
-
-// Callback function for meta box fields
-function laundryclean_services_meta_box_callback($post)
-{
-  
-    $services_avator = get_post_meta($post->ID, '_services_avator', true) ?: 'default a image';
+function laundryclean_services_meta_box_callback($post) {
+ 
+    $services_icon  = get_post_meta($post->ID, '_services_icon', true) ?: '';
 
     ?>
-  
-   
-    <p>
-        <label for="testimonial_client_destination"><?php _e('Client Destination:', 'laundryclean'); ?></label><br>
-        <input type="text" name="testimonial_client_destination" id="testimonial_client_destination" value="<?php echo esc_attr($services_avator); ?>" class="widefat">
-    </p>
-    
+    <p style="margin-bottom:20px;">
+    <label for="services_icon" style="display:block; font-weight:bold; font-size:16px; color:#333; margin-bottom:5px;">
+        <?php _e('Services Icon URL:', 'laundryclean'); ?>
+    </label>
+    <input 
+        type="text" 
+        name="services_icon" 
+        id="services_icon" 
+        value="<?php echo esc_attr($services_icon); ?>" 
+        style="width:100%; padding:8px 10px; border:1px solid #ccc; border-radius:5px; font-size:14px; outline:none;"
+        onfocus="this.style.borderColor='#ff7f50'; this.style.boxShadow='0 0 5px rgba(255,127,80,0.5)';" 
+        onblur="this.style.borderColor='#ccc'; this.style.boxShadow='none';"
+    >
+    <small style="color:#666; font-size:14px;">
+        <?php _e('Enter image URL or upload via Media Library and copy link.', 'laundryclean'); ?>
+    </small>
+</p>
+
     <?php
 }
 
 // Save Meta Box Data
-function laundryclean_save_testimonial_meta($post_id)
+function laundryclean_save_services_meta($post_id)
 {
     $fields = [
-        'testimonial_rating'       => '_testimonial_rating',
-        'testimonial_client_destination'  => '_testimonial_client_destination',
+        'services_icon'       => '_services_icon',
     ];
 
     foreach ($fields as $form_field => $meta_key) {
@@ -91,6 +101,4 @@ function laundryclean_save_testimonial_meta($post_id)
         }
     }
 }
-add_action('save_post', 'laundryclean_save_testimonial_meta');
-
-
+add_action('save_post', 'laundryclean_save_services_meta');
