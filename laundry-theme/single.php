@@ -81,27 +81,25 @@
                     <!-- Text Section -->
                     <div class="py-4 md:py-5 xl:pr-4 flex flex-col gap-3 md:gap-[12px]">
                         <!-- First Row -->
-                        <div class="flex flex-col flex-wrap sm:flex-row items-center gap-4 sm:gap-4 md:gap-6 lg:gap-3">
+                        <div class="flex flex-col sm:flex-wrap sm:flex-row  gap-4 md:gap-6 lg:gap-3">
 
-                            <!-- mobile device only -->
+                            <!-- Mobile device only -->
                             <div class="w-full px-6 mt-2 flex justify-between sm:hidden">
-
-                                <!-- Avatar -->
+                                <!-- Avatar + Name -->
                                 <div class="flex items-center gap-3">
                                     <?php
-                                    $author_id = get_the_author_meta('ID', get_the_ID());
+                                    $author_id = get_the_author_meta('ID');
                                     $default_avatar = get_template_directory_uri() . '/assets/images/postclient1.jpg';
-                                    echo get_avatar($author_id, 56, '', '', ['class' => 'w-12 h-12 object-cover']);
-                                    ?>
-                                    <!-- Name -->
+                                    echo get_avatar($author_id, 60, '', '', ['class' => 'w-12 h-12 object-cover']);
+                                    ?>,
                                     <h2 class="text-[#142137] font-poppins text-[18px] font-semibold">
                                         <?php echo get_the_author(); ?>
                                     </h2>
                                 </div>
 
-                                <!-- Service Type -->
+                                <!-- Category -->
                                 <div
-                                    class="text-[rgba(20,33,55,0.60)] pl-0 lg:pl-1.5 flex gap-1 lg:gap-1.5 items-center text-center font-poppins text-base font-medium leading-[26px]">
+                                    class="flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
                                     <!-- Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
                                         fill="none" class="w-[22px] h-[22px] flex-shrink-0 aspect-square">
@@ -112,41 +110,37 @@
                                             d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                                             fill="#1D92CD" />
                                     </svg>
-                                    <h1>
-                                        <a href="<?php esc_html(the_permalink()); ?>">
-                                            <?php
-                                            $categories = get_the_category();
-                                            if (!empty($categories)) {
-                                                echo esc_html($categories[0]->name);
-                                            }
-                                            ?>
-                                        </a>
-                                    </h1>
+                                    <a href="<?php esc_html(the_permalink()); ?>">
+                                        <?php
+                                        $categories = get_the_category();
+                                        if (!empty($categories)) {
+                                            echo esc_html($categories[0]->name);
+                                        }
+                                        ?>
+                                    </a>
+
                                 </div>
                             </div>
 
-                            <!-- sm, md and above -->
-                            <!-- Avatar -->
-                            <div
-                                class="hidden sm:flex w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 aspect-square rounded-2 bg-[#CFD4C6] bg-cover bg-no-repeat">
-                                <?php
-                                $author_id = get_the_author_meta('ID');
-                                $default_avatar = get_template_directory_uri() . '/assets/images/postclient1.jpg';
-                                echo get_avatar($author_id, 90, '', '', ['class' => 'w-full h-full object-cover']);
-                                ?>
+
+                            <!-- Desktop Avatar and name -->
+                            <div class="hidden sm:flex items-center gap-2">
+                                <div class=" w-12 h-12 lg:w-14 lg:h-14 bg-[#CFD4C6] overflow-hidden">
+                                    <?php
+                                    echo get_avatar($author_id, 80, '', '', ['class' => 'w-full h-full object-cover']);
+                                    ?>
+                                </div>
+
+                                <!-- Desktop Name -->
+                                <h2 class="hidden sm:flex text-[#142137] font-poppins text-[18px] font-semibold leading-none">
+                                    <?php echo get_the_author(); ?>
+                                </h2>
                             </div>
 
-                            <!-- Name -->
-                            <h2
-                                class="hidden sm:flex text-[#142137] font-poppins text-base lg:text-[18px] font-semibold leading-none">
-                                <?php echo get_the_author(); ?>
-                            </h2>
-
-
-                            <!-- Service Type -->
+                            <!-- Desktop Category -->
                             <div
-                                class="hidden sm:flex text-[rgba(20,33,55,0.60)] pl-0 lg:pl-1.5 gap-1 lg:gap-1.5 items-center text-center font-poppins text-base font-medium leading-[26px]">
-                                <!-- Phone Icon -->
+                                class="hidden sm:flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
+                                <!-- Icon -->
                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none"
                                     class="w-[22px] h-[22px] flex-shrink-0 aspect-square">
                                     <path
@@ -156,25 +150,19 @@
                                         d="M15.747 3.57547C17.1935 3.56815 18.3377 4.70408 18.3358 6.14598C18.334 7.56315 17.1962 8.7119 15.7873 8.71832C14.3555 8.72473 13.1893 7.56773 13.1912 6.1414C13.1921 4.72881 14.3344 3.5828 15.747 3.57547ZM16.6127 6.14415C16.6127 5.66412 16.2582 5.30502 15.7791 5.29953C15.2991 5.29403 14.9317 5.6458 14.9225 6.12033C14.9125 6.61684 15.2844 6.99426 15.7791 6.98785C16.2591 6.98235 16.6136 6.62325 16.6136 6.14415H16.6127Z"
                                         fill="#1D92CD" />
                                 </svg>
-                                <h1>
-                                    <a href="<?php esc_html(the_permalink()); ?>">
-                                        <?php
-                                        $categories = get_the_category();
-                                        if (!empty($categories)) {
-                                            echo esc_html($categories[0]->name);
-                                        }
-                                        ?>
-                                    </a>
-                                </h1>
+                                <a href="<?php esc_html(the_permalink()); ?>">
+                                    <?php
+                                    if (!empty($categories)) {
+                                        echo esc_html($categories[0]->name);
+                                    }
+                                    ?>
+                                </a>
                             </div>
 
-                            <!-- mobile device only -->
-                            <div class="w-full px-8 mt-2 flex justify-between sm:hidden">
-
-
-                                <!-- Date -->
+                            <!-- Date and Comment Count -->
+                            <div class="flex items-center gap-4">
                                 <div
-                                    class="text-[rgba(20,33,55,0.60)] pl-0 lg:pl-[7px] flex items-center gap-1 lg:gap-1.5 text-center font-poppins text-base font-medium leading-[26px]">
+                                    class="flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
                                     <!-- Calendar Icon -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 19 20"
                                         fill="none" class="w-[16.201px] h-[18px] flex-shrink-0">
@@ -191,10 +179,9 @@
                                         <path d="M5.75195 13.5994H9.35213" stroke="#1D92CD" stroke-width="2"
                                             stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                    <h2> <?php echo get_the_date('M d, Y'); ?></h2>
+                                    <?php echo get_the_date('M d, Y'); ?>
                                 </div>
 
-                                <!-- Comment Count -->
                                 <?php
                                 $comments_count = get_comments_number();
                                 if (comments_open()) :
@@ -207,9 +194,7 @@
                                     }
                                 ?>
                                     <div
-                                        class="text-[rgba(20,33,55,0.60)] pl-0 lg:pl-[7px] flex items-center gap-1 lg:gap-1.5 text-center font-poppins text-base font-medium leading-[26px]">
-
-                                        <!-- Comment Icon -->
+                                        class="flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                                             <path
                                                 d="M14.1752 12.8638L14.4872 15.3918C14.5672 16.0558 13.8552 16.5197 13.2872 16.1757L9.93546 14.1838C9.56749 14.1838 9.20752 14.1598 8.85554 14.1118C9.4475 13.4158 9.79947 12.5358 9.79947 11.5838C9.79947 9.31185 7.8316 7.47192 5.39976 7.47192C4.47182 7.47192 3.61588 7.73589 2.90392 8.19989C2.87992 7.99989 2.87192 7.79989 2.87192 7.59189C2.87192 3.95195 6.03171 1 9.93546 1C13.8392 1 16.999 3.95195 16.999 7.59189C16.999 9.75185 15.8871 11.6638 14.1752 12.8638Z"
@@ -222,67 +207,10 @@
                                         </svg>
                                         <a
                                             href="<?php echo esc_url(get_comments_link()); ?>"><?php echo esc_html($comment_text); ?></a>
-                                    <?php endif; ?>
                                     </div>
-
-                            </div>
-
-                            <!-- sm, md and above -->
-                            <!-- Date -->
-                            <div
-                                class="hidden sm:flex text-[rgba(20,33,55,0.60)] pl-0 lg:pl-[7px] items-center gap-1 lg:gap-1.5 text-center font-poppins text-base font-medium leading-[26px]">
-                                <!-- Calendar Icon -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 19 20" fill="none"
-                                    class="w-[16.201px] h-[18px] flex-shrink-0">
-                                    <path d="M5.75195 1V3.70016" stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M12.9531 1V3.70016" stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path
-                                        d="M17.4528 6.84927V14.4997C17.4528 17.1999 16.1027 19 12.9525 19H5.75218C2.60202 19 1.25195 17.1999 1.25195 14.4997V6.84927C1.25195 4.14911 2.60202 2.349 5.75218 2.349H12.9525C16.1027 2.349 17.4528 4.14911 17.4528 6.84927Z"
-                                        stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M5.75195 9.09912H12.9523" stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.75195 13.5994H9.35213" stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <h2> <?php echo get_the_date('M d, Y'); ?></h2>
-                            </div>
-
-
-                            <!-- Comment Count -->
-                            <?php
-                            $comments_count = get_comments_number();
-                            if (comments_open()) :
-                                if ($comments_count == 0) {
-                                    $comment_text = __('No Comments', 'laundryclean');
-                                } elseif ($comments_count == 1) {
-                                    $comment_text = __('1 Comment', 'laundryclean');
-                                } else {
-                                    $comment_text = $comments_count . ' ' . __('Comments', 'laundryclean');
-                                }
-                            ?>
-                                <div
-                                    class="hidden sm:flex text-[rgba(20,33,55,0.60)] pl-0 lg:pl-[7px] items-center gap-1 lg:gap-1.5 text-center font-poppins text-base font-medium leading-[26px]">
-
-                                    <!-- Comment Icon -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 20 20" fill="none"
-                                        class="w-[17.941px] h-[18px] flex-shrink-0">
-                                        <path
-                                            d="M18.9411 6.37784V10.8687C18.9411 11.1606 18.9298 11.4413 18.8962 11.7108C18.6379 14.7421 16.8528 16.2465 13.5632 16.2465H13.1142C12.8335 16.2465 12.564 16.3813 12.3956 16.6058L11.0484 18.4022C10.4533 19.1993 9.48776 19.1993 8.89272 18.4022L7.54544 16.6058C7.39949 16.4149 7.07392 16.2465 6.82692 16.2465H6.37784C2.79636 16.2465 1 15.3596 1 10.8687V6.37784C1 3.08827 2.51568 1.30314 5.5358 1.04492C5.80525 1.01124 6.08593 1 6.37784 1H13.5632C17.1447 1 18.9411 2.79636 18.9411 6.37784Z"
-                                            stroke="#1D92CD" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M13.904 9.13973H13.9141" stroke="#1D92CD" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M9.98209 9.13973H9.99219" stroke="#1D92CD" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M6.04849 9.13973H6.0586" stroke="#1D92CD" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                    <a href="<?php echo esc_url(get_comments_link()); ?>"><?php echo esc_html($comment_text); ?></a>
                                 <?php endif; ?>
-                                </div>
+                            </div>
+
                         </div>
 
                         <!-- Second Row - Title -->
@@ -643,34 +571,34 @@
                         <div class="flex items-center gap-2">
                             <h2
                                 class="text-[#142137] text-base md:text-[20px] leading-relaxed md:leading-[34px] font-medium md:font-[500] tracking-tight md:tracking-[-0.48px] font-poppins">
-                                <?php echo __('Related Tags:', 'laundryclean');?>
+                                <?php echo __('Related Tags:', 'laundryclean'); ?>
                             </h2>
 
                             <!-- Tag List -->
                             <div class="flex flex-wrap gap-2 md:gap-[9px]">
-                                <?php 
-                                $tags = get_the_tags();
-                                if(!empty( $tags )): 
-                                    foreach( $tags as $tag ):
-                                   
-                                ?>
                                 <?php
-$tag_id = get_queried_object_id(); 
-$tag_link = get_tag_link( $tag_id );
-?>
-<a href="<?php echo esc_url($tag_link); ?>">
+                                $tags = get_the_tags();
+                                if (!empty($tags)):
+                                    foreach ($tags as $tag):
 
-                                <span
-                                    class="h-[28px] px-2 text-sm md:text-[15px] font-medium leading-relaxed md:leading-[26px] tracking-tight md:tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center hover:bg-[#4375E7] hover:text-white transform transition ease-out">
-                                    <?php echo esc_html($tag->name);?>
-                                </span>
-                                </a>
-                                <?php 
-                                 endforeach;
-                                 wp_reset_postdata();  
+                                ?>
+                                        <?php
+                                        $tag_id = get_queried_object_id();
+                                        $tag_link = get_tag_link($tag_id);
+                                        ?>
+                                        <a href="<?php echo esc_url($tag_link); ?>">
+
+                                            <span
+                                                class="h-[28px] px-2 text-sm md:text-[15px] font-medium leading-relaxed md:leading-[26px] tracking-tight md:tracking-[-0.3px] text-[#142137B3] border border-[#14213723] flex items-center justify-center hover:bg-[#4375E7] hover:text-white transform transition ease-out">
+                                                <?php echo esc_html($tag->name); ?>
+                                            </span>
+                                        </a>
+                                <?php
+                                    endforeach;
+                                    wp_reset_postdata();
                                 endif;
                                 ?>
-                              
+
                             </div>
                         </div>
 
@@ -678,322 +606,377 @@ $tag_link = get_tag_link( $tag_id );
                         <div class="social-icon flex flex-col md:flex-row gap-2 items-center">
                             <h2
                                 class="text-[#142137] text-base md:text-[20px] leading-relaxed md:leading-[34px] font-medium md:font-[500] tracking-tight md:tracking-[-0.48px] font-poppins">
-                                <?php echo __('Social Share:' , 'laundryclean');?>
+                                <?php echo __('Social Share:', 'laundryclean'); ?>
                             </h2>
-                            
-              <i class="fa-brands fa-square-twitter"></i>
-            </a>
-            
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a href="https://api.whatsapp.com/send?text=<?php the_permalink(); ?>" target="_blank">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
+
+                            <i class="fa-brands fa-square-twitter"></i>
+                            </a>
+
+                            <i class="fa-brands fa-facebook"></i>
+                            </a>
+
+                            <i class="fa-brands fa-linkedin"></i>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?text=<?php the_permalink(); ?>" target="_blank">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </a>
                             <!-- icon list -->
                             <div class="flex gap-2 md:gap-[5px]">
                                 <!-- facebook -->
-                                 <a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                    <circle cx="20" cy="20" r="20" fill="#1877F2" />
-                                    <path
-                                        d="M24.35 12H21.8C20.6728 12 19.5918 12.4478 18.7948 13.2448C17.9978 14.0418 17.55 15.1228 17.55 16.25V18.8H15V22.2H17.55V29H20.95V22.2H23.5L24.35 18.8H20.95V16.25C20.95 16.0246 21.0396 15.8084 21.199 15.649C21.3584 15.4896 21.5746 15.4 21.8 15.4H24.35V12Z"
-                                        fill="white" />
-                                </svg>
-                               </a>
-                               <!-- twitter -->
-                            <a href="https://twitter.com/intent/tweet?url=&text=<?php the_permalink(); ?>" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                    <circle cx="20" cy="20" r="20" fill="#040618" />
-                                    <path
-                                        d="M19.5022 21.9509C19.1592 22.3455 18.824 22.7313 18.4887 23.1173C17.3887 24.3834 16.2882 25.6491 15.1901 26.9167C15.1368 26.9783 15.0821 27.0008 15.0023 26.9998C14.7098 26.9956 14.4174 26.9983 14.1249 26.9979C14.0911 26.9979 14.0574 26.9948 14 26.9919C14.1143 26.8596 14.2152 26.7424 14.3165 26.6259C15.7543 24.971 17.1921 23.316 18.6299 21.6611C18.7373 21.5377 18.8419 21.4119 18.953 21.292C18.9982 21.2436 18.9955 21.2105 18.9591 21.1585C18.3786 20.3248 17.8002 19.4897 17.2209 18.655C16.5485 17.6859 15.8754 16.7171 15.2028 15.7482C14.8161 15.1907 14.4295 14.6332 14.0426 14.0756C14.0311 14.0589 14.0209 14.0412 14.0004 14.0084C14.0487 14.0059 14.0848 14.0023 14.1207 14.0023C15.3148 14.0019 16.509 14.0027 17.703 14C17.7835 13.9998 17.8286 14.0286 17.8722 14.0919C18.718 15.3133 19.5659 16.5334 20.413 17.754C20.6234 18.0569 20.8329 18.3604 21.043 18.6635C21.0685 18.7005 21.095 18.7366 21.1287 18.7841C21.2392 18.6581 21.3442 18.5394 21.4483 18.4197C22.7035 16.975 23.9587 15.5303 25.2125 14.0844C25.262 14.0272 25.3115 13.999 25.3899 14.0002C25.6856 14.0046 25.9816 14.0019 26.2776 14.0021C26.3113 14.0021 26.3449 14.0054 26.4017 14.0086C26.2685 14.1631 26.15 14.3019 26.0303 14.4395C24.5877 16.0994 23.1455 17.7596 21.7006 19.4174C21.6402 19.4866 21.6427 19.5321 21.6923 19.6031C22.9061 21.3486 24.1177 23.0954 25.3301 24.8419C25.8024 25.5223 26.2754 26.202 26.7477 26.8824C26.7692 26.9135 26.7892 26.9457 26.8199 26.9927C26.7702 26.995 26.7339 26.9979 26.6977 26.9979C25.507 26.9981 24.3166 26.9973 23.1259 27C23.0388 27.0002 22.9897 26.9708 22.9406 26.8997C22.0695 25.6407 21.1953 24.3838 20.3221 23.1263C20.0641 22.7549 19.8072 22.3826 19.5494 22.0108C19.5375 21.9941 19.5239 21.9786 19.5022 21.9509ZM25.2783 26.193C25.2526 26.1519 25.2363 26.1224 25.2171 26.0951C25.0245 25.8221 24.8313 25.5497 24.6387 25.2768C23.204 23.2445 21.7693 21.2122 20.3347 19.1801C19.3353 17.7647 18.3354 16.3498 17.3375 14.9331C17.293 14.8698 17.2483 14.8414 17.1681 14.8418C16.6563 14.8456 16.1447 14.8435 15.6329 14.8437C15.603 14.8437 15.5734 14.8471 15.5293 14.8498C15.5594 14.8949 15.5813 14.9292 15.6047 14.9624C16.8374 16.7072 18.0703 18.4517 19.3027 20.1966C20.6977 22.1717 22.0925 24.1469 23.4852 26.1239C23.5278 26.1843 23.5729 26.1999 23.6406 26.1995C24.1488 26.1974 24.6571 26.1985 25.1655 26.1981C25.1981 26.1985 25.2313 26.1953 25.2783 26.193Z"
-                                        fill="white" />
-                                </svg>
-                            </a>
-                            <!-- linkedin -->
-                             <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                    <circle cx="20" cy="20" r="20" fill="#0A66C2" />
-                                    <path
-                                        d="M23.0493 16.7368C24.3056 16.7368 25.5104 17.2359 26.3987 18.1242C27.2871 19.0125 27.7861 20.2173 27.7861 21.4736V26.9999H24.6282V21.4736C24.6282 21.0549 24.4619 20.6533 24.1658 20.3572C23.8697 20.061 23.4681 19.8947 23.0493 19.8947C22.6306 19.8947 22.2289 20.061 21.9328 20.3572C21.6367 20.6533 21.4704 21.0549 21.4704 21.4736V26.9999H18.3125V21.4736C18.3125 20.2173 18.8116 19.0125 19.6999 18.1242C20.5882 17.2359 21.793 16.7368 23.0493 16.7368Z"
-                                        fill="white" />
-                                    <path d="M15.1579 17.5261H12V26.9997H15.1579V17.5261Z" fill="white" />
-                                    <path
-                                        d="M13.5789 15.1579C14.451 15.1579 15.1579 14.451 15.1579 13.5789C15.1579 12.7069 14.451 12 13.5789 12C12.7069 12 12 12.7069 12 13.5789C12 14.451 12.7069 15.1579 13.5789 15.1579Z"
-                                        fill="white" />
-                                </svg>
-                             </a>
-                 
-                              <a href="https://www.pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                    <circle cx="20" cy="20" r="20" fill="#CB2027" />
-                                    <path
-                                        d="M20.0076 11C15.0328 11 11 15.0261 11 19.9926C11 23.8043 13.3724 27.0608 16.7231 28.3707C16.641 27.6605 16.5752 26.5647 16.7523 25.7878C16.9154 25.0843 17.8049 21.317 17.8049 21.317C17.8049 21.317 17.5383 20.777 17.5383 19.9849C17.5383 18.734 18.2648 17.8017 19.1691 17.8017C19.94 17.8017 20.3111 18.3793 20.3111 19.0677C20.3111 19.8372 19.822 20.9921 19.5621 22.0654C19.3473 22.9609 20.0143 23.6935 20.8964 23.6935C22.498 23.6935 23.7287 22.006 23.7287 19.5781C23.7287 17.4241 22.1796 15.9219 19.9628 15.9219C17.3982 15.9219 15.8927 17.8389 15.8927 19.8225C15.8927 20.592 16.1896 21.4214 16.5597 21.8731C16.6347 21.961 16.6425 22.0426 16.6199 22.1312C16.553 22.4124 16.3977 23.0266 16.3674 23.1528C16.3305 23.3156 16.2336 23.3521 16.0632 23.2713C14.9363 22.7457 14.2317 21.1099 14.2317 19.7852C14.2317 16.9502 16.2924 14.3455 20.1847 14.3455C23.3061 14.3455 25.737 16.5663 25.737 19.5416C25.737 22.5168 23.7801 25.1374 21.0665 25.1374C20.1544 25.1374 19.2941 24.6635 19.0057 24.101C19.0057 24.101 18.5536 25.8177 18.4423 26.2399C18.2426 27.0242 17.6933 28.0016 17.3228 28.601C18.1687 28.859 19.0589 29 19.9928 29C24.9676 29 29.0004 24.9739 29.0004 20.0074C29.0148 15.0261 24.9824 11 20.0076 11Z"
-                                        fill="white" />
-                                </svg>
-                              </a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php the_permalink(); ?>"
+                                    target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                                        fill="none">
+                                        <circle cx="20" cy="20" r="20" fill="#1877F2" />
+                                        <path
+                                            d="M24.35 12H21.8C20.6728 12 19.5918 12.4478 18.7948 13.2448C17.9978 14.0418 17.55 15.1228 17.55 16.25V18.8H15V22.2H17.55V29H20.95V22.2H23.5L24.35 18.8H20.95V16.25C20.95 16.0246 21.0396 15.8084 21.199 15.649C21.3584 15.4896 21.5746 15.4 21.8 15.4H24.35V12Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                                <!-- twitter -->
+                                <a href="https://twitter.com/intent/tweet?url=&text=<?php the_permalink(); ?>" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                                        fill="none">
+                                        <circle cx="20" cy="20" r="20" fill="#040618" />
+                                        <path
+                                            d="M19.5022 21.9509C19.1592 22.3455 18.824 22.7313 18.4887 23.1173C17.3887 24.3834 16.2882 25.6491 15.1901 26.9167C15.1368 26.9783 15.0821 27.0008 15.0023 26.9998C14.7098 26.9956 14.4174 26.9983 14.1249 26.9979C14.0911 26.9979 14.0574 26.9948 14 26.9919C14.1143 26.8596 14.2152 26.7424 14.3165 26.6259C15.7543 24.971 17.1921 23.316 18.6299 21.6611C18.7373 21.5377 18.8419 21.4119 18.953 21.292C18.9982 21.2436 18.9955 21.2105 18.9591 21.1585C18.3786 20.3248 17.8002 19.4897 17.2209 18.655C16.5485 17.6859 15.8754 16.7171 15.2028 15.7482C14.8161 15.1907 14.4295 14.6332 14.0426 14.0756C14.0311 14.0589 14.0209 14.0412 14.0004 14.0084C14.0487 14.0059 14.0848 14.0023 14.1207 14.0023C15.3148 14.0019 16.509 14.0027 17.703 14C17.7835 13.9998 17.8286 14.0286 17.8722 14.0919C18.718 15.3133 19.5659 16.5334 20.413 17.754C20.6234 18.0569 20.8329 18.3604 21.043 18.6635C21.0685 18.7005 21.095 18.7366 21.1287 18.7841C21.2392 18.6581 21.3442 18.5394 21.4483 18.4197C22.7035 16.975 23.9587 15.5303 25.2125 14.0844C25.262 14.0272 25.3115 13.999 25.3899 14.0002C25.6856 14.0046 25.9816 14.0019 26.2776 14.0021C26.3113 14.0021 26.3449 14.0054 26.4017 14.0086C26.2685 14.1631 26.15 14.3019 26.0303 14.4395C24.5877 16.0994 23.1455 17.7596 21.7006 19.4174C21.6402 19.4866 21.6427 19.5321 21.6923 19.6031C22.9061 21.3486 24.1177 23.0954 25.3301 24.8419C25.8024 25.5223 26.2754 26.202 26.7477 26.8824C26.7692 26.9135 26.7892 26.9457 26.8199 26.9927C26.7702 26.995 26.7339 26.9979 26.6977 26.9979C25.507 26.9981 24.3166 26.9973 23.1259 27C23.0388 27.0002 22.9897 26.9708 22.9406 26.8997C22.0695 25.6407 21.1953 24.3838 20.3221 23.1263C20.0641 22.7549 19.8072 22.3826 19.5494 22.0108C19.5375 21.9941 19.5239 21.9786 19.5022 21.9509ZM25.2783 26.193C25.2526 26.1519 25.2363 26.1224 25.2171 26.0951C25.0245 25.8221 24.8313 25.5497 24.6387 25.2768C23.204 23.2445 21.7693 21.2122 20.3347 19.1801C19.3353 17.7647 18.3354 16.3498 17.3375 14.9331C17.293 14.8698 17.2483 14.8414 17.1681 14.8418C16.6563 14.8456 16.1447 14.8435 15.6329 14.8437C15.603 14.8437 15.5734 14.8471 15.5293 14.8498C15.5594 14.8949 15.5813 14.9292 15.6047 14.9624C16.8374 16.7072 18.0703 18.4517 19.3027 20.1966C20.6977 22.1717 22.0925 24.1469 23.4852 26.1239C23.5278 26.1843 23.5729 26.1999 23.6406 26.1995C24.1488 26.1974 24.6571 26.1985 25.1655 26.1981C25.1981 26.1985 25.2313 26.1953 25.2783 26.193Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+                                <!-- linkedin -->
+                                <a href="https://www.linkedin.com/shareArticle?mini=true&url=<?php the_permalink(); ?>"
+                                    target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                                        fill="none">
+                                        <circle cx="20" cy="20" r="20" fill="#0A66C2" />
+                                        <path
+                                            d="M23.0493 16.7368C24.3056 16.7368 25.5104 17.2359 26.3987 18.1242C27.2871 19.0125 27.7861 20.2173 27.7861 21.4736V26.9999H24.6282V21.4736C24.6282 21.0549 24.4619 20.6533 24.1658 20.3572C23.8697 20.061 23.4681 19.8947 23.0493 19.8947C22.6306 19.8947 22.2289 20.061 21.9328 20.3572C21.6367 20.6533 21.4704 21.0549 21.4704 21.4736V26.9999H18.3125V21.4736C18.3125 20.2173 18.8116 19.0125 19.6999 18.1242C20.5882 17.2359 21.793 16.7368 23.0493 16.7368Z"
+                                            fill="white" />
+                                        <path d="M15.1579 17.5261H12V26.9997H15.1579V17.5261Z" fill="white" />
+                                        <path
+                                            d="M13.5789 15.1579C14.451 15.1579 15.1579 14.451 15.1579 13.5789C15.1579 12.7069 14.451 12 13.5789 12C12.7069 12 12 12.7069 12 13.5789C12 14.451 12.7069 15.1579 13.5789 15.1579Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
+
+                                <a href="https://www.pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>"
+                                    target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                                        fill="none">
+                                        <circle cx="20" cy="20" r="20" fill="#CB2027" />
+                                        <path
+                                            d="M20.0076 11C15.0328 11 11 15.0261 11 19.9926C11 23.8043 13.3724 27.0608 16.7231 28.3707C16.641 27.6605 16.5752 26.5647 16.7523 25.7878C16.9154 25.0843 17.8049 21.317 17.8049 21.317C17.8049 21.317 17.5383 20.777 17.5383 19.9849C17.5383 18.734 18.2648 17.8017 19.1691 17.8017C19.94 17.8017 20.3111 18.3793 20.3111 19.0677C20.3111 19.8372 19.822 20.9921 19.5621 22.0654C19.3473 22.9609 20.0143 23.6935 20.8964 23.6935C22.498 23.6935 23.7287 22.006 23.7287 19.5781C23.7287 17.4241 22.1796 15.9219 19.9628 15.9219C17.3982 15.9219 15.8927 17.8389 15.8927 19.8225C15.8927 20.592 16.1896 21.4214 16.5597 21.8731C16.6347 21.961 16.6425 22.0426 16.6199 22.1312C16.553 22.4124 16.3977 23.0266 16.3674 23.1528C16.3305 23.3156 16.2336 23.3521 16.0632 23.2713C14.9363 22.7457 14.2317 21.1099 14.2317 19.7852C14.2317 16.9502 16.2924 14.3455 20.1847 14.3455C23.3061 14.3455 25.737 16.5663 25.737 19.5416C25.737 22.5168 23.7801 25.1374 21.0665 25.1374C20.1544 25.1374 19.2941 24.6635 19.0057 24.101C19.0057 24.101 18.5536 25.8177 18.4423 26.2399C18.2426 27.0242 17.6933 28.0016 17.3228 28.601C18.1687 28.859 19.0589 29 19.9928 29C24.9676 29 29.0004 24.9739 29.0004 20.0074C29.0148 15.0261 24.9824 11 20.0076 11Z"
+                                            fill="white" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Next and Previous Post -->
                     <div class="flex flex-col lg:flex-row justify-between gap-4 pt-20">
-                        <?php 
+                        <?php
                         $get_prev = get_previous_post();
-                        if(!empty($get_prev)):
-                            $get_prev_thumbnail = get_the_post_thumbnail($get_prev->ID,'thumbnail', ['class'=>'h-full w-full object-cover rounded-md']);
+                        if (!empty($get_prev)):
+                            $get_prev_thumbnail = get_the_post_thumbnail($get_prev->ID, 'thumbnail', ['class' => 'h-full w-full object-cover rounded-md']);
                         ?>
 
-                        <!-- Previous Post Card -->
-  
-                        <div
-                            class="flex w-full h-auto items-center border border-[rgba(20,33,55,0.14)] bg-transparent p-4 gap-4">
-                            <!-- Image -->
-                            <div class="w-24 h-28 flex-shrink-0">
-                                <a href="<?php echo get_permalink($get_prev->ID)?>">
-                                <?php echo $get_prev_thumbnail?>
+                            <!-- Previous Post Card -->
+
+                            <div
+                                class="flex w-full h-auto items-center border border-[rgba(20,33,55,0.14)] bg-transparent p-4 gap-4">
+                                <!-- Image -->
+                                <div class="w-24 h-28 flex-shrink-0">
+                                    <a href="<?php echo get_permalink($get_prev->ID) ?>">
+                                        <?php echo $get_prev_thumbnail ?>
+                                    </a>
+                                </div>
+                                <!-- Text Section -->
+                                <a href="<?php echo get_permalink($get_prev->ID) ?>">
+                                    <div class="flex flex-col justify-center gap-2">
+                                        <div
+                                            class="flex items-center gap-2 text-sm font-medium uppercase text-[rgba(20,33,55,0.70)] font-poppins">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
+                                                viewBox="0 0 14 14">
+                                                <path d="M13 7H1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M7 13L1 7L7 1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                            <?php echo esc_html('Previous Post', 'laundryclean'); ?>
+                                        </div>
+                                        <h4 class="text-[#142137] text-lg md:text-xl font-semibold leading-snug font-poppins">
+                                            <?php echo esc_html(wp_trim_words(get_the_title($get_prev->ID), 9)); ?>
+                                        </h4>
+                                    </div>
                                 </a>
                             </div>
-                            <!-- Text Section -->
-                            <a href="<?php echo get_permalink($get_prev->ID)?>">
-                            <div class="flex flex-col justify-center gap-2">
-                                <div
-                                    class="flex items-center gap-2 text-sm font-medium uppercase text-[rgba(20,33,55,0.70)] font-poppins">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
-                                        viewBox="0 0 14 14">
-                                        <path d="M13 7H1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M7 13L1 7L7 1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                    <?php echo esc_html('Previous Post', 'laundryclean');?>
-                                </div>
-                                <h4 class="text-[#142137] text-lg md:text-xl font-semibold leading-snug font-poppins">
-                                    <?php echo esc_html(wp_trim_words(get_the_title($get_prev->ID), 9));?>
-                                </h4>
-                            </div>
-                            </a>
-                        </div>
-                        <?php endif;?>
+                        <?php endif; ?>
 
                         <!-- Next Post Card -->
 
-                         <?php 
+                        <?php
                         $get_next = get_next_post();
-                        if(!empty($get_next)):
-                            $get_next_thumbnail = get_the_post_thumbnail($get_next->ID,'thumbnail', ['class'=>'h-full w-full object-cover rounded-md']);
+                        if (!empty($get_next)):
+                            $get_next_thumbnail = get_the_post_thumbnail($get_next->ID, 'thumbnail', ['class' => 'h-full w-full object-cover rounded-md']);
                         ?>
-                        <div
-                            class="flex w-full  h-auto items-center justify-end border border-[rgba(20,33,55,0.14)] bg-transparent p-4 gap-4">
-                            <!-- Text Section -->
-                          <a href="<?php echo get_permalink($get_prev->ID)?>">
-                            <div class="flex flex-col justify-center items-end gap-2">
-                                <div
-                                    class="flex items-center gap-2 text-sm font-medium uppercase text-[rgba(20,33,55,0.70)] font-poppins">
-                                    <?php echo __('Next Post', 'laundryclean') ?>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
-                                        viewBox="0 0 14 14">
-                                        <path d="M1 7H13" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                        <path d="M7 13L13 7L7 1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
+                            <div
+                                class="flex w-full  h-auto items-center justify-end border border-[rgba(20,33,55,0.14)] bg-transparent p-4 gap-4">
+                                <!-- Text Section -->
+                                <a href="<?php echo get_permalink($get_prev->ID) ?>">
+                                    <div class="flex flex-col justify-center items-end gap-2">
+                                        <div
+                                            class="flex items-center gap-2 text-sm font-medium uppercase text-[rgba(20,33,55,0.70)] font-poppins">
+                                            <?php echo __('Next Post', 'laundryclean') ?>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none"
+                                                viewBox="0 0 14 14">
+                                                <path d="M1 7H13" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path d="M7 13L13 7L7 1" stroke="#5B6473" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                            </svg>
+                                        </div>
+                                        <h4
+                                            class="text-[#142137] text-right text-lg md:text-xl font-semibold leading-snug font-poppins">
+                                            <?php echo esc_html(wp_trim_words(get_the_title($get_next->ID), 9)); ?>
+                                        </h4>
+                                    </div>
+                                </a>
+                                <!-- Image -->
+                                <div class="w-24 h-28 flex-shrink-0">
+                                    <a href="<?php echo get_permalink($get_prev->ID) ?>">
+                                        <?php echo $get_next_thumbnail ?>
+                                    </a>
                                 </div>
-                                <h4
-                                    class="text-[#142137] text-right text-lg md:text-xl font-semibold leading-snug font-poppins">
-                                    <?php echo esc_html(wp_trim_words(get_the_title($get_next->ID), 9));?>
-                                </h4>
                             </div>
-                          </a>
-                            <!-- Image -->
-                            <div class="w-24 h-28 flex-shrink-0">
-                                 <a href="<?php echo get_permalink($get_prev->ID)?>">
-                                 <?php echo $get_next_thumbnail?>
-                                 </a>
-                            </div>
-                        </div>
-                        <?php endif;?>
+                        <?php endif; ?>
 
                     </div>
 
 
                     <!-- Comments Section-->
-                    <div class="comment-area w-full flex flex-col gap-6 md:gap-[24px] py-12 md:py-[85px]">
-                        <!-- heading -->
-                        <div class="comment-heading">
-                            <h1
-                                class="text-[#142137] font-poppins text-3xl md:text-[44px] font-semibold leading-relaxed md:leading-[64px] tracking-tight md:tracking-[-0.88px]">
-                                2 Comments</h1>
-                        </div>
+                    <?php if (comments_open()): ?>
+                        <div class="comment-area w-full flex flex-col gap-6 md:gap-[24px] py-12 md:py-[85px]">
+                            <?php
+                            $comments_count = get_comments_number();
+                            if (comments_open()) :
+                                if ($comments_count == 0) {
+                                    $comment_text = __('No Comments', 'laundryclean');
+                                } elseif ($comments_count == 1) {
+                                    $comment_text = __('1 Comment', 'laundryclean');
+                                } else {
+                                    $comment_text = $comments_count . ' ' . __('Comments', 'laundryclean');
+                                }
+                            ?>
+                                <!-- heading -->
+                                <div class="comment-heading">
+                                    <h1
+                                        class="text-[#142137] font-poppins text-3xl md:text-[44px] font-semibold leading-relaxed md:leading-[64px] tracking-tight md:tracking-[-0.88px]">
+                                        <?php echo esc_html($comment_text); ?></h1>
+                                </div>
+                            <?php endif; ?>
 
-                        <!-- Comment Wrapper -->
-                        <div class="w-full space-y-6">
+                            <!-- Comment Wrapper -->
+                             <?php
+                                $parent_comments = get_comments([
+                                    'post_id' => get_the_ID(),
+                                    'status' => 'approve',
+                                    'orderby' => 'comment_date',
+                                    'order' => 'ASC',
+                                    'parent' => 0,
+                                ]);
+                                ?>
+                            <?php if ($parent_comments): ?>
+                                
+                            <div class="w-full space-y-6">
+                                         <!-- comment start -->
+                                    <?php foreach ($parent_comments as $comment): ?>
+                                        <div class="w-full border-b border-b-[rgba(28,28,28,0.14)] pb-2.5">
+                                            <!-- Top Row: Image + Info | Reply Button -->
+                                            <div class="flex flex-col sm:flex-row justify-between items-start md:items-center mb-3 gap-3"
+                                                id="comment-<?php echo $comment->comment_ID; ?>">
 
-                            <!-- comment -->
-                            <div class="w-full border-b border-b-[rgba(28,28,28,0.14)] pb-2.5">
-                                <!-- Top Row: Image + Info | Reply Button -->
-                                <div class="flex flex-col sm:flex-row justify-between items-start md:items-center mb-3 gap-3">
-                                    <!-- Left: Image, Name, Date -->
-                                    <div
-                                        class="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-5 w-full sm:w-auto">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blogcomment1.png"
-                                            alt="User"
-                                            class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[6px] object-cover" />
-                                        <div class="flex flex-col gap-1 sm:gap-[13px]">
-                                            <h4
-                                                class="text-[#142137] font-poppins text-[16px] sm:text-[18px] font-semibold not-italic leading-none">
-                                                Norman Gordon</h4>
+                                                <!-- Left: Image, Name, Date -->
+                                                <div
+                                                    class="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-5 w-full sm:w-auto">
+
+                                                    <?php echo get_avatar($comment, 90, '', $comment->comment_author, ['class' => 'w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[6px] object-cover']) ?>
+                                                    <div class="flex flex-col gap-1 sm:gap-[13px]">
+                                                        <h4
+                                                            class="text-[#142137] font-poppins text-[16px] sm:text-[18px] font-semibold not-italic leading-none">
+                                                            <?php echo esc_html($comment->comment_author); ?>
+                                                        </h4>
+                                                        <p
+                                                            class="text-[#616161] font-inter text-[14px] sm:text-[16px] font-medium not-italic leading-[26px]">
+                                                            <?php echo get_comment_date('F j, Y \a\t g:i a', $comment); ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Right: Reply Button -->
+                                                <div class="reply-btn self-end md:self-auto ml-auto md:ml-0">
+                                                    <button
+                                                        class="flex items-center gap-1 px-3 py-1.5 w-[91px] h-[30px] flex-shrink-0 border border-[rgba(28,28,28,0.1)] bg-transparent text-[14px] text-[#142137] hover:bg-gray-100 transition">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="10" viewBox="0 0 13 10"
+                                                            fill="none">
+                                                            <path
+                                                                d="M12.1615 10C11.953 10 11.7721 9.92334 11.6187 9.77002C11.4654 9.61669 11.3888 9.43578 11.3888 9.22726V7.11141C11.3888 6.51039 11.1772 5.9983 10.754 5.57513C10.3308 5.15196 9.81874 4.94038 9.21772 4.94038H2.63101L4.71005 7.01942C4.85724 7.16661 4.93083 7.3414 4.93083 7.54378C4.93083 7.74617 4.85111 7.92709 4.69165 8.08654C4.54446 8.23373 4.36354 8.30733 4.14889 8.30733C3.93424 8.30733 3.75332 8.23373 3.60613 8.08654L0.239182 4.71959C0.153322 4.63373 0.0919932 4.5448 0.0551959 4.45281C0.0183986 4.36082 0 4.26576 0 4.16763C0 4.06951 0.0183986 3.97445 0.0551959 3.88245C0.0919932 3.79046 0.153322 3.70153 0.239182 3.61567L3.62453 0.230324C3.77172 0.0831346 3.94957 0.0064736 4.15809 0.000340716C4.36661 -0.00579216 4.5506 0.0708688 4.71005 0.230324C4.85724 0.377513 4.93083 0.558433 4.93083 0.773084C4.93083 0.987734 4.85724 1.16865 4.71005 1.31584L2.63101 3.39489H9.21772C10.248 3.39489 11.125 3.75673 11.8487 4.48041C12.5724 5.20409 12.9342 6.08109 12.9342 7.11141V9.22726C12.9342 9.43578 12.8576 9.61669 12.7043 9.77002C12.5509 9.92334 12.37 10 12.1615 10Z"
+                                                                fill="#616161" />
+                                                        </svg>
+                                                        <span
+                                                            class="text-[rgba(20,33,55,0.7)] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[26px]">
+                                                            <?php
+                                                            comment_reply_link([
+                                                                'reply_text' => __('Reply', 'laundryclean'),
+                                                                'depth'      => 1,
+                                                                'max_depth'  => 3,
+                                                            ], $comment->comment_ID, get_the_ID());
+                                                            ?>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Bottom: Message -->
                                             <p
-                                                class="text-[#616161] font-inter text-[14px] sm:text-[16px] font-medium not-italic leading-[26px]">
-                                                March 23,2025 at 10:34 pm</p>
+                                                class="text-[rgba(20,33,55,0.7)] pl-[65px] sm:pl-[80px] mt-3 sm:mt-[20px] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[22px] sm:leading-[26px]">
+                                                <?php echo esc_html($comment->comment_content); ?>
+                                            </p>
+                                        </div>
+                                    <?php endforeach;
+                                    endif; ?>
+
+                                    <?php 
+                                    $replies = get_comments([
+                                        'post_id' => get_the_ID(),
+              'status' => 'approve',
+              'orderby' => 'comment_date',
+              'order' => 'ASC',
+              'parent' => $comment->comment_ID
+                                    ]);
+                                    ?>
+
+                                <!-- Comment Reply -->
+                                 <?php if($replies):
+                                    foreach($replies as $reply):
+                                    ?>
+                                <div class="w-full sm:ml-[10px] lg:ml-[80px] border-b border-b-[rgba(28,28,28,0.14)] pb-1.5" id=comment-<?php echo $reply->comment_ID; ?>>
+                                    <!-- Top Row: Image + Info | Reply Button -->
+                                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-3">
+                                        <!-- Left: Image, Name, Date -->
+                                        <div
+                                            class="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-5 w-full sm:w-auto">
+
+                                            <?php echo get_avatar($reply, 50,'','',['class'=>'w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[6px] object-cover']); ?>
+                                            
+                                            <div class="flex flex-col gap-1 sm:gap-[10px] pt-0 sm:pt-[5px]">
+                                                <h4
+                                                    class="text-[#142137] font-poppins text-[16px] sm:text-[18px] font-semibold not-italic leading-none">
+                                                    <?php echo esc_html($reply->comment_author); ?></h4>
+                                                <p
+                                                    class="text-[#616161] font-inter text-[14px] sm:text-[16px] font-medium not-italic leading-[26px]">
+                                                    <?php echo get_comment_date('F j, Y \a\t g:i a', $reply); ?></p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Right: Reply Button -->
+                                        <div class="reply-btn self-end sm:self-auto ml-auto sm:ml-0">
+                                            <button
+                                                class="flex items-center gap-1 px-3 py-1.5 w-[91px] h-[30px] flex-shrink-0 border border-[rgba(28,28,28,0.1)] bg-transparent text-[14px] text-[#142137] hover:bg-gray-100 transition">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="10" viewBox="0 0 13 10"
+                                                    fill="none">
+                                                    <path
+                                                        d="M12.1615 10C11.953 10 11.7721 9.92334 11.6187 9.77002C11.4654 9.61669 11.3888 9.43578 11.3888 9.22726V7.11141C11.3888 6.51039 11.1772 5.9983 10.754 5.57513C10.3308 5.15196 9.81874 4.94038 9.21772 4.94038H2.63101L4.71005 7.01942C4.85724 7.16661 4.93083 7.3414 4.93083 7.54378C4.93083 7.74617 4.85111 7.92709 4.69165 8.08654C4.54446 8.23373 4.36354 8.30733 4.14889 8.30733C3.93424 8.30733 3.75332 8.23373 3.60613 8.08654L0.239182 4.71959C0.153322 4.63373 0.0919932 4.5448 0.0551959 4.45281C0.0183986 4.36082 0 4.26576 0 4.16763C0 4.06951 0.0183986 3.97445 0.0551959 3.88245C0.0919932 3.79046 0.153322 3.70153 0.239182 3.61567L3.62453 0.230324C3.77172 0.0831346 3.94957 0.0064736 4.15809 0.000340716C4.36661 -0.00579216 4.5506 0.0708688 4.71005 0.230324C4.85724 0.377513 4.93083 0.558433 4.93083 0.773084C4.93083 0.987734 4.85724 1.16865 4.71005 1.31584L2.63101 3.39489H9.21772C10.248 3.39489 11.125 3.75673 11.8487 4.48041C12.5724 5.20409 12.9342 6.08109 12.9342 7.11141V9.22726C12.9342 9.43578 12.8576 9.61669 12.7043 9.77002C12.5509 9.92334 12.37 10 12.1615 10Z"
+                                                        fill="#616161" />
+                                                </svg>
+                                                <span
+                                                    class="text-[rgba(20,33,55,0.7)] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[26px]">
+                                                    <?php
+                                                            comment_reply_link([
+                                                                'reply_text' => __('Reply', 'laundryclean'),
+                                                                'depth'      => 1,
+                                                                'max_depth'  => 3,
+                                                            ], $reply->comment_ID, get_the_ID());
+                                                            ?>
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
 
-                                    <!-- Right: Reply Button -->
-                                    <div class="reply-btn self-end md:self-auto ml-auto md:ml-0">
-                                        <button
-                                            class="flex items-center gap-1 px-3 py-1.5 w-[91px] h-[30px] flex-shrink-0 border border-[rgba(28,28,28,0.1)] bg-transparent text-[14px] text-[#142137] hover:bg-gray-100 transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="10" viewBox="0 0 13 10"
-                                                fill="none">
-                                                <path
-                                                    d="M12.1615 10C11.953 10 11.7721 9.92334 11.6187 9.77002C11.4654 9.61669 11.3888 9.43578 11.3888 9.22726V7.11141C11.3888 6.51039 11.1772 5.9983 10.754 5.57513C10.3308 5.15196 9.81874 4.94038 9.21772 4.94038H2.63101L4.71005 7.01942C4.85724 7.16661 4.93083 7.3414 4.93083 7.54378C4.93083 7.74617 4.85111 7.92709 4.69165 8.08654C4.54446 8.23373 4.36354 8.30733 4.14889 8.30733C3.93424 8.30733 3.75332 8.23373 3.60613 8.08654L0.239182 4.71959C0.153322 4.63373 0.0919932 4.5448 0.0551959 4.45281C0.0183986 4.36082 0 4.26576 0 4.16763C0 4.06951 0.0183986 3.97445 0.0551959 3.88245C0.0919932 3.79046 0.153322 3.70153 0.239182 3.61567L3.62453 0.230324C3.77172 0.0831346 3.94957 0.0064736 4.15809 0.000340716C4.36661 -0.00579216 4.5506 0.0708688 4.71005 0.230324C4.85724 0.377513 4.93083 0.558433 4.93083 0.773084C4.93083 0.987734 4.85724 1.16865 4.71005 1.31584L2.63101 3.39489H9.21772C10.248 3.39489 11.125 3.75673 11.8487 4.48041C12.5724 5.20409 12.9342 6.08109 12.9342 7.11141V9.22726C12.9342 9.43578 12.8576 9.61669 12.7043 9.77002C12.5509 9.92334 12.37 10 12.1615 10Z"
-                                                    fill="#616161" />
-                                            </svg>
-                                            <span
-                                                class="text-[rgba(20,33,55,0.7)] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[26px]">Reply</span>
-                                        </button>
-                                    </div>
+                                    <!-- Bottom: Message -->
+                                    <p
+                                        class="text-[rgba(20,33,55,0.7)] pl-[65px] sm:pl-[80px] mt-3 sm:mt-[20px] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[22px] sm:leading-[26px]">
+                                        <?php echo esc_html($reply->comment_content);?>
+                                    </p>
                                 </div>
+                                <?php endforeach; endif;?>
 
-                                <!-- Bottom: Message -->
-                                <p
-                                    class="text-[rgba(20,33,55,0.7)] pl-[65px] sm:pl-[80px] mt-3 sm:mt-[20px] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[22px] sm:leading-[26px]">
-                                    Travel is more than just visiting places—it's about creating lasting memories, discovering
-                                    new
-                                    cultures, and
-                                    experiencing the extraordinary. From breathtaking landscapes to immersive adventures.
-                                </p>
                             </div>
 
-                            <!-- Comment Reply -->
-                            <div class="w-full sm:ml-[10px] lg:ml-[80px] border-b border-b-[rgba(28,28,28,0.14)] pb-1.5">
-                                <!-- Top Row: Image + Info | Reply Button -->
-                                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-3">
-                                    <!-- Left: Image, Name, Date -->
-                                    <div
-                                        class="flex flex-col xs:flex-row items-start xs:items-center gap-3 sm:gap-5 w-full sm:w-auto">
-                                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/blogcomment2.png"
-                                            alt="User"
-                                            class="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] rounded-[6px] object-cover" />
-                                        <div class="flex flex-col gap-1 sm:gap-[10px] pt-0 sm:pt-[5px]">
-                                            <h4
-                                                class="text-[#142137] font-poppins text-[16px] sm:text-[18px] font-semibold not-italic leading-none">
-                                                Norman Gordon</h4>
-                                            <p
-                                                class="text-[#616161] font-inter text-[14px] sm:text-[16px] font-medium not-italic leading-[26px]">
-                                                April 28,2025 at 08:37 pm</p>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right: Reply Button -->
-                                    <div class="reply-btn self-end sm:self-auto ml-auto sm:ml-0">
-                                        <button
-                                            class="flex items-center gap-1 px-3 py-1.5 w-[91px] h-[30px] flex-shrink-0 border border-[rgba(28,28,28,0.1)] bg-transparent text-[14px] text-[#142137] hover:bg-gray-100 transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="10" viewBox="0 0 13 10"
-                                                fill="none">
-                                                <path
-                                                    d="M12.1615 10C11.953 10 11.7721 9.92334 11.6187 9.77002C11.4654 9.61669 11.3888 9.43578 11.3888 9.22726V7.11141C11.3888 6.51039 11.1772 5.9983 10.754 5.57513C10.3308 5.15196 9.81874 4.94038 9.21772 4.94038H2.63101L4.71005 7.01942C4.85724 7.16661 4.93083 7.3414 4.93083 7.54378C4.93083 7.74617 4.85111 7.92709 4.69165 8.08654C4.54446 8.23373 4.36354 8.30733 4.14889 8.30733C3.93424 8.30733 3.75332 8.23373 3.60613 8.08654L0.239182 4.71959C0.153322 4.63373 0.0919932 4.5448 0.0551959 4.45281C0.0183986 4.36082 0 4.26576 0 4.16763C0 4.06951 0.0183986 3.97445 0.0551959 3.88245C0.0919932 3.79046 0.153322 3.70153 0.239182 3.61567L3.62453 0.230324C3.77172 0.0831346 3.94957 0.0064736 4.15809 0.000340716C4.36661 -0.00579216 4.5506 0.0708688 4.71005 0.230324C4.85724 0.377513 4.93083 0.558433 4.93083 0.773084C4.93083 0.987734 4.85724 1.16865 4.71005 1.31584L2.63101 3.39489H9.21772C10.248 3.39489 11.125 3.75673 11.8487 4.48041C12.5724 5.20409 12.9342 6.08109 12.9342 7.11141V9.22726C12.9342 9.43578 12.8576 9.61669 12.7043 9.77002C12.5509 9.92334 12.37 10 12.1615 10Z"
-                                                    fill="#616161" />
-                                            </svg>
-                                            <span
-                                                class="text-[rgba(20,33,55,0.7)] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[26px]">Reply</span>
-                                        </button>
-                                    </div>
+                            <!-- Write Comment -->
+                            <div class="write-comment-area mb-2 md:mb-[8px]">
+                                <!-- heading -->
+                                <div class="heading mb-3 md:mb-[14px]">
+                                    <h2
+                                        class="text-[#142137] font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-semibold leading-[1.3] md:leading-[64px] tracking-tight md:tracking-[-0.88px]">
+                                        <?php echo esc_html_e('Leave a Comment', 'laundryclean'); ?>
+                                    </h2>
                                 </div>
 
-                                <!-- Bottom: Message -->
-                                <p
-                                    class="text-[rgba(20,33,55,0.7)] pl-[65px] sm:pl-[80px] mt-3 sm:mt-[20px] font-poppins text-[14px] sm:text-[16px] font-normal not-italic leading-[22px] sm:leading-[26px]">
-                                    Travel is more than just visiting places—it's about creating lasting memories, discovering
-                                    new
-                                    cultures, and
-                                    experiencing the extraordinary. From breathtaking landscapes to immersive adventures.
-                                </p>
-                            </div>
+                                <?php
+                                comment_form([
+                                    // Input fields
+                                    'fields' => [
+                                        'author' =>
+                                        '<div class="flex flex-col sm:flex-row gap-4 sm:gap-[30px]">' .
+                                            '<div class="w-full sm:w-1/2 my-4">
+                    <label for="author" class="block mb-1 sm:mb-2 cursor-text">Your Name *</label>
+                    <input id="author" name="author" type="text" placeholder="Your Name"
+                        class="w-full h-10 sm:h-[50px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
+                        required />
+                </div>',
 
-                        </div>
-
-                        <!-- Write Comment -->
-                        <div class="write-comment-area mb-2 md:mb-[8px]">
-                            <!-- heading -->
-                            <div class="heading mb-3 md:mb-[14px]">
-                                <h2
-                                    class="text-[#142137] font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-[44px] font-semibold leading-[1.3] md:leading-[64px] tracking-tight md:tracking-[-0.88px]">
-                                    Leave a Comment
-                                </h2>
-                            </div>
-
-                            <form
-                                class="w-full mx-auto space-y-4 md:space-y-6 font-poppins text-sm sm:text-base text-[rgba(20,33,55,0.7)] leading-snug md:leading-[26px]">
-                                <div class="flex flex-col sm:flex-row gap-4 sm:gap-[30px]">
-                                    <!-- Name -->
-                                    <div class="w-full sm:w-1/2">
-                                        <label for="name" class="block mb-1 sm:mb-2 cursor-text">Your Name *</label>
-                                        <input id="name" type="text" placeholder="Your Name"
-                                            class="w-full h-10 sm:h-[50px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
-                                            required />
-                                    </div>
-
-                                    <!-- Email -->
-                                    <div class="w-full sm:w-1/2">
-                                        <label for="email" class="block mb-1 sm:mb-2 cursor-text">Your Email *</label>
-                                        <input id="email" type="email" placeholder="Your Email"
-                                            class="w-full h-10 sm:h-[50px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
-                                            required />
-                                    </div>
-                                </div>
-
-                                <!-- Comment textarea -->
-                                <div>
-                                    <label for="comment" class="block mb-1 sm:mb-2 cursor-text">Your Comment *</label>
-                                    <textarea id="comment" placeholder="Your Comment"
-                                        class="w-full h-32 sm:h-[210px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 py-2 sm:py-3 resize-none text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
-                                        required></textarea>
-                                </div>
-
-                                <!-- Checkbox with label -->
-                                <div class="flex items-start gap-2 -mt-1 sm:-mt-[16px]">
-                                    <input id="save-info" type="checkbox"
-                                        class="mt-1 w-3 h-3 sm:w-[14px] sm:h-[14px] border border-[rgba(20,33,55,0.1)] bg-transparent cursor-pointer rounded" />
-                                    <label for="save-info" class="cursor-pointer select-none text-xs sm:text-sm md:text-base">
-                                        Save my name, email, and website in this browser for the next time I comment.
-                                    </label>
-                                </div>
-
-                                <!-- Submit button with icon -->
-                                <div class="flex mt-4 sm:mt-[34px] items-center gap-4 sm:gap-6">
-                                    <button type="submit"
-                                        class="w-full sm:w-[207px] h-10 sm:h-[54px] px-4 sm:pl-[16px] rounded-[50px] border border-[rgba(20,33,55,0.2)] bg-[#142137] text-white font-medium leading-normal cursor-pointer flex items-center justify-center gap-2 sm:gap-3 hover:bg-[#0f1b2a] transition">
-                                        <span>Post Comment</span>
-                                        <span
-                                            class="w-6 h-6 sm:w-[34px] sm:h-[34px] rounded-[50px] bg-white flex items-center justify-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14"
-                                                fill="none">
-                                                <path d="M0.853516 7.16162L12.8535 7.16162" stroke="#142137" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="#142137"
-                                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </span>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
+                                        'email' =>
+                                        '<div class="w-full sm:w-1/2 my-4">
+                    <label for="email" class="block mb-1 sm:mb-2 cursor-text">Your Email *</label>
+                    <input id="email" name="email" type="email" placeholder="Your Email"
+                        class="w-full h-10 sm:h-[50px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
+                        required />
                 </div>
+                </div>',
+                                    ],
+
+                                    'comment_field' => '
+<div>
+    <textarea id="comment" name="comment" placeholder="Your Comment"
+        class="w-full h-32 sm:h-[210px] border border-[rgba(20,33,55,0.1)] bg-transparent px-3 sm:px-4 py-2 sm:py-3 resize-none text-[rgba(20,33,55,0.7)] placeholder:text-[rgba(20,33,55,0.7)] focus:outline-none rounded"
+        required></textarea>
+</div>',
+
+
+                                    // Submit button
+                                    'submit_button' =>
+                                    '<button type="submit" id="%2$s" class="w-full my-4 sm:w-[207px] h-10 sm:h-[54px] px-4 sm:pl-[16px] rounded-[50px] border border-[rgba(20,33,55,0.2)] bg-[#142137] text-white font-medium leading-normal cursor-pointer flex items-center justify-center gap-2 sm:gap-3 hover:bg-[#0f1b2a] transition">
+                <span>%4$s</span>
+                <span class="w-6 h-6 sm:w-[34px] sm:h-[34px] rounded-[50px] bg-white flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+                        <path d="M0.853516 7.16162L12.8535 7.16162" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </button>',
+
+                                    'label_submit' => 'Post Comment',
+                                ]);
+                                ?>
+                            </div>
+
+
+                        </div>
+                </div>
+
+            <?php endif; ?>
+
+            </div>
 
             </main>
     <?php
@@ -1007,4 +990,6 @@ $tag_link = get_tag_link( $tag_id );
 
 </section>
 
-<?php get_footer(); ?>
+<div class="mt-4">
+    <?php get_footer(); ?>
+</div>
