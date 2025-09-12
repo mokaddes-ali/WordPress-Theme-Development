@@ -30,7 +30,7 @@
                 $slider_rating          = get_post_meta(get_the_ID(), '_slider_rating', true) ?: 5;
                 $slider_rating_text     = get_post_meta(get_the_ID(), '_slider_rating_text', true) ?: '8k Clients Reviews.';
         ?>
-            <div class="hero-slick-single-item relative h-[385px] sm:h-[350px] md:h-[420px] lg:h-[500px]">
+            <div class="hero-slick-single-item relative w-full h-[30rem] sm:h-[40rem] md:h-[45rem] lg:h-[55rem] xl:h-[65rem] 2xl:h-[75rem] overflow-hidden flex items-center">
                 <!-- Background Image -->
                 <div>
                     <?php if ($slider_background_image) : ?>
