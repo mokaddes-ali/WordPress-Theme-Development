@@ -22,7 +22,7 @@
 ?>
 <!-- Blog Section -->
 <section class="blog-area bg-[#FFF] w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
-
+    <div class="custom-cotainer">
      <!-- Latest News Label -->
      <div
         class="w-[194px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)] py-2 px-3 font-poppins">
@@ -151,4 +151,5 @@
                 <h2>No Found Blog</h2>
                </div>
             <?php endif;?>
+      </div>
 </section>

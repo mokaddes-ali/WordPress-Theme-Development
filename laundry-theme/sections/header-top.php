@@ -7,15 +7,15 @@
 ?>
 
 <!-- Navbar Top -->
-<section class="header-top w-full bg-[#4375E7] h-[3.90rem] lg:h-[2.80rem] py-3">
-    <div class="custom-cotainer flex flex-col items-center flex-warp gap-2.5 sm:gap-3.5 lg:flex-row lg:justify-between">
+<section class="header-top w-full bg-[#4375E7] py-3">
+    <div class="custom-cotainer flex flex-wrap lg:flex-nowrap flex-col lg:flex-row items-center gap-2.5 sm:gap-3.5 lg:justify-between">
 
         <!-- left -->
-        <div class="follow-liink flex w-full justify-between lg:justify-start items-center lg:gap-[1.25rem]">
+        <div class="follow-liink flex flex-nowrap w-full justify-between lg:justify-start items-center lg:gap-[1.25rem]">
 
             <!-- Social Icons -->
-            <div class="social-icon flex items-center justify-center gap-1.5  xl:gap-[1.125rem]">
-                <h3 class="text-white font-poppins text-xs sm:text-sm  md:text-base font-medium leading-none">
+            <div class="social-icon flex flex-wrap items-center justify-center gap-1.5 xl:gap-[1.125rem]">
+                <h3 class="text-white font-poppins text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-none">
                     <?php echo esc_html_e('Follow Us:', 'laundryclean'); ?>
                 </h3>
                 <!-- Facebook -->
@@ -60,9 +60,9 @@
                     </svg>
                 </a>
             </div>
-
+            
             <!-- Location for mobile, sm, md device -->
-            <div class="location flex items-center gap-1 sm:gap-2 lg:gap-[0.4375rem] pl-2  border-white/25 lg:hidden">
+            <div class="location flex flex-wrap items-center gap-1 sm:gap-2 lg:gap-[0.4375rem] pl-2 border-white/25 lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16" fill="none">
                     <path
                         d="M0.141069 4.88781C1.62473 -1.63429 11.2874 -1.62676 12.7635 4.89534C13.6296 8.72124 10.3086 12.9009 8.22238 14.9042C6.70859 16.3653 6.19599 16.3653 4.67467 14.9042C2.59604 12.9009 -0.72503 8.71371 0.141069 4.88781Z"
@@ -72,19 +72,18 @@
                         fill="#4375E7" />
                 </svg>
                 <h3
-                    class="text-white font-poppins text-xs sm:text-sm lg:text-[0.9375rem] font-medium leading-none whitespace-nowrap">
+                    class="text-white font-poppins text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-none whitespace-nowrap">
                     <?php echo esc_html(get_theme_mod('company_address', 'Holland, London 7QU UK')); ?>
                 </h3>
             </div>
         </div>
 
         <!-- right -->
-        <div
-            class="contact-info relative flex flex-row items-center justify-center gap-0 sm:gap-3 md:gap-6 lg:gap-[1.25rem]">
+        <div class="contact-info flex flex-wrap md:flex-nowrap items-center justify-center gap-4 sm:gap-3 md:gap-6 lg:gap-[1.25rem]">
 
             <!-- Location  Location for lg or large device -->
             <div
-                class="location hidden lg:flex items-center gap-1 sm:gap-2 lg:gap-[0.4375rem] pr-[10px] border-r border-white/25">
+                class="location hidden lg:flex flex-wrap md:flex-nowrap items-center gap-1 sm:gap-2 lg:gap-[0.4375rem] pr-[10px] border-r border-white/25">
                 <svg xmlns="http://www.w3.org/2000/svg" width="13" height="16" viewBox="0 0 13 16" fill="none">
                     <path
                         d="M0.141069 4.88781C1.62473 -1.63429 11.2874 -1.62676 12.7635 4.89534C13.6296 8.72124 10.3086 12.9009 8.22238 14.9042C6.70859 16.3653 6.19599 16.3653 4.67467 14.9042C2.59604 12.9009 -0.72503 8.71371 0.141069 4.88781Z"
@@ -95,29 +94,28 @@
                 </svg>
 
                 <h3
-                    class="text-white font-poppins text-xs sm:text-sm lg:text-[0.9375rem] font-medium leading-none whitespace-nowrap">
+                    class="text-white font-poppins text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-none whitespace-nowrap">
                     <?php echo esc_html(get_theme_mod('company_address', 'Holland, London 7QU UK')); ?>
                 </h3>
             </div>
 
             <!-- Contact Number -->
-            <div
-                class="contact-number flex items-center gap-1 sm:gap-2 lg:gap-[0.4375rem] pl-2 sm:pr-2 border-r border-white/25">
+            <div class="contact-number flex flex-wrap md:flex-nowrap items-center sm:gap-2 lg:gap-[0.4375rem] sm:pr-2 border-r border-white/25">
                 <!-- svg -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="14" viewBox="0 0 16 16" fill="none">
                     <path
                         d="M15.9995 11.9791V14.3877C16.0004 14.6113 15.9545 14.8327 15.8648 15.0375C15.775 15.2424 15.6434 15.4263 15.4783 15.5775C15.3132 15.7286 15.1183 15.8437 14.906 15.9154C14.6938 15.987 14.4689 16.0136 14.2457 15.9935C11.7702 15.725 9.39235 14.8808 7.30312 13.5286C5.35937 12.2959 3.71141 10.6512 2.47627 8.71134C1.11669 6.61679 0.270593 4.23206 0.00652969 1.75036C-0.0135738 1.52834 0.0128649 1.30457 0.0841619 1.0933C0.155459 0.882034 0.270052 0.687898 0.420646 0.523253C0.57124 0.358607 0.754535 0.22706 0.958861 0.136987C1.16319 0.0469136 1.38407 0.000287778 1.60744 7.78413e-05H4.02086C4.41128 -0.00375708 4.78977 0.134222 5.0858 0.388297C5.38182 0.642373 5.57517 0.995207 5.62981 1.38103C5.73168 2.15185 5.92059 2.9087 6.19295 3.63713C6.30118 3.9245 6.32461 4.23682 6.26045 4.53707C6.19629 4.83732 6.04723 5.11292 5.83093 5.33121L4.80925 6.35087C5.95446 8.36092 7.62206 10.0252 9.6361 11.1682L10.6578 10.1485C10.8765 9.93264 11.1527 9.78387 11.4535 9.71984C11.7544 9.6558 12.0673 9.67918 12.3552 9.78721C13.0851 10.059 13.8435 10.2476 14.6158 10.3492C15.0066 10.4042 15.3635 10.6007 15.6186 10.9012C15.8737 11.2017 16.0093 11.5853 15.9995 11.9791Z"
                         fill="white" />
                 </svg>
                 <!-- Phone number link -->
                 <a href="tel:<?php echo esc_html(get_theme_mod('company_phone', '2349873543670')); ?>"
-                    class="text-white w-[10.75rem] font-poppins text-xs sm:text-sm lg:text-[0.9375rem] font-medium leading-none whitespace-nowrap">
+                    class="text-white font-poppins text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-none whitespace-nowrap">
                     <?php echo esc_html(get_theme_mod('company_phone', '(234) 987 - 354 - 3670')); ?>
                 </a>
             </div>
 
             <!-- Email -->
-            <div class="email pr-2 flex items-center gap-0.5 sm:gap-2 lg:gap-[0.375rem]">
+            <div class="email flex flex-wrap md:flex-nowrap items-center gap-0.5 sm:gap-2 lg:gap-[0.375rem]">
                 <!-- svg -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
                     <path
@@ -127,11 +125,10 @@
                         stroke-linejoin="round" />
                 </svg>
                 <a href="mailto:<?php echo get_theme_mod('company_email', 'example@gmail.com'); ?>"
-                    class="text-white font-poppins text-xs sm:text-sm lg:text-[1rem] font-medium leading-none whitespace-nowrap">
+                    class="text-white font-poppins text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-none whitespace-nowrap">
                     <?php echo esc_html__('Email:', 'laundryclean'); ?>
                     <?php echo esc_html(get_theme_mod('company_email', 'example@gmail.com')); ?>
                 </a>
-
             </div>
 
         </div>
