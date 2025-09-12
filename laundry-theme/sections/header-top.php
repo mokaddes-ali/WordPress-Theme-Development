@@ -2,7 +2,6 @@
 /**
  * Header Top Section
  *
- * @package LaundryTheme
  */
 ?>
 
