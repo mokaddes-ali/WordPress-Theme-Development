@@ -18,8 +18,8 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
 }
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('relative my-3 w-full h-auto flex-shrink-0 bg-[#EBEFF3]'); ?>>
-    <div class="relative w-full h-auto aspect-[1160/570]">
+<article id="post-<?php the_ID(); ?>" <?php post_class('relative w-full h-auto flex-shrink-0 bg-[#EBEFF3]'); ?>>
+    <div class="relative w-full h-[160px] sm:h-[200px] md:h-[240px] lg:h-[260px]">
         <?php if ($video_found): ?>
             <iframe class="w-full h-full aspect-video" src="<?php echo esc_url($video_url); ?>?autoplay=0" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -29,9 +29,10 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
     </div>
 
     <!-- Text Section -->
-    <div class="px-[41px] py-[42px] flex flex-col gap-[14px]">
-         <!-- First Row -->
-        <div class="flex flex-col sm:flex-wrap sm:flex-row  gap-4 md:gap-6 lg:gap-3">
+    <div class="flex flex-col gap-3 p-3">
+
+        <!-- First Row -->
+        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-5 lg:gap-4">
 
             <!-- Mobile device only -->
             <div class="w-full px-6 mt-2 flex justify-between sm:hidden">
@@ -60,17 +61,16 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
                                         fill="#1D92CD" />
                                 </svg>
                                 <a href="<?php esc_html(the_permalink()); ?>">
-                                    <?php
+                                     <?php
                     $categories = get_the_category();
                     if (!empty($categories)) {
                         echo esc_html($categories[0]->name);
                     }
                     ?>
                                 </a>
-                    
+                   
                 </div>
             </div>
-             
 
             <!-- Desktop Avatar and name -->
              <div class="hidden sm:flex items-center gap-2">
@@ -81,7 +81,7 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
             </div>
 
             <!-- Desktop Name -->
-            <h2 class="hidden sm:flex text-[#142137] font-poppins text-[18px] font-semibold leading-none">
+            <h2 class=" text-[#142137] font-poppins text-[18px] font-semibold leading-none">
                 <?php echo get_the_author(); ?>
             </h2>
             </div>
@@ -141,7 +141,7 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
                     }
                 ?>
                     <div class="flex items-center gap-1 text-[rgba(20,33,55,0.60)] font-poppins text-base font-medium">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
             <path d="M14.1752 12.8638L14.4872 15.3918C14.5672 16.0558 13.8552 16.5197 13.2872 16.1757L9.93546 14.1838C9.56749 14.1838 9.20752 14.1598 8.85554 14.1118C9.4475 13.4158 9.79947 12.5358 9.79947 11.5838C9.79947 9.31185 7.8316 7.47192 5.39976 7.47192C4.47182 7.47192 3.61588 7.73589 2.90392 8.19989C2.87992 7.99989 2.87192 7.79989 2.87192 7.59189C2.87192 3.95195 6.03171 1 9.93546 1C13.8392 1 16.999 3.95195 16.999 7.59189C16.999 9.75185 15.8871 11.6638 14.1752 12.8638Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             <path d="M9.79943 11.5836C9.79943 12.5356 9.44746 13.4156 8.8555 14.1116C8.06355 15.0716 6.80762 15.6875 5.39971 15.6875L3.31185 16.9275C2.95987 17.1435 2.5119 16.8475 2.5599 16.4395L2.75988 14.8636C1.68795 14.1196 1 12.9276 1 11.5836C1 10.1756 1.75196 8.93564 2.90388 8.19965C3.61583 7.73565 4.47177 7.47168 5.39971 7.47168C7.83156 7.47168 9.79943 9.31161 9.79943 11.5836Z" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -153,39 +153,53 @@ if (preg_match('/<iframe.*?src=["\'](.*?)["\'].*?<\/iframe>/', $content, $matche
         </div>
 
         <!-- Second Row - Title -->
-        <div class="text-[#142137] font-poppins text-[34px] font-semibold leading-[64px] tracking-[-0.68px]">
-            <h1>
-                <a href="<?php esc_html(the_permalink()); ?>">
-                    <?php echo esc_html(the_title()); ?>
-                </a>
-
-            </h1>
-
-        </div>
-
-        <!-- Third Row - Description -->
-        <div class="text-[rgba(20,33,55,0.70)] -mt-[8px] font-poppins text-[16px] font-normal leading-[26px]">
-            <?php
-            $content = get_the_content();
-            $content_text = preg_replace('/https?:\/\/(www\.)?youtube\.com\/watch\?v=[\w-]+/', '', $content);
-            echo esc_html(wp_trim_words($content_text, 45));
-            ?>
-        </div>
-
-        <!-- Fourth Row - Button -->
-        <div class="flex flex-col items-start gap-3 mt-[38px]">
-            <a href="<?php the_permalink(); ?>"
-                class="w-[173px] h-[54px] flex items-center gap-3 pl-[30px] py-[22px] rounded-full border border-[rgba(20,33,55,0.20)] bg-[#142137] text-white font-poppins text-[16px] font-medium">
-                <?php esc_html_e('Read More', 'laundryclean'); ?>
-                <div class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" fill="none">
-                        <path d="M0.853516 7.1615L12.8535 7.1615" stroke="#142137" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="#142137" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </div>
+        <h1 class="text-[#142137] font-poppins text-[24px] sm:text-[26px] lg:text-[30px] font-semibold leading-[38px] tracking-[-0.68px]">
+            <a href="<?php esc_html(the_permalink()); ?>">
+           <?php echo esc_html( wp_trim_words( get_the_title(), 15 ) ); ?>
             </a>
+        </h1>
+
+        <!-- Third Row - Excerpt -->
+        <div class="text-[rgba(20,33,55,0.70)] font-poppins text-[16px] font-normal leading-[22px]">
+<?php 
+$content = get_the_content(); 
+
+// ১️⃣ image, iframe, video ট্যাগ রিমুভ
+$content = preg_replace('/<img[^>]+\>|<iframe.*?<\/iframe>|<video.*?<\/video>/is', '', $content);
+
+// ২️⃣ শুধু plain URL লাইন রিমুভ (যেমন video link বা embed link)
+$content = preg_replace('/https?:\/\/[^\s]+/i', '', $content);
+
+// ৩️⃣ HTML ট্যাগ বাদ দিয়ে ২০ words show
+echo esc_html( wp_trim_words( wp_strip_all_tags( $content ), 20, '...' ) ); 
+?>
+
+
+        </div>
+
+        <!-- Fourth Row - Read More Button -->
+        <div class="flex flex-col items-start gap-3 pt-3">
+           <a href="<?php esc_html(the_permalink()); ?>"
+   class="relative w-[173px] h-[54px] flex items-center gap-3 pl-[30px] py-[22px] rounded-full border border-[rgba(20,33,55,0.20)] bg-[#142137] text-white font-poppins text-[16px] font-medium
+          overflow-hidden group">
+
+    <!-- Background Animation -->
+    <span class="absolute inset-0 bg-white group-hover:translate-x-0 -translate-x-full transition-transform duration-500 ease-in-out"></span>
+
+    <!-- Text + Icon -->
+    <span class="relative z-10 flex items-center gap-3 group-hover:text-black">
+        <?php esc_html_e('Read More', 'laundryclean'); ?>
+        <div class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white text-black group-hover:text-white group-hover:bg-[#142137] transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" fill="none"
+                 class="transition-colors duration-300 group-hover:stroke-white">
+                <path d="M0.853516 7.1615L12.8535 7.1615" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </span>
+</a>
 
         </div>
 

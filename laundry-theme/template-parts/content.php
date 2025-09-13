@@ -6,23 +6,23 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('w-full my-3 flex-shrink-0 bg-[#EBEFF3] mt-6'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('w-full bg-[#EBEFF3]'); ?>>
 
     <!-- Image Section -->
-    <div class="w-full h-auto aspect-[1160/570]">
+    <div class="w-full h-[160px] sm:h-[200px] md:h-[240px] lg:h-[260px]">
         <a href="<?php esc_html(the_permalink()); ?>">
         <?php if (has_post_thumbnail()) : ?>
-            <img src="<?php echo esc_url(get_the_post_thumbnail_url(null, 'full')); ?>"
+            <img src="<?php echo esc_url(get_the_post_thumbnail_url(null)); ?>"
                 alt="<?php echo esc_attr(get_the_title()); ?>" class="w-full h-full object-cover" />
         <?php endif; ?>
         </a>
     </div>
 
     <!-- Text Section -->
-    <div class="px-4 py-3 lg:px-8 lg:py-6 flex flex-col gap-[14px]">
+    <div class="flex flex-col gap-3 p-3">
 
         <!-- First Row -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 md:gap-6 lg:gap-3">
+        <div class="flex flex-col sm:flex-row items-center gap-3 md:gap-5 lg:gap-4">
 
             <!-- Mobile device only -->
             <div class="w-full px-6 mt-2 flex justify-between sm:hidden">
@@ -143,31 +143,41 @@
         </div>
 
         <!-- Second Row - Title -->
-        <h1 class="text-[#142137] font-poppins text-[34px] font-semibold leading-[64px] tracking-[-0.68px]">
+        <h1 class="text-[#142137] font-poppins text-[24px] sm:text-[26px] lg:text-[30px] font-semibold leading-[38px] tracking-[-0.68px]">
             <a href="<?php esc_html(the_permalink()); ?>">
             <?php esc_html(the_title()); ?>
             </a>
         </h1>
 
         <!-- Third Row - Excerpt -->
-        <div class="text-[rgba(20,33,55,0.70)] -mt-[8px] font-poppins text-[16px] font-normal leading-[26px]">
+        <div class="text-[rgba(20,33,55,0.70)] font-poppins text-[16px] font-normal leading-[22px]">
             <?php esc_html(the_excerpt()); ?>
         </div>
 
         <!-- Fourth Row - Read More Button -->
-        <div class="flex flex-col items-start gap-3 mt-[38px]">
-            <a href="<?php esc_html(the_permalink()); ?>"
-                class="w-[173px] h-[54px] flex items-center gap-3 pl-[30px] py-[22px] rounded-full border border-[rgba(20,33,55,0.20)] bg-[#142137] text-white font-poppins text-[16px] font-medium">
-                <?php esc_html_e('Read More', 'laundryclean'); ?>
-                <div class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" fill="none">
-                        <path d="M0.853516 7.1615L12.8535 7.1615" stroke="#142137" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="#142137"
-                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </div>
-            </a>
+        <div class="flex flex-col items-start gap-3 pt-3">
+           <a href="<?php esc_html(the_permalink()); ?>"
+   class="relative w-[173px] h-[54px] flex items-center gap-3 pl-[30px] py-[22px] rounded-full border border-[rgba(20,33,55,0.20)] bg-[#142137] text-white font-poppins text-[16px] font-medium
+          overflow-hidden group">
+
+    <!-- Background Animation -->
+    <span class="absolute inset-0 bg-white group-hover:translate-x-0 -translate-x-full transition-transform duration-500 ease-in-out"></span>
+
+    <!-- Text + Icon -->
+    <span class="relative z-10 flex items-center gap-3 group-hover:text-black">
+        <?php esc_html_e('Read More', 'laundryclean'); ?>
+        <div class="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-white text-black group-hover:text-white group-hover:bg-[#142137] transition-colors duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="12" viewBox="0 0 15 14" fill="none"
+                 class="transition-colors duration-300 group-hover:stroke-white">
+                <path d="M0.853516 7.1615L12.8535 7.1615" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M7.85352 13.1611L13.8535 7.16113L7.85352 1.16113" stroke="currentColor"
+                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </div>
+    </span>
+</a>
+
         </div>
 
     </div>
