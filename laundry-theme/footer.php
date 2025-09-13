@@ -16,19 +16,19 @@
     $terms_of_service_url = get_permalink(get_theme_mod('terms_of_service_page'));
 ?>
 
-<footer class="footer-area w-full font-poppins text-white px-[10%] lg:px-[5%] xl:px-[5%] 2xl:px-[8%] py-12 md:py-16 lg:py-[90px] bg-[#142137]">
+<footer class="footer-area w-full font-poppins text-white mx-auto px-[5%] lg:px-[7.5%] py-5 md:py-6 lg:py-8 bg-[#142137]">
 
     <!-- Only for mobile, sm,md,and lg device subscribe form and social icon -->
     <div class="w-full mb-10 ml-0 sm:-ml-6 px-6 lg:px-28 xl:hidden ">
         <!-- heading and social icon -->
         <div class="heading-social-icon mb-9 w-full flex justify-between items-center">
             <div class="heading">
-                <h3 class="text-white text-xl font-semibold tracking-[-0.4px]">
+                <h3 class="text-white text-[18px] font-semibold tracking-[-0.4px]">
                     <?php if($newsletter_title):?>
                         <?php echo esc_html($newsletter_title); ?>
                     <?php endif; ?>
                 </h3>
-                <p class="text-white/70 text-base font-normal leading-[26px]">
+                <p class="text-white/70 text-sm font-normal leading-[26px]">
                     <?php if($newsletter_description):?>
                         <?php echo esc_html($newsletter_description); ?>
                     <?php endif; ?>
@@ -87,14 +87,14 @@
         </form>
     </div>
 
-    <div class="ml-0 lg:ml-20 xl:ml-0  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 ">
+    <div class="ml-0 lg:ml-20 xl:ml-0  grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
         <!-- First Column -->
         <div class="w-full flex flex-col items-center sm:items-start gap-2">
             <?php if($footer_logo) : ?>
             <img src="<?php echo esc_url($footer_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>"
-                class="w-[183px] h-[40px] mb-4">
+                class="w-[183px] h-[40px] mb-2">
             <?php endif; ?>
-            <p class="text-base text-center sm:text-start leading-[26px] text-white/70 w-full mb-6">
+            <p class="text-base text-center sm:text-start leading-[26px] text-white/70 w-full mb-2">
                 <?php if($footer_description): ?>
                 <?php echo esc_html($footer_description); ?>
                 <?php endif; ?>
@@ -146,7 +146,7 @@
 
         <!-- Second Column -->
         <div class="w-full mt-4 sm:mt-4 lg:mt-0 flex items-center sm:items-start flex-col gap-5 ml-4">
-            <h3 class="text-center sm:text-start  w-full text-white text-[26px] lg:text-xl font-semibold tracking-[-0.4px]">
+            <h3 class="text-center sm:text-start  w-full text-white text-[20px] lg:text-[24px] font-semibold tracking-[-0.4px]">
                 <?php if($footer_menu1_title): ?>
                     <?php echo esc_html($footer_menu1_title); ?>
                 <?php endif; ?>
@@ -155,7 +155,7 @@
             wp_nav_menu(array(
                 'theme_location' => 'laundryclean_footer1_ourservice',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
+                    echo '<ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
                         <li>Laundry Service</li>
                         <li>Dry Cleaning</li>
                         <li>Ironing</li>
@@ -169,8 +169,8 @@
         </div>
 
         <!-- Third Column -->
-        <div class="w-full mt-4 sm:mt-4 lg:mt-0 flex items-center sm:items-start flex-col gap-5">
-            <h3 class="text-center sm:text-start  w-full text-white text-[26px] lg:text-xl font-semibold tracking-[-0.4px]">
+        <div class="w-full mt-2 sm:mt-3 lg:mt-0 flex items-center sm:items-start flex-col gap-3">
+            <h3 class="text-center sm:text-start  w-full text-white text-[20px] lg:text-[24px] font-semibold tracking-[-0.4px]">
                 <?php if($footer_menu2_title): ?>
                     <?php echo esc_html($footer_menu2_title); ?>
                 <?php endif; ?>
@@ -179,7 +179,7 @@
           wp_nav_menu(array(
                 'theme_location' => 'laundryclean_footer2_quicklinks',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
+                    echo '<ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
                         <li>About Us</li>
                         <li>Contact Us</li>
                         <li>Privacy Policy</li>
@@ -193,7 +193,7 @@
 
         <!-- Fourth Column -->
         <div class="w-full  mt-4 sm:mt-4 lg:mt-0 flex items-center sm:items-start flex-col gap-5">
-            <h3 class="text-center sm:text-start  w-full text-white text-[26px] lg:text-xl font-semibold tracking-[-0.4px]">
+            <h3 class="text-center sm:text-start  w-full text-white text-[20px] lg:text-[24px] font-semibold tracking-[-0.4px]">
                 <?php if($footer_menu3_title): ?>
                     <?php echo esc_html($footer_menu3_title); ?>
                 <?php endif; ?>
@@ -202,7 +202,7 @@
             wp_nav_menu(array(
                 'theme_location' => 'laundryclean_footer3_commercial_service',
                 'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[44px] grid grid-cols-2 gap-4 sm:grid-cols-1">
+                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
                         <li>Airbnb Laundry</li>
                         <li>Restaurant Laundry</li>
                         <li>Workwear Laundry</li>

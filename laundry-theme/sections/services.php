@@ -11,22 +11,24 @@
 ?>
 
 <!-- company service -->
-<section class="w-full mx-auto relative bg-[#ECF2FE] px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-6 md:py-10 xl:py-14 flex flex-col gap-[34px]">
+<section class="w-full mx-auto relative bg-[#ECF2FE] px-[5%] lg:px-[7.5%] py-5 md:py-6 lg:py-8 flex flex-col gap-3 sm:gap-4 lg:gap-6">
 
      <!-- Latest News Label -->
+    <div class="flex items-center justify-center md:justify-start">
      <div
-        class="w-[194px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)] py-2 px-3 font-poppins">
+        class="w-[150px] py-1.5 px-3 border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)]font-poppins">
         <span class="w-[5px] h-[5px] bg-[#142137] flex-shrink-0 aspect-square"></span>
         <?php if($services_title):
         echo esc_html($services_title);
             endif;
             ?>
     </div>
+</div>
 
     <!-- Heading and Button -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
          <h1
-             class="text-[#142137] font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight tracking-tight text-center md:text-left lg:leading-[64px] lg:tracking-[-1.08px] font-poppins max-w-[660px]">
+             class="text-[#142137] tex-start text-[22px] sm:text-[28px] xl:text-[38px] font-semibold leading-tight sm:leading-snug lg:leading-[48px] tracking-tight font-poppins max-w-[450px]">
              <?php if($services_sub_title):
              echo esc_html($services_sub_title);
             endif;
@@ -34,7 +36,7 @@
          </h1>
 
           <button
-    class="relative w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group overflow-hidden">
+    class="relative py-2 px-3 shrink-0 border border-[rgba(20,33,55,0.14)] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group overflow-hidden">
 
     <!-- Background animation -->
     <span
@@ -59,7 +61,7 @@
 
 
     <!-- Cards -->
-    <div class="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4 sm:px-0">
+    <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-0">
 
           
       <?php 
@@ -82,7 +84,7 @@
       ?>
         <!--Daynamic Card -->
         <div class="relative w-full flex flex-col items-center md:items-start gap-[30px] md:pr-4 md:border-r border-[rgba(20,33,55,0.14)] last:border-r-0">
-            <div class="image pt-9 pb-[22px]">
+            <div class="image py-4">
                   <?php if($services_icon): ?>
                     <a href="<?php the_permalink();?>">
                  <img src="<?php echo esc_url($services_icon); ?>"
@@ -91,23 +93,23 @@
                  <?php endif; ?>
                 
             </div>
-            <div class="card-body flex flex-col gap-[22px] items-center md:items-start">
+            <div class="card-body flex flex-col gap-4 items-center md:items-start">
                 <div class="group">
-                   <h1 class="text-[#142137] hover:text-[#4375E7]  font-poppins text-[24px] md:text-[30px] font-semibold leading-none tracking-[-0.48px] cursor-pointer">
+                   <h1 class="text-[#142137] hover:text-[#4375E7]  font-poppins text-[22px] md:text-[26px] font-semibold leading-none tracking-[-0.48px] cursor-pointer">
                     <a href="<?php the_permalink();?>">
-                  <?php echo esc_html($title); ?>
+                  <?php echo esc_html(wp_trim_words($title, 4)); ?>
                     </a>
                  </h1>
 
             <!-- Hover Image -->
-               <div class="hidden absolute top-[80%] group-hover:block pt-4">
+               <div class="hidden absolute top-[70%] group-hover:block">
                  <?php if($services_hover_image): ?>
                  <img src="<?php echo esc_url($services_hover_image); ?>"
                      alt="<?php echo esc_attr($title); ?>" class="w-[350px]" />
                  <?php endif; ?>
                 </div>
                </div>
-                <p class="text-[rgba(20,33,55,0.7)] text-center md:text-start font-poppins text-[16px] not-italic font-normal leading-[26px]">
+                <p class="text-[rgba(20,33,55,0.7)] text-center md:text-start font-poppins text-[14px] md:text-base not-italic font-normal leading-[26px]">
                    <?php 
 
 echo esc_html($trimmed); 

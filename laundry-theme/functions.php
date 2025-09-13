@@ -18,6 +18,8 @@ include_once get_template_directory() . '/inc/enqueue.php';
 include_once get_template_directory() . '/inc/CPT/slider.php';
 include_once get_template_directory() . '/inc/CPT/services.php';
 include_once get_template_directory() . '/inc/CPT/testimonial.php';
+include_once get_template_directory() . '/inc/CPT/team-member.php';
+
 
 // Include Customizer Settings
 include_once get_template_directory() . '/inc/customizer/top.header.php';

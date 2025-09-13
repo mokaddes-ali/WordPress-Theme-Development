@@ -6,21 +6,13 @@
  */
 
 $about_title = get_theme_mod('about_title', __('About Our Company', 'laundryclean'));
-
 $about_subtitle = get_theme_mod('about_subtitle', __('Laundry & Dry Cleaning Made Simple.', 'laundryclean'));
-
 $about_description = get_theme_mod('about_description', __('Revolutionized the way you think about dry cleaning and laundry. Our mission is simple: to make laundry day hassle-free. With our easy-to-use service, you can enjoy the convenience of professional dry cleaning and laundry.', 'laundryclean'));
-
 $about_button_text = get_theme_mod('about_button_text', __('Discover More', 'laundryclean'));
-
 $about_button_url = get_theme_mod('about_button_url', __('http://localhost/wordpress/', 'laundryclean'));
-
 $about_experience_year = get_theme_mod('about_experience_year', __('14', 'laundryclean'));
-
 $about_experience_year_text = get_theme_mod('about_experience_year_text', __('Years Experience', 'laundryclean'));
-
 $about_left_image = get_theme_mod('about_left_image', get_template_directory_uri() . '/assets/images/aboutleft.png');
-
 $about_right_image = get_theme_mod('about_right_image', get_template_directory_uri() . '/assets/images/aboutright.png');
 
 $about_first_counter = get_theme_mod('about_first_counter', __('86', 'laundryclean'));
@@ -34,181 +26,140 @@ $about_second_counter_text = get_theme_mod('about_second_counter_text', __('Clea
 $about_third_counter = get_theme_mod('about_third_counter', __('98', 'laundryclean'));
 $about_third_counter_suffix = get_theme_mod('about_third_counter_suffix', __('%', 'laundryclean'));
 $about_third_counter_text = get_theme_mod('about_third_counter_text', __('Company Award Winner', 'laundryclean'));
-
 ?>
 
-
-
 <!-- About Company -->
-<section class="w-full bg-[#FFF] mx-auto h-auto relative px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 flex flex-col md:flex-row gap-6 md:gap-6 lg:gap-[90px] 2xl:gap-52">
+<section class="w-full bg-[#FFF] mx-auto relative px-[5%] lg:px-[8%] 2xl:px-[10%] pt-5 md:pt-6 lg:pt-8 flex flex-col md:flex-row gap-8 md:gap-5 lg:gap-[50px] 2xl:gap-20">
 
-  <!-- about left -->
-  <div class="flex flex-col items-center justify-center md:items-start md:justify-start gap-2 w-full md:w-6/12 md:gap-3 2xl:gap-5">
+  <!-- About Left -->
+  <div class="flex flex-col items-center md:items-start gap-3 md:gap-4 2xl:gap-6 w-full md:w-6/12">
 
-    <div class=" w-auto lg:w-[208px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-[14px] sm:text-[14px] md:text-[16px] font-[500] leading-none text-[rgba(20,33,55,0.70)] py-2 px-[12px] font-poppins">
-      <!-- Dot -->
-      <span class="w-[5px] h-[5px] rounded-[10px] bg-[#142137] flex-shrink-0 aspect-square"></span>
-      <?php if($about_title):?>
-        <?php echo esc_html($about_title); ?>
-      <?php endif; ?>
+    <!-- Small Top Label -->
+    <div class="border border-[rgba(20,33,55,0.14)] flex items-center gap-2 text-[13px] sm:text-[14px] md:text-[15px] font-medium text-[rgba(20,33,55,0.70)] py-1.5 px-3 font-poppins">
+      <span class="w-[6px] h-[6px] rounded-full bg-[#142137] flex-shrink-0"></span>
+      <?php if($about_title): echo esc_html($about_title); endif; ?>
     </div>
 
-    <h1 class=" text-[#142137] w-full text-center md:text-start font-poppins text-[32px] sm:text-[40px] xl:text-[54px] font-semibold leading-[40px] sm:leading-[48px] md:leading-[56px] lg:leading-[64px] tracking-[-0.5px] sm:tracking-[-0.8px] lg:tracking-[-1.08px]">
-      <?php if($about_subtitle):?>
-        <?php echo esc_html($about_subtitle); ?>
-      <?php endif; ?>
+    <!-- Heading -->
+    <h1 class="text-[#142137] w-full text-center md:text-left font-poppins 
+              text-[22px] sm:text-[28px] xl:text-[38px] 
+              font-semibold leading-tight sm:leading-snug lg:leading-[48px] tracking-tight">
+      <?php if($about_subtitle): echo esc_html($about_subtitle); endif; ?>
     </h1>
-    <p class="text-[rgba(20,33,55,0.70)] text-center md:text-start font-poppins text-[14px] sm:text-[15px] md:text-[16px] font-normal leading-[22px] sm:leading-[24px] md:leading-[26px]">
-      <?php if($about_description):?>
-        <?php echo esc_html($about_description); ?>
-      <?php endif; ?>
+
+    <!-- Description -->
+    <p class="text-[rgba(20,33,55,0.70)] text-center md:text-left font-poppins 
+              text-[14px] sm:text-[15px] md:text-[16px] 
+              leading-relaxed max-w-[95%]">
+      <?php if($about_description): echo esc_html($about_description); endif; ?>
     </p>
 
-    <button class=" w-[160px] sm:w-[180px] md:w-[198px] h-[44px] sm:h-[50px] md:h-[54px] mt-[12px] sm:mt-[14px] md:mt-[16px] border border-[rgba(20,33,55,0.14)] flex items-center justify-center gap-[8px] sm:gap-[10px] flex-shrink-0 text-[#142137] font-poppins text-[13px] sm:text-[14px] md:text-[15px] font-medium leading-none">
+  <!-- Animated Button -->
+<a href="<?php echo esc_url($about_button_url); ?>" 
+   class="relative inline-flex items-center justify-center gap-2 
+          py-3 px-6 text-[13px] sm:text-[14px] md:text-[15px] font-poppins font-medium
+          overflow-hidden rounded-lg group border border-[rgba(20,33,55,0.14)]">
 
-      <a href="<?php echo esc_url($about_button_url); ?>">
-          <?php if($about_button_text):?>
-        <?php echo esc_html($about_button_text); ?>
-      <?php endif; ?>
-      </a>
-  
-      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-        <path d="M1 7.00049L13 7.00049" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8 13.0001L14 7.00012L8 1.00012" stroke="#142137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </button>
+  <!-- Background Animation -->
+  <span class="absolute inset-0 bg-[#4375E7] group-hover:bg-black 
+               -translate-x-full group-hover:translate-x-0 
+               transition-all duration-500 ease-in-out">
+  </span>
 
-    <!-- image and time -->
-    <div class="flex items-center mt-6">
+  <!-- Text + Icon -->
+  <span class="relative z-10 flex items-center gap-2 text-black group-hover:text-white transition-colors duration-300">
+    <?php if($about_button_text): echo esc_html($about_button_text); endif; ?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+      <path d="M1 7.00049L13 7.00049" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 13.0001L14 7.00012L8 1.00012" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </span>
+</a>
 
-      <!-- Image -->
-      <div class=" w-full h-[350px] md:w-[240px] md:h-[320px] lg:w-[280px] lg:h-[360px] xl:w-[320px] xl:h-[400px] 2xl:w-[360px] 2xl:h-[440px] object-cover ">
-        <?php if($about_left_image):?>
-          <img src="<?php echo esc_url($about_left_image); ?>" alt="about image" class="w-full h-full object-cover" />
+
+    <!-- Image + Card -->
+    <div class="relative">
+      <!-- Left Image -->
+      <div class="w-full h-[280px] sm:h-[300px] md:h-[260px] lg:h-[320px] overflow-hidden shadow-md">
+        <?php if($about_left_image): ?>
+          <img src="<?php echo esc_url($about_left_image); ?>" alt="about image" 
+               class="w-full h-full object-cover transition-transform duration-500 hover:scale-95" />
         <?php endif; ?>
       </div>
 
-      <!-- Experience Card (Smaller & Clean) -->
-<div class="w-[300px] md:w-[280px] lg:w-[320px] 
-     h-[200px] md:h-[220px] lg:h-[240px] 
-     -ml-[60px] sm:-ml-[80px] md:-ml-[100px] lg:-ml-[120px] 
-     flex-shrink-0 border border-[rgba(20,33,55,0.14)] 
-     bg-white text-[#142137] font-poppins relative 
-     p-3 sm:p-4 md:p-5 z-10 shadow-md rounded-xl">
+      <!-- Experience Card -->
+      <div class="absolute top-[40%] right-[-10%] sm:right-[-20%] md:right-[-50%] w-[150px] sm:w-[210px] md:w-[230px] lg:w-[250px] 
+                  h-[160px] sm:h-[180px] md:h-[200px] lg:h-[200px] bg-white border border-[rgba(7,11,19,0.14)] 
+                  shadow-xl p-4 sm:p-5 flex flex-col justify-center">
+        <!-- Top Circle -->
+        <div class="absolute top-6 right-[15%] sm:right-[8%]">
+          <div class="w-[60px] sm:w-[70px] lg:w-[80px] h-[60px] sm:h-[70px] lg:h-[80px] rounded-full bg-[#EBEFF3] flex items-center justify-center">
+          </div>
+          <h3 class="text-[#142137] ml-[20%] mt-[-80%] sm:-mt-[70%] md:-mt-[60%] max-w-[20px] font-poppins text-[12px] sm:text-[13px] lg:text-[14px] font-medium">
+              <?php if($about_experience_year_text): echo esc_html($about_experience_year_text); endif; ?>
+        </h3>
+        </div>
 
-  <!-- Top Right Circle with Text -->
-  <div class="absolute top-2 sm:top-3 left-16 sm:left-20 md:left-24 lg:left-28 
-              w-[90px] sm:w-[110px] lg:w-[130px] 
-              h-[55px] sm:h-[65px] lg:h-[75px] flex items-center relative">
-
-    <!-- Circle -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" viewBox="0 0 90 90" fill="none">
-      <circle cx="45" cy="45" r="45" fill="#EBEFF3" />
-    </svg>
-
-    <!-- Text Inside Same Container -->
-    <div class="absolute w-9 right-6 sm:right-8 md:right-9 lg:right-10 
-                text-[rgba(20,33,55,0.70)] font-poppins 
-                text-[12px] sm:text-[14px] lg:text-[15px] 
-                font-medium leading-[18px] sm:leading-[20px] lg:leading-[22px]">
-      <p> 
-        <?php if($about_experience_year_text):?>
-          <?php echo esc_html($about_experience_year_text); ?>
-        <?php endif; ?>
-      </p>
-    </div>
-  </div>
-
-  <!-- Large Center Number -->
-  <div class="counter absolute left-[16px] sm:left-[22px] md:left-[26px] lg:left-[32px] 
-              bottom-[60px] sm:bottom-[65px] md:bottom-[70px] lg:bottom-[75px] 
-              text-[80px] sm:text-[110px] md:text-[140px] lg:text-[160px] 
-              font-medium leading-[50px] sm:leading-[70px] md:leading-[80px] lg:leading-[90px] opacity-80"  
-              data-count="<?php if($about_experience_year):?>
-            <?php echo esc_html($about_experience_year); ?>
-           <?php endif; ?>" 
-           data-suffix=""> 0
-
-  </div>
-</div>
-
+        <!-- Number -->
+        <div class="absolute top-[20%] right-[50%] sm:right-[30%] counter text-[#142137] font-poppins font-semibold 
+                    text-[60px] sm:text-[80px] md:text-[100px] lg:text-[120px] leading-none opacity-90"
+             data-count="<?php if($about_experience_year) echo esc_html($about_experience_year); ?>">
+          0
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- About Right -->
-  <div class="about-right w-full items-center md:w-6/12 relative py-4 sm:pb-4 md:pt-12 lg:pt-16 2xl:pt-28 flex flex-col">
+  <div class="about-right w-full items-center justify-start md:justify-center md:w-6/12 relative flex flex-col h-[250px] sm:h-[300px] md:h-auto">
 
     <!-- circle text -->
-    <div class="text-circle flex flex-wrap justify-center gap-[15px] md:gap-[20px] lg:gap-[25px]">
-
-      <!-- first circle -->
-      <div class="w-[180px] h-[180px]  xl:w-[220px] xl:h-[220px] rounded-full border border-gray-300 flex flex-col items-center justify-center text-center py-[30px] sm:py-[40px] md:py-[50px] lg:py-[64px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[60px]">
-        <div class="text -mt-[4px] sm:-mt-[6px] lg:-mt-[8px]">
-         <h2 
-  class="counter text-[#142137] font-poppins text-[30px] sm:text-[40px] md:text-[45px] lg:text-[50px] 
-         font-semibold leading-[36px] sm:leading-[48px] md:leading-[54px] lg:leading-[60px] uppercase"
-  data-count="<?php echo $about_first_counter ? esc_html($about_first_counter) : ''; ?>" 
-  data-suffix="<?php echo $about_first_counter_suffix ? esc_html($about_first_counter_suffix) : ''; ?>"
->
-  60
-</h2>
-
-          <p class="text-[rgba(20,33,55,0.70)] font-poppins pt-[4px] sm:pt-[6px] lg:pt-[8px] text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-[16px] sm:leading-[18px] lg:leading-[22px] text-center min-w-[80px] sm:min-w-[100px] lg:min-w-[110px] break-words">
-            <?php if($about_first_counter_text):?>
-              <?php echo esc_html($about_first_counter_text); ?>
-            <?php endif; ?>
+    <div class="text-circle flex flex-wrap gap-[15px] md:gap-[20px] lg:gap-[25px] 2xl:pb-16">
+      <div class="grid grid-cols-3 gap-6 justify-items-center">
+        <!-- First Circle -->
+        <div class="rounded-full border border-gray-300 flex flex-col justify-center items-center 
+                    text-center w-[85px] h-[85px] sm:w-[110px] sm:h-[110px] md:w-[130px] md:h-[130px] 
+                    lg:w-[150px] lg:h-[150px] xl:w-[170px] xl:h-[170px] p-3 sm:p-4 lg:p-6 shadow-md bg-white">
+          <h2 class="counter text-[#142137] font-poppins text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold tracking-tight uppercase"
+              data-count="<?php echo esc_html($about_first_counter); ?>"
+              data-suffix="<?php echo esc_html($about_first_counter_suffix); ?>">0</h2>
+          <p class="text-[rgba(20,33,55,0.70)] font-poppins text-center text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] leading-tight max-w-[90px] mt-1 sm:mt-2">
+            <?php echo esc_html($about_first_counter_text); ?>
           </p>
         </div>
-      </div>
 
-      <!-- second circle -->
-      <div class="w-[180px] h-[180px] xl:w-[220px] xl:h-[220px] rounded-full border border-gray-300 flex flex-col items-center justify-center text-center py-[30px] sm:py-[40px] md:py-[50px] lg:py-[64px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[60px]">
-        <div class="text -mt-[4px] sm:-mt-[6px] lg:-mt-[8px]">
-        <h2 
-  class="counter text-[#142137] font-poppins text-[30px] sm:text-[40px] md:text-[45px] lg:text-[50px] 
-         font-semibold leading-[36px] sm:leading-[48px] md:leading-[54px] lg:leading-[60px] uppercase"
-  data-count="<?php echo $about_second_counter ? esc_html($about_second_counter) : ''; ?>"
-  data-suffix="<?php echo $about_second_counter_suffix ? esc_html($about_second_counter_suffix) : ''; ?>"
->
-  50
-</h2>
-
-          <p class="text-[rgba(20,33,55,0.70)] font-poppins pt-[4px] sm:pt-[6px] lg:pt-[8px] text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-[16px] sm:leading-[18px] lg:leading-[22px] text-center min-w-[90px] sm:min-w-[110px] lg:min-w-[130px] break-words">
-            <?php if($about_second_counter_text):?>
-              <?php echo esc_html($about_second_counter_text); ?>
-            <?php endif; ?>
+        <!-- Second Circle -->
+        <div class="rounded-full border border-gray-300 flex flex-col justify-center items-center 
+                    text-center w-[85px] h-[85px] sm:w-[110px] sm:h-[110px] md:w-[130px] md:h-[130px] 
+                    lg:w-[150px] lg:h-[150px] xl:w-[170px] xl:h-[170px] p-3 sm:p-4 lg:p-6 shadow-md bg-white">
+          <h2 class="counter text-[#142137] font-poppins text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold tracking-tight uppercase"
+              data-count="<?php echo esc_html($about_second_counter); ?>"
+              data-suffix="<?php echo esc_html($about_second_counter_suffix); ?>">0</h2>
+          <p class="text-[rgba(20,33,55,0.70)] font-poppins text-center text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] leading-tight max-w-[90px] mt-1 sm:mt-2">
+            <?php echo esc_html($about_second_counter_text); ?>
           </p>
         </div>
-      </div>
 
-      <!-- third circle -->
-      <div class="w-[180px] h-[180px] xl:w-[220px] xl:h-[220px] rounded-full border border-gray-300 flex flex-col items-center justify-center text-center py-[30px] sm:py-[40px] md:py-[50px] lg:py-[64px] px-[20px] sm:px-[30px] md:px-[40px] lg:px-[60px]">
-        <div class="text -mt-[4px] sm:-mt-[6px] lg:-mt-[8px]">
-          <h2 
-  class="counter text-[#142137] font-poppins text-[30px] sm:text-[40px] md:text-[45px] lg:text-[50px] 
-         font-semibold leading-[36px] sm:leading-[48px] md:leading-[54px] lg:leading-[60px] uppercase"
-  data-count="<?php if($about_third_counter) echo esc_html($about_third_counter); ?>" 
-  data-suffix="<?php if($about_third_counter_suffix) echo esc_html($about_third_counter_suffix); ?>"
->
-  70
-</h2>
-
-          <p class="text-[rgba(20,33,55,0.70)] font-poppins pt-[4px] sm:pt-[6px] lg:pt-[8px] text-[12px] sm:text-[14px] lg:text-[16px] font-medium leading-[16px] sm:leading-[18px] lg:leading-[22px] text-center min-w-[90px] sm:min-w-[120px] lg:min-w-[140px] break-words">
-            <?php if($about_third_counter_text):?>
-              <?php echo esc_html($about_third_counter_text); ?>
-            <?php endif; ?>
+        <!-- Third Circle -->
+        <div class="rounded-full border border-gray-300 flex flex-col justify-center items-center 
+                    text-center w-[85px] h-[85px] sm:w-[110px] sm:h-[110px] md:w-[130px] md:h-[130px] 
+                    lg:w-[150px] lg:h-[150px] xl:w-[170px] xl:h-[170px] p-3 sm:p-4 lg:p-6 shadow-md bg-white">
+          <h2 class="counter text-[#142137] font-poppins text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold tracking-tight uppercase"
+              data-count="<?php echo esc_html($about_third_counter); ?>"
+              data-suffix="<?php echo esc_html($about_third_counter_suffix); ?>">0</h2>
+          <p class="text-[rgba(20,33,55,0.70)] font-poppins text-center text-[10px] sm:text-[12px] md:text-[14px] lg:text-[15px] leading-tight max-w-[90px] mt-1 sm:mt-2">
+            <?php echo esc_html($about_third_counter_text); ?>
           </p>
         </div>
       </div>
     </div>
 
-    <!-- image -->
-    <div class="mt-6 ml-0 md:ml-6 md:mt-40 w-[300px] sm:w-[350px] md:w-[300px] lg:w-[400px] 2xl:w-[480px]">
-      <div class="image">
-        <?php if($about_right_image):?>
-          <img src="<?php echo esc_url($about_right_image); ?>" alt="about image" class="w-full h-full object-cover" />
-        <?php endif; ?>
-      </div>
-    </div>
+  <!-- Bottom Centered Image -->
+<div class="absolute bottom-0 left-1/2 w-[300px] sm:w-[350px] md:w-[300px] lg:w-[400px] 2xl:w-[480px] transform -translate-x-1/2">
+  <?php if($about_right_image): ?>
+    <img src="<?php echo esc_url($about_right_image); ?>" alt="about image" class="w-full h-full object-cover shadow-lg" />
+  <?php endif; ?>
+</div>
+
   </div>
 </section>

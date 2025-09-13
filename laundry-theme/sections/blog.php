@@ -21,27 +21,28 @@
 
 ?>
 <!-- Blog Section -->
-<section class="blog-area bg-[#FFF] w-full px-[2.5%] lg:px-[5%] 2xl:px-[8%] py-8 md:py-14 lg:py-20 flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
-    <div class="custom-cotainer">
+<section class="blog-area bg-[#FFF] w-full mx-auto px-[5%] lg:px-[7.5%] py-5 md:py-6 lg:py-8 flex flex-col items-center justify-center md:items-start md:justify-start gap-5">
+    <div class="flex items-center justify-center md:justify-start">
      <!-- Latest News Label -->
      <div
-        class="w-[194px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)] py-2 px-3 font-poppins">
+        class="border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-base font-medium leading-none text-[rgba(20,33,55,0.70)] max-w-[200px] py-2 px-3 font-poppins">
         <span class="w-[5px] h-[5px] bg-[#142137] flex-shrink-0 aspect-square"></span>
         <?php if($blog_title): ?>
         <?php echo esc_html($blog_title); ?>
         <?php endif; ?>
     </div>
+    </div>
 
     <!-- Heading and Button -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+    <div class="flex flex-col pt-2 md:flex-row justify-between items-center gap-6 w-full">
          <h1
-             class="text-[#142137] font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[54px] leading-tight tracking-tight text-center md:text-left lg:leading-[64px] lg:tracking-[-1.08px] font-poppins max-w-[660px]">
+             class="text-[#142137] font-semibold text-[22px] sm:text-[28px] xl:text-[38px] leading-tight tracking-tight text-center md:text-left lg:tracking-[-1.08px] font-poppins max-w-[550px]">
             <?php if($blog_sub_title): ?>
             <?php echo esc_html($blog_sub_title); ?>
             <?php endif; ?>
          </h1>
         <button
-    class="relative w-[188px] h-[44px] shrink-0 border border-[rgba(20,33,55,0.14)] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group overflow-hidden">
+    class="relative py-2 px-3 shrink-0 border border-[rgba(20,33,55,0.14)] font-poppins text-[15px] font-medium flex items-center justify-center gap-2 group overflow-hidden">
 
     <!-- Background animation -->
     <span
@@ -151,5 +152,4 @@
                 <h2>No Found Blog</h2>
                </div>
             <?php endif;?>
-      </div>
 </section>

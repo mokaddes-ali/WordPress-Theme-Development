@@ -204,6 +204,7 @@ jQuery(document).ready(function($){
 
 
 
+
   $('.gallery-container').slick({
         slidesToShow: 1,
         slidesToScroll: 1,

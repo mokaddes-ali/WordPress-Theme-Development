@@ -10,11 +10,11 @@
      
 ?>
 
-<section class="blog-area bg-[#ECF2FE] w-full flex flex-col py-8 md:py-12 items-center justify-center gap-5">
+<section class="blog-area bg-[#ECF2FE] w-full flex flex-col py-5 md:py-6 lg:py-8 items-center justify-center gap-5">
  <!-- heading -->
     <div class="heading px-[2.5%] lg:px-[5%] 2xl:px-[8%] flex flex-col gap-2 md:gap-4 justify-center items-center">
       <button
-        class="w-[222px] h-[29px] border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-[16px] font-[500] leading-none text-[rgba(20,33,55,0.70)] py-2 px-[12px] font-poppins">
+        class="border border-[rgba(20,33,55,0.14)] flex items-center gap-2 flex-shrink-0 text-[16px] font-[500] leading-none text-[rgba(20,33,55,0.70)] py-3 px-2 font-poppins">
         <!-- Dot -->
         <span class="w-[5px] h-[5px] bg-[#142137] flex-shrink-0 aspect-square"></span>
         <?php if($testimonial_title):
@@ -22,7 +22,7 @@
             endif;?>
       </button>
       <h1
-        class="text-[#142137] max-w-[563px] text-center font-poppins text-[40px] md:text-[44px] xl:text-[54px] not-italic font-semibold leading-[64px] tracking-[-1.08px]">
+        class="text-[#142137] max-w-[550px] text-center font-poppins text-[22px] sm:text-[28px] xl:text-[38px] leading-tight sm:leading-snug lg:leading-[48px] tracking-tight font-semibold">
         <?php if($testimonial_sub_title):
              echo esc_html($testimonial_sub_title);
             endif;?>
