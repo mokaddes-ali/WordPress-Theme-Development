@@ -163,7 +163,50 @@ jQuery(document).ready(function($){
     });
 
 
-   
+// team-member-slider
+  $(".team-member-slider").slick({
+        slidesToShow: 4,
+        autoplay: true,
+        autoplaySpeed: 1000,
+        pauseOnHover: false,
+        infinite: true,
+        dots: true,
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 1280, settings: {
+              arrows: false,
+              slidesToShow: 3
+            }
+          },
+          {
+      breakpoint: 1024, settings: {
+        arrows: false,
+        slidesToShow: 2
+      }
+    },
+          {
+      breakpoint: 768, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 576, settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        slidesToShow: 1
+      }
+    }
+  ]
+    });
+
 
    $(".blog-wrapper").slick({ 
     slidesToShow: 4,

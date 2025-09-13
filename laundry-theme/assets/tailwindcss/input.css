@@ -94,3 +94,57 @@ left logo and right logo settings
 .testimonial-items2 .slick-slide {
   @apply px-4 py-6;
 }
+
+.team-member-slider .slick-slide {
+  @apply px-4 py-6;
+}
+
+.team-member-slider .slick-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+  bottom: 0px;
+  left: 45%;
+}
+
+.team-member-slider .slick-dots li button {
+  display: none;
+}
+
+.team-member-slider .slick-dots li {
+  width: 10px;
+  height: 10px;
+  background-color: #142137;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.2;
+}
+
+.team-member-slider {
+  position: relative;
+}
+
+/* Active dot */
+.team-member-slider .slick-dots .slick-active{
+  width: 26px;
+  height: 26px;
+  background-color: #4375E7 !important;
+  opacity: 1;
+  position: relative;
+}
+
+/* Inner white circle for active dot */
+.team-member-slider .slick-dots .slick-active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+
