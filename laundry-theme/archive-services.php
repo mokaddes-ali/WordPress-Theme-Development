@@ -163,4 +163,6 @@ echo esc_html($trimmed);
     <?php laundryclean_all_pagenav(); ?>
 </section>
 
+<?php get_template_part('sections/team.member'); ?>
+
 <?php get_footer()?>

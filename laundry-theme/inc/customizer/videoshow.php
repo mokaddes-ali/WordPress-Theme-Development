@@ -6,158 +6,165 @@
 
 function laundryclean_video_section_customizer($customizer){
     //Settings
-    $customizer->add_section('_about_section', array(
+    $customizer->add_section('show_video_section', array(
         'title' => __('Show Video Settings', 'laundryclean'),
         'priority' => 90,
     ));
 
-    $customizer->add_setting('about_title', array(
+    $customizer->add_setting('show_video_title', array(
         'default' => __('About Our Company', 'laundryclean'),
     ));
-    $customizer->add_control('about_title', array(
+    $customizer->add_control('show_video_title', array(
         'label' => __('Show Video Title', 'laundryclean'),
-        'section' => '_about_section',
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
     //sub title
-    $customizer->add_setting('about_subtitle', array(
+    $customizer->add_setting('show_video_subtitle', array(
         'default' => __('Laundry & Dry Cleaning Made Simple.', 'laundryclean'),
     ));
-    $customizer->add_control('about_subtitle', array(
+    $customizer->add_control('show_video_subtitle', array(
         'label' => __('Show Video Subtitle', 'laundryclean'),
-        'section' => '_about_section',
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-    //button text
-    $customizer->add_setting('about_button_text', array(
-        'default' => __('Discover More', 'laundryclean'),
+    //video url
+    $customizer->add_setting('show_video_url', array(
+        'default'           => '',
     ));
-    $customizer->add_control('about_button_text', array(
+    $customizer->add_control('show_video_url', array(
         'label' => __('Show Video URL', 'laundryclean'),
-        'section' => '_about_section',
-        'type' => 'text',
-    ));
-    //button url
-    $customizer->add_setting('about_button_url', array(
-        'default' => __('http://localhost/wordpress/', 'laundryclean'),
-    ));
-    $customizer->add_control('about_button_url', array(
-        'label' => __('About Button URL', 'laundryclean'),
-        'section' => '_about_section',
+        'section' => 'show_video_section',
         'type' => 'url',
     ));
 
+    // Our processing system
+      
+    // processing system 1
+$customizer->add_setting('processing_system_image1',array(
+    'default'=> get_template_directory_uri() . '/assets/images/featureimg1.png',
+));
 
-    //left image
-    $customizer->add_setting('about_left_image', array(
-        'default' => get_template_directory_uri() . '/assets/images/aboutleft.png',
-    ));
-    $customizer->add_control(WP_Customize_Image_Control::class, array(
-        'label' => __('About Left Image', 'laundryclean'),
-        'section' => '_about_section',
-        'settings' => 'about_left_image',
-    ));
+$customizer->add_control(new WP_Customize_Image_Control($customizer, 'processing_system_image1',array(
+    'label'=> __('Processing System Image1','lessonlms'),
+    'section' => 'show_video_section',
+    'settings'=> 'processing_system_image1',
+)));
 
-    //right image
-    $customizer->add_setting('about_right_image', array(
-        'default' => get_template_directory_uri() . '/assets/images/aboutright.png',
+    //processing_system_title1
+    $customizer->add_setting('processing_system_title1', array(
+        'default' => __('You Order', 'laundryclean'),
     ));
-    $customizer->add_control(WP_Customize_Image_Control::class, array(
-        'label' => __('About Right Image', 'laundryclean'),
-        'section' => '_about_section',
-        'settings' => 'about_right_image',
-    ));
-
-    //First Counter
-    $customizer->add_setting('about_first_counter', array(
-        'default' => __('86', 'laundryclean'),
-    ));
-    $customizer->add_control('about_first_counter', array(
-        'label' => __('About First Counter', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_title1', array(
+        'label' => __('Processing System Title1', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-    //First counter suffix
-    $customizer->add_setting('about_first_counter_suffix', array(
-        'default' => __('K', 'laundryclean'),
+    //Processing System Subtitle1
+    $customizer->add_setting('processing_system_subtitle1', array(
+        'default' => __('Quickly book your laundry pickup online.', 'laundryclean'),
     ));
-    $customizer->add_control('about_first_counter_suffix', array(
-        'label' => __('About First Counter Suffix', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_subtitle1', array(
+        'label' => __('Processing System SubTitle1', 'laundryclean'),
+        'section' => 'show_video_section',
+        'type' => 'text',
+    ));
+      
+
+    // processing system 2
+    $customizer->add_setting('processing_system_image2',array(
+    'default'=> get_template_directory_uri() . '/assets/images/featureimg2.png',
+));
+
+$customizer->add_control(new WP_Customize_Image_Control($customizer, 'processing_system_image2',array(
+    'label'=> __('Processing System Image2','lessonlms'),
+    'section' => 'show_video_section',
+    'settings'=> 'processing_system_image2',
+)));
+
+    //processing_system_title2
+    $customizer->add_setting('processing_system_title2', array(
+        'default' => __('We Collect', 'laundryclean'),
+    ));
+    $customizer->add_control('processing_system_title2', array(
+        'label' => __('Processing System Title2', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-
-    //First Counter Text
-    $customizer->add_setting('about_first_counter_text', array(
-        'default' => __('Free Pickup & Delivery', 'laundryclean'),
+    //Processing System Subtitle2
+    $customizer->add_setting('processing_system_subtitle2', array(
+        'default' => __('No bag needed – just hand over your clothes!', 'laundryclean'),
     ));
-    $customizer->add_control('about_first_counter_text', array(
-        'label' => __('About First Counter Text', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_subtitle2', array(
+        'label' => __('Processing System SubTitle2', 'laundryclean'),
+        'section' => 'show_video_section',
+        'type' => 'text',
+    ));
+     
+       // processing system 3
+
+       $customizer->add_setting('processing_system_image3',array(
+    'default'=> get_template_directory_uri() . '/assets/images/featureimg3.png',
+));
+
+$customizer->add_control(new WP_Customize_Image_Control($customizer, 'processing_system_image3',array(
+    'label'=> __('Processing System Image3','lessonlms'),
+    'section' => 'show_video_section',
+    'settings'=> 'processing_system_image3',
+)));
+
+    //processing_system_title3
+    $customizer->add_setting('processing_system_title3', array(
+        'default' => __('We Clean', 'laundryclean'),
+    ));
+    $customizer->add_control('processing_system_title3', array(
+        'label' => __('Processing System Title3', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-    // Second Counter
-    $customizer->add_setting('about_second_counter', array(
-        'default' => __('140', 'laundryclean'),
+    //Processing System Subtitle3
+    $customizer->add_setting('processing_system_subtitle3', array(
+        'default' => __('Superior cleaning satisfaction assured.', 'laundryclean'),
     ));
-    $customizer->add_control('about_second_counter', array(
-        'label' => __('About Second Counter', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_subtitle3', array(
+        'label' => __('Processing System SubTitle3', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-    //second counter suffix
-    $customizer->add_setting('about_second_counter_suffix', array(
-        'default' => __('+', 'laundryclean'),
+       // processing system 4
+    $customizer->add_setting('processing_system_image4',array(
+    'default'=> get_template_directory_uri() . '/assets/images/featureimg4.png',
+));
+
+$customizer->add_control(new WP_Customize_Image_Control($customizer, 'processing_system_image4',array(
+    'label'=> __('Processing System Image4','lessonlms'),
+    'section' => 'show_video_section',
+    'settings'=> 'processing_system_image4',
+)));
+
+    //processing_system_title3
+    $customizer->add_setting('processing_system_title4', array(
+        'default' => __('We Deliver', 'laundryclean'),
     ));
-    $customizer->add_control('about_second_counter_suffix', array(
-        'label' => __('About Second Counter Suffix', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_title4', array(
+        'label' => __('Processing System Title4', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 
-    //Second Counter Text
-    $customizer->add_setting('about_second_counter_text', array(
-        'default' => __('Cleaning Expert Members', 'laundryclean'),
+    //Processing System Subtitle3
+    $customizer->add_setting('processing_system_subtitle4', array(
+        'default' => __('Pick a time, and we’ll deliver straight to you!', 'laundryclean'),
     ));
-    $customizer->add_control('about_second_counter_text', array(
-        'label' => __('About Second Counter Text', 'laundryclean'),
-        'section' => '_about_section',
-        'type' => 'text',
-    ));
-
-    // Third Counter
-    $customizer->add_setting('about_third_counter', array(
-        'default' => __('98', 'laundryclean'),
-    ));
-    $customizer->add_control('about_third_counter', array(
-        'label' => __('About Third Counter', 'laundryclean'),
-        'section' => '_about_section',
-        'type' => 'text',
-    ));
-
-    //Third counter suffix
-    $customizer->add_setting('about_third_counter_suffix', array(
-        'default' => __('%', 'laundryclean'),
-    ));
-    $customizer->add_control('about_third_counter_suffix', array(
-        'label' => __('About Third Counter Suffix', 'laundryclean'),
-        'section' => '_about_section',
-        'type' => 'text',
-    ));
-
-    //Third Counter Text
-    $customizer->add_setting('about_third_counter_text', array(
-        'default' => __('Company Award Winner', 'laundryclean'),
-    ));
-    $customizer->add_control('about_third_counter_text', array(
-        'label' => __('About Third Counter Text', 'laundryclean'),
-        'section' => '_about_section',
+    $customizer->add_control('processing_system_subtitle4', array(
+        'label' => __('Processing System SubTitle4', 'laundryclean'),
+        'section' => 'show_video_section',
         'type' => 'text',
     ));
 }
