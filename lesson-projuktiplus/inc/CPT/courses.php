@@ -45,3 +45,41 @@ function lessonlms_custome_courses_register(){
     register_post_type('courses', $args);
 }
 add_action('init', 'lessonlms_custome_courses_register');
+
+function lessonlms_courses_add_meta_box(){
+    add_meta_box(
+        'courses_details',
+        'Courses Details',
+        'lessonlms_couses_add_meta_box_callback',
+        'courses',
+        'normal',
+        'high'
+    );
+
+}
+add_action('add_meta_boxes', 'lessonlms_courses_add_meta_box');
+
+function lessonlms_couses_add_meta_box_callback($post){
+    $regular_price = get_post_meta($post->ID,'regular_price', true);
+    ?>
+    <div class="">
+        <label for="regular_price">Regular Price</label>
+        <input type="number" name="regular_price" id="regular_price" value="<?php echo esc_attr($regular_price);?>">
+    </div>
+    <?php
+}
+
+function lessonlms_courses_save_meta_data($post_id){
+    $fields = [
+         'regular_price'
+    ];
+    
+    foreach($fields as $field){
+        if(isset($_POST[$field])){
+        update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
+
+    }
+
+}
+}
+add_action('save_post_courses', 'lessonlms_courses_save_meta_data');

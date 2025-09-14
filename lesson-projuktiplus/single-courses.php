@@ -115,13 +115,12 @@ $title = get_the_title();
             <!-- left -->
             <div class="left-courses-image-details">
                 <div class="single-couses-image-box">
-                  <img src="<?php 
-    if ( has_post_thumbnail() ) {
-        echo esc_url( get_the_post_thumbnail_url() ); 
-    } else {
-        echo esc_url( get_template_directory_uri() . '/assets/images/default-image.png' ); 
-    }
-?>" alt="<?php echo esc_attr( get_the_title() ); ?>">
+                    <?php 
+                       if ( has_post_thumbnail() ): ?>
+
+                         <?php the_post_thumbnail('full');?>
+
+                      <?php endif;?>
 
                     <!----- absolute card box ----->
                     <div class="courses-card-box">

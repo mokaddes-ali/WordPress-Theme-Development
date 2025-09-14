@@ -147,9 +147,10 @@
       </div>
     </div>
 
-    <!-- second card -->
+
+   <!-- Second card -->
     <div class="relative w-full max-w-md mx-auto">
-      <!-- text and icon -->
+ <!-- text and icon -->
       <div class="card-icon-top w-full h-40 md:h-44 px-6 md:px-8 pt-8 md:pt-10 pb-16 md:pb-20 bg-[#ECF2FE] flex justify-between items-start rounded-t-lg">
         <h1 class="text-[#142137] font-poppins text-[18px] md:text-[24px] font-semibold leading-normal ">Dry Cleaning</h1>
         <div class="icon  w-12 h-10 md:w-14 md:h-12 flex-shrink-0 -mt-2 pl-2">
@@ -160,9 +161,9 @@
       </div>
 
       <!-- card content -->
-      <div class="card-content -mt-8 md:-mt-10 px-6 md:px-8">
-        <div class="w-full h-52 md:h-56 flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white pt-6 md:pt-8 px-5 md:px-6 pb-5 md:pb-6 rounded-b-lg">
-          <h2
+      <div class="card-content -mt-8 md:-mt-10 px-4 md:px-6">
+        <div class="flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white py-3 px-4 rounded-b-lg">
+            <h2
               class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -195,7 +196,44 @@
                   </defs>
                 </svg>
               </span>
-              Priced by the piece
+              Prices start from $24.78
+              per 5kg load
+            </h2>
+            <h2
+              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <g filter="url(#filter0_d_38_16)">
+                    <path
+                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
+                      fill="url(#paint0_linear_38_16)" />
+                  </g>
+                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <defs>
+                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha" />
+                      <feOffset dy="1" />
+                      <feGaussianBlur stdDeviation="1" />
+                      <feComposite in2="hardAlpha" operator="out" />
+                      <feColorMatrix type="matrix"
+                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
+                    </filter>
+                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.124731" stop-color="#22E17F" />
+                      <stop offset="0.809861" stop-color="#0EAC60" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+              Prices start from $24.78
+              per 5kg load
             </h2>
 
 
@@ -232,48 +270,13 @@
                   </defs>
                 </svg>
               </span>
-              Dresses priced from $14
-            </h2>
-
-
-            <h2
-              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[226px]">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <g filter="url(#filter0_d_38_16)">
-                    <path
-                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
-                      fill="url(#paint0_linear_38_16)" />
-                  </g>
-                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                  <defs>
-                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB">
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha" />
-                      <feOffset dy="1" />
-                      <feGaussianBlur stdDeviation="1" />
-                      <feComposite in2="hardAlpha" operator="out" />
-                      <feColorMatrix type="matrix"
-                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
-                    </filter>
-                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
-                      gradientUnits="userSpaceOnUse">
-                      <stop offset="0.124731" stop-color="#22E17F" />
-                      <stop offset="0.809861" stop-color="#0EAC60" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-              Suits priced from $23.50
+              Next day delivery available
+              for $8
             </h2>
         </div>
       </div>
     </div>
+
 
     <!-- third card -->
     <div class="relative w-full max-w-md mx-auto">
@@ -292,10 +295,10 @@
         </div>
       </div>
 
-      <!-- card content -->
-      <div class="card-content -mt-8 md:-mt-10 px-6 md:px-8">
-        <div class="w-full h-52 md:h-56 flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white pt-6 md:pt-8 px-5 md:px-6 pb-5 md:pb-6 rounded-b-lg">
-          <h2
+       <!-- card content -->
+      <div class="card-content -mt-8 md:-mt-10 px-4 md:px-6">
+        <div class="flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white py-3 px-4 rounded-b-lg">
+            <h2
               class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
               <span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -328,7 +331,44 @@
                   </defs>
                 </svg>
               </span>
-              Priced per piece
+              Prices start from $24.78
+              per 5kg load
+            </h2>
+            <h2
+              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <g filter="url(#filter0_d_38_16)">
+                    <path
+                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
+                      fill="url(#paint0_linear_38_16)" />
+                  </g>
+                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <defs>
+                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha" />
+                      <feOffset dy="1" />
+                      <feGaussianBlur stdDeviation="1" />
+                      <feComposite in2="hardAlpha" operator="out" />
+                      <feColorMatrix type="matrix"
+                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
+                    </filter>
+                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.124731" stop-color="#22E17F" />
+                      <stop offset="0.809861" stop-color="#0EAC60" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+              Prices start from $24.78
+              per 5kg load
             </h2>
 
 
@@ -365,44 +405,8 @@
                   </defs>
                 </svg>
               </span>
-              Prices start from $5 per
-              piece
-            </h2>
-
-            <h2
-              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[216px]">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <g filter="url(#filter0_d_38_16)">
-                    <path
-                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
-                      fill="url(#paint0_linear_38_16)" />
-                  </g>
-                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                  <defs>
-                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB">
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha" />
-                      <feOffset dy="1" />
-                      <feGaussianBlur stdDeviation="1" />
-                      <feComposite in2="hardAlpha" operator="out" />
-                      <feColorMatrix type="matrix"
-                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
-                    </filter>
-                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
-                      gradientUnits="userSpaceOnUse">
-                      <stop offset="0.124731" stop-color="#22E17F" />
-                      <stop offset="0.809861" stop-color="#0EAC60" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-              5 shirts for $15 deal
+              Next day delivery available
+              for $8
             </h2>
         </div>
       </div>
@@ -420,9 +424,9 @@
         </div>
       </div>
 
-      <!-- card content -->
-      <div class="card-content -mt-8 md:-mt-10 px-6 md:px-8">
-        <div class="w-full h-52 md:h-56 flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white pt-6 md:pt-8 px-5 md:px-6 pb-5 md:pb-6 rounded-b-lg">
+       <!-- card content -->
+      <div class="card-content -mt-8 md:-mt-10 px-4 md:px-6">
+        <div class="flex flex-col gap-4 md:gap-5 border border-[rgba(20,33,55,0.16)] bg-white py-3 px-4 rounded-b-lg">
             <h2
               class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
               <span>
@@ -456,7 +460,44 @@
                   </defs>
                 </svg>
               </span>
-              Polo Shirt on Hanger $8
+              Prices start from $24.78
+              per 5kg load
+            </h2>
+            <h2
+              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[130px] max-w-[226px]">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <g filter="url(#filter0_d_38_16)">
+                    <path
+                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
+                      fill="url(#paint0_linear_38_16)" />
+                  </g>
+                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                  <defs>
+                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
+                      color-interpolation-filters="sRGB">
+                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                        result="hardAlpha" />
+                      <feOffset dy="1" />
+                      <feGaussianBlur stdDeviation="1" />
+                      <feComposite in2="hardAlpha" operator="out" />
+                      <feColorMatrix type="matrix"
+                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
+                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
+                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
+                    </filter>
+                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
+                      gradientUnits="userSpaceOnUse">
+                      <stop offset="0.124731" stop-color="#22E17F" />
+                      <stop offset="0.809861" stop-color="#0EAC60" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </span>
+              Prices start from $24.78
+              per 5kg load
             </h2>
 
 
@@ -493,44 +534,8 @@
                   </defs>
                 </svg>
               </span>
-              Bed Sheet - All Sizes $10
-            </h2>
-
-            <h2
-              class="text-[rgba(20,33,55,0.70)] flex gap-[10px] font-poppins text-[16px] font-medium leading-[26px] [font-feature-settings:'case'_on,'cpsp'_on] min-w-[216px]">
-              <span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <g filter="url(#filter0_d_38_16)">
-                    <path
-                      d="M12 21C17.5228 21 22 16.5228 22 11C22 5.47715 17.5228 1 12 1C6.47715 1 2 5.47715 2 11C2 16.5228 6.47715 21 12 21Z"
-                      fill="url(#paint0_linear_38_16)" />
-                  </g>
-                  <path d="M16.5451 8.27295L10.9201 14.0484L8.36328 11.4232" stroke="white" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                  <defs>
-                    <filter id="filter0_d_38_16" x="0" y="0" width="24" height="24" filterUnits="userSpaceOnUse"
-                      color-interpolation-filters="sRGB">
-                      <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                        result="hardAlpha" />
-                      <feOffset dy="1" />
-                      <feGaussianBlur stdDeviation="1" />
-                      <feComposite in2="hardAlpha" operator="out" />
-                      <feColorMatrix type="matrix"
-                        values="0 0 0 0 0.0248264 0 0 0 0 0.541667 0 0 0 0 0.29306 0 0 0 0.3 0" />
-                      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_38_16" />
-                      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_38_16" result="shape" />
-                    </filter>
-                    <linearGradient id="paint0_linear_38_16" x1="2" y1="1" x2="22" y2="27.5"
-                      gradientUnits="userSpaceOnUse">
-                      <stop offset="0.124731" stop-color="#22E17F" />
-                      <stop offset="0.809861" stop-color="#0EAC60" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </span>
-              Baby clothes $4 (prices can
-              vary)
+              Next day delivery available
+              for $8
             </h2>
         </div>
       </div>

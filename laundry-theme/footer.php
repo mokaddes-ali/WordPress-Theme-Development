@@ -151,21 +151,14 @@
                     <?php echo esc_html($footer_menu1_title); ?>
                 <?php endif; ?>
             </h3>
-           <?php 
-            wp_nav_menu(array(
-                'theme_location' => 'laundryclean_footer1_ourservice',
-                'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
-                        <li>Laundry Service</li>
-                        <li>Dry Cleaning</li>
-                        <li>Ironing</li>
-                        <li>Alteration & Repairs</li>
-                        <li>Dry Cleaners</li>
-                        <li>Shirt Service</li>
-                    </ul>';
-                }
-            ));
-           ?>
+              <ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
+            <?php
+wp_nav_menu(array(
+    'theme_location' => 'laundryclean_footer1_ourservice',
+    'container' => false,
+));
+?>
+</ul>
         </div>
 
         <!-- Third Column -->
@@ -175,20 +168,14 @@
                     <?php echo esc_html($footer_menu2_title); ?>
                 <?php endif; ?>
             </h3>
+            <ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
           <?php
           wp_nav_menu(array(
                 'theme_location' => 'laundryclean_footer2_quicklinks',
-                'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
-                        <li>About Us</li>
-                        <li>Contact Us</li>
-                        <li>Privacy Policy</li>
-                        <li>Terms & Conditions</li>
-                        <li>FAQs</li>
-                    </ul>';
-                }
+                'fallback_cb' => false,
             ));
           ?>
+          </ul>
         </div>
 
         <!-- Fourth Column -->
@@ -198,19 +185,11 @@
                     <?php echo esc_html($footer_menu3_title); ?>
                 <?php endif; ?>
             </h3>
+             <ul class="text-white/70 mt-2 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
             <?php
             wp_nav_menu(array(
                 'theme_location' => 'laundryclean_footer3_commercial_service',
-                'fallback_cb' => function(){
-                    echo '<ul class="text-white/70 text-start text-base font-medium leading-[30px] grid grid-cols-2 gap-2 sm:grid-cols-1">
-                        <li>Airbnb Laundry</li>
-                        <li>Restaurant Laundry</li>
-                        <li>Workwear Laundry</li>
-                        <li>Cafe Laundry</li>
-                        <li>Hotel Laundry</li>
-                        <li>Gym Laundry</li>
-                    </ul>';
-                }
+                'fallback_cb' => false,
             ));
             ?>
         </div>
