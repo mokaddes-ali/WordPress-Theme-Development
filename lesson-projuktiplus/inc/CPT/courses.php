@@ -61,7 +61,12 @@ add_action('add_meta_boxes', 'lessonlms_courses_add_meta_box');
 
 function lessonlms_couses_add_meta_box_callback($post){
     $regular_price = get_post_meta($post->ID,'regular_price', true);
+    $rating = get_post_meta($post->ID,'rating', true);
     ?>
+     <div class="">
+        <label for="rating">Course Rating</label>
+        <input type="number" name="rating" id="rating" value="<?php echo esc_attr($rating);?>">
+    </div>
     <div class="">
         <label for="regular_price">Regular Price</label>
         <input type="number" name="regular_price" id="regular_price" value="<?php echo esc_attr($regular_price);?>">
@@ -71,7 +76,8 @@ function lessonlms_couses_add_meta_box_callback($post){
 
 function lessonlms_courses_save_meta_data($post_id){
     $fields = [
-         'regular_price'
+         'regular_price',
+         'rating'
     ];
     
     foreach($fields as $field){

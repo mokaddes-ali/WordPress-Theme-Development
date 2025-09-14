@@ -125,8 +125,12 @@ $title = get_the_title();
                     <!----- absolute card box ----->
                     <div class="courses-card-box">
                         <!-- prices -->
+                         <?php 
+                         $price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
+                         ?>
+                          
                         <div class="course-price-list">
-                            <h2>$200</h2>
+                            <h2><?php echo esc_html($price);?></h2>
                             <h3>$300</h3>
                             <p>30% off</p>
                         </div>

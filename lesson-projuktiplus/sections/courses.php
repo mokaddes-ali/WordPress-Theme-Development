@@ -3,8 +3,6 @@
     <div class="container">
         <div class="heading courses-heading">
             <?php
-
-
             // Courses Section Title
             $course_section_title = get_theme_mod(
                 'course_section_title',
@@ -42,7 +40,7 @@
                 while ($couses->have_posts()): $couses->the_post();
 
                     $rating = get_post_meta(get_the_ID(), "rating", true);
-                    $price  = get_post_meta(get_the_ID(), "price", true);
+                    $price  = get_post_meta(get_the_ID(), "regular_price", true);
 
 
                     $rating = !empty($rating) ? $rating : "0.00";
