@@ -41,8 +41,7 @@
 
                     $rating = get_post_meta(get_the_ID(), "rating", true);
                     $regular_price  = get_post_meta(get_the_ID(), "regular_price", true);
-
-
+                    
                     $rating = !empty($rating) ? $rating : "0.00";
                     $price = !empty($regular_price) ? $regular_price : '0.00';
 
