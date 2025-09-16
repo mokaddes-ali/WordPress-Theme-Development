@@ -31,7 +31,7 @@ function lessonlms_custome_courses_register(){
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-        'rewrite'            => array( 'slug' => 'courses' ),
+         'rewrite'            => array( 'slug' => 'courses'),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -62,8 +62,9 @@ add_action('add_meta_boxes', 'lessonlms_courses_add_meta_box');
 function lessonlms_couses_add_meta_box_callback($post){
     $regular_price = get_post_meta($post->ID,'regular_price', true);
     $rating = get_post_meta($post->ID,'rating', true);
+    $original_price = get_post_meta($post->ID,'original_price', true);
     ?>
-     <div class="">
+     <div class="" style="margin: 15px 0px;">
         <label for="rating">Course Rating</label>
         <input type="number" name="rating" id="rating" value="<?php echo esc_attr($rating);?>">
     </div>
@@ -71,13 +72,18 @@ function lessonlms_couses_add_meta_box_callback($post){
         <label for="regular_price">Regular Price</label>
         <input type="number" name="regular_price" id="regular_price" value="<?php echo esc_attr($regular_price);?>">
     </div>
+     <div class="" style="margin: 15px 0px;">
+        <label for="original_price">Original Price</label>
+        <input type="number" name="original_price" id="original_price" value="<?php echo esc_attr($original_price);?>">
+    </div>
     <?php
 }
 
 function lessonlms_courses_save_meta_data($post_id){
     $fields = [
          'regular_price',
-         'rating'
+         'rating',
+         'original_price'
     ];
     
     foreach($fields as $field){

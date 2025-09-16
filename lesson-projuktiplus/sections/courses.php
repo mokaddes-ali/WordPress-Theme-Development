@@ -40,11 +40,11 @@
                 while ($couses->have_posts()): $couses->the_post();
 
                     $rating = get_post_meta(get_the_ID(), "rating", true);
-                    $price  = get_post_meta(get_the_ID(), "regular_price", true);
+                    $regular_price  = get_post_meta(get_the_ID(), "regular_price", true);
 
 
                     $rating = !empty($rating) ? $rating : "0.00";
-                    $price = !empty($price) ? $price : '0.00';
+                    $price = !empty($regular_price) ? $regular_price : '0.00';
 
             ?>
                     <!----- course-1 ----->
@@ -98,8 +98,7 @@
 
                             <!----- price and btn ----->
                             <div class="price-btn">
-                                <span class="price">$<?php echo esc_html($price); ?></span>
-
+                                <span class="price">$<?php echo esc_html($regular_price); ?></span>
 
                                 <div class="yellow-bg-btn book-now">
                                     <a href="<?php echo esc_url(get_permalink()); ?>">

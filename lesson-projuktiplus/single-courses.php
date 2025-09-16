@@ -126,13 +126,30 @@ $title = get_the_title();
                     <div class="courses-card-box">
                         <!-- prices -->
                          <?php 
-                         $price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
+                         $regular_price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
+                         $original_price  = get_post_meta(get_the_ID(), "original_price", true) ?: '0.00';
+
+                         if($original_price > $regular_price && !empty($regular_price)){
+                            $discount_price = (($original_price - $regular_price) /$original_price ) *100;
+                             $discount_price = round($discount_price,2);
+
+                         }
+                   
                          ?>
                           
                         <div class="course-price-list">
-                            <h2><?php echo esc_html($price);?></h2>
-                            <h3>$300</h3>
-                            <p>30% off</p>
+                            <?php if($regular_price): ?>
+                            <h2>$<?php echo esc_html($regular_price);?>
+                            </h2>
+                            <?php endif;?>
+
+                             <?php if($original_price): ?>
+                            <h3>$<?php echo esc_html($original_price);?></h3>
+                             <?php endif;?>
+                           <?php if($discount_price):?>
+                            <p><?php echo esc_html($discount_price) . '%' . __('off', 'lessonlms');?>
+                           </p>
+                            <?php endif;?>
                         </div>
                         <div class="enroll-btn">
                             <a href="#">
