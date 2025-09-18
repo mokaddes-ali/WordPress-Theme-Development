@@ -1,5 +1,5 @@
 <div class="" style="margin-top: -70px;">
-<?php
+    <?php
 get_header();
 ?>
 </div>
@@ -61,73 +61,75 @@ $title = get_the_title();
 
 <section class="single-courses">
     <div class="container">
-         <!-- course title -->
-             <h2 class="course-heading">
-               <?php echo esc_html( get_the_title( $post_id ) ); ?>
-             </h2>
-             <div class="rating-student">
-                <div class="rating">
-                    <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                    fill="#FEA31B" />
-                            </svg>
-                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                    fill="#FEA31B" />
-                            </svg>
-                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                    fill="#FEA31B" />
-                            </svg>
-                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                    fill="#FEA31B" />
-                            </svg>
-                            <svg width="18" height="17" viewBox="0 0 18 17" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
-                                    fill="#FEA31B" />
-                            </svg>
-                    <h2><span>4.8 (1245 reviews)</span></h2>
-                </div>
+        <!-- course title -->
+        <h2 class="course-heading">
+            <?php echo esc_html( get_the_title( $post_id ) ); ?>
+        </h2>
+        <div class="rating-student">
+            <div class="rating">
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
+                        fill="#FEA31B" />
+                </svg>
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
+                        fill="#FEA31B" />
+                </svg>
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
+                        fill="#FEA31B" />
+                </svg>
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
+                        fill="#FEA31B" />
+                </svg>
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z"
+                        fill="#FEA31B" />
+                </svg>
+                <h2><span>4.8 (1245 reviews)</span></h2>
+            </div>
 
-                <div class="student">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-</svg>
+            <div class="student">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
 
-                    <h4>350 student enrolled</h4>
+                <h4>350 student enrolled</h4>
 
-                </div>
-                
-             </div>
+            </div>
+
+        </div>
         <div class="single-courses-wrapper">
-           
+
             <!-- left -->
             <div class="left-courses-image-details">
                 <div class="single-couses-image-box">
                     <?php 
                        if ( has_post_thumbnail() ): ?>
 
-                         <?php the_post_thumbnail('full');?>
+                    <?php the_post_thumbnail('full');?>
 
-                      <?php endif;?>
+                    <?php endif;?>
 
                     <!----- absolute card box ----->
                     <div class="courses-card-box">
                         <!-- prices -->
-                         <?php 
+                        <?php 
                          $regular_price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
                          $original_price  = get_post_meta(get_the_ID(), "original_price", true) ?: '0.00';
+                         $video_hours  = get_post_meta(get_the_ID(), "video_hours", true) ?: '0.00';
+                         $downlable_resource  = get_post_meta(get_the_ID(), "downlable_resource", true) ?: '0';
+                          $total_articles  = get_post_meta(get_the_ID(), "total_articles", true) ?: '0';
+                          $language  = get_post_meta(get_the_ID(), "language", true) ?: 'English';
+                          $sub_title_language  = get_post_meta(get_the_ID(), "sub_title_language", true) ?: 'English';
 
                          if($original_price > $regular_price && !empty($regular_price)){
                             $discount_price = (($original_price - $regular_price) /$original_price ) *100;
@@ -136,19 +138,19 @@ $title = get_the_title();
                          }
                    
                          ?>
-                          
+
                         <div class="course-price-list">
                             <?php if($regular_price): ?>
                             <h2>$<?php echo esc_html($regular_price);?>
                             </h2>
                             <?php endif;?>
 
-                             <?php if($original_price): ?>
+                            <?php if($original_price): ?>
                             <h3>$<?php echo esc_html($original_price);?></h3>
-                             <?php endif;?>
-                           <?php if($discount_price):?>
+                            <?php endif;?>
+                            <?php if($discount_price):?>
                             <p><?php echo esc_html($discount_price) . '%' . __('off', 'lessonlms');?>
-                           </p>
+                            </p>
                             <?php endif;?>
                         </div>
                         <div class="enroll-btn">
@@ -166,7 +168,11 @@ $title = get_the_title();
                             </svg>
 
                             <div class="text">
-                                <p>42 hours on-demand vedio </p>
+                                <?php if($video_hours): ?>
+                            <p>
+                                <?php echo esc_html($video_hours) . ' ' . __('hours on-demand vedio', 'lessonlms'); ?>
+                            </p>
+                            <?php endif;?>
                             </div>
                         </div>
 
@@ -178,8 +184,10 @@ $title = get_the_title();
                             </svg>
 
 
-                            <div class="text">
-                                <p>18 articles</p>
+                        <div class="text">
+                            <p>
+                                <?php echo esc_html($total_articles) . ' ' . __('articles', 'lessonlms'); ?>
+                            </p>
                             </div>
                         </div>
 
@@ -191,7 +199,11 @@ $title = get_the_title();
                             </svg>
 
                             <div class="text">
-                                <p>58 downable resource</p>
+                      
+                            <p>
+                                <?php echo esc_html($downlable_resource) . ' ' . __('downable resource', 'lessonlms'); ?>
+                            </p>
+                
                             </div>
                         </div>
 
@@ -203,7 +215,9 @@ $title = get_the_title();
                             </svg>
 
                             <div class="text">
-                                <p>Full lifetime Access</p>
+                                <p>
+                                    <?php echo esc_html_e('Full lifetime Access', 'lessonlms');?>
+                                </p>
                             </div>
                         </div>
                         <div class="courses-card-items item3">
@@ -215,7 +229,9 @@ $title = get_the_title();
 
 
                             <div class="text">
-                                <p>Access on mobile and TV</p>
+                                <p>
+                                    <?php echo esc_html_e('Access on mobile and TV', 'lessonlms');?>
+                                    </p>
                             </div>
                         </div>
                         <div class="courses-card-items item3">
@@ -227,7 +243,9 @@ $title = get_the_title();
 
 
                             <div class="text">
-                                <p>Certificate on completion</p>
+                                <p>
+                                    <?php echo esc_html_e('Certificate on completion', 'lessonlms');?>
+                                    </p>
                             </div>
                         </div>
 
@@ -264,8 +282,14 @@ $title = get_the_title();
                         </svg>
 
                         <div class="text">
-                            <span>Duration</span>
-                            <p>42 hours</p>
+                            <span>
+                                <?php echo esc_html_e('Duration', 'lessonlms')?>
+                            </span>
+                               <?php if($video_hours): ?>
+                            <p>
+                                <?php echo esc_html($video_hours) . ' ' . __('hours', 'lessonlms'); ?>
+                            </p>
+                            <?php endif;?>
                         </div>
                     </div>
 
@@ -276,10 +300,9 @@ $title = get_the_title();
                                 d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
                         </svg>
 
-
                         <div class="text">
-                            <span>Last Updated</span>
-                            <p>June 15, 2023</p>
+                            <span><?php echo esc_html_e('Last Updated', 'lessonlms');?></span>
+                            <p><?php echo get_the_modified_date('M j, Y')?></p>
                         </div>
                     </div>
 
@@ -296,8 +319,10 @@ $title = get_the_title();
 
 
                         <div class="text">
-                            <span>Language</span>
-                            <p>English</p>
+                            <span><?php echo esc_html_e('Language', 'lessonlms');?></span>
+                              <?php if($language):?>
+                            <p><?php echo esc_html($language);?></p>
+                            <?php endif;?>
                         </div>
                     </div>
 
@@ -310,8 +335,12 @@ $title = get_the_title();
                         </svg>
 
                         <div class="text">
-                            <span>Sub titles</span>
-                            <p>English, Spanish</p>
+                             <span><?php echo esc_html_e('Sub titles', 'lessonlms');?></span>
+                              <?php if($language):?>
+                            <p>
+                                <?php echo esc_html($sub_title_language);?>
+                            </p>
+                            <?php endif;?>
                         </div>
                     </div>
                 </div>
@@ -373,6 +402,6 @@ $title = get_the_title();
             </div>
         </div>
     </div>
- </section>
+</section>
 
 <?php get_footer(); ?>
