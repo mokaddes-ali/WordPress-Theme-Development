@@ -24,19 +24,12 @@ add_action('after_setup_theme','portfolioTheme_theme_register');
 
 
 
-/**
- * Enque Script and Style
- */
-
 function portfolioTheme_theme_enqueue_styles() {
     //Google Font
      wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,700;0,900;1,400&family=Sen:wght@400..800&display=swap', array(), null);
     // Slick CSS
     wp_enqueue_style('slick-css', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css', array(), '1.9.0');
 
-
-  // Tailwind CSS
-  wp_enqueue_style('tailwind-css', get_template_directory_uri() . '/assets/tailwindcss/output.css', array(), time());
 
   //Custom CSS  
   wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/custom-style.css', array(), time());
