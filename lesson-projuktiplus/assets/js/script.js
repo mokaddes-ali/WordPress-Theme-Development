@@ -115,4 +115,33 @@ jQuery(document).ready(function($){
     var left = tab.position().left;
     $('.tab-divider').css({width: width + 'px', left: left + 'px'});
   }
+
+
+    $('.star').on('mouseenter', function(){
+        var index = $(this).data('value');
+        $('.star').each(function(){
+            if($(this).data('value') <= index){
+                $(this).addClass('hovered');
+            } else {
+                $(this).removeClass('hovered');
+            }
+        });
+    });
+
+    // Remove hover effect when leaving
+    $('.star-rating').on('mouseleave', function(){
+        $('.star').removeClass('hovered');
+    });
+
+    // Click event for rating
+    $('.star').on('click', function(){
+        var value = $(this).data('value');
+        $('#rating-value').val(value);
+        $('.star').removeClass('selected');
+        $('.star').each(function(){
+            if($(this).data('value') <= value){
+                $(this).addClass('selected');
+            }
+        });
+    });
 });

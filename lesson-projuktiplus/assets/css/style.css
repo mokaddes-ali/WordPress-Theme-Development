@@ -2580,3 +2580,199 @@ single courses design
     color: #fff;
 }
 
+
+
+/* === Review Section: simplified, left-aligned, no card === */
+.courses-tab-content {
+  background: transparent; /* no card look */
+  padding: 24px 16px;
+  border-radius: 6px;
+  box-shadow: none; /* remove shadow */
+  max-width: 100%; /* full width */
+  margin: 20px auto;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Left aligned headings and text */
+.section-title,
+.form-title {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: left;   /* left aligned */
+  color: #111;
+  margin-bottom: 14px;
+}
+
+/* Form layout */
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch; /* full width inputs */
+  text-align: left;     /* ensure text left */
+}
+
+/* === Star Rating: left aligned, no card centering === */
+.star-rating {
+  direction: ltr;
+  display: flex;
+  justify-content: flex-start; /* left aligned stars */
+  gap: 8px;
+  font-size: 30px;
+  color: #ccc;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star {
+  transition: transform 0.15s ease, color 0.2s ease;
+}
+
+.star:hover,
+.star.hovered {
+  color: #ffde00; /* hover yellow */
+  transform: scale(1.15);
+}
+
+.star.selected {
+  color: #ffb400; /* selected color (darker yellow) */
+}
+
+/* === Form Fields: white background, black text, yellow border only === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #111;
+}
+
+/* Inputs and textarea: white bg, black text, yellow border only */
+.form-group input,
+.form-group textarea {
+  background: #ffffff;      /* white background */
+  color: #000000;           /* black text */
+  border: 2px solid #ffde00; /* yellow border */
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
+  transition: box-shadow 0.15s ease, transform 0.08s ease;
+  outline: none;
+}
+
+/* remove inner shadows/focus gimmicks, keep simple */
+.form-group input:focus,
+.form-group textarea:focus {
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+/* === Button: simple, match yellow border look === */
+.review-btn {
+  background: #ffde00;    /* yellow background */
+  color: #000;            /* black text */
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  text-transform: none;
+  align-self: flex-start; /* button aligned to left */
+  transition: transform 0.12s ease;
+}
+
+.review-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* === Remove any card visuals from inner containers === */
+.student-form,
+.courses-tab-content .student-form,
+.courses-tab-content .review-form {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+}
+
+/* === Responsive tweaks === */
+@media (max-width: 600px) {
+  .section-title, .form-title {
+    font-size: 18px;
+  }
+  .star-rating { font-size: 26px; }
+  .form-group input, .form-group textarea { font-size: 14px; }
+}
+
+
+.student-reviews-list {
+  width: 100%;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 0 15px;
+  color: #000;
+}
+
+.student-reviews-list h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #f6b800;
+  margin-bottom: 25px;
+  border-left: 4px solid #f6b800;
+  padding-left: 10px;
+  text-transform: uppercase;
+}
+
+.single-review {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  text-align: left;
+}
+
+.review-stars {
+  color: #FFD700;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-align: right;
+}
+
+.review-message {
+  margin-top: 8px;
+}
+
+.review-message p {
+  font-size: 15px;
+  color: #222;
+  margin: 0;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.review-time {
+  margin-top: 6px;
+}
+
+.review-time small {
+  color: #888;
+  font-size: 13px;
+  font-style: italic;
+  display: block;
+  text-align: left;
+}
+
+

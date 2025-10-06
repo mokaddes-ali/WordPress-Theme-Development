@@ -24,10 +24,15 @@
                 <!----- main-menu and button ----->
                 <div class="menu-button-wrapper">
                     <nav class="main-menu">
-                        <?php wp_nav_menu(array(
-                'theme_location' => 'header_menu',
-                 'fallback_cb' => false
-              )); ?>
+                        <?php 
+                            wp_nav_menu(array(
+                            'theme_location' => 'header_menu',
+                            'container' => false,
+                            'menu_class' => '',  
+                            'fallback_cb' => false
+                            )); 
+                            ?>
+
 
                     </nav>
 

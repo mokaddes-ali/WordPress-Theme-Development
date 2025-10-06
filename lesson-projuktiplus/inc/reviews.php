@@ -11,33 +11,36 @@ function lesssonlms_handle_review_submission(){
     if(isset($_POST['submit_review']) && isset($_POST['course_id']) ){
         $course_id = intval($_POST['course_id']);
         $rating = intval($_POST['rating']);
-
         $review_text = sanitize_text_field($_POST['review_text']);
-
         $reviewer_name = sanitize_text_field($_POST['reviewer_name']);
 
         if( $rating >= 1 && $rating <=5 && !empty($review_text) && !empty($reviewer_name)){
-          $reviews =  get_post_meta( $course_id , '_course_reviews', true);
+            $reviews = get_post_meta( $course_id , '_course_reviews', true);
 
-          if( !is_array($reviews)){
-             $reviews = array();
-          }
-          $new_review = array(
-            'rating' => $rating,
-            'review' => $review_text,
-            'name'  => $reviewer_name,
-            'date'  => current_time('mysql'),
-          );
+            if( !is_array($reviews)){
+                $reviews = array();
+            }
+            $new_review = array(
+                'rating' => $rating,
+                'review' => $review_text,
+                'name'  => $reviewer_name,
+                'date'  => current_time('mysql'),
+            );
 
-          $reviews[] = $new_review;
+            $reviews[] = $new_review;
 
-          update_post_meta( $course_id, '_course_reviews', $reviews);
+            update_post_meta( $course_id, '_course_reviews', $reviews);
 
-          lessonlms_update_review_stats( $course_id );
+            lessonlms_update_review_stats( $course_id );
+
+            // Redirect to same page to show review immediately
+            wp_redirect( get_permalink($course_id) . '#reviews' );
+            exit;
         }
     }
 }
 add_action('init', 'lesssonlms_handle_review_submission');
+
 
 /*=============
 Course Review Total Count and get Average Rating Update
@@ -83,7 +86,8 @@ Return Total Course Review and Average Rating
 /*=============
 Return All Course Review in A Array
 =============*/
-function lessonlms_get_total_course_reviews($course_id){
-    return get_post_meta($course_id, '_total_reviews', true) ?: array();
 
+function lessonlms_get_total_course_reviews($course_id){
+    $reviews = get_post_meta($course_id, '_course_reviews', true);
+    return is_array($reviews) ? $reviews : array();
 }
