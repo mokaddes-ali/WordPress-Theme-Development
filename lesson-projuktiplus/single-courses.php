@@ -65,7 +65,7 @@ $title = get_the_title();
         <h2 class="course-heading">
             <?php echo esc_html(get_the_title($post_id)); ?>
         </h2>
-        <div class="rating-student">
+        <div class="average-rating-student">
             <div class="rating">
                 <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -264,67 +264,77 @@ $title = get_the_title();
                 <div class="courses-tab-content" id="curriculum">Curriculum Content</div>
                 <div class="courses-tab-content" id="instructor">Instructor Content</div>
 
-<div class="courses-tab-content" id="reviews">
-  <h2 class="section-title">Students Review</h2>
+                <!-- Reviews Section -->
+              <div class="courses-tab-content" id="reviews">
+                    <h2 class="section-title">Students Review</h2>
 
+                    <!-- Review Form -->
+                    <div class="student-form">
+                        <h2 class="form-title">Add Review</h2>
+                        <form method="post" action="<?php echo esc_url(get_permalink()); ?>" class="review-form">
+                        <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
 
+                        <!-- Star Rating -->
+                        <div class="star-rating">
+                            <?php for ($i = 5; $i >= 1; $i--): ?>
 
-  <!-- Review Form -->
-  <div class="student-form">
-    <h2 class="form-title">Add Review</h2>
+                            <input type="radio" name="rating" id="rating-<?php echo $i; ?>" value="<?php echo $i; ?>">
 
-      <!-- Success Message - Eta form er upore diben -->
-  <?php if (isset($_GET['review_submitted']) && $_GET['review_submitted'] === 'success'): ?>
-    <div class="review-success-message" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-        Thank you for your review! It has been submitted successfully.
-    </div>
-  <?php endif; ?>
+                            <label for="rating-<?php echo $i; ?>">★</label>
+                            <?php endfor; ?>
+                        </div>
 
-    <form method="post" class="review-form">
-      <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label for="reviewer_name">Your Name</label>
+                            <input type="text" name="reviewer_name" id="reviewer_name" required />
+                        </div>
 
-      <!-- Star Rating -->
-      <div class="star-rating">
-        <span class="star" data-value="1">★</span>
-        <span class="star" data-value="2">★</span>
-        <span class="star" data-value="3">★</span>
-        <span class="star" data-value="4">★</span>
-        <span class="star" data-value="5">★</span>
-        <input type="hidden" name="rating" id="rating-value" value="0">
-      </div>
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label for="review_text">Your Message</label>
+                            <textarea name="review_text" id="review_text" required></textarea>
+                        </div>
 
-      <!-- Name -->
-      <div class="form-group">
-        <label for="reviewer_name">Your Name</label>
-        <input type="text" name="reviewer_name" id="reviewer_name" required />
-      </div>
+                        <!-- Submit Button -->
+                        <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
+                        </form>
+                    </div>
 
-      <!-- Review Message -->
-      <div class="form-group">
-        <label for="review_text">Your Message</label>
-        <textarea name="review_text" id="review_text" required></textarea>
-      </div>
+                    <!-- Reviews List -->
+                    <div class="student-reviews">
+                        <h2 class="section-title">All Reviews</h2>
+                        <?php 
+                        $reviews = lessonlms_get_total_course_reviews(get_the_ID());
+                        if (!empty($reviews)) : 
+                            foreach (array_reverse($reviews) as $review) : ?>
+                            <div class="single-review">
 
-      <!-- Submit -->
-      <div class="form-submit">
-        <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Success Message -->
-<?php 
-$transient_key = 'review_submitted_' . get_the_ID() . '_' . get_current_user_id();
-if (get_transient($transient_key)): 
-    delete_transient($transient_key);
-?>
-    <div class="review-success-message" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
-        Thank you for your review! It has been submitted successfully.
-    </div>
-<?php endif; ?>
-
-
+                                <div class="review-header">
+                                <div class="reviewer-name">
+                                    <?php echo esc_html($review['name']); ?>
+                                </div>
+                                 <div class="review-rating">
+                                <?php 
+                                    for ($i = 1; $i <= 5; $i++) {
+                                    echo ($i <= $review['rating']) ? '<span> ★ </span>' : '<span> ☆ </span>';
+                                    }
+                                ?>
+                                </div>
+                                </div>
+                               
+                                <div class="review-text">
+                                    <?php echo esc_html($review['review']); ?>
+                                </div>
+                                 <div class="review-date">
+                                    <?php echo date('F j, Y', strtotime($review['date'])); ?>
+                                </div>
+                            </div>
+                        <?php endforeach; else: ?> 
+                        <p>No reviews yet. Be the first to review!</p>
+                        <?php endif; ?>
+                    </div>
+                    </div>
 
             </div>
             <!-- right -->

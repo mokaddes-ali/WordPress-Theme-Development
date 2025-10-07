@@ -117,28 +117,6 @@ jQuery(document).ready(function($){
   }
 
 
-  // Hover effect
-  $('.star').on('mouseenter', function () {
-    var index = $(this).data('value');
-    $('.star').each(function () {
-      $(this).toggleClass('hovered', $(this).data('value') <= index);
-    });
-  });
-
-  $('.star-rating').on('mouseleave', function () {
-    $('.star').removeClass('hovered');
-  });
-
-  // Click select
-  $('.star').on('click', function () {
-    var value = $(this).data('value');
-    $('#rating-value').val(value);
-    $('.star').removeClass('selected');
-    $('.star').each(function () {
-      $(this).toggleClass('selected', $(this).data('value') <= value);
-    });
-  });
-
   // Form submission validation
 $('.review-form').on('submit', function(e) {
   var rating = $('#rating-value').val();

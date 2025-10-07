@@ -5,16 +5,14 @@
  */
 
 /*============= User Review Submit Process and Save =============*/ 
-function lessonlms_handle_review_submission()
-{
+function lessonlms_handle_review_submission() {
+
     if (isset($_POST['submit_review']) && isset($_POST['course_id'])) {
+
         $course_id = intval($_POST['course_id']);
         $rating = intval($_POST['rating']);
         $review_text = sanitize_text_field($_POST['review_text']);
         $reviewer_name = sanitize_text_field($_POST['reviewer_name']);
-
-        // Debugging: Check if data is received
-        error_log("Review Submission: Course ID - $course_id, Rating - $rating, Name - $reviewer_name");
 
         if ($rating >= 1 && $rating <= 5 && !empty($review_text) && !empty($reviewer_name)) {
             $reviews = get_post_meta($course_id, '_course_reviews', true);
@@ -23,29 +21,23 @@ function lessonlms_handle_review_submission()
             }
             $new_review = array(
                 'rating' => $rating,
-                'review' => $review_text, 
+                'review' => $review_text,
                 'name' => $reviewer_name,
                 'date' => current_time('mysql'),
             );
             $reviews[] = $new_review;
-            $updated = update_post_meta($course_id, '_course_reviews', $reviews);
-            
-            // Debugging: Check if update was successful
-            error_log("Review Update Status: " . ($updated ? 'Success' : 'Failed'));
-            
+            update_post_meta($course_id, '_course_reviews', $reviews);
+
             lessonlms_update_review_stats($course_id);
-            
-            // Redirect to avoid form resubmission
-            wp_redirect(add_query_arg('review_submitted', 'success', get_permalink($course_id)));
-            exit;
+
         }
     }
 }
-// Change from 'init' to 'template_redirect'
-add_action('template_redirect', 'lessonlms_handle_review_submission');
+add_action('init', 'lessonlms_handle_review_submission');
 
 
-/*============= Course Review Total Count and get Average Rating Update =============*/
+
+/*==== Course Review Total Count and get Average Rating Update ====*/
 
 function lessonlms_update_review_stats($course_id)
 {
@@ -66,7 +58,7 @@ function lessonlms_update_review_stats($course_id)
 }
 
 
-/*============= Return Total Course Review and Average Rating =============*/
+/*====== Return Total Course Review and Average Rating =======*/
 function lessonlms_get_review_stats($course_id)
 {
     $total_reviews = get_post_meta($course_id, '_total_reviews', true) ?: 0;
@@ -79,7 +71,7 @@ function lessonlms_get_review_stats($course_id)
 }
 
 
-/*============= Return All Course Review in A Array =============*/
+/*======== Return All Course Review in A Array ========*/
 function lessonlms_get_total_course_reviews($course_id)
 {
     $reviews = get_post_meta($course_id, '_course_reviews', true);
