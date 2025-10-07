@@ -46,5 +46,7 @@ function lessonlms_theme_enqueue_styles() {
 
     // Custom JS
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
+
+
 }
 add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');

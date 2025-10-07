@@ -1,10 +1,10 @@
 <div class="" style="margin-top: -70px;">
     <?php
-get_header();
-?>
+    get_header();
+    ?>
 </div>
 
-<?php 
+<?php
 $default_image = get_template_directory_uri() . '/assets/images/courses-image1.png';
 
 if (has_post_thumbnail()) {
@@ -63,7 +63,7 @@ $title = get_the_title();
     <div class="container">
         <!-- course title -->
         <h2 class="course-heading">
-            <?php echo esc_html( get_the_title( $post_id ) ); ?>
+            <?php echo esc_html(get_the_title($post_id)); ?>
         </h2>
         <div class="rating-student">
             <div class="rating">
@@ -112,46 +112,45 @@ $title = get_the_title();
             <!-- left -->
             <div class="left-courses-image-details">
                 <div class="single-couses-image-box">
-                    <?php 
-                       if ( has_post_thumbnail() ): ?>
+                    <?php
+                    if (has_post_thumbnail()): ?>
 
-                    <?php the_post_thumbnail('full');?>
+                        <?php the_post_thumbnail('full'); ?>
 
-                    <?php endif;?>
+                    <?php endif; ?>
 
                     <!----- absolute card box ----->
                     <div class="courses-card-box">
                         <!-- prices -->
-                        <?php 
-                         $regular_price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
-                         $original_price  = get_post_meta(get_the_ID(), "original_price", true) ?: '0.00';
-                         $video_hours  = get_post_meta(get_the_ID(), "video_hours", true) ?: '0.00';
-                         $downlable_resource  = get_post_meta(get_the_ID(), "downlable_resource", true) ?: '0';
-                          $total_articles  = get_post_meta(get_the_ID(), "total_articles", true) ?: '0';
-                          $language  = get_post_meta(get_the_ID(), "language", true) ?: 'English';
-                          $sub_title_language  = get_post_meta(get_the_ID(), "sub_title_language", true) ?: 'English';
+                        <?php
+                        $regular_price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
+                        $original_price  = get_post_meta(get_the_ID(), "original_price", true) ?: '0.00';
+                        $video_hours  = get_post_meta(get_the_ID(), "video_hours", true) ?: '0.00';
+                        $downlable_resource  = get_post_meta(get_the_ID(), "downlable_resource", true) ?: '0';
+                        $total_articles  = get_post_meta(get_the_ID(), "total_articles", true) ?: '0';
+                        $language  = get_post_meta(get_the_ID(), "language", true) ?: 'English';
+                        $sub_title_language  = get_post_meta(get_the_ID(), "sub_title_language", true) ?: 'English';
 
-                         if($original_price > $regular_price && !empty($regular_price)){
-                            $discount_price = (($original_price - $regular_price) /$original_price ) *100;
-                             $discount_price = round($discount_price,2);
+                        if ($original_price > $regular_price && !empty($regular_price)) {
+                            $discount_price = (($original_price - $regular_price) / $original_price) * 100;
+                            $discount_price = round($discount_price, 2);
+                        }
 
-                         }
-                   
-                         ?>
+                        ?>
 
                         <div class="course-price-list">
-                            <?php if($regular_price): ?>
-                            <h2>$<?php echo esc_html($regular_price);?>
-                            </h2>
-                            <?php endif;?>
+                            <?php if ($regular_price): ?>
+                                <h2>$<?php echo esc_html($regular_price); ?>
+                                </h2>
+                            <?php endif; ?>
 
-                            <?php if($original_price): ?>
-                            <h3>$<?php echo esc_html($original_price);?></h3>
-                            <?php endif;?>
-                            <?php if($discount_price):?>
-                            <p><?php echo esc_html($discount_price) . '%' . __('off', 'lessonlms');?>
-                            </p>
-                            <?php endif;?>
+                            <?php if ($original_price): ?>
+                                <h3>$<?php echo esc_html($original_price); ?></h3>
+                            <?php endif; ?>
+                            <?php if ($discount_price): ?>
+                                <p><?php echo esc_html($discount_price) . '%' . __('off', 'lessonlms'); ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                         <div class="enroll-btn">
                             <a href="#">
@@ -168,11 +167,11 @@ $title = get_the_title();
                             </svg>
 
                             <div class="text">
-                                <?php if($video_hours): ?>
-                            <p>
-                                <?php echo esc_html($video_hours) . ' ' . __('hours on-demand vedio', 'lessonlms'); ?>
-                            </p>
-                            <?php endif;?>
+                                <?php if ($video_hours): ?>
+                                    <p>
+                                        <?php echo esc_html($video_hours) . ' ' . __('hours on-demand vedio', 'lessonlms'); ?>
+                                    </p>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -184,10 +183,10 @@ $title = get_the_title();
                             </svg>
 
 
-                        <div class="text">
-                            <p>
-                                <?php echo esc_html($total_articles) . ' ' . __('articles', 'lessonlms'); ?>
-                            </p>
+                            <div class="text">
+                                <p>
+                                    <?php echo esc_html($total_articles) . ' ' . __('articles', 'lessonlms'); ?>
+                                </p>
                             </div>
                         </div>
 
@@ -199,11 +198,11 @@ $title = get_the_title();
                             </svg>
 
                             <div class="text">
-                      
-                            <p>
-                                <?php echo esc_html($downlable_resource) . ' ' . __('downable resource', 'lessonlms'); ?>
-                            </p>
-                
+
+                                <p>
+                                    <?php echo esc_html($downlable_resource) . ' ' . __('downable resource', 'lessonlms'); ?>
+                                </p>
+
                             </div>
                         </div>
 
@@ -216,7 +215,7 @@ $title = get_the_title();
 
                             <div class="text">
                                 <p>
-                                    <?php echo esc_html_e('Full lifetime Access', 'lessonlms');?>
+                                    <?php echo esc_html_e('Full lifetime Access', 'lessonlms'); ?>
                                 </p>
                             </div>
                         </div>
@@ -230,8 +229,8 @@ $title = get_the_title();
 
                             <div class="text">
                                 <p>
-                                    <?php echo esc_html_e('Access on mobile and TV', 'lessonlms');?>
-                                    </p>
+                                    <?php echo esc_html_e('Access on mobile and TV', 'lessonlms'); ?>
+                                </p>
                             </div>
                         </div>
                         <div class="courses-card-items item3">
@@ -244,8 +243,8 @@ $title = get_the_title();
 
                             <div class="text">
                                 <p>
-                                    <?php echo esc_html_e('Certificate on completion', 'lessonlms');?>
-                                    </p>
+                                    <?php echo esc_html_e('Certificate on completion', 'lessonlms'); ?>
+                                </p>
                             </div>
                         </div>
 
@@ -264,7 +263,66 @@ $title = get_the_title();
                 <div class="courses-tab-content" id="overview">Overview Content</div>
                 <div class="courses-tab-content" id="curriculum">Curriculum Content</div>
                 <div class="courses-tab-content" id="instructor">Instructor Content</div>
-                <div class="courses-tab-content" id="reviews">Reviews Content</div>
+
+<div class="courses-tab-content" id="reviews">
+  <h2 class="section-title">Students Review</h2>
+
+
+
+  <!-- Review Form -->
+  <div class="student-form">
+    <h2 class="form-title">Add Review</h2>
+
+      <!-- Success Message - Eta form er upore diben -->
+  <?php if (isset($_GET['review_submitted']) && $_GET['review_submitted'] === 'success'): ?>
+    <div class="review-success-message" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+        Thank you for your review! It has been submitted successfully.
+    </div>
+  <?php endif; ?>
+
+    <form method="post" class="review-form">
+      <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
+
+      <!-- Star Rating -->
+      <div class="star-rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+        <input type="hidden" name="rating" id="rating-value" value="0">
+      </div>
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="reviewer_name">Your Name</label>
+        <input type="text" name="reviewer_name" id="reviewer_name" required />
+      </div>
+
+      <!-- Review Message -->
+      <div class="form-group">
+        <label for="review_text">Your Message</label>
+        <textarea name="review_text" id="review_text" required></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div class="form-submit">
+        <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Success Message -->
+<?php 
+$transient_key = 'review_submitted_' . get_the_ID() . '_' . get_current_user_id();
+if (get_transient($transient_key)): 
+    delete_transient($transient_key);
+?>
+    <div class="review-success-message" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 4px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+        Thank you for your review! It has been submitted successfully.
+    </div>
+<?php endif; ?>
 
 
 
@@ -283,13 +341,13 @@ $title = get_the_title();
 
                         <div class="text">
                             <span>
-                                <?php echo esc_html_e('Duration', 'lessonlms')?>
+                                <?php echo esc_html_e('Duration', 'lessonlms') ?>
                             </span>
-                               <?php if($video_hours): ?>
-                            <p>
-                                <?php echo esc_html($video_hours) . ' ' . __('hours', 'lessonlms'); ?>
-                            </p>
-                            <?php endif;?>
+                            <?php if ($video_hours): ?>
+                                <p>
+                                    <?php echo esc_html($video_hours) . ' ' . __('hours', 'lessonlms'); ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -301,8 +359,8 @@ $title = get_the_title();
                         </svg>
 
                         <div class="text">
-                            <span><?php echo esc_html_e('Last Updated', 'lessonlms');?></span>
-                            <p><?php echo get_the_modified_date('M j, Y')?></p>
+                            <span><?php echo esc_html_e('Last Updated', 'lessonlms'); ?></span>
+                            <p><?php echo get_the_modified_date('M j, Y') ?></p>
                         </div>
                     </div>
 
@@ -319,10 +377,10 @@ $title = get_the_title();
 
 
                         <div class="text">
-                            <span><?php echo esc_html_e('Language', 'lessonlms');?></span>
-                              <?php if($language):?>
-                            <p><?php echo esc_html($language);?></p>
-                            <?php endif;?>
+                            <span><?php echo esc_html_e('Language', 'lessonlms'); ?></span>
+                            <?php if ($language): ?>
+                                <p><?php echo esc_html($language); ?></p>
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -335,12 +393,12 @@ $title = get_the_title();
                         </svg>
 
                         <div class="text">
-                             <span><?php echo esc_html_e('Sub titles', 'lessonlms');?></span>
-                              <?php if($language):?>
-                            <p>
-                                <?php echo esc_html($sub_title_language);?>
-                            </p>
-                            <?php endif;?>
+                            <span><?php echo esc_html_e('Sub titles', 'lessonlms'); ?></span>
+                            <?php if ($language): ?>
+                                <p>
+                                    <?php echo esc_html($sub_title_language); ?>
+                                </p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

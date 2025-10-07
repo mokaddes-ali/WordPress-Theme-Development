@@ -117,31 +117,36 @@ jQuery(document).ready(function($){
   }
 
 
-    $('.star').on('mouseenter', function(){
-        var index = $(this).data('value');
-        $('.star').each(function(){
-            if($(this).data('value') <= index){
-                $(this).addClass('hovered');
-            } else {
-                $(this).removeClass('hovered');
-            }
-        });
+  // Hover effect
+  $('.star').on('mouseenter', function () {
+    var index = $(this).data('value');
+    $('.star').each(function () {
+      $(this).toggleClass('hovered', $(this).data('value') <= index);
     });
+  });
 
-    // Remove hover effect when leaving
-    $('.star-rating').on('mouseleave', function(){
-        $('.star').removeClass('hovered');
-    });
+  $('.star-rating').on('mouseleave', function () {
+    $('.star').removeClass('hovered');
+  });
 
-    // Click event for rating
-    $('.star').on('click', function(){
-        var value = $(this).data('value');
-        $('#rating-value').val(value);
-        $('.star').removeClass('selected');
-        $('.star').each(function(){
-            if($(this).data('value') <= value){
-                $(this).addClass('selected');
-            }
-        });
+  // Click select
+  $('.star').on('click', function () {
+    var value = $(this).data('value');
+    $('#rating-value').val(value);
+    $('.star').removeClass('selected');
+    $('.star').each(function () {
+      $(this).toggleClass('selected', $(this).data('value') <= value);
     });
+  });
+
+  // Form submission validation
+$('.review-form').on('submit', function(e) {
+  var rating = $('#rating-value').val();
+  if (rating == '0' || rating == '') {
+    e.preventDefault();
+    alert('Please select a rating before submitting.');
+    return false;
+  }
+});
+
 });
