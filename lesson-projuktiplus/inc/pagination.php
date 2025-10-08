@@ -1,28 +1,30 @@
-<?php 
+<?php
+
 /**
  * Default Pagination
  */
 ?>
 
 
-<?php 
+<?php
 
-function lessonlms_all_pagenav() {
+function lessonlms_all_pagenav()
+{
     global $wp_query, $wp_rewrite;
     $pages = '';
-    $bigrandom = 999999999; 
-    $max = $wp_query->max_num_pages; 
-    $total = 1; 
+    $bigrandom = 999999999;
+    $max = $wp_query->max_num_pages;
+    $total = 1;
     $current = max(1, get_query_var('paged'));
 
     if ($max <= 1) return;
     if ($total == 1 && $max > 1) {
-    $pages = '<p class="pages-count">Page <span class="current-page">' . $current . '</span> 
+        $pages = '<p class="pages-count" style="color: black;" >Page <span class="current-page">' . $current . '</span> 
               <span class="sep">of</span> 
               <span class="total-page">' . $max . '</span></p>';
-}
+    }
 
-echo '<div class="pagination-info">' . $pages . '</div>';
+    echo '<div class="pagination-info">' . $pages . '</div>';
 
     echo '<div class="pagination-wrapper">';
 

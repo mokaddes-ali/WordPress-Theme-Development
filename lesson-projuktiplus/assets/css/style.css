@@ -2734,3 +2734,83 @@ single courses design
   .form-group input, .form-group textarea { font-size: 14px; }
 }
 
+/* === Average Rating & Student Section === */
+.average-rating-student {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  padding: 18px 25px;
+  margin: 25px 0;
+}
+
+
+
+/* === Each Student Info Box === */
+.average-rating-student .student {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Star icons */
+.average-rating-student .student svg {
+  width: 22px;
+  height: 22px;
+  stroke: #FEA31B;
+  fill: #FEA31B;
+  transition: transform 0.2s ease;
+}
+
+/* Star hover animation */
+.average-rating-student .student svg:hover {
+  transform: scale(1.1);
+}
+
+/* Rating number */
+.average-rating-student .student span {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Reviews text */
+.average-rating-student .student h4 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #666;
+}
+
+/* Second student (enrolled count) icon */
+.average-rating-student .student:last-child svg {
+  stroke: #FEA31B;
+  fill: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .average-rating-student {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .average-rating-student .student {
+    font-size: 18px;
+  }
+
+  .average-rating-student .student svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+
+
