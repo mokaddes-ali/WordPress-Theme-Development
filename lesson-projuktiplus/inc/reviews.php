@@ -7,7 +7,12 @@
 /*============= User Review Submit Process and Save =============*/ 
 function lessonlms_handle_review_submission() {
 
-    if (isset($_POST['submit_review']) && isset($_POST['course_id'])) {
+     if (
+        isset($_POST['submit_review']) && 
+        isset($_POST['course_id']) && 
+        isset($_POST['lessonlms_review_nonce']) && 
+        wp_verify_nonce($_POST['lessonlms_review_nonce'], 'lessonlms_review_action')
+    ) {
 
         $course_id = intval($_POST['course_id']);
         $rating = intval($_POST['rating']);

@@ -313,6 +313,7 @@ $title = get_the_title();
                             <label for="review_text">Your Message</label>
                             <textarea name="review_text" id="review_text" required></textarea>
                         </div>
+                        <?php wp_nonce_field('lessonlms_review_action', 'lessonlms_review_nonce'); ?>
 
                         <!-- Submit Button -->
                         <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
