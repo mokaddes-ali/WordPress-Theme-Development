@@ -1,0 +1,299 @@
+body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header container */
+    header {
+      width: 1440px;
+      height: 105px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      box-sizing: border-box;
+      font-family: "Bebas Neue", sans-serif; 
+      position: relative;
+      left: 100px;
+    }
+
+    /* Logo */
+    .logo {
+      position: absolute;
+      left: 100px;
+      top: 0;
+      width: 210px;
+      height: 105px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 210px;
+      height: 105px;
+      transform: rotate(0deg);
+      opacity: 1;
+    }
+
+    /* Navigation */
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      padding: 0;
+      margin-left: 200px;
+    }
+
+    nav ul li {
+      font-size: 20px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: "Bebas Neue", sans-serif; 
+    }
+
+    /* Button */
+    .btn {
+      background: #f25c05;
+      color: #fff;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #d94d04;
+    }
+
+        .scholarship-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #fff;
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  padding: 0 18px 42px 18px;
+  font-family: Arial, sans-serif;
+  gap: 32px;
+}
+.scholarship-left {
+  flex: 1 1 50%;
+  min-width: 320px;
+  max-width: 570px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.scholarship-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #244073;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.scholarship-title .orange {
+  color: #f25c05;
+}
+.scholarship-desc {
+  font-size: 1.07rem;
+  color: #1a252f;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+.scholarship-btn {
+  display: inline-block;
+  background: #f25c05;
+  color: #fff;
+  padding: 13px 32px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: 1px;
+  margin-bottom: 34px;
+  margin-top: 4px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s;
+}
+.scholarship-btn:hover {
+  background: #c94803;
+}
+.scholarship-highlight-row {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.scholarship-right {
+  flex: 1 1 48%;
+  min-width: 250px;
+  max-width: 420px;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  justify-content: flex-start;
+}
+.scholarship-image {
+  width: 400%;
+  max-width: 600px;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 3;
+}
+@media (max-width: 900px) {
+  .scholarship-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .scholarship-right {
+    max-width: 100vw;
+    justify-content: center;
+  }
+  .scholarship-image {
+    max-width: 250px;
+  }
+  .scholarship-title {
+    font-size: 1.35rem;
+  }
+}
+@media (max-width: 600px) {
+  .scholarship-section {
+    padding: 0 3vw 20px 3vw;
+  }
+  .scholarship-title {
+    font-size: 1.02rem;
+  }
+  .scholarship-highlight {
+    font-size: 0.95rem;
+    padding: 10px 5px 10px 12px;
+  }
+  .scholarship-btn {
+    font-size: 0.96rem;
+    padding: 10px 16px;
+  }
+  .scholarship-image {
+    max-width: 120px;
+  }
+  .scholarship-image-angle {
+    left: -16px;
+    top: 14px;
+    border-top: 29px solid transparent;
+    border-bottom: 29px solid transparent;
+    border-right: 13px solid #53141d;
+  }
+}
+
+.footer {
+  background-color: #0b2a56; /* Dark Blue */
+  color: #fce5db;           /* Light Beige */
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: auto;
+  padding: 50px 20px;
+  flex-wrap: wrap;
+}
+
+.footer-left h2 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: 1px;
+  color: #fce5db;
+}
+
+.footer-left .highlight {
+  color: #ff3c00; /* Orange for BBQ */
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.btn-competition {
+  display: inline-block;
+  background-color: #ff3c00;
+  color: white;
+  font-weight: 600;
+  padding: 14px 35px;
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 80px;
+  justify-content: flex-end;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 14px;
+}
+
+.footer-links a {
+  color: #fce5db;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ffffff;
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #ddd;
+  font-family: Arial, sans-serif; /* small text different font */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-right {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+  }
+}

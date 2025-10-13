@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoke-N-Wings</title> 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Archivo:ital,wght@0,100..900;1,100..900&family=Bebas+Neue&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Cabin:ital,wght@0,400..700;1,400..700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Roboto+Serif:ital,opsz,wght,GRAD@0,8..144,100..900,-50;1,8..144,100..900,-50&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="<?php get_template_directory_uri()?>./src/style.css">
+</head>
+<body>
+
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 10px 60px;">
+
+  <!-- Logo -->
+  <div class="logo">
+     <img src="<?php echo get_template_directory_uri() ?> /assets/smokin-wings-bbq-24-320x160 1.png" alt="Smoke-N-Wings Logo"></a>
+    </div>
+
+  <!-- Navigation-->
+  <nav style="flex: 1; display: flex; justify-content: center;">
+    <ul style="display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; justify-content: flex-end; text-align: center;">
+      <li><a style="padding: 12px; text-decoration: none; color: black;" href="page1.html">RULES</a></li>
+      <li><a style="padding: 12px; text-decoration: none; color: black;" href="page2.html">SPONSORS</a></li>
+      <li><a style="padding: 12px; text-decoration: none; color: black;" href="page3.html">KIDS-Q</a></li>
+      <li><a style="padding: 12px; text-decoration: none; color: black;" href="page4.html">BINGHAM MAYORS SCHOLARSHIP</a></li>
+      <li><a style="padding: 12px; text-decoration: none; color: black;" href="page5.html">CONTACT US</a></li>
+    </ul>
+  </nav>
+
+<a href="page6.html" class="btn">
+  ENTER COMPETITION
+</a>
+
+
+</header>
+
+<section class="bbq-section">
+   <img style="width: 1230px; height: 296px; margin-top: -60px; margin-left: 200px;margin-bottom: -30px; color: rgba(248, 184, 149, 0.6); mix-blend-mode: multiply;  display: block; margin-left: auto;margin-right: auto;" src="<?php echo get_template_directory_uri() ?> /assets/Smoke-N-Wings.svg" alt="">
+  <img style="width: 1230px; height: 296px; margin-top: -60px; margin-left: 200px;margin-bottom: -30px; color: rgba(248, 184, 149, 0.6); mix-blend-mode: multiply; display: block; margin-left: auto;margin-right: auto;" src="<?php echo get_template_directory_uri() ?> /assets/Idaho State bbq.svg" alt="">
+  <img style="width: 1230px; height: 296px; margin-top: -60px; margin-left: 200px;margin-bottom: -30px; color: rgba(248, 184, 149, 0.6); mix-blend-mode: multiply; display: block; margin-left: auto;margin-right: auto;" src="<?php echo get_template_directory_uri() ?> /assets/Competition.svg" alt="">
+</div>
+  <div class="content">
+    <img style="width: 514px; height: 88px; margin-top: -336px; margin-left: -40px;" src="<?php echo get_template_directory_uri() ?> /assets/Group 2.png" alt="">
+    <img style="margin-top: -590px; margin-left: -150px;  width: 865px; height: 562px;" src="<?php echo get_template_directory_uri() ?> /assets/meat 1.png" alt="Grilled Steak Stack" class="steak" />
+   <img style="width: 514px; height: 88px; margin-top: -336px; margin-left: -100px;" src="<?php echo get_template_directory_uri() ?> /assets/Group 2 (1).png" alt="">
+
+
+
+
+
+  </div>
+</section>
+<style>
+  
+</style>
+<section style="font-family: Bebas Neue, sans-serif;  padding: 60px 80px; position: relative; background: #fff;">
+  
+  <!-- Title -->
+   <div><img style="mix-blend-mode: multiply; position: absolute;" src="<?php echo get_template_directory_uri() ?> /assets/smoke-n- wings.svg" alt="">
+    <div style="position: relative; font-size: 40px; font-weight: bold;line-height: 1.3;z-index: 2;max-width: 600px;margin: 0;">
+  <h1 style="font-family: Bebas Neue; font-weight: 700; font-size: 78px; line-height: 81px; letter-spacing: 2%; text-transform: uppercase;">
+    JOIN US FOR THE <span style="color:#ff4c00;">2025 <br></span> 
+    <span style="color:#ff4c00;">SMOKE-N-WINGS </span> <span style="color:rgba(22, 57, 111, 1)">BBQ <br> COMPETITION! <br></span>
+  </h1>
+  </div>
+  </div>
+
+  <!-- Paragraph -->
+  <p style="margin-top: 20px; font-size: 16px; color: #333; max-width: 600px; line-height: 1.6;">
+    Teams from all around the area will compete in this KCBS sanctioned, Idaho State Competition. 
+    Teams will cook chicken, ribs, pork and brisket. <br><br>
+    The winning team will be crowned the SMOKE-N-WINGS winner and the Idaho State Champions and be 
+    eligible for the American Royal and the Jack Daniels World Championship.
+  </p>
+
+  <!-- Right Side Image with Button -->
+  <div style="position: absolute; top: 60px; right: 80px; width: 480px;">
+    <img src="<?php echo get_template_directory_uri() ?> /assets/Group 3.png" alt="Grilled Steak Stack" style="width: 593.5px; height: 495px; top: 97px; left: -722px; display: block;">
+    <div><img src="<?php echo get_template_directory_uri() ?> /assets/Group 2 (2).png" alt=""></div> 
+  </div>
+  <br><br><br><br><br><br>
+
+  <!-- Bottom Info Section -->
+ <img src="<?php echo get_template_directory_uri() ?> /assets/Group 9.png" alt="">
+
+</section>
+<section class="highlights-section">
+  <!-- Title -->
+  <h2 style="font-size: 78px;" class="highlights-title">
+   <span style="color: rgba(22, 57, 111, 1);;">SMOKIN’ HIGHLIGHTS:</span><br><span>THE <span style="color: rgba(246, 86, 0, 1);">BEST BBQ</span> IN ACTION</span>
+   <img style="mix-blend-mode: multiply; position: absolute; margin-top: -130px; left: 500px;" src="<?php echo get_template_directory_uri() ?> /assets/Barbecue.png" alt="">
+  </h2>
+
+<div class="highlights-grid">
+  <img src="<?php echo get_template_directory_uri() ?> /assets/Rectangle 16.png" alt="BBQ Image 1">
+  <img src="<?php echo get_template_directory_uri() ?> /assets/Rectangle 17.png" alt="BBQ Image 2">
+  <img src="<?php echo get_template_directory_uri() ?> /assets/Rectangle 18.png" alt="BBQ Image 3">
+  <img src="<?php echo get_template_directory_uri() ?> /assets/Rectangle 19.png" alt="BBQ Image 4">a
+</div>
+</section>
+
+<!-- Event Section -->
+<div class="event-section" style="max-width: 1191px; margin: 0 auto;">
+  <!-- Left Side Ribbons -->
+  <div style="display: flex; gap: 20px; width: 15%;margin-left: 31px; margin-right: -35px;" class="event-ribbons">
+    <div style="padding: 20px;" class="ribbon blue">KIDES-Q</div>
+    <div style="padding: 20px;" class="ribbon orange">SATURDAY JUNE 29TH</div>
+  </div>
+
+  <!-- Right Content -->
+  <div style="position: relative;width: 83%;" class="event-content">
+    <img style="mix-blend-mode: multiply; position: absolute; top: 20px; width: 100%;" src="<?php echo get_template_directory_uri() ?> /assets/Mask group.png" alt="">
+    <div style="width: 60%;" class="event-inner">
+      <div class="event-date" style="margin-left: 30%;">FRIDAY JUNE 28, 2024</div>
+      <div class="event-title"style="margin-left: 30%;">BINGHAM COUNTY MAYORS SCHOLARSHIP FUNDRAISER</div>
+      <div class="event-desc"style="margin-left: 30%;">
+        Friday June 28, 2024 from 5–7pm — Community invited to enjoy BBQ, Kids-Q activities
+        and an auction to benefit the high school seniors of Bingham County through the
+        Bingham County Mayors Scholarship. Come and help support a wonderful cause.
+      </div>
+    </div>
+  </div>
+</div>
+<br><br><br>
+<!-- FAQ Section -->
+<section class="faq">
+  <div class="faq-left">
+    <img src="<?php echo get_template_directory_uri() ?> /assets/Group 4.png" alt="Food">
+  </div>
+
+  <div class="faq-right">
+    <h2 style="font-family: 'Bebas Neue', sans-serif; font-size: 60px; " class="faq-title">
+      FREQUENTLY <span>ASKED</span> QUESTIONS
+    </h2>
+
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <input type="radio" name="accordion" id="q1">
+        <label for="q1">Question one Goes here?</label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet consectetur. Facilisi gravida ultricies nec integer amet quis neque aliquet. Nec eget consectetur gravida amet donec suspendisse non.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <input type="radio" name="accordion" id="q2" checked>
+        <label for="q2">Question one Goes here?</label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus voluptas in veritatis natus doloremque delectus.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <input type="radio" name="accordion" id="q3">
+        <label for="q3">Question one Goes here?</label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <input type="radio" name="accordion" id="q4">
+        <label for="q4">Question one Goes here?</label>
+        <div class="content">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ====== Footer Section ====== -->
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Left Side -->
+    <div class="footer-left">
+      <h2>
+        SMOKE-N-WINGS <br>
+        <span class="highlight">BBQ</span> COMPETITION
+      </h2>
+    </div>
+
+    <!-- Right Side -->
+    <div class="footer-right">
+    <a href="page6.html" class="btn">ENTER COMPETITION</a>
+<br><br>
+      <div class="footer-links">
+        <ul>
+          <li><a href="page1.html">RULES</a></li>
+          <li><a href="page2.html">SPONSORS</a></li>
+          <li><a href="page3.html">KIDS-Q</a></li>
+        </ul>
+        <ul>
+          <li><a href="page4.html">BINGHAM MAYORS SCHOLARSHIP</a></li>
+          <li><a href="page5.html">CONTACT US</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Line -->
+  <div class="footer-bottom">
+    <p>© COPYRIGHT 2025 BBQCOMPETITION.COM. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+</body>
+</html>

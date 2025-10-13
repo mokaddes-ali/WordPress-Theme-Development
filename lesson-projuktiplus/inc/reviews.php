@@ -9,9 +9,7 @@ function lessonlms_handle_review_submission() {
 
      if (
         isset($_POST['submit_review']) && 
-        isset($_POST['course_id']) && 
-        isset($_POST['lessonlms_review_nonce']) && 
-        wp_verify_nonce($_POST['lessonlms_review_nonce'], 'lessonlms_review_action')
+        isset($_POST['course_id'])
     ) {
 
         $course_id = intval($_POST['course_id']);
@@ -34,6 +32,9 @@ function lessonlms_handle_review_submission() {
             update_post_meta($course_id, '_course_reviews', $reviews);
 
             lessonlms_update_review_stats($course_id);
+
+            wp_redirect( add_query_arg( 'review_submitted', 'true', get_permalink($course_id) ) );
+            exit;
 
         }
     }

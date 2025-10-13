@@ -1,0 +1,445 @@
+ body {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header container */
+    header {
+      width: 1440px;
+      height: 105px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      position: relative;
+      left: 100px;
+    }
+
+    /* Logo */
+    .logo {
+      position: absolute;
+      left: 100px;
+      top: 0;
+      width: 210px;
+      height: 105px;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 210px;
+      height: 105px;
+      transform: rotate(0deg);
+      opacity: 1;
+      margin-right: 100px;
+    }
+
+    /* Navigation */
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+      padding: 0;
+      margin-left: 200px;
+    }
+
+    nav ul li {
+      font-size: 20px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-family: "Bebas Neue", sans-serif; 
+    }
+
+    /* Button */
+    .btn {
+      background: #f25c05;
+      color: #fff;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: 0.90s;
+      margin-left: -20px;
+    }
+
+    .btn:hover {
+      background: #923300;
+    }
+.bbq-section {
+  position: relative;
+  width: 100%;
+  height: 601px;
+  background-color: rgba(248, 184, 149, 1);
+  overflow: hidden;
+}
+/* Foreground Content */
+.content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  gap: 40px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.highlights-section {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  /* Title */
+  .highlights-title {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #16396f;
+    margin-bottom: 1.5rem;
+    position: relative;
+    text-align: left;
+  }
+
+
+  /* Image Grid (Responsive) */
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .highlights-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Arrows */
+  .slider-arrows {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .arrow-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 20px;
+    border-radius: 4px;
+  }
+
+  .arrow-btn:hover {
+    background: #ffeadf;
+  }
+
+  .arrow-btn:active {
+    transform: scale(0.95);
+  }
+  .faq {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px 5%;
+  flex-wrap: wrap;
+}
+
+.faq-left {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+}
+
+.faq-left img {
+  width: 80%;
+  height: 500px;
+  margin-top: -81px;
+}
+
+.faq-right {
+  flex: 1;
+  min-width: 300px;
+}
+
+.faq-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #0d2c5a; /* dark blue */
+}
+
+.faq-title span {
+  color: #ff4500; /* orange ASKED */
+}
+
+.accordion {
+  border-top: 1px solid #ccc;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.accordion-item input {
+  display: none;
+}
+
+.accordion-item label {
+  display: block;
+  padding: 14px 0;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  font-weight: 500;
+}
+
+.accordion-item label::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.accordion-item input:checked + label::after {
+  content: "−";
+}
+
+.accordion-item .content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.accordion-item input:checked ~ .content {
+  max-height: 200px;
+  padding-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .faq-left .triangle {
+    display: none;
+  }
+
+  .faq-right {
+    text-align: left;
+  }
+}
+
+.event-section {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  max-height: 300px;
+}
+
+
+.ribbon {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) skew(-13deg);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  padding: 20px 10px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.ribbon.blue {
+  background: #0d47a1;
+  height: 300px;
+}
+
+.ribbon.orange {
+  background: #ff5722;
+  height: 300px;
+  width: 30px
+}
+
+/* Right Content Box */
+.event-content {
+  flex: 1;
+  background: #fdece4;
+  /* padding: 40px; */
+  position: relative;
+  clip-path: polygon(8% 0%, 100% 0, 100% 100%, 1% 100%);
+}
+
+.event-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.event-date {
+  font-size: 28px;
+  font-weight: 700;
+  color: #6d0000;
+  font-family: 'Bebas Neue', sans-serif;
+  border-bottom: 4px solid #6d0000;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.event-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.event-desc {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .event-section {
+    flex-direction: column;
+  }
+  .event-ribbons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .ribbon {
+    writing-mode: horizontal-tb;
+    transform: skew(0);
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+  .event-content::before {
+    font-size: 50px;
+  }
+}
+
+.footer {
+  background-color: #0b2a56; /* Dark Blue */
+  color: #fce5db;           /* Light Beige */
+  font-family: 'Bebas Neue', sans-serif;
+  text-transform: uppercase;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: auto;
+  padding: 50px 20px;
+  flex-wrap: wrap;
+}
+
+.footer-left h2 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: 1px;
+  color: #fce5db;
+}
+
+.footer-left .highlight {
+  color: #ff3c00; /* Orange for BBQ */
+}
+
+.footer-right {
+  text-align: right;
+}
+
+.btn-competition {
+  display: inline-block;
+  background-color: #ff3c00;
+  color: white;
+  font-weight: 600;
+  padding: 14px 35px;
+  text-decoration: none;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 80px;
+  justify-content: flex-end;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 14px;
+}
+
+.footer-links a {
+  color: #fce5db;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid #ffffff;
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #ddd;
+  font-family: Arial, sans-serif; 
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-right {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .footer-links {
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+  }
+}
