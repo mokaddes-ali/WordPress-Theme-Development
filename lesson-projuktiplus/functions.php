@@ -11,6 +11,8 @@ include_once get_template_directory() .'/inc/wideget.php';
 include_once get_template_directory() .'/inc/pagination.php';
 
 include_once get_template_directory() .'/inc/reviews.php';
+include_once get_template_directory() .'/inc/enroll.php';
+
 
 // Custom Post Type
 include_once get_template_directory() .'/inc/CPT/courses.php';
