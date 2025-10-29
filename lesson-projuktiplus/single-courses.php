@@ -13,6 +13,9 @@ if (has_post_thumbnail()) {
     $bg_image = $default_image;
 }
 $title = get_the_title();
+$total_enrolled_student = get_post_meta( get_the_ID(), '_enrolled_students', true) ?: 0 ;
+$current_user_id = get_current_user_id();
+
 ?>
 
 <section class="page-section" style="background-image: url('<?php echo esc_url($bg_image); ?>') ;">
@@ -119,7 +122,7 @@ $title = get_the_title();
                         d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                 </svg>
 
-                <h4>350 student enrolled</h4>
+                <h4 class="student-entrolled"> <?php echo number_format( $total_enrolled_student ) ?> student enrolled</h4>
 
             </div>
 
@@ -170,10 +173,24 @@ $title = get_the_title();
                                 </p>
                             <?php endif; ?>
                         </div>
-                        <div class="enroll-btn">
-                            <a href="#">
+                        <div class="enroll">
+                            <?php if( $current_user_id > 0): ?>
+                            <button class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
                                 Enroll Now
-                            </a>
+                            </button>
+                            <?php else: ?>
+                                <div class="login-required">
+                                    <p> Please Register or Login First</p>
+                                    <a class="login-btn" href="<?php echo wp_login_url( get_permalink());?>">
+                                        Login
+                                    </a>
+
+                                    <a class="register-btn" href="<?php echo wp_registration_url();?> ">
+                                       
+                                    </a>
+                                </div>
+
+                            <?php endif;?>
                         </div>
                         <h3>This courses includes:</h3>
                         <div class="courses-card-items item1">
@@ -489,5 +506,43 @@ $title = get_the_title();
         </div>
     </div>
 </section>
+
+
+<script>
+document.querySelectorAll('.enroll-btn').forEach(button => {
+  button.addEventListener('click', function() {
+    const courseId = this.getAttribute('data-course-id');
+    const courseElement = document.querySelector('.student-entrolled');
+
+    fetch(ajax_object.ajaxurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: 'action=lessonlms_enroll_course&course_id=' + courseId
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.success){
+        courseElement.textContent = data.data + ' student enrolled';
+        this.textContent = "Enrolled";
+        this.disabled = true;
+        alert("Enrolled Successfully");
+      } else {
+        if(data.data === 'Please login first to enroll'){
+          alert('Please login first to enroll');
+        } else {
+          alert("Enrollment Unsuccessful");
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Try Again");
+    });
+  });
+});
+</script>
+
 
 <?php get_footer(); ?>

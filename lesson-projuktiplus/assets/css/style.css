@@ -2310,11 +2310,12 @@ single courses design
   font-weight: bold;
 }
 
-.enroll-btn a {
+.enroll-btn{
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #FFB900;
+    width: 100%;
   color: #fff;
   font-weight: 600;
   padding: 12px 24px;
@@ -2327,8 +2328,11 @@ single courses design
   transition: color 0.3s ease;
 }
 
+.student-entrolled{
+  color: #000;
+}
 /* hover bg animation */
-.enroll-btn a::after {
+.enroll-btn::after {
   content: "";
   width: 100%;
   height: 100%;
