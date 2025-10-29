@@ -85,35 +85,38 @@ $total_enrollments = $wpdb->get_var(
             </div>
         </div>
 
-        <?php if ( $recent_enrollments) : ?>
-            <div class="recent-enrollments">
-                <h4> Last Enrollment </h4>
+<?php if ($recent_enrollments) : ?>
+    <div class="recent-enrollments">
+        <h4>Last Enrollments</h4>
+        <ul>
+            <?php foreach ($recent_enrollments as $recent_enrollment) : ?>
+                <?php
+                $meta_value = maybe_unserialize($recent_enrollment->meta_value);
 
-                <ul>
-                    <?php foreach( $recent_enrollments as $recent_enrollment ) : ?>
-                    <?php
-                    $data_text = '';
-                    $meta_value = maybe_unserialize( $recent_enrollment->meta_value );
+                if (is_array($meta_value)) :
+                    foreach ($meta_value as $enroll_item) :
+                        if (is_array($enroll_item) && isset($enroll_item['course_id']) && isset($enroll_item['date'])) :
+                            $course_id = intval($enroll_item['course_id']);
+                            $course_title = get_the_title($course_id);
+                            $date_text = esc_html($enroll_item['date']);
+                ?>
+                            <li>
+                                <strong><?php echo esc_html($recent_enrollment->user_login); ?></strong>
+                                - <?php echo esc_html($course_title ?: 'Unknown Course'); ?>
+                                <em style="color: #888;">(<?php echo $date_text ?: 'N/A'; ?>)</em>
+                            </li>
+                <?php
+                        endif;
+                    endforeach;
+                endif;
+                ?>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php else : ?>
+    <p>No recent enrollments found.</p>
+<?php endif; ?>
 
-                    if( is_array($meta_value)){
-                        foreach ( $meta_value as $enroll_item ){
-                            if( is_array($enroll_item) && isset($enroll_item['course_id']) && isset($enroll_item['date'])){
-                                 $date_text = esc_html($enroll_item['date']);
-                            }
-                        }
-                    }
-                         ?>
-                    <li>
-                        <strong> <?php echo esc_html( $recent_enrollment->user_login ); ?> </strong>
-                        - <?php echo esc_html($recent_enrollment->post_title ) ?>
-                        <em style="color: #888;">(<?php echo $date_text ?: 'N/A'; ?>)</em>
-                    </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php else : ?>
-            <p>No recent enrollments found.</p>
-         <?php endif; ?>
     </div>
 
     <?php
