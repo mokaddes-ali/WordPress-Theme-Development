@@ -11,7 +11,6 @@ function lessonlms_handle_review_submission() {
         isset($_POST['submit_review']) && 
         isset($_POST['course_id'])
     ) {
-
         $course_id = intval($_POST['course_id']);
         $rating = intval($_POST['rating']);
         $review_text = sanitize_text_field($_POST['review_text']);
