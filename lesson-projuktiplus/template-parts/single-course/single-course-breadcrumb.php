@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: Single Course Breadcrumb
  * 
@@ -38,13 +39,13 @@ $title = get_the_title();
 
                     <li>
                         <a href="<?php echo get_post_type_archive_link('courses'); ?>">
-                         <?php echo esc_html__('Courses', 'lessonlms'); ?>
+                            <?php echo esc_html__('Courses', 'lessonlms'); ?>
                         </a>
 
                     </li>
 
                     <li class="breadcrumb-icon">
-                       <?php get_template_part('template-parts/single-course/svg/breadcrumb', 'svg'); ?>
+                        <?php get_template_part('template-parts/single-course/svg/breadcrumb', 'svg'); ?>
                     </li>
 
                     <li>
