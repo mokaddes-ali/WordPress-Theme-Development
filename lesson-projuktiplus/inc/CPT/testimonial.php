@@ -38,3 +38,43 @@ function lessonlms_testimonial_register(){
     register_post_type('testimonials', $args );
 }
 add_action('init','lessonlms_testimonial_register');
+
+
+
+function lessonlms_testimonial_add_meta_box(){
+    add_meta_box(
+        'testimonial_details',
+        'Testimonial Details',
+        'lessonlms_testimonial_add_meta_box_callback',
+        'testimonials',
+        'normal',
+        'high'
+    );
+
+}
+add_action('add_meta_boxes', 'lessonlms_testimonial_add_meta_box');
+
+function lessonlms_testimonial_add_meta_box_callback($post){
+    $student_destination = get_post_meta($post->ID,'student_destination', true);
+    ?>
+    <div class="">
+        <label for="student_destination"> Student Destination</label>
+        <input type="text" name="student_destination" id="student_destination" value="<?php echo esc_attr($student_destination);?>">
+    </div>
+    <?php
+}
+
+function lessonlms_testimonial_save_meta_data($post_id){
+    $fields = [
+         'student_destination',
+    ];
+    
+    foreach($fields as $field){
+        if(isset($_POST[$field])){
+        update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
+
+    }
+}
+}
+add_action('save_post_testimonials', 'lessonlms_testimonial_save_meta_data');
+

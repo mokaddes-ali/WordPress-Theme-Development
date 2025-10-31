@@ -7,7 +7,7 @@
             $testimonial = new WP_Query(array(
                 "post_type" => "testimonials",
                 "post_per_page" => 3,
-                "post_status" => "public",
+                "post_status" => "publish",
                 "orderby" => "date",
                 "order" => "DESC",
             ));
@@ -34,7 +34,13 @@
                     <div class="name">
                         <h3><?php echo esc_html(the_title()); ?></h3>
                         <span>
-                            <?php echo esc_html(get_post_meta(get_the_ID(), "student_destination", true)); ?>
+                            <?php
+                            $destination = get_post_meta(get_the_ID(), "student_destination", true);
+                            if(!empty
+                            ($destination)){
+                                 echo esc_html( wp_trim_words($destination, 7, '...'));
+                            }
+                              ?>
                         </span>
                     </div>
                 </div>
@@ -48,8 +54,12 @@
                                 fill="#634700" />
                         </svg>
                     </div>
-
-                    <p><?php echo esc_html(the_content()); ?></p>
+ 
+                    <p>
+                        <?php
+                         $content = get_the_content();
+                         echo esc_html( wp_trim_words(wp_strip_all_tags($content), 35, '...')); ?>
+                    </p>
                 </div>
             </div>
 
