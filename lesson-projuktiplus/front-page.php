@@ -4,12 +4,15 @@
  */
  get_header();?>   
  <main>
-       <?php get_template_part('sections/hero');?>
-       <?php get_template_part('sections/courses');?>
-        <?php get_template_part('sections/testimonial');?>
-       <?php get_template_part('sections/features');?>
-       <?php get_template_part('sections/cta');?>
-       <?php get_template_part('sections/blog');?>
+     <?php get_template_part('template-parts/hero/hero', 'section'); ?>
+
+      <?php get_template_part('template-parts/courses/courses', 'section'); ?>
+
+      <?php get_template_part('template-parts/testimonial/testimonial', 'section'); ?>
+       <?php get_template_part('template-parts/features/features', 'section'); ?>
+
+      <?php get_template_part('template-parts/cta/cta', 'section'); ?>
+      <?php get_template_part('template-parts/blog/blog', 'section'); ?>
       
     </main>
 
