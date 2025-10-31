@@ -89,90 +89,13 @@
              <div class="left-courses-image-details">
                  <?php get_template_part('template-parts/single-course/single-course-image', 'card'); ?>
 
-                 <!-- courses tabs -->
-                 <div class="courses-tabs">
-                     <div class="courses-tab" data-tab="overview">Overview</div>
-                     <div class="courses-tab" data-tab="curriculum">Curriculum</div>
-                     <div class="courses-tab" data-tab="instructor">Instructor</div>
-                     <div class="courses-tab" data-tab="reviews">Reviews</div>
-                     <div class="tab-divider"></div>
-                 </div>
+                <?php get_template_part('template-parts/single-course/single-course', 'tab'); ?>
+
                  <div class="courses-tab-content" id="overview">Overview Content</div>
                  <div class="courses-tab-content" id="curriculum">Curriculum Content</div>
                  <div class="courses-tab-content" id="instructor">Instructor Content</div>
 
-                 <!-- Reviews Section -->
-                 <div class="courses-tab-content" id="reviews">
-                     <h2 class="section-title">Students Review</h2>
-
-                     <!-- Review Form -->
-                     <div class="student-form">
-                         <h2 class="form-title">Add Review</h2>
-                         <form method="post" action="<?php echo esc_url(get_permalink()); ?>" class="review-form">
-                             <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
-
-                             <!-- Star Rating -->
-                             <div class="star-rating">
-                                 <?php for ($i = 5; $i >= 1; $i--): ?>
-
-                                     <input type="radio" name="rating" id="rating-<?php echo $i; ?>" value="<?php echo $i; ?>">
-
-                                     <label for="rating-<?php echo $i; ?>">★</label>
-                                 <?php endfor; ?>
-                             </div>
-
-                             <!-- Name -->
-                             <div class="form-group">
-                                 <label for="reviewer_name">Your Name</label>
-                                 <input type="text" name="reviewer_name" id="reviewer_name" required />
-                             </div>
-
-                             <!-- Message -->
-                             <div class="form-group">
-                                 <label for="review_text">Your Message</label>
-                                 <textarea name="review_text" id="review_text" required></textarea>
-                             </div>
-
-                             <!-- Submit Button -->
-                             <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
-                         </form>
-                     </div>
-
-                     <!-- Reviews List -->
-                     <div class="student-reviews">
-                         <h2 class="section-title">All Reviews</h2>
-                         <?php
-                            $reviews = lessonlms_get_total_course_reviews(get_the_ID());
-                            if (!empty($reviews)) :
-                                foreach (array_reverse($reviews) as $review) : ?>
-                                 <div class="single-review">
-
-                                     <div class="review-header">
-                                         <div class="reviewer-name">
-                                             <?php echo esc_html($review['name']); ?>
-                                         </div>
-                                         <div class="review-rating">
-                                             <?php
-                                                for ($i = 1; $i <= 5; $i++) {
-                                                    echo ($i <= $review['rating']) ? '<span> ★ </span>' : '<span> ☆ </span>';
-                                                }
-                                                ?>
-                                         </div>
-                                     </div>
-
-                                     <div class="review-text">
-                                         <?php echo esc_html($review['review']); ?>
-                                     </div>
-                                     <div class="review-date">
-                                         <?php echo date('F j, Y', strtotime($review['date'])); ?>
-                                     </div>
-                                 </div>
-                             <?php endforeach;
-                            else: ?>
-                             <p>No reviews yet. Be the first to review!</p>
-                         <?php endif; ?>
-                     </div>
-                 </div>
+                 <?php get_template_part('template-parts/single-course/single-course', 'review'); ?>
 
              </div>
              <!-- right -->
@@ -185,10 +108,8 @@
                  <div class="course-right-info-card2">
                      <h2>Who this course is for:</h2>
                      <div class="course-right-info-card2-items item1">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="#f3b841" class="size-6">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                         </svg>
+
+                         <?php get_template_part('template-parts/single-course/svg/check-icon', 'svg'); ?>
 
 
                          <div class="text">
@@ -197,23 +118,14 @@
                      </div>
 
                      <div class="course-right-info-card2-items item2">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="#f3b841" class="size-6">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                         </svg>
-
-
+                        <?php get_template_part('template-parts/single-course/svg/check-icon', 'svg'); ?>
                          <div class="text">
                              <span>Web developers wanting design skills</span>
                          </div>
                      </div>
 
                      <div class="course-right-info-card2-items item3">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="#f3b841" class="size-6">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                         </svg>
-
+                        <?php get_template_part('template-parts/single-course/svg/check-icon', 'svg'); ?>
 
                          <div class="text">
                              <span>Graphic desiners transitioning to digital</span>
@@ -221,12 +133,7 @@
                      </div>
 
                      <div class="course-right-info-card2-items item4">
-                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="#f3b841" class="size-6">
-                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                         </svg>
-
-
+                         <?php get_template_part('template-parts/single-course/svg/check-icon', 'svg'); ?>
                          <div class="text">
                              <span>Products manager</span>
                          </div>
