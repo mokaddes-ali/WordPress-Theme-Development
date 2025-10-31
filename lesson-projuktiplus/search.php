@@ -2,9 +2,8 @@
 get_header();
 ?>
 
-
     <!-- section heading -->
-    <?php get_template_part('sections/searchheading'); ?>
+    <?php get_template_part('template-parts/search/search' ,'heading'); ?>
 
 <section >
   <div class="container " style="display: flex; gap: 40px; padding: 40px 0px 40px 0px;">

@@ -6,6 +6,14 @@
 <section class="courses">
     <div class="container">
 
+    <!-- courses left side -->
+     <div class="courses-left-side">
+        <?php get_template_part('template-parts/all-courses/all-courses', 'sidebar') ?>
+     </div>
+
+    <!-- courses right side -->
+     <div class="course-right-side">
+
         <?php
         $page_title =  get_theme_mod('courses_page_title', 'All Courses');
 
@@ -23,7 +31,7 @@
                 'post_status' => 'publish',
                 'orderby' => 'date',
                 'order' => 'DESC',
-                'paged' => $paged,
+                 'posts_per_page' => -1
             ));
             if ($couses->have_posts()):
                 while ($couses->have_posts()): $couses->the_post();
@@ -103,9 +111,8 @@
             <?php endif;
             wp_reset_postdata(); ?>
         </div>
-
-        <?php echo lessonlms_all_pagenav(); ?>
     </div>
+ </div>
 </section>
 
 <?php get_footer(); ?>

@@ -38,13 +38,49 @@ function lessonlms_custome_courses_register(){
         'menu_icon'          => 'dashicons-welcome-learn-more',
         'menu_position'      => 20,
         'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-        'taxonomies'         => array( 'category', 'post_tag' ),
+        'taxonomies'         => array( 'course_category', 'course_tag' ),
         'show_in_rest'       => true
     );
   
     register_post_type('courses', $args);
 }
 add_action('init', 'lessonlms_custome_courses_register');
+
+// Course Category
+function lessonlms_register_course_category() {
+    $labels = array(
+        'name' => 'Course Categories',
+        'singular_name' => 'Course Category',
+        'menu_name' => 'Course Categories'
+    );
+    register_taxonomy('course_category', 'courses', array(
+        'labels' => $labels,
+        'hierarchical' => true,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'rewrite' => array('slug' => 'course-category'),
+    ));
+}
+add_action('init', 'lessonlms_register_course_category');
+
+// Course Tag
+function lessonlms_register_course_tag() {
+    $labels = array(
+        'name' => 'Course Tags',
+        'singular_name' => 'Course Tag',
+        'menu_name' => 'Course Tags'
+    );
+    register_taxonomy('course_tag', 'courses', array(
+        'labels' => $labels,
+        'hierarchical' => false,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'rewrite' => array('slug' => 'course-tag'),
+    ));
+}
+add_action('init', 'lessonlms_register_course_tag');
+
+
 
 function lessonlms_courses_add_meta_box(){
     add_meta_box(
