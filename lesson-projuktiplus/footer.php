@@ -1,6 +1,5 @@
  <?php 
-$footer_text = get_theme_mod(
-    'footer_about_text', 
+$footer_text = get_theme_mod('footer_about_text', 
     'Need to help for your dream Career? trust us. With Lesson, study becomes a lot easier with us.'
 );
 $footer_logo = get_theme_mod('footer_logo', get_template_directory_uri() .'/assets/images/footer-logo.png');
