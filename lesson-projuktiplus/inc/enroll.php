@@ -5,10 +5,10 @@
  */
 function lessonlms_handle_enrollmemt()
 {
-     $course = $_POST['course_id'];
+    $course = $_POST['course_id'];
     $course_id = isset($course) ? intval($course) : 0;
 
-    if ($course_id <= 0) {
+    if ( $course_id <= 0) {
         wp_send_json_error('Invalid course ID');
     }
 
@@ -19,6 +19,7 @@ function lessonlms_handle_enrollmemt()
     }
 
     $current_enroll = get_post_meta($course_id, '_enrolled_students', true) ?: 0;
+
     $new_enroll_count = intval($current_enroll + 1);
 
     update_post_meta($course_id, '_enrolled_students', $new_enroll_count);
@@ -60,7 +61,7 @@ function lessonlms_dashboard_enrollment_widget(){
     global $wpdb;
 
 $total_enrollments = $wpdb->get_var(
-    "SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = '_enrolled_students'"
+    "SELECT SUM( meta_value ) FROM $wpdb->postmeta WHERE meta_key = '_enrolled_students'"
 );
 
 
@@ -76,40 +77,26 @@ $total_enrollments = $wpdb->get_var(
 
     ?>
     <div class="enrollment-dashboard-widget">
-        <h3> Enrollment Status </h3>
+        <h3> <?php echo esc_html__('Enrollment Status', 'lessonLMS' );?> </h3>
 
         <div class="enrollment-stats">
             <div class="stat-item">
                 <span class="stat-number"> <?php echo number_format( $total_enrollments ?: 0 ); ?> </span>
-                <span class="stat-label"> Total Enrollments: </span>
+                <span class="stat-label"> <?php echo esc_html__('Total Enrollments', 'lessonLMS')?>: </span>
             </div>
         </div>
 
 <?php if ($recent_enrollments) : ?>
     <div class="recent-enrollments">
-        <h4>Last Enrollments</h4>
+        <h4>
+            <?php echo esc_html__('Last Enrollments', 'lessonLMS' );?> :
+            </h4>
         <ul>
             <?php foreach ($recent_enrollments as $recent_enrollment) : ?>
-                <?php
-                $meta_value = maybe_unserialize($recent_enrollment->meta_value);
-
-                if (is_array($meta_value)) :
-                    foreach ($meta_value as $enroll_item) :
-                        if (is_array($enroll_item) && isset($enroll_item['course_id']) && isset($enroll_item['date'])) :
-                            $course_id = intval($enroll_item['course_id']);
-                            $course_title = get_the_title($course_id);
-                            $date_text = esc_html($enroll_item['date']);
-                ?>
                             <li>
                                 <strong><?php echo esc_html($recent_enrollment->user_login); ?></strong>
-                                - <?php echo esc_html($course_title ?: 'Unknown Course'); ?>
-                                <em style="color: #888;">(<?php echo $date_text ?: 'N/A'; ?>)</em>
+                                - <?php echo esc_html( $recent_enrollment->post_title ); ?>
                             </li>
-                <?php
-                        endif;
-                    endforeach;
-                endif;
-                ?>
             <?php endforeach; ?>
         </ul>
     </div>
