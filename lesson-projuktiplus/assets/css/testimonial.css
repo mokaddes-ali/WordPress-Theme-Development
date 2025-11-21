@@ -1,0 +1,84 @@
+
+/*----- testimonial section -----*/
+section.testimonial {
+  height: 380px;
+  background-color: #2E2100;
+  padding-top: 97px;
+}
+
+.testimonial-wrapper {
+  display: flex !important;
+  justify-content: space-between;
+
+}
+
+.name h3 {
+  color: #F7F7F7;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 141.667%;
+  margin-bottom: 4px;
+}
+
+.name span {
+  color: #BFBCB2;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 185.714%;
+}
+
+.name {
+  margin-top: 18px;
+}
+
+.reviews {
+  max-width: 740px;
+  width: 100%;
+  position: relative;
+}
+
+.reviews p {
+  color: #FFF;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 153.846%;
+  padding-top: 29px;
+
+}
+
+.absolute-svg {
+  position: absolute;
+  top: 0;
+  left: -31px;
+}
+
+/*----- testimonial slick css -----*/
+.testimonial-items .slick-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+}
+
+.testimonial-items .slick-dots li button {
+  display: none;
+}
+
+.testimonial-items .slick-dots li {
+  width: 6px;
+  height: 6px;
+  background-color: #634700;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.testimonial-items {
+  position: relative;
+}
+
+.testimonial-items .slick-dots .slick-active {
+  background-color: #FFB900 !important;
+}

@@ -26,7 +26,7 @@ function lessonlms_theme_enqueue_styles() {
   wp_enqueue_style('responsive-style-css', get_template_directory_uri() . '/assets/css/responsive.css', array(), time());
 
   //Style CSS  
-  wp_enqueue_style('lesson-theme-css', get_template_directory_uri() . '/assets/css/style.css', array(), time());
+  wp_enqueue_style('theme-main-css', get_template_directory_uri() . '/assets/css/main.css', array(), time());
 
     //Main CSS
     wp_enqueue_style('main-style', get_stylesheet_uri());

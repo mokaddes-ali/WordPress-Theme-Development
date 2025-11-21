@@ -5,12 +5,27 @@
  * 
  * @package LessonLMS
  */
+  $user_id = get_current_user_id();
+  $course_id = get_the_ID();
+  $user_enrollments = get_user_meta($user_id, '_user_enrollments', true);
+  $is_enrolled = false;
+
+  if( is_array($user_enrollments)){
+    foreach( $user_enrollments as $enrollment){
+        if( intval($enrollment['course_id']) === $course_id){
+           $is_enrolled = true;
+           break;
+        }
+    }
+  }
+
 ?>
 
 <!-- Reviews Section -->
 <div class="courses-tab-content" id="reviews">
     <h2 class="section-title">Students Review</h2>
 
+      <?php if(!empty($is_enrolled)):?>
     <!-- Review Form -->
     <div class="student-form">
         <h2 class="form-title">Add Review</h2>
@@ -43,6 +58,7 @@
             <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
         </form>
     </div>
+    <?php endif; ?>
 
     <!-- Reviews List -->
     <div class="student-reviews">

@@ -91,7 +91,10 @@
 
                 <?php get_template_part('template-parts/single-course/single-course', 'tab'); ?>
 
-                 <div class="courses-tab-content" id="overview">Overview Content</div>
+                 <div class="courses-tab-content" id="overview">
+                     <?php get_template_part('template-parts/single-course/course', 'overview'); ?>
+                 </div>
+                 
                  <div class="courses-tab-content" id="curriculum">Curriculum Content</div>
                  <div class="courses-tab-content" id="instructor">Instructor Content</div>
 

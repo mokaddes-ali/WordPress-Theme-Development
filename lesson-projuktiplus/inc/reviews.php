@@ -7,38 +7,46 @@
 /*============= User Review Submit Process and Save =============*/ 
 function lessonlms_handle_review_submission() {
 
-     if (
-        isset($_POST['submit_review']) && 
-        isset($_POST['course_id'])
-    ) {
+    if (isset($_POST['submit_review']) && isset($_POST['course_id'])) {
+
         $course_id = intval($_POST['course_id']);
         $rating = intval($_POST['rating']);
         $review_text = sanitize_text_field($_POST['review_text']);
         $reviewer_name = sanitize_text_field($_POST['reviewer_name']);
+        $user_id = get_current_user_id();
 
+        // If user login
+        if ($user_id == 0) {
+            wp_die('Please login to submit a review.');
+        }
+
+        // Review process
         if ($rating >= 1 && $rating <= 5 && !empty($review_text) && !empty($reviewer_name)) {
             $reviews = get_post_meta($course_id, '_course_reviews', true);
             if (!is_array($reviews)) {
                 $reviews = array();
             }
+
             $new_review = array(
                 'rating' => $rating,
                 'review' => $review_text,
                 'name' => $reviewer_name,
+                'user_id' => $user_id,
                 'date' => current_time('mysql'),
             );
+
             $reviews[] = $new_review;
             update_post_meta($course_id, '_course_reviews', $reviews);
 
             lessonlms_update_review_stats($course_id);
 
-            wp_redirect( add_query_arg( 'review_submitted', 'true', get_permalink($course_id) ) );
+            wp_redirect(add_query_arg('review_submitted', 'true', get_permalink($course_id)));
             exit;
-
         }
     }
 }
 add_action('init', 'lessonlms_handle_review_submission');
+
 
 
 

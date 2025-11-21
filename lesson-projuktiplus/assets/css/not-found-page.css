@@ -1,0 +1,70 @@
+/* 404 Page Style */
+.content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+}
+
+.page-header .page-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff4b5c;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.page-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ffffff;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+.page-content h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.page-content p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.page-content form.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page-content input[type="search"] {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 250px;
+}
+
+.page-content input[type="submit"] {
+  padding: 10px 20px;
+  background-color: #ff4b5c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.page-content input[type="submit"]:hover {
+  background-color: #e8434f;
+}

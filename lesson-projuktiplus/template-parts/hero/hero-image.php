@@ -5,7 +5,5 @@
         <img src="<?php echo get_template_directory_uri(); ?>/assets/images/heor-img.png" alt="hero-img">
     <?php endif; ?>
 
-    <div class="card-box">
         <?php get_template_part('template-parts/hero/cards'); ?>
-    </div>
 </div>
