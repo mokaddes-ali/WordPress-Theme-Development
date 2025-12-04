@@ -128,144 +128,117 @@ function lessonlms_get_total_course_reviews($course_id)
 }
 
 
-// Admin Menu
 add_action('admin_menu', function() {
     add_menu_page(
-        'Course Reviews',           // Page Title
-        'Reviews',                  // Menu Title
-        'manage_options',           // Capability
-        'course-reviews',           // Menu Slug
-        'lessonlms_reviews_page',   // Callback
-        'dashicons-star-filled',    // Icon
-        25                          // Position
+        'Course Reviews',
+        'Reviews',
+        'manage_options',
+        'course-reviews',
+        'lessonlms_reviews_list_page',
+        'dashicons-star-filled',
+        25
     );
 });
 
-// Admin Page Callback
-function lessonlms_reviews_page() {
-    echo '<div class="wrap"><h1>Course Reviews</h1>';
+function lessonlms_reviews_list_page() {
+    echo '<div class="wrap"><h1 class="wp-heading-inline">Course Reviews</h1>';
 
-    // All courses
-    $courses = get_posts(['post_type'=>'courses','numberposts'=>-1]);
+    $courses = get_posts(['post_type' => 'courses', 'numberposts' => -1]);
 
-    foreach($courses as $course){
-        $reviews = get_post_meta($course->ID,'_course_reviews',true);
-        $reviews = is_array($reviews) ? $reviews : [];
-
-        $review_count = count($reviews);
-        $latest_review = end($reviews); // latest review
-
-        echo '<h2>'.$course->post_title.' ('.$review_count.' Reviews)</h2>';
-
-        if($review_count){
-            echo '<table class="wp-list-table widefat fixed striped">';
-            echo '<tr>
+    echo '<table class="wp-list-table widefat fixed striped comments">';
+    echo '<thead>
+            <tr>
                 <th>Author</th>
-                <th>Message</th>
+                <th>Review</th>
+                <th>In Response To</th>
                 <th>Rating</th>
                 <th>Status</th>
                 <th>Submitted On</th>
-                <th>Actions</th>
-            </tr>';
+            </tr>
+          </thead>';
+    echo '<tbody>';
 
-            // Show latest review only
-            $author_id = isset($latest_review['user_id']) ? intval($latest_review['user_id']) : 0;
-            $author_name = isset($latest_review['name']) ? $latest_review['name'] : 'Guest';
-            $author_img = $author_id ? get_avatar($author_id, 32) : '';
+    foreach ($courses as $course) {
+        $reviews = get_post_meta($course->ID, '_course_reviews', true);
 
-            echo '<tr>';
-            echo '<td>'.$author_img.' '.$author_name.'</td>';
-            echo '<td>'.esc_html($latest_review['review']).'</td>';
-            echo '<td>'.str_repeat('★',$latest_review['rating']).str_repeat('☆',5-$latest_review['rating']).'</td>';
-            echo '<td>'.(isset($latest_review['status'])?$latest_review['status']:'pending').'</td>';
-            echo '<td>'.date('F j, Y', strtotime($latest_review['date'])).'</td>';
-            echo '<td>
-                <a href="'.add_query_arg(['course'=>$course->ID,'approve'=>key($reviews)]).'">Approve</a> | 
-                <a href="'.add_query_arg(['course'=>$course->ID,'reject'=>key($reviews)]).'">Reject</a> | 
-                <a href="'.add_query_arg(['course'=>$course->ID,'delete'=>key($reviews)]).'">Delete</a> | 
-                <a href="'.add_query_arg(['course'=>$course->ID,'all_reviews'=>1]).'">All Reviews</a>
-            </td>';
-            echo '</tr>';
+        if (!empty($reviews)) {
+            foreach ($reviews as $key => $review) {
 
-            echo '</table>';
-        } else {
-            echo '<p>No reviews yet.</p>';
-        }
-
-        // Show all reviews if clicked
-        if(isset($_GET['course']) && intval($_GET['course']) == $course->ID && isset($_GET['all_reviews'])){
-            echo '<h3>All Reviews</h3>';
-            echo '<table class="wp-list-table widefat fixed striped">';
-            echo '<tr>
-                <th>Author</th>
-                <th>Message</th>
-                <th>Rating</th>
-                <th>Status</th>
-                <th>Submitted On</th>
-                <th>Actions</th>
-            </tr>';
-            foreach($reviews as $key => $review){
-                $author_id = isset($review['user_id']) ? intval($review['user_id']) : 0;
-                $author_name = isset($review['name']) ? $review['name'] : 'Guest';
-                $author_img = $author_id ? get_avatar($author_id, 32) : '';
+                $user = get_user_by('id', $review['user_id']);
+                $avatar = get_avatar($review['user_id'], 50);
 
                 echo '<tr>';
-                echo '<td>'.$author_img.' '.$author_name.'</td>';
-                echo '<td>'.esc_html($review['review']).'</td>';
-                echo '<td>'.str_repeat('★',$review['rating']).str_repeat('☆',5-$review['rating']).'</td>';
-                echo '<td>'.(isset($review['status'])?$review['status']:'pending').'</td>';
-                echo '<td>'.date('F j, Y', strtotime($review['date'])).'</td>';
-                echo '<td>
-                    <a href="'.add_query_arg(['course'=>$course->ID,'approve'=>$key]).'">Approve</a> | 
-                    <a href="'.add_query_arg(['course'=>$course->ID,'reject'=>$key]).'">Reject</a> | 
-                    <a href="'.add_query_arg(['course'=>$course->ID,'delete'=>$key]).'">Delete</a>
-                </td>';
+
+                // AUTHOR COLUMN
+                echo '<td class="author column-author">
+                        '.$avatar.'
+                        <strong>'.$review['name'].'</strong><br>
+                        <span>'.$user->user_email.'</span>
+                      </td>';
+
+                // COMMENT / MESSAGE COLUMN
+                echo '<td class="comment column-comment">
+                        <p>'.$review['review'].'</p>
+                      </td>';
+
+                // COURSE TITLE COLUMN
+                echo '<td class="response column-response">
+                        <strong><a href="'.get_permalink($course->ID).'">'.$course->post_title.'</a></strong>
+                        <p><a href="'.get_permalink($course->ID).'" target="_blank">View Course</a></p>
+                      </td>';
+
+                // RATING COLUMN
+                echo '<td class="rating column-rating">
+                        '.str_repeat('★', $review['rating']).'
+                      </td>';
+
+                // STATUS
+                echo '<td>'.$review['status'].'</td>';
+
+                // DATE COLUMN
+                echo '<td>'.date('F j, Y - g:i a', strtotime($review['date'])).'<br>';
+
+                echo '<div class="row-actions">
+                        <span class="approve"><a href="'.add_query_arg(['course'=>$course->ID,'approve'=>$key]).'">Approve</a> | </span>
+                        <span class="reject"><a href="'.add_query_arg(['course'=>$course->ID,'reject'=>$key]).'">Reject</a> | </span>
+                        <span class="trash"><a href="'.add_query_arg(['course'=>$course->ID,'delete'=>$key]).'" style="color:red;">Delete</a></span>
+                      </div>';
+
+                echo '</td>';
                 echo '</tr>';
             }
-            echo '</table>';
         }
     }
 
-    echo '</div>';
+    echo '</tbody></table></div>';
 }
-
 add_action('admin_init', function(){
 
     if(isset($_GET['course'])){
-
         $course_id = intval($_GET['course']);
-        $reviews = get_post_meta($course_id,'_course_reviews', true);
-        if(!is_array($reviews)) $reviews = [];
+        $reviews = get_post_meta($course_id, '_course_reviews', true);
+        if (!is_array($reviews)) $reviews = [];
 
-        // === APPROVE ===
+        // Approve
         if(isset($_GET['approve'])){
             $reviews[intval($_GET['approve'])]['status'] = 'approved';
-            update_post_meta($course_id,'_course_reviews',$reviews);
-
-            wp_redirect(admin_url('admin.php?page=course-reviews'));
-            exit;
         }
 
-        // === REJECT ===
+        // Reject
         if(isset($_GET['reject'])){
             $reviews[intval($_GET['reject'])]['status'] = 'rejected';
-            update_post_meta($course_id,'_course_reviews',$reviews);
-
-            wp_redirect(admin_url('admin.php?page=course-reviews'));
-            exit;
         }
 
-        // === DELETE (WORKS FROM BOTH NORMAL + ALL REVIEWS PAGE) ===
+        // Delete
         if(isset($_GET['delete'])){
             unset($reviews[intval($_GET['delete'])]);
             $reviews = array_values($reviews);
-
-            update_post_meta($course_id,'_course_reviews',$reviews);
-
-            // যদি all_reviews page থেকে delete করে → normal page এ redirect করবে
-            wp_redirect(admin_url('admin.php?page=course-reviews'));
-            exit;
         }
-    }
 
+        update_post_meta($course_id, '_course_reviews', $reviews);
+
+        wp_redirect(admin_url('admin.php?page=course-reviews'));
+        exit;
+    }
 });
+
