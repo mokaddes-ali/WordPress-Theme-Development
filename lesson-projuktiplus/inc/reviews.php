@@ -4,6 +4,20 @@
  * Course Reviews System Function
  */
 
+function lessonlms_get_user_review($course_id, $user_id) {
+    $reviews = get_post_meta($course_id, '_course_reviews', true);
+
+    if (empty($reviews) || !is_array($reviews)) return false;
+
+    foreach ($reviews as $review) {
+        if (isset($review['user_id']) && intval($review['user_id']) === intval($user_id)) {
+            return $review; 
+        }
+    }
+    return false;
+}
+
+
 /*============= User Review Submit Process and Save =============*/ 
 function lessonlms_handle_review_submission() {
 
@@ -26,6 +40,8 @@ function lessonlms_handle_review_submission() {
             if (!is_array($reviews)) {
                 $reviews = array();
             }
+
+            $updated = false;
 
             $new_review = array(
                 'rating' => $rating,

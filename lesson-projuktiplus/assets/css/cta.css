@@ -28,3 +28,7 @@ section.cta {
   width: 100%;
   height: 100%;
 }
+
+.custom-toast {
+    margin-top: 50px !important;
+}

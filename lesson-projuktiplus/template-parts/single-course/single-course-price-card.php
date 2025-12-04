@@ -17,7 +17,20 @@ if ($original_price > $regular_price && !empty($regular_price)) {
     $discount_price = (($original_price - $regular_price) / $original_price) * 100;
     $discount_price = round($discount_price, 2);
 }
+
 $current_user_id = get_current_user_id();
+$course_id = get_the_ID();
+$user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
+  $is_enrolled = false;
+
+  if( is_array($user_enrollments)){
+    foreach( $user_enrollments as $enrollment){
+        if( intval($enrollment['course_id']) === $course_id){
+           $is_enrolled = true;
+           break;
+        }
+    }
+  }
 
 ?>
 
@@ -42,11 +55,7 @@ $current_user_id = get_current_user_id();
         <?php endif; ?>
     </div>
     <div class="enroll">
-        <?php if ($current_user_id > 0): ?>
-            <button class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
-                Enroll Now
-            </button>
-        <?php else: ?>
+        <?php if ( !$current_user_id ): ?>
             <div class="login-required">
                 <p> Please Register or Login First</p>
                 <a class="login-btn" href="<?php echo wp_login_url(get_permalink()); ?>">
@@ -57,8 +66,18 @@ $current_user_id = get_current_user_id();
 
                 </a>
             </div>
+            
+            <?php elseif($is_enrolled):?>
+                 <button disabled style="cursor: not-allowed;" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
+                Enroled
+            </button>
 
+        <?php else: ?>
+            <button class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
+                Enroll Now
+            </button>
         <?php endif; ?>
+
     </div>
     <h3>This courses includes:</h3>
     <div class="courses-card-items item1">

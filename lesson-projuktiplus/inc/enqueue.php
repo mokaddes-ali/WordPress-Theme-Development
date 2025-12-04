@@ -41,6 +41,10 @@ function lessonlms_theme_enqueue_styles() {
     //AOS JS
     wp_enqueue_script('aos-js', 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js', array(), '2.3.4', true);
 
+   wp_enqueue_script(
+    'sweetalert-js','https://cdn.jsdelivr.net/npm/sweetalert2@11', array('jquery'), null, true);
+
+
     // Custom script to initialize AOS
     wp_add_inline_script('aos-js', 'AOS.init();');
 

@@ -170,7 +170,28 @@
                          courseElement.textContent = data.data + ' student enrolled';
                          this.textContent = "Enrolled";
                          this.disabled = true;
-                         alert("Enrolled Successfully");
+                         this.style.cursor = "not-allowed";
+                         document.querySelector(".review-warning").style.display = "none";
+                          document.querySelector(".student-form-wrapper").style.display = "block";
+
+                           const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            customClass: {
+                                popup: 'custom-toast'
+                            },
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                            });
+                            Toast.fire({
+                            icon: "success",
+                            title: "Course Purchase in successfully"
+                            });
                      } else {
                          if (data.data === 'Please login first to enroll') {
                              alert('Please login first to enroll');

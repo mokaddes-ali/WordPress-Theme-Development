@@ -25,10 +25,18 @@
 <div class="courses-tab-content" id="reviews">
     <h2 class="section-title">Students Review</h2>
 
-      <?php if(!empty($is_enrolled)):?>
-    <!-- Review Form -->
+    <!-- Warning (default: visible if not enrolled) -->
+    <p class="review-warning" style="<?php echo (!empty($is_enrolled)) ? 'display:none;' : 'display:block;'; ?>">
+        Please purchase course and login to submit a review.
+    </p>
+
+   <!-- Review Form -->
+    <div class="student-form-wrapper" style="<?php echo (!empty($is_enrolled)) ? 'display:block;' : 'display:none;'; ?>">
     <div class="student-form">
-        <h2 class="form-title">Add Review</h2>
+        <h2 class="form-title"> 
+            <?php echo esc_attr__("Add Review", "lessonlms");?>
+            <span>*</span>
+        </h2>
         <form method="post" action="<?php echo esc_url(get_permalink()); ?>" class="review-form">
             <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
 
@@ -36,7 +44,7 @@
             <div class="star-rating">
                 <?php for ($i = 5; $i >= 1; $i--): ?>
 
-                    <input type="radio" name="rating" id="rating-<?php echo $i; ?>" value="<?php echo $i; ?>">
+                    <input type="radio" name="rating" id="rating-<?php echo $i; ?>" value="<?php echo $i; ?>" required>
 
                     <label for="rating-<?php echo $i; ?>">★</label>
                 <?php endfor; ?>
@@ -44,13 +52,13 @@
 
             <!-- Name -->
             <div class="form-group">
-                <label for="reviewer_name">Your Name</label>
+                <label for="reviewer_name">Your Name <span>*</span></label>
                 <input type="text" name="reviewer_name" id="reviewer_name" required />
             </div>
 
             <!-- Message -->
             <div class="form-group">
-                <label for="review_text">Your Message</label>
+                <label for="review_text">Your Message <span>*</span></label>
                 <textarea name="review_text" id="review_text" required></textarea>
             </div>
 
@@ -58,7 +66,7 @@
             <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
         </form>
     </div>
-    <?php endif; ?>
+    </div>
 
     <!-- Reviews List -->
     <div class="student-reviews">
