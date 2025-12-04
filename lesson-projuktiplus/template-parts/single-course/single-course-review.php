@@ -7,6 +7,13 @@
  */
   $user_id = get_current_user_id();
   $course_id = get_the_ID();
+  $user_review = lessonlms_get_user_review($course_id, $user_id);
+  $button_text = $user_review ? "Update Review" : "Submit Review";
+ $old_name   = $user_review ? $user_review['name'] : "";
+$old_text   = $user_review ? $user_review['review'] : "";
+$old_rating = $user_review ? $user_review['rating'] : "";
+
+
   $user_enrollments = get_user_meta($user_id, '_user_enrollments', true);
   $is_enrolled = false;
 
@@ -41,29 +48,34 @@
             <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
 
             <!-- Star Rating -->
-            <div class="star-rating">
-                <?php for ($i = 5; $i >= 1; $i--): ?>
+           <div class="star-rating">
+            <?php for ($i = 5; $i >= 1; $i--): ?>
+                <input type="radio" name="rating" id="rating-<?php echo $i; ?>" 
+                    value="<?php echo $i; ?>" 
+                    <?php checked($old_rating, $i); ?> >
 
-                    <input type="radio" name="rating" id="rating-<?php echo $i; ?>" value="<?php echo $i; ?>" required>
-
-                    <label for="rating-<?php echo $i; ?>">★</label>
-                <?php endfor; ?>
+                 <label for="rating-<?php echo $i; ?>">★</label>
+               <?php endfor; ?>
             </div>
+
 
             <!-- Name -->
             <div class="form-group">
                 <label for="reviewer_name">Your Name <span>*</span></label>
-                <input type="text" name="reviewer_name" id="reviewer_name" required />
+                <input type="text" name="reviewer_name" id="reviewer_name"
+       value="<?php echo esc_attr($old_name); ?>" required />
             </div>
 
             <!-- Message -->
             <div class="form-group">
                 <label for="review_text">Your Message <span>*</span></label>
-                <textarea name="review_text" id="review_text" required></textarea>
+                <textarea name="review_text" id="review_text" required><?php echo esc_textarea($old_text); ?></textarea>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" name="submit_review" class="review-btn">Submit Review</button>
+            <button type="submit" name="submit_review" class="review-btn">
+                <?php echo $button_text; ?>
+            </button>
         </form>
     </div>
     </div>
