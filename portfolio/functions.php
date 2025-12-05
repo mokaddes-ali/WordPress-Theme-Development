@@ -48,3 +48,6 @@ function portfolioTheme_theme_enqueue_styles() {
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
 }
 add_action('wp_enqueue_scripts', 'portfolioTheme_theme_enqueue_styles');
+
+
+

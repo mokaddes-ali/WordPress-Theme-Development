@@ -4,7 +4,6 @@ include_once get_template_directory() .'/inc/enqueue.php';
 
 include_once get_template_directory() .'/inc/default.php';
 
-
 include_once get_template_directory() .'/inc/wideget.php';
 
 // Default pagination

@@ -195,9 +195,6 @@ $title = get_the_title();
           </div>
         </div>
 
-
-
-
 <!-- Comment Section -->
 <div class="comments">
   <?php
@@ -230,10 +227,15 @@ $title = get_the_title();
                 <?php echo esc_html(human_time_diff(strtotime($comment->comment_date), current_time('timestamp'))) ?> ago
               </span>
             </div>
-            <p class="comment-text"><?php echo esc_html($comment->comment_content); ?></p>
-            <a href="#" class="reply-btn">
-              <i class="fa-solid fa-reply"></i> Reply
-            </a>
+            <p class="comment-text">
+              <?php echo esc_html($comment->comment_content); ?>
+            </p>
+           <?php if ( current_user_can('manage_options') ) : ?>
+              <a href="#" class="reply-btn">
+                  <i class="fa-solid fa-reply"></i> Reply
+              </a>
+           <?php endif; ?>
+
 
             <!-- Replies -->
             <?php
@@ -254,10 +256,14 @@ $title = get_the_title();
                       <strong><?php echo esc_html($reply->comment_author); ?></strong>
                       <span class="time"><?php echo esc_html(human_time_diff(strtotime($reply->comment_date), current_time('timestamp'))) ?> ago</span>
                     </div>
-                    <p><?php echo esc_html($reply->comment_content); ?></p>
-                    <button class="reply-btn">
-                      <i class="fa-solid fa-reply"></i> Reply
-                    </button>
+                    <p>
+                      <?php echo esc_html($reply->comment_content); ?>
+                    </p>
+                   <?php if ( current_user_can('manage_options') ) : ?>
+                     <a href="#" class="reply-btn">
+                    <i class="fa-solid fa-reply"></i> Reply
+                    </a>
+                   <?php endif; ?>
                   </div>
                 </div>
               <?php endforeach; ?>
@@ -265,7 +271,9 @@ $title = get_the_title();
 
           </div>
         </div>
+       
       <?php endforeach; ?>
+      <?php the_comments_pagination();?>
     </div>
   <?php endif; ?>
 </div>
@@ -274,8 +282,10 @@ $title = get_the_title();
  <!-- Comment form -->
    <?php 
        comment_form([
+            'id_form' => 'ajax-comment-form',
             'fields' => [
               'author' => '<div class="form-row"><input type="text" id="author" name="author"  placeholder="Your Name">',
+              
               'email' => '<input type="email" id="email" name="email" placeholder="Your Email">
             </div>'
             ],
