@@ -44,7 +44,7 @@ $old_rating = $user_review ? $user_review['rating'] : "";
             <?php echo esc_attr__("Add Review", "lessonlms");?>
             <span>*</span>
         </h2>
-        <form method="post" action="<?php echo esc_url(get_permalink()); ?>" class="review-form">
+        <form id="ajax-review-form" method="post" action="<?php echo esc_url(get_permalink()); ?>" class="review-form">
             <input type="hidden" name="course_id" value="<?php echo get_the_ID(); ?>">
 
             <!-- Star Rating -->
@@ -63,17 +63,17 @@ $old_rating = $user_review ? $user_review['rating'] : "";
             <div class="form-group">
                 <label for="reviewer_name">Your Name <span>*</span></label>
                 <input type="text" name="reviewer_name" id="reviewer_name"
-       value="<?php echo esc_attr($old_name); ?>" required />
+       value="<?php echo esc_attr($old_name); ?>" />
             </div>
 
             <!-- Message -->
             <div class="form-group">
                 <label for="review_text">Your Message <span>*</span></label>
-                <textarea name="review_text" id="review_text" required><?php echo esc_textarea($old_text); ?></textarea>
+                <textarea name="review_text" id="review_text"><?php echo esc_textarea($old_text); ?></textarea>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" name="submit_review" class="review-btn">
+            <button id="review_submit_btn" type="submit" name="submit_review" class="review-btn">
                 <?php echo $button_text; ?>
             </button>
         </form>

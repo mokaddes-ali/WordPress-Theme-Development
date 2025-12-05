@@ -64,9 +64,13 @@
 
                  <?php endfor; ?>
 
-                 <span> <?php echo esc_html($avg_rating); ?> </span>
-
-                 <h4> ( <?php echo esc_html($total_reviews); ?> reviews)</h4>
+                 <span class="average-rating-count">
+                    <?php echo esc_html($avg_rating); ?>
+                </span>
+                 <h4>(<span class="total-reviews-count">
+                    <?php echo esc_html($total_reviews); ?>
+                </span> reviews)
+              </h4>
 
              </div>
 

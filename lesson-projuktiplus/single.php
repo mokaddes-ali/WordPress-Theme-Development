@@ -293,6 +293,7 @@ $title = get_the_title();
               <textarea id="comment" name="comment" placeholder="Your Comment"></textarea>
             </div>',
             'class_submit' => 'comment-button',
+            'id_submit'     => 'comment_submit_btn',
             'label_submit' => 'Post Comment'
        ]);
    
