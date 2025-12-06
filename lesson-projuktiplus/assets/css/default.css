@@ -48,7 +48,18 @@ svg {
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
 
+.black-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #171100;
+  color: #FFF;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 /*----- btn hover effect -----*/
@@ -76,6 +87,7 @@ svg {
   background-color: #FFB900;
   transform: scaleX(0);
   transform-origin: left;
+  transition: all 0.3s;
   z-index: -2;
 }
 

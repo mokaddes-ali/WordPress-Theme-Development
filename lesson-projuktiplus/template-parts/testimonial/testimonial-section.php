@@ -4,7 +4,7 @@
             <?php
             $testimonial = new WP_Query(array(
                 'post_type' => 'testimonials',
-                'posts_per_page' => 3, // 🔧 fixed key name
+                'posts_per_page' => 3,
                 'post_status' => 'publish',
                 'orderby' => 'date',
                 'order' => 'DESC',
@@ -20,6 +20,18 @@
                 echo '<p>' . __('No testimonials found', 'lessonlms') . '</p>';
             endif;
             ?>
+        </div>
+    </div>
+
+    <div class="testimonial-submit">
+
+        <div class="show-all-testimonial yellow-bg-btn See-Courses-btn">
+            <a href="#" > All Testimonial </a>
+        </div>
+
+
+        <div class="testimonial-submit-form black-btn See-Courses-btn">
+            <a href="<?php echo home_url('/testimonial-submit');?>">Submit Feedback </a>
         </div>
     </div>
 </section>

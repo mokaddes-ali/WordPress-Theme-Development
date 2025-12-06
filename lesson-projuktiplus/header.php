@@ -32,8 +32,6 @@
                             'fallback_cb' => false
                             )); 
                             ?>
-
-
                     </nav>
 
                     <!----- sign-up-btn ----->

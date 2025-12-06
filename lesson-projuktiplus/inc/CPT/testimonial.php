@@ -56,18 +56,18 @@ add_action('add_meta_boxes', 'lessonlms_testimonial_add_meta_box');
 
 function lessonlms_testimonial_add_meta_box_callback($post){
 
-    $student_destination = get_post_meta($post->ID,'student_destination', true);
+    $student_designation = get_post_meta($post->ID,'student_designation', true);
     ?>
     <div class="">
-        <label for="student_destination"> Student Destination / Course Name </label>
-        <input type="text" name="student_destination" id="student_destination" value="<?php echo esc_attr($student_destination);?>">
+        <label for="student_designation"> Student Destination / Course Name </label>
+        <input type="text" name="student_designation" id="student_designation" value="<?php echo esc_attr($student_designation);?>">
     </div>
     <?php
 }
 
 function lessonlms_testimonial_save_meta_data($post_id){
     $fields = [
-         'student_destination',
+         'student_designation',
     ];
     
     foreach($fields as $field){

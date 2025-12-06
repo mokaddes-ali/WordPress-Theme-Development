@@ -12,6 +12,9 @@ include_once get_template_directory() .'/inc/pagination.php';
 include_once get_template_directory() .'/inc/reviews.php';
 include_once get_template_directory() .'/inc/enroll.php';
 
+ get_template_part('inc/submit-feedback');
+
+
 
 // Custom Post Type
 include_once get_template_directory() .'/inc/CPT/courses.php';

@@ -81,7 +81,7 @@ $blog_page_description = get_theme_mod("blog_page_description", "Read our regula
                         </span>
                     </div>
 
-                    <div class="yellow-bg-btn read-more">
+                    <div class="black-btn read-more">
                         <a href="<?php the_permalink(); ?>">
                             <?php _e('Read More', 'lessonlms'); ?>
                         </a>

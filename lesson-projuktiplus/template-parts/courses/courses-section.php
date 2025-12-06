@@ -26,7 +26,7 @@
         <div class="flex justify-center mt-5">
             <div class="yellow-bg-btn See-Courses-btn">
                 <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-                    <?php esc_html_e('See Courses', 'lessonlms'); ?>
+                    <?php esc_html_e('See All Courses', 'lessonlms'); ?>
                 </a>
             </div>
         </div>

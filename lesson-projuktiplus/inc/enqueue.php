@@ -46,7 +46,7 @@ function lessonlms_theme_enqueue_styles() {
     'sweetalert-js','https://cdn.jsdelivr.net/npm/sweetalert2@11', array('jquery'), null, true);
 
     // ajax-comment-js
-    wp_enqueue_script( 'ajax-comment-js', get_template_directory_uri() . '/assets/js/ajax-comment.js', ['jquery'], null, true);
+    wp_enqueue_script( 'ajax-comment-js', get_template_directory_uri() . '/assets/js/ajax-comment.js', ['jquery', 'sweetalert-js'], null, true);
     wp_localize_script( 'ajax-comment-js', 'lessonlms_ajax_comment_obj',[
       'ajax_url' => admin_url('admin-ajax.php'),
        'nonce' => wp_create_nonce('lessonlms_ajax_comment_nonce')
@@ -56,10 +56,18 @@ function lessonlms_theme_enqueue_styles() {
         // ajax-review-js
     wp_enqueue_script( 'ajax-review-js', get_template_directory_uri() . '/assets/js/ajax-review.js', ['jquery', 'sweetalert-js'], null, true );
 
-
     wp_localize_script( 'ajax-review-js', 'lessonlms_ajax_review_obj',[
       'ajax_url' => admin_url('admin-ajax.php'),
        'nonce' => wp_create_nonce('lessonlms_ajax_review_nonce')
+    ]);
+
+          // ajax-feedback-js
+    wp_enqueue_script( 'ajax-feedback-js', get_template_directory_uri() . '/assets/js/ajax-feedback.js', ['jquery', 'sweetalert-js'], null, true );
+
+
+    wp_localize_script( 'ajax-feedback-js', 'lessonlms_ajax_feedback_obj',[
+      'ajax_url' => admin_url('admin-ajax.php'),
+       'nonce' => wp_create_nonce('lessonlms_ajax_feedback_nonce')
     ]);
 
 

@@ -41,7 +41,7 @@
             ?>
             <span class="price">$<?php echo esc_html($price); ?></span>
 
-            <div class="yellow-bg-btn book-now">
+            <div class="black-btn book-now">
                 <a href="<?php echo esc_url(get_permalink()); ?>">
                     <?php esc_html_e('Book Now', 'lessonlms'); ?>
                 </a>

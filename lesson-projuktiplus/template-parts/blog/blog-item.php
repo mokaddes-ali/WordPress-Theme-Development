@@ -25,7 +25,7 @@
             </span>
         </div>
 
-        <div class="yellow-bg-btn read-more">
+        <div class="black-btn read-more">
             <a href="<?php the_permalink(); ?>"><?php _e('Read More', 'lessonlms'); ?></a>
         </div>
     </div>

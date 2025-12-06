@@ -16,9 +16,9 @@
             <h3><?php the_title(); ?></h3>
             <span>
                 <?php
-                $destination = get_post_meta(get_the_ID(), "student_destination", true);
-                if (!empty($destination)) {
-                    echo esc_html(wp_trim_words($destination, 7, '...'));
+                $student_designation = get_post_meta(get_the_ID(), "student_designation", true);
+                if (!empty($student_designation)) {
+                    echo esc_html(wp_trim_words($student_designation, 7, '...'));
                 }
                 ?>
             </span>
