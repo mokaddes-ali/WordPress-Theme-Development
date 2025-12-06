@@ -26,6 +26,7 @@ function lessonlms_testimonial_register(){
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
+        'show_in_rest'       => true,
         'rewrite'            => array( 'slug' => 'testimonials' ),
         'capability_type'    => 'post',
         'has_archive'        => false,

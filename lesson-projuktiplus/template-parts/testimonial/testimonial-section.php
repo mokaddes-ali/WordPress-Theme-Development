@@ -26,7 +26,7 @@
     <div class="testimonial-submit">
 
         <div class="show-all-testimonial yellow-bg-btn See-Courses-btn">
-            <a href="#" > All Testimonial </a>
+            <a href="<?php echo esc_url( get_post_type_archive_link('testimonials')); ?>" > All Testimonial </a>
         </div>
 
 

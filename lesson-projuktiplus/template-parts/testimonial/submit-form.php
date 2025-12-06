@@ -18,12 +18,14 @@ $old_data = get_posts([
 $old_name = "";
 $old_designation = "";
 $old_feedback = "";
+$button_text = !empty($old_data) ? "Update Feedback" : "Submit Feedback";
 
 if(!empty($old_data)){
     $post_id = $old_data[0]->ID;
     $old_name = get_the_title($post_id);
     $old_feedback = get_post_field('post_content', $post_id);
     $old_designation = get_post_meta($post_id, 'student_designation', true);
+    $old_image_id = get_post_thumbnail_id($post_id);
 }
 
 ?>
@@ -33,7 +35,7 @@ if(!empty($old_data)){
         <h1 class="common-heading">Give Your Valuable Feedback</h1>
     </div>
 
-    <form id="ajax-feedback-form" method="post">
+    <form id="ajax-feedback-form" method="post" enctype="multipart/form-data">
         
         <?php wp_nonce_field('testimonial_form_action', 'testimonial_nonce_field'); ?>
 
@@ -58,8 +60,26 @@ if(!empty($old_data)){
             <textarea id="student_feedback" name="student_feedback" placeholder="Write your feedback here..."><?php echo esc_textarea($old_feedback); ?></textarea>
         </div>
 
+      <div class="student-image">
+    <label>Your Photo</label>
+    <input id="student_image" name="student_image" type="file" accept="image/*">
+    
+    <div class="current-image" id="image-preview-container" style="<?php echo empty($old_image_id) ? 'display:none;' : ''; ?>">
+        <p>Current Image:</p>
+        <?php 
+        if(!empty($old_image_id)) {
+             echo wp_get_attachment_image($old_image_id, 'thumbnail', false, ['id' => 'preview_img_tag']); 
+        } else {
+             // Placeholder if no image exists yet
+             echo '<img id="preview_img_tag" src="" style="max-width:150px;">';
+        }
+        ?>
+    </div>
+</div>
+
+
         <button id="feedback_submit_btn" type="submit" class="submit-btn yellow-bg-btn">
-            Submit Feedback
+            <?php echo $button_text?>
         </button>
     </form>
 </div>

@@ -19,16 +19,24 @@ jQuery(document).ready(function($){
         e.preventDefault();
 
         let form = $(this);
-        let data = form.serialize();
         let submit_btn = $('#feedback_submit_btn');
 
-        data += '&action=lessonlms_ajax_feedback'; 
-        data += '&security=' + lessonlms_ajax_feedback_obj.nonce;
+        // === CHANGE: Use FormData for file uploads ===
+        let formData = new FormData(this);
+        
+        // Append action and nonce manually to FormData
+        formData.append('action', 'lessonlms_ajax_feedback');
+        formData.append('security', lessonlms_ajax_feedback_obj.nonce);
 
         $.ajax({
             url: lessonlms_ajax_feedback_obj.ajax_url,
             type: "POST",
-            data: data,
+            data: formData,
+            
+            // === CHANGE: Required for FormData ===
+            processData: false, 
+            contentType: false, 
+            // =====================================
 
             beforeSend: function(){
                 submit_btn.prop('disabled', true);
@@ -39,15 +47,21 @@ jQuery(document).ready(function($){
 
                 if(response.success){
 
-                submit_btn.prop('disabled', false);
-                submit_btn.html('Update Feedback');
+                    submit_btn.prop('disabled', false);
+                    submit_btn.html('Update Feedback');
 
-                   $('#student_name').val(response.data.student_name);
-                   
+                    $('#student_name').val(response.data.student_name);
                     $('#student_designation').val(response.data.student_designation);
                     $('#student_feedback').val(response.data.student_feedback);
 
-                    // BUTTON TEXT CHANGE
+                    // === NEW: Update Image Preview ===
+                    if(response.data.new_image_url){
+                        $('#preview_img_tag').attr('src', response.data.new_image_url);
+                        $('#image-preview-container').show();
+                        // Reset file input
+                        $('#student_image').val(''); 
+                    }
+
                     $('#feedback_submit_btn').text("Update Feedback");
 
                     Toast.fire({
@@ -56,17 +70,18 @@ jQuery(document).ready(function($){
                     });
 
                 } else {
+                    submit_btn.prop('disabled', false);
+                    submit_btn.html('Submit Feedback');
                     Toast.fire({
                         icon: 'error',
                         title: response.data || 'Please Check Error'
                     });
-
                 }
             },
 
             error: function(){
                 submit_btn.prop('disabled', false);
-                submit_btn.val('Submit Feedback');
+                submit_btn.text('Submit Feedback');
 
                 Toast.fire({
                     icon: 'error',
@@ -77,4 +92,3 @@ jQuery(document).ready(function($){
 
     });
 });
-
