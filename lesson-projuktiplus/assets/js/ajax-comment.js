@@ -22,7 +22,7 @@ jQuery(document).ready(function($){
         let data = form.serialize();
         let submit_btn = $('#comment_submit_btn');
 
-        data += '&action=lessonlms_ajax_comment'; 
+        data += '&action=lessonlms_ajax_comment';
         data += '&security=' + lessonlms_ajax_comment_obj.nonce;
 
         $.ajax({
@@ -75,4 +75,3 @@ jQuery(document).ready(function($){
 
     });
 });
-

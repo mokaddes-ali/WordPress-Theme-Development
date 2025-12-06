@@ -278,26 +278,40 @@ $title = get_the_title();
   <?php endif; ?>
 </div>
 
+<?php 
+comment_form([
+    'id_form' => 'ajax-comment-form',
+    'comment_notes_before' => '',
+    'comment_notes_after'  => '',
 
- <!-- Comment form -->
-   <?php 
-       comment_form([
-            'id_form' => 'ajax-comment-form',
-            'fields' => [
-              'author' => '<div class="form-row"><input type="text" id="author" name="author"  placeholder="Your Name">',
-              
-              'email' => '<input type="email" id="email" name="email" placeholder="Your Email">
-            </div>'
-            ],
-            'comment_field' => '<div class="form-row">
-              <textarea id="comment" name="comment" placeholder="Your Comment"></textarea>
-            </div>',
-            'class_submit' => 'comment-button',
-            'id_submit'     => 'comment_submit_btn',
-            'label_submit' => 'Post Comment'
-       ]);
-   
-  ?>
+    'fields' => [
+        'author' => '
+        <div class="form-row">
+            <input type="text" id="author" name="author" placeholder="Your Name">
+        </div>
+        ',
+
+        'email' => '
+        <div class="form-row">
+            <input type="email" id="email" name="email" placeholder="Your Email">
+        </div>
+        ',
+    ],
+
+    'comment_field' => '
+        <div class="form-row">
+            <textarea id="comment" name="comment" placeholder="Your Comment"></textarea>
+        </div>
+        <input type="hidden" name="comment_post_ID" value="' . get_the_ID() . '">
+        <input type="hidden" name="comment_parent" value="0">
+    ',
+
+    'class_submit' => 'comment-button',
+    'id_submit'     => 'comment_submit_btn',
+    'label_submit' => 'Post Comment'
+]);
+?>
+
       <?php endwhile; else: ?>
       <p>No posts found.</p>
     <?php endif; ?>

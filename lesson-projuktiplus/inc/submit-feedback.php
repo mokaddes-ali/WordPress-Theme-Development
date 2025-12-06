@@ -10,9 +10,7 @@ function lessonlms_ajax_feedback(){
     if(isset($_POST['submit_testimonial_form']) && $_SERVER['REQUEST_METHOD'] == 'POST' ){
 
         // nonce check
-        if( !isset($_POST['security']) || !wp_verify_nonce($_POST['security'], 'lessonlms_ajax_feedback_nonce') ){
-            wp_send_json_error("Security verification failed!");
-        }
+        if( isset($_POST['security']) && wp_verify_nonce($_POST['security'], 'lessonlms_ajax_feedback_nonce') ){
 
         //  data sanitize
         $student_name        = !empty($_POST['student_name']) ? sanitize_text_field($_POST['student_name']) : '';
@@ -97,8 +95,6 @@ function lessonlms_ajax_feedback(){
             }
         }
         // ==============================================
-
-
         // SUCCESS RESPONSE
         $message = $is_update ? "Your testimonial has been updated successfully!" : "Your testimonial has been added successfully!";
 
@@ -109,6 +105,9 @@ function lessonlms_ajax_feedback(){
             "student_designation" => $student_designation,
             "new_image_url"       => $new_image_url
         ]);
+    }else{
+         wp_send_json_error("Security verification failed!");
+        }
     }
 
     wp_send_json_error("Invalid Request!");

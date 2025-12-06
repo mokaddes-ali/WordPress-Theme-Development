@@ -29,7 +29,7 @@ function lessonlms_testimonial_register(){
         'show_in_rest'       => true,
         'rewrite'            => array( 'slug' => 'testimonials' ),
         'capability_type'    => 'post',
-        'has_archive'        => false,
+        'has_archive'        => true,
         'hierarchical'       => false,
         'menu_icon'          => 'dashicons-format-quote',
         'menu_position'      => 33,
