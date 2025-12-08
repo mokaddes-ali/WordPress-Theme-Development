@@ -127,4 +127,39 @@ $('.review-form').on('submit', function(e) {
   }
 });
 
+
+$(function(){
+
+  // Accordion Toggle
+  $('.course-structure-module-header').on('click', function(){
+    let module = $(this).closest('.course-structure-module-block');
+    let list = module.find('.course-structure-lecture-list');
+
+    if(list.is(':visible')){
+      list.slideUp(200);
+      module.removeClass('open');
+    } else {
+      list.slideDown(200);
+      module.addClass('open');
+    }
+  });
+
+  // Video Popup
+  $('.preview-video').magnificPopup({
+    type:'iframe',
+    callbacks:{
+      elementParse:function(item){
+        let video = item.el.attr('data-video');
+        if(video.includes("youtube.com")){
+          let id = video.split("v=")[1];
+          item.src = "https://www.youtube.com/embed/" + id + "?autoplay=1&rel=0";
+        } else {
+          item.src = video;
+        }
+      }
+    }
+  });
+
+});
+
 });

@@ -29,7 +29,6 @@
                     $stats = lessonlms_get_review_stats(get_the_ID());
                     $total_reviews = $stats['total_reviews'];
                     $avg_rating = $stats['average_rating'];
-
                     ?>
                  <?php for ($i = 1; $i <= 5; $i++) : ?>
                      <?php if ($i <= $avg_rating): ?>
@@ -85,6 +84,14 @@
 
              </div>
 
+             <div class="course-category">
+                <h4>Category: Web Development</h4>
+             </div>
+
+             <div class="course-level">
+                <h4> Level: Intermediate </h4>
+             </div>
+
          </div>
 
          <div class="single-courses-wrapper">
@@ -99,7 +106,9 @@
                      <?php get_template_part('template-parts/single-course/course', 'overview'); ?>
                  </div>
                  
-                 <div class="courses-tab-content" id="curriculum">Curriculum Content</div>
+                 <div class="courses-tab-content" id="curriculum">
+                     <?php get_template_part('template-parts/single-course/single-course', 'curriculum'); ?>
+                </div>
                  <div class="courses-tab-content" id="instructor">Instructor Content</div>
 
                  <?php get_template_part('template-parts/single-course/single-course', 'review'); ?>

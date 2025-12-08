@@ -34,6 +34,9 @@ function lessonlms_theme_enqueue_styles() {
     // jQuery
     wp_enqueue_script('jquery');
 
+     // magnific-popup.js
+     wp_enqueue_script('magnific-popup.js', 'https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js', array('jquery'), '1.1.0', true);
+
     // Slick JS
     wp_enqueue_script('slick-js', 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js', array('jquery'), '1.9.0', true);
 
