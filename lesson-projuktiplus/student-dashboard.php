@@ -6,12 +6,24 @@ Template Name: Student Dashboard
 get_header();
 ?>
 
+  <!-- TOPBAR -->
+   <div class="container">
+        <div class="student-dashboard-topbar">
+            <div class="topbar-breadcrumb">
+                <i class="fa-solid fa-house"></i> Home 
+                <i class="fa-solid fa-angle-right"></i> Dashboard
+            </div>
+
+            <div class="topbar-user-icon">
+               <span>Welcome Mokaddes Ali</span> <i class="fa-solid fa-circle-user"></i>
+            </div>
+        </div>
+     </div>
+
 <div class="student-dashboard-wrapper container">
 
     <!-- LEFT SIDEBAR -->
     <div class="dashboard-left-sidebar">
-
-        <h2 class="sidebar-menu-title">Student Panel</h2>
 
         <ul class="sidebar-menu-items">
 
@@ -57,18 +69,6 @@ get_header();
 
     <!-- MAIN CONTENT -->
     <div style="width:100%;">
-        
-        <!-- TOPBAR -->
-        <div class="student-dashboard-topbar">
-            <div class="topbar-breadcrumb">
-                <i class="fa-solid fa-house"></i> Home 
-                <i class="fa-solid fa-angle-right"></i> Dashboard
-            </div>
-
-            <div class="topbar-user-icon">
-                <i class="fa-solid fa-circle-user"></i>
-            </div>
-        </div>
 
         <!-- Dashboard Body -->
         <div class="student-dashboard-main">
