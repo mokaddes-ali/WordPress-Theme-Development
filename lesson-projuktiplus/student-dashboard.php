@@ -4,6 +4,14 @@ Template Name: Student Dashboard
 */
 
 get_header();
+
+if(!is_user_logged_in()){
+    wp_login_url();
+    exit;
+}
+
+$current_user = wp_get_current_user();
+
 ?>
 
   <!-- TOPBAR -->
@@ -15,7 +23,10 @@ get_header();
             </div>
 
             <div class="topbar-user-icon">
-               <span>Welcome Mokaddes Ali</span> <i class="fa-solid fa-circle-user"></i>
+               <span>
+                <?php echo esc_attr__('Welcome' . ' ' . $current_user->display_name, 'lessonlms'); ?>
+            </span>
+             <i class="fa-solid fa-circle-user"></i>
             </div>
         </div>
      </div>
@@ -29,37 +40,36 @@ get_header();
 
             <li class="active">
                 <a href="<?php echo site_url('/student-dashboard'); ?>">
-                    <i class="fa-solid fa-gauge"></i> Dashboard
+                    <i class="fa-solid fa-gauge"></i> 
+                    <?php echo esc_html__('Dashboard', 'lessonlms'); ?>
                 </a>
             </li>
 
             <li>
                 <a href="<?php echo site_url('/my-account'); ?>">
-                    <i class="fa-solid fa-user"></i> My Account
+                    <i class="fa-solid fa-user"></i>
+                    <?php echo esc_html__('My Account', 'lessonlms'); ?>
                 </a>
             </li>
 
             <li>
                 <a href="<?php echo site_url('/my-enrollments'); ?>">
-                    <i class="fa-solid fa-list"></i> My Enrollments
-                </a>
-            </li>
-
-            <li>
-                <a href="<?php echo site_url('/my-courses'); ?>">
-                    <i class="fa-solid fa-book"></i> My Courses
+                    <i class="fa-solid fa-list"></i>
+                 <?php echo esc_html__('My Enrollments', 'lessonlms'); ?> 
                 </a>
             </li>
 
             <li>
                 <a href="<?php echo site_url('/change-password'); ?>">
-                    <i class="fa-solid fa-key"></i> Change Password
+                 <i class="fa-solid fa-key"></i> 
+                 <?php echo esc_html__('Change Password', 'lessonlms'); ?> 
                 </a>
             </li>
 
             <li>
-                <a href="<?php echo wp_logout_url(); ?>">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                <a href="<?php echo esc_url(wp_logout_url(), 'lessonlms'); ?>">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <?php echo esc_html__('Logout', 'lessonlms'); ?>  
                 </a>
             </li>
 
@@ -72,34 +82,21 @@ get_header();
 
         <!-- Dashboard Body -->
         <div class="student-dashboard-main">
-            
-            <h2 class="dashboard-heading">Welcome to Your Dashboard</h2>
 
             <div class="dashboard-cards-grid">
-
+                
                 <div class="dashboard-card-box">
-                    <div class="dashboard-card-title">Total Sales</div>
+                    <div class="dashboard-card-title">Your Enrollments</div>
                     <div class="dashboard-card-number">0</div>
                 </div>
-
+                
                 <div class="dashboard-card-box">
-                    <div class="dashboard-card-title">Total Enrolls</div>
+                    <div class="dashboard-card-title">Favourite Courses</div>
                     <div class="dashboard-card-number">0</div>
-                </div>
-
-                <div class="dashboard-card-box">
-                    <div class="dashboard-card-title">Active Courses</div>
-                    <div class="dashboard-card-number">0</div>
-                    <a href="<?php echo site_url('/my-courses'); ?>" class="dashboard-view-course-btn">View Courses</a>
                 </div>
 
                 <div class="dashboard-card-box">
                     <div class="dashboard-card-title">Completed Courses</div>
-                    <div class="dashboard-card-number">0</div>
-                </div>
-
-                <div class="dashboard-card-box">
-                    <div class="dashboard-card-title">Your Enrollments</div>
                     <div class="dashboard-card-number">0</div>
                 </div>
 
