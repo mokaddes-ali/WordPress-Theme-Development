@@ -128,14 +128,17 @@ $('.review-form').on('submit', function(e) {
 });
 
 
-$(function(){
+  // default open
+  $('.course-structure-module-block.open')
+  .find('.course-structure-lecture-list')
+   .show();
 
   // Accordion Toggle
   $('.course-structure-module-header').on('click', function(){
     let module = $(this).closest('.course-structure-module-block');
     let list = module.find('.course-structure-lecture-list');
 
-    if(list.is(':visible')){
+    if (list.is(':visible')) {
       list.slideUp(200);
       module.removeClass('open');
     } else {
@@ -159,7 +162,4 @@ $(function(){
       }
     }
   });
-
-});
-
 });

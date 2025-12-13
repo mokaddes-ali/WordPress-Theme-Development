@@ -89,8 +89,8 @@
       </div>
     </div>
 
-     <!-- MODULE 2 -->
-    <div class="course-structure-module-block open">
+    <!-- MODULE 2 -->
+    <div class="course-structure-module-block">
 
       <div class="course-structure-module-header">
         <div class="course-structure-module-left">
@@ -103,7 +103,7 @@
         <div class="course-structure-chevron-icon">›</div>
       </div>
 
-      <div class="course-structure-lecture-list" style="display:block">
+      <div class="course-structure-lecture-list">
 
         <!-- Lecture -->
         <div class="course-structure-lecture-item">
@@ -153,22 +153,24 @@
           </div>
         </div>
 
+      </div>
+    </div>
 
-         <!-- MODULE 3 -->
-    <div class="course-structure-module-block open">
+    <!-- MODULE 3 -->
+    <div class="course-structure-module-block">
 
       <div class="course-structure-module-header">
         <div class="course-structure-module-left">
           <div class="course-structure-module-icon-box">1</div>
           <div class="course-structure-module-information">
-            <h4>Module 3: Introduction</h4>
+            <h4>Module 1: Introduction</h4>
             <p>(3 lectures · 3 hours 5 minutes)</p>
           </div>
         </div>
         <div class="course-structure-chevron-icon">›</div>
       </div>
 
-      <div class="course-structure-lecture-list" style="display:block">
+      <div class="course-structure-lecture-list">
 
         <!-- Lecture -->
         <div class="course-structure-lecture-item">
@@ -221,9 +223,7 @@
       </div>
     </div>
 
-      </div>
+
     </div>
   </div>
-</div>
-   
 </div>
