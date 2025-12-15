@@ -4,7 +4,7 @@
 
     <div class="hero-btns">
         <div class="yellow-bg-btn See-Courses-btn">
-            <a href="<?php echo esc_url(get_theme_mod('courses_button_url','#')); ?>">
+            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
                 <?php echo esc_html(get_theme_mod('courses_button_text','See Courses')); ?>
             </a>
         </div>

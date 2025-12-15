@@ -196,27 +196,87 @@ function lessonlms_courses_featured_meta_box(){
         'Featured',
         'lessonlms_courses_featured_callback',
         'courses',
-        'side',  // sidebar-এ দেখানোর জন্য "side"
+        'side',
         'high'
     );
 }
 add_action('add_meta_boxes', 'lessonlms_courses_featured_meta_box');
 
 function lessonlms_courses_featured_callback($post){
-    // Save করা value বের করা
+    // Save value
     $featured = get_post_meta($post->ID, '_is_featured', true);
     ?>
-    <label for="_is_featured">Select Featured Status:</label>
-    <select name="_is_featured" id="_is_featured" style="width:100%;">
-        <option value="" <?php selected($featured, ''); ?>>None</option>
-        <option value="yes" <?php selected($featured, 'yes'); ?>>Yes</option>
-        <option value="no" <?php selected($featured, 'no'); ?>>No</option>
-    </select>
+    <div class="featured-check">
+        <label for="_is_featured">Show Featured Course:</label>
+        <br>
+        <input type="checkbox" value="yes" name="_is_featured" id="_is_featured" <?php checked( $featured, 'yes' ); ?>>
+    </div>
+
+    <style>
+
+.featured-check{
+  position: absolute;
+}
+
+.featured-check label{
+ display: inline-block;
+ padding-bottom: 20px;
+}
+
+.featured-check input[type="checkbox"]{
+   -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+
+  position: relative;
+  width: 80px;
+  height: 40px;
+  background: #c6c6c6 !important;
+  outline: none;
+  border-radius: 20px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
+  transition: 0.5s;
+}
+
+.featured-check input[type="checkbox"]:checked{
+  background: #FFB900 !important;
+  outline: none;
+
+}
+
+.featured-check input[type="checkbox"]::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background: #fff;
+  transition: .5s;
+  transform: scale(1.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+
+}
+
+.featured-check input[type="checkbox"]:checked::before{
+     left: 40px;
+       background: #fff;
+  
+}
+    </style>
     <?php
 }
+
 function lessonlms_courses_save_featured_meta($post_id){
-    if(isset($_POST['_is_featured'])){
+    if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
+
+    if ( !current_user_can('edit_post', $post_id) ) return;
+
+    if ( isset($_POST['_is_featured']) && $_POST['_is_featured'] === 'yes' ) {
         update_post_meta($post_id, '_is_featured', sanitize_text_field($_POST['_is_featured']));
+    } else {
+        delete_post_meta($post_id, '_is_featured');
     }
 }
 add_action('save_post_courses', 'lessonlms_courses_save_featured_meta');
