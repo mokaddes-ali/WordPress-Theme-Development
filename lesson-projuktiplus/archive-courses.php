@@ -29,9 +29,9 @@
             $couses = new WP_Query(array(
                 "post_type" => "courses",
                 'post_status' => 'publish',
-                'orderby' => 'date',
+                'orderby'        => 'date',
                 'order' => 'DESC',
-                 'posts_per_page' => -1
+                'posts_per_page' => -1
             ));
             if ($couses->have_posts()):
                 while ($couses->have_posts()): $couses->the_post();

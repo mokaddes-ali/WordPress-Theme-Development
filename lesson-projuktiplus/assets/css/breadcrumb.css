@@ -4,7 +4,7 @@
 .page-section {
   background-size: cover;
   background-position: center;
-  height: 50vh;
+  height: 40vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,7 +23,7 @@
 }
 
 .page-title {
-  padding-top: 10%;
+  padding-top: 7.5%;
   font-size: 2rem;
   font-weight: bold;
 }

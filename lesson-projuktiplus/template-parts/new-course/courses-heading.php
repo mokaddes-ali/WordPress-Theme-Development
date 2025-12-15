@@ -1,7 +1,6 @@
   <?php
-    $course_section_title = get_theme_mod('course_section_title', 'Our Popular Courses');
-    $course_section_description = get_theme_mod('course_section_description', 'Build new skills with trendy courses and shine for the next future career.');
-
+    $course_section_title = get_theme_mod('course_section_title', 'Featured Courses');
+    $course_section_description = get_theme_mod('course_section_description', 'Discover courses designed to help you excel in your professional and personal growth.');
     ?>
 
 

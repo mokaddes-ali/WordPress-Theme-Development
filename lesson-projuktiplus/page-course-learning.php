@@ -19,6 +19,7 @@ if ( $course_id <= 0 ) {
 }
 
 $course = get_post( $course_id );
+
 if ( ! $course || $course->post_status !== 'publish' ) {
     echo '<p>Course not found</p>';
     get_footer();

@@ -1,14 +1,21 @@
 <section class="courses">
     <div class="container">
-        <?php get_template_part('template-parts/courses/courses', 'heading'); ?>
+        <?php get_template_part('template-parts/new-course/courses', 'heading'); ?>
 
         <div class="courses-wrapper slick-items">
             <?php
             $courses = new WP_Query([
                 'post_type'      => 'courses',
                 'posts_per_page' => 6,
-                'meta_key'       => '_enrolled_students',
-                'orderby'        => 'meta_value_num',
+                'meta_query'     =>[
+                                  [
+                                    'key'      => '_is_featured',
+                                    'value'    => 'yes',
+                                    'compare'  => '='
+                                  ]
+                              
+                                   ],
+                'orderby'        => 'date',
                 'order'          => 'DESC',
             ]);
 
@@ -22,14 +29,6 @@
                 echo '<h2>' . __('Courses Not Found', 'lessonlms') . '</h2>';
             endif;
             ?>
-        </div>
-
-        <div class="flex justify-center mt-5">
-            <div class="yellow-bg-btn See-Courses-btn">
-                <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-                    <?php esc_html_e('See All Courses', 'lessonlms'); ?>
-                </a>
-            </div>
         </div>
     </div>
 </section>

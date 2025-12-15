@@ -21,12 +21,14 @@ $current_user = wp_get_current_user();
                 <a href="<?php echo esc_url('/');?>">
                 <?php echo esc_html__('Home', 'lessonlms');?> 
                 </a>
+
                 <?php if ( !is_page('student-dashboard') ) : ?>
                 <i class="fa-solid fa-angle-right"></i> 
                 <a href="<?php echo esc_url( home_url('/student-dashboard') ); ?>">
                 <?php echo esc_html__( 'Dashboard');?> 
                 </a>
                 <?php endif; ?>
+                
                 <i class="fa-solid fa-angle-right"></i> 
                 <a href="<?php echo esc_url( get_permalink() ); ?>">
                 <?php echo esc_html( get_the_title());?> 

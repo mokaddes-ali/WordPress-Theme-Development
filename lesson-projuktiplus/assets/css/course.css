@@ -25,23 +25,6 @@
   max-width: 458px;
 }
 
-.courses-heading h2 {
-  color: #171100;
-  font-size: 38px;
-  font-weight: 700;
-  line-height: 126.316%;
-  letter-spacing: -0.76px;
-  margin-bottom: 16px;
-}
-
-.courses-heading p {
-  color: #5F5B53;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 166.667%;
-  max-width: 458px;
-}
-
 .courses-wrapper {
   display: flex;
   justify-content: space-between;
