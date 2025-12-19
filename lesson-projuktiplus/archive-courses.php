@@ -1,6 +1,19 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template Name: Archive Courses
+ * 
+ * @package lessonlms
+ */
 
-<?php get_template_part('sections/pageTitle'); ?>
+    $page_title =  get_theme_mod('courses_page_title', 'All Courses');
+    $page_description = get_theme_mod('courses_page_description', 'Build new skills with new trendy courses and shine for the next future career.');
+                    
+
+    get_header();
+
+    get_template_part('sections/pageTitle');
+ ?>
+
 
 <!----- Courses section ----->
 <section class="courses">
@@ -14,11 +27,6 @@
     <!-- courses right side -->
      <div class="course-right-side">
 
-        <?php
-        $page_title =  get_theme_mod('courses_page_title', 'All Courses');
-
-        $page_description = get_theme_mod('courses_page_description', 'Build new skills with new trendy courses and shine for the next future career.');
-        ?>
         <div class="heading courses-heading">
             <h2><?php echo esc_html($page_title); ?></h2>
             <p><?php echo esc_html($page_description); ?></p>
@@ -33,16 +41,15 @@
                 'order' => 'DESC',
                 'posts_per_page' => -1
             ));
+            
             if ($couses->have_posts()):
                 while ($couses->have_posts()): $couses->the_post();
 
-                    $rating = get_post_meta(get_the_ID(), "rating", true);
-                    $price  = get_post_meta(get_the_ID(), "regular_price", true);
-
-
-                    $rating = !empty($rating) ? $rating : "0.00";
-                    $price = !empty($price) ? $price : '0.00';
-
+                $stats = lessonlms_get_review_stats(get_the_ID());
+                $price  = get_post_meta(get_the_ID(), "regular_price", true);
+                $avg_rating = $stats['average_rating'];
+                $avg_rating = !empty($avg_rating) ? $avg_rating : '0.0';
+                $price = !empty($price) ? $price : '0.00';
             ?>
             <!----- course ----->
             <div class="course course-1 active-btn">
@@ -79,7 +86,7 @@
                             </svg>
 
                             <span>
-                                <?php echo esc_html($rating); ?>
+                                <?php echo esc_html($avg_rating); ?>
                             </span>
                         </div>
                     </div>

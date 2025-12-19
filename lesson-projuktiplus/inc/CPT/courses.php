@@ -1,11 +1,10 @@
 <?php 
 /**
- * Register Courses
+ * Template Name: Register Courses
+ * 
+ * @package lessonlms
  */
 
-
-
-// Register Course 
 function lessonlms_custome_courses_register(){
     $labels = array(
         'name'                  => __( 'Courses', 'lessonlms' ),
@@ -37,8 +36,8 @@ function lessonlms_custome_courses_register(){
         'hierarchical'       => false,
         'menu_icon'          => 'dashicons-welcome-learn-more',
         'menu_position'      => 20,
-        'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-        'taxonomies'         => array( 'course_category'),
+        'supports'           => array( 'title', 'editor', 'thumbnail'),
+        'taxonomies'         => array( 'course_category', 'course_level'),
         'show_in_rest'       => true
     );
   
@@ -79,7 +78,6 @@ add_action('add_meta_boxes', 'lessonlms_courses_add_meta_box');
 
 function lessonlms_couses_add_meta_box_callback($post){
     $regular_price = get_post_meta($post->ID,'regular_price', true);
-    $rating = get_post_meta($post->ID,'rating', true);
     $original_price = get_post_meta($post->ID,'original_price', true);
     $video_hours = get_post_meta($post->ID,'video_hours', true);
     $downlable_resource = get_post_meta($post->ID,'downlable_resource', true);
@@ -87,10 +85,6 @@ function lessonlms_couses_add_meta_box_callback($post){
     $language = get_post_meta($post->ID,'language', true);
     $sub_title_language = get_post_meta($post->ID,'sub_title_language', true);
     ?>
-     <div class="" style="margin: 15px 0px;">
-        <label for="rating">Course Rating</label>
-        <input type="number" step="0.1" name="rating" id="rating" value="<?php echo esc_attr($rating);?>">
-    </div>
 
      <div class="" style="margin: 15px 0px;">
         <label for="video_hours">Video Hours</label>
@@ -130,7 +124,6 @@ function lessonlms_couses_add_meta_box_callback($post){
 function lessonlms_courses_save_meta_data($post_id){
     $fields = [
          'regular_price',
-         'rating',
          'original_price',
          'video_hours',
          'downlable_resource',
@@ -142,7 +135,6 @@ function lessonlms_courses_save_meta_data($post_id){
     foreach($fields as $field){
         if(isset($_POST[$field])){
         update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
-
     }
 
 }
@@ -169,7 +161,7 @@ function lessonlms_register_course_level_taxonomy() {
 
     register_taxonomy('course_level', 'courses', array(
         'labels'            => $labels,
-        'hierarchical'      => true, // ✔ checkbox system
+        'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
@@ -208,7 +200,6 @@ function lessonlms_courses_featured_callback($post){
     ?>
     <div class="featured-check">
         <label for="_is_featured">Show Featured Course:</label>
-        <br>
         <input type="checkbox" value="yes" name="_is_featured" id="_is_featured" <?php checked( $featured, 'yes' ); ?>>
     </div>
 
@@ -216,10 +207,12 @@ function lessonlms_courses_featured_callback($post){
 
 .featured-check{
   position: absolute;
+  height: 150px;
+  margin-top: -15px;
 }
 
 .featured-check label{
- display: inline-block;
+ padding-right: 20px;
  padding-bottom: 20px;
 }
 

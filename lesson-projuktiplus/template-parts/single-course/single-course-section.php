@@ -15,7 +15,6 @@
  <?php
     $total_enrolled_student = get_post_meta(get_the_ID(), '_enrolled_students', true) ?: 0;
 
-
     ?>
  <section class="single-courses">
      <div class="container">

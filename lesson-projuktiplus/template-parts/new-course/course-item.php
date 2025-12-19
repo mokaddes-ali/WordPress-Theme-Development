@@ -1,3 +1,14 @@
+<?php 
+/**
+ * Template Name: Featured Courses Item
+ * 
+ * @package lessonlms
+ */
+
+$stats = lessonlms_get_review_stats(get_the_ID());
+$average_rating = $stats['average_rating']; 
+?>
+
 <div class="course">
     <div class="img">
         <a href="<?php echo esc_url(get_permalink()); ?>">
@@ -24,8 +35,7 @@
                 <?php get_template_part('template-parts/courses/course', 'rating-svg'); ?>
                 <span>
                     <?php
-                    $rating = get_post_meta(get_the_ID(), 'rating', true);
-                    echo esc_html(!empty($rating) ? $rating : '0.00');
+                    echo esc_html(!empty($average_rating) ? $average_rating : '0.0');
                     ?>
                 </span>
             </div>
