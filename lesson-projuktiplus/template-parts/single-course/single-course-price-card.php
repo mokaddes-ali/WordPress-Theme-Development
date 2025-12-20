@@ -57,20 +57,16 @@ $user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
     <div class="enroll">
         <?php if ( !$current_user_id ): ?>
             <div class="login-required">
-                <p> Please Register or Login First</p>
-                <a class="login-btn" href="<?php echo wp_login_url(get_permalink()); ?>">
-                    Login
-                </a>
 
-                <a class="register-btn" href="<?php echo wp_registration_url(); ?> ">
-
-                </a>
+                 <a href="<?php echo esc_url(wp_login_url(get_permalink()));?>" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
+                  Enroll Now
+                 </a>
             </div>
             
             <?php elseif($is_enrolled):?>
-                 <button disabled style="cursor: not-allowed;" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
-                Enroled
-            </button>
+                 <a href="<?php echo esc_url(home_url('/start-your-learning')); ?>" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
+                Start Learning
+              </a>
 
         <?php else: ?>
             <button class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">

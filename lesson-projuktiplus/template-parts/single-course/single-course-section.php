@@ -180,9 +180,9 @@
                  .then(data => {
                      if (data.success) {
                          courseElement.textContent = data.data + ' student enrolled';
-                         this.textContent = "Enrolled";
-                         this.disabled = true;
-                         this.style.cursor = "not-allowed";
+                         this.textContent = "Start Learning";
+                         this.disabled = false;
+                         this.style.cursor = "pointer";
                          document.querySelector(".review-warning").style.display = "none";
                           document.querySelector(".student-form-wrapper").style.display = "block";
 
