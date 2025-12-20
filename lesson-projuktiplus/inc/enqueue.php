@@ -21,7 +21,6 @@ function lessonlms_theme_enqueue_styles() {
      wp_enqueue_style('font-awesome-css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css', array(), '7.0.0');
 
 
-
   // Responsive CSS
   wp_enqueue_style('responsive-style-css', get_template_directory_uri() . '/assets/css/responsive.css', array(), time());
 

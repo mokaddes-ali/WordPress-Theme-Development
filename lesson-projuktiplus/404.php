@@ -5,22 +5,42 @@
 get_header();
 ?>
 
-<div id="primary" class="content-area">
-    <div id="content" class="site-content" role="main">
+<div class="error-page-wrapper">
+    <div class="error-page-container">
 
-        <div class="page-header">
-            <h1 class="page-title"><?php _e('Not Found', 'lessonlms'); ?></h1>
-        </div>
+        <header class="error-page-header">
+            <h1 class="error-page-title">
+                <?php _e('404', 'lessonlms'); ?>
+            </h1>
+            <p class="error-page-subtitle">
+                <?php _e('Page Not Found', 'lessonlms'); ?>
+            </p>
+        </header>
 
-        <div class="page-wrapper">
-            <div class="page-content">
-                <h2><?php _e('This is somewhat embarrassing, isn’t it?', 'lessonlms'); ?></h2>
-                <p><?php _e('It looks like nothing was found at this location. Maybe try a search?', 'lessonlms'); ?></p>
-                <form class="search-form" role="search" method="get" action="<?php echo home_url('/'); ?>">
-                    <input type="search" name="s" placeholder="<?php _e('Search...', 'lessonlms'); ?>">
-                    <input type="submit" value="<?php _e('Search', 'lessonlms'); ?>">
-                </form>
-            </div>
+        <div class="error-page-content">
+            <h2 class="error-page-heading">
+                <?php _e('Oops! This page can’t be found.', 'lessonlms'); ?>
+            </h2>
+
+            <p class="error-page-description">
+                <?php _e('The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.', 'lessonlms'); ?>
+            </p>
+
+            <form class="error-search-form" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+                <input
+                    type="search"
+                    class="error-search-input"
+                    name="s"
+                    placeholder="<?php esc_attr_e('Search here...', 'lessonlms'); ?>"
+                >
+                <button type="submit" class="error-search-button">
+                    <?php _e('Search', 'lessonlms'); ?>
+                </button>
+            </form>
+
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="error-back-home">
+                <?php _e('Back to Home', 'lessonlms'); ?>
+            </a>
         </div>
 
     </div>

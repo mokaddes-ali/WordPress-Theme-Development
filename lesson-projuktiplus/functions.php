@@ -29,6 +29,8 @@ include_once get_template_directory() ."/inc/customizer/coursespage.php";
 include_once get_template_directory() ."/inc/customizer/cta.php";
 include_once get_template_directory() ."/inc/customizer/features.php";
 include_once get_template_directory() ."/inc/customizer/footer.php";
+require_once get_template_directory() . '/inc/customer-user-register.php';
+
 
 
 

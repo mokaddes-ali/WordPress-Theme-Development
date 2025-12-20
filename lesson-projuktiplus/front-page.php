@@ -6,11 +6,11 @@
  <main>
      <?php get_template_part('template-parts/hero/hero', 'section'); ?>
 
-      <?php get_template_part('template-parts/explore-category/category', 'section'); ?>
-
-     <?php get_template_part('template-parts/new-course/courses', 'section'); ?>
+     <?php get_template_part('template-parts/explore-category/category', 'section'); ?>
 
       <?php get_template_part('template-parts/courses/courses', 'section'); ?>
+
+         <?php get_template_part('template-parts/new-course/courses', 'section'); ?>
 
       <?php get_template_part('template-parts/testimonial/testimonial', 'section'); ?>
        <?php get_template_part('template-parts/features/features', 'section'); ?>
