@@ -18,19 +18,6 @@ if ($original_price > $regular_price && !empty($regular_price)) {
     $discount_price = round($discount_price, 2);
 }
 
-$current_user_id = get_current_user_id();
-$course_id = get_the_ID();
-$user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
-  $is_enrolled = false;
-
-  if( is_array($user_enrollments)){
-    foreach( $user_enrollments as $enrollment){
-        if( intval($enrollment['course_id']) === $course_id){
-           $is_enrolled = true;
-           break;
-        }
-    }
-  }
 
 ?>
 
@@ -54,27 +41,46 @@ $user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
             </p>
         <?php endif; ?>
     </div>
-    <div class="enroll">
-        <?php if ( !$current_user_id ): ?>
-            <div class="login-required">
+   <?php
+$current_user_id = get_current_user_id();
+$course_id = get_the_ID();
 
-                 <a href="<?php echo esc_url(wp_login_url(get_permalink()));?>" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
-                  Enroll Now
-                 </a>
-            </div>
-            
-            <?php elseif($is_enrolled):?>
-                 <a href="<?php echo esc_url(home_url('/start-your-learning')); ?>" class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
-                Start Learning
-              </a>
+$user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
+$is_enrolled = false;
 
-        <?php else: ?>
-            <button class="enroll-btn" data-course-id="<?php echo get_the_ID(); ?>">
-                Enroll Now
-            </button>
-        <?php endif; ?>
+if (is_array($user_enrollments)) {
+    foreach ($user_enrollments as $enrollment) {
+        if (intval($enrollment['course_id']) === $course_id) {
+            $is_enrolled = true;
+            break;
+        }
+    }
+}
+?>
 
-    </div>
+<div class="enroll">
+    <?php if (!$current_user_id): ?>
+        <!-- Not Logged In -->
+        <button class="enroll-btn yellow-bg-btn"
+                data-course-id="<?php echo esc_attr($course_id); ?>">
+            Enroll Now
+        </button>
+
+    <?php elseif ($is_enrolled): ?>
+        <!-- Logged in + Enrolled -->
+            <a href="<?php echo esc_url(home_url('/start-your-learning')); ?>"
+           class="enroll-btn black-btn">
+            Start Learning
+        </a>
+
+    <?php else: ?>
+        <!-- Logged in but NOT enrolled -->
+        <button class="enroll-btn yellow-bg-btn"
+                data-course-id="<?php echo esc_attr($course_id); ?>">
+            Enroll Now
+        </button>
+    <?php endif; ?>
+</div>
     <h3>This courses includes:</h3>
     <div class="courses-card-items item1">
 

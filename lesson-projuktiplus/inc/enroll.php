@@ -5,6 +5,8 @@
  */
 function lessonlms_handle_enrollmemt()
 {
+    check_ajax_referer('lessonlms_enroll_nonce', 'nonce');
+
     $course = $_POST['course_id'];
     $course_id = isset($course) ? intval($course) : 0;
 
@@ -18,18 +20,24 @@ function lessonlms_handle_enrollmemt()
         wp_send_json_error('Please login first to enroll');
     }
 
-    $current_enroll = get_post_meta($course_id, '_enrolled_students', true) ?: 0;
-
-    $new_enroll_count = intval($current_enroll + 1);
-
-    update_post_meta($course_id, '_enrolled_students', $new_enroll_count);
-
     $user_enrollments = get_user_meta($user_id, '_user_enrollments', true);
     if (!is_array($user_enrollments)) {
         $user_enrollments = array();
     }
 
-    $user_enrollments[] = array(
+      foreach( $user_enrollments as $enrollment){
+        if(intval($enrollment['course_id']) === $course_id){
+           wp_send_json_error('Already enrolled');
+        }
+    }
+
+        $current_enroll = get_post_meta($course_id, '_enrolled_students', true) ?: 0;
+
+    $new_enroll_count = intval($current_enroll + 1);
+
+    update_post_meta($course_id, '_enrolled_students', $new_enroll_count);
+    
+     $user_enrollments[] = array(
         'course_id' => $course_id,
         'date'      => current_time('mysql'),
     );
@@ -49,6 +57,7 @@ function lessonlms_ajax_script() {
     <script type="text/javascript">
         var ajax_object = {
             ajaxurl: '<?php echo admin_url('admin-ajax.php') ?>',
+            nonce: '<?php echo wp_create_nonce('lessonlms_enroll_nonce'); ?>'
         }
     </script>
     <?php

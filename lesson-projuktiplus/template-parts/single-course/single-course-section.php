@@ -164,29 +164,14 @@
 
 
  <script>
-     document.querySelectorAll('.enroll-btn').forEach(button => {
+     document.querySelectorAll('button.enroll-btn').forEach(button => {
          button.addEventListener('click', function() {
              const courseId = this.getAttribute('data-course-id');
              const courseElement = document.querySelector('.student-entrolled');
+             const loginUrl = "<?php echo esc_url(wp_login_url()); ?>";
+             const startLearningUrl = "<?php echo esc_url(home_url("/start-your-learning"));?>"
 
-             fetch(ajax_object.ajaxurl, {
-                     method: "POST",
-                     headers: {
-                         "Content-Type": "application/x-www-form-urlencoded",
-                     },
-                     body: 'action=lessonlms_enroll_course&course_id=' + courseId
-                 })
-                 .then(response => response.json())
-                 .then(data => {
-                     if (data.success) {
-                         courseElement.textContent = data.data + ' student enrolled';
-                         this.textContent = "Start Learning";
-                         this.disabled = false;
-                         this.style.cursor = "pointer";
-                         document.querySelector(".review-warning").style.display = "none";
-                          document.querySelector(".student-form-wrapper").style.display = "block";
-
-                           const Toast = Swal.mixin({
+              const Toast = Swal.mixin({
                             toast: true,
                             position: "top-end",
                             showConfirmButton: false,
@@ -200,21 +185,66 @@
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                             });
+
+
+
+             fetch(ajax_object.ajaxurl, {
+                     method: "POST",
+                     headers: {
+                         "Content-Type": "application/x-www-form-urlencoded",
+                     },
+                     body: 'action=lessonlms_enroll_course&course_id=' + courseId + '&nonce=' + ajax_object.nonce
+                 })
+                 .then(response => response.json())
+                 .then(data => {
+                    
+                    if (!data.success && data.data === 'Already enrolled') {
+                          window.location.href = startLearningUrl;
+                           return;
+                          }
+
+                     if (data.success) {
+                         courseElement.textContent = data.data + ' student enrolled';
+                         this.textContent = "Start Learning";
+                         this.disabled = false;
+                         this.style.cursor = "pointer";
+                         this.outerHTML = `<a href="${startLearningUrl}"  class="enroll-btn enrolled"> Start Learning </a>`;
+                         document.querySelector(".review-warning").style.display = "none";
+                          document.querySelector(".student-form-wrapper").style.display = "block";
                             Toast.fire({
                             icon: "success",
-                            title: "Course Purchase in successfully"
+                            title: "Course Purchase in successfully",
                             });
                      } else {
                          if (data.data === 'Please login first to enroll') {
-                             alert('Please login first to enroll');
+                        Swal.fire({
+                        title: "Please login first to enroll",
+                        icon: "question",
+                        showCancelButton: true,
+                        confirmButtonText: "Login Now",
+                        cancelButtonText: "Cancel"
+                        }).then( (result) =>{
+                            if (result.isConfirmed) {
+                              window.location.href = loginUrl; 
+                           }
+
+                        });
+                           
                          } else {
-                             alert("Enrollment Unsuccessful");
+                            Toast.fire({
+                                icon: "error",
+                                title:"Enrollment Unsuccessful"
+                            })
                          }
                      }
                  })
                  .catch(error => {
-                     console.error('Error:', error);
-                     alert("Try Again");
+                    //  console.error('Error:', error);
+                        Swal.fire({
+                        title: "Oh! Try Again for Enrollment?",
+                        text: "Please login first to enroll",
+                        icon: "question"
+                        });
                  });
          });
      });
