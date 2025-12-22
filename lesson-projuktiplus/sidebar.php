@@ -8,7 +8,7 @@
     <div class="card">
         <h4 class="blog-detail-right-heading">
             <?php
-              echo __('Search Posts', 'lessonlms')
+              echo esc_html__('Search Posts', 'lessonlms');
              ?>
         </h4>
         <div class="sidebar-divider"></div>
@@ -22,7 +22,8 @@
     </div>
 
     <div class="card">
-        <h4 class="blog-detail-right-heading"><?php echo __('Recent Posts', 'lessonlms') ?></h4>
+        <h4 class="blog-detail-right-heading"><?php echo __('Recent Posts', 'lessonlms') ?>
+       </h4>
         <div class="sidebar-divider"></div>
 
         <?php
@@ -65,18 +66,17 @@
     <div class="card category-widget">
         <h4 class="blog-detail-right-heading"><?php echo __('Categories', 'lessonlms'); ?></h4>
         <div class="sidebar-divider"></div>
-        <div class="category-list">
-            <ul>
-                <?php
-        wp_list_categories([
-          'title_li'   => '',
-          'show_count' => true,
-        ]);
-        ?>
 
+        <div class="category-list">
+            <ul class="category-list-items">
+                <?php
+                    wp_list_categories([
+                    'title_li'   => '',
+                    'show_count' => true,
+                    ]);
+                    ?>
             </ul>
         </div>
-
     </div>
 
     <div class="card">

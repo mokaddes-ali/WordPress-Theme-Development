@@ -5,9 +5,9 @@ get_header();
 get_template_part('template-parts/search/search' ,'heading'); ?>
 
 <section >
-  <div class="container " style="display: flex; gap: 40px; padding: 40px 0px 40px 0px;">
+  <div class="container">
     <!-- left bloge search details -->
-    <div class="blog-details" style="width: 70%;">
+    <div class="blog-details">
     <?php
     if (have_posts()) :
       while ( have_posts() ) : the_post();

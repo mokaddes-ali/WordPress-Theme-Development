@@ -18,7 +18,17 @@
 
             foreach($categories as $catagory): ?>
                 <li class="all-courses-category-single">
-                    <input type="checkbox" class="all-courses-filter-category-input" value="<?php echo $catagory->term_id; ?>" id="catagory-<?php echo $catagory->term_id; ?>">
+
+
+  <input
+    type="checkbox"
+    class="all-courses-filter-category-input"
+    value="<?php echo $catagory->term_id; ?>"
+    id="catagory-<?php echo $catagory->term_id; ?>"
+    <?php checked($selected_category, $catagory->term_id); ?>
+>
+
+
 
                     <label for="catagory-<?php echo $catagory->term_id; ?>"><?php echo $catagory->name; ?>
                 </label>

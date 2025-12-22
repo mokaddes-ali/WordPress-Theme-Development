@@ -458,7 +458,10 @@ textarea {
   width: 50px;
   margin-bottom: 15px;
   margin-top: -5px;
+ }
 
+ .category-list-items li:active{
+  color: red;
  }
 /* serach */
 .search-box {

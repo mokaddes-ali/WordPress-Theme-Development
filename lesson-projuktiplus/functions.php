@@ -194,4 +194,11 @@ function lessonlms_filter_courses(){
     wp_die();
 }
 
+add_action('init', function () {
+    if (!session_id()) {
+        session_start();
+    }
+});
+
+
 

@@ -17,52 +17,26 @@
 
        <!-- category card  -->
         <div class="explore-category-cards">
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-            <div class="explore-category-single-card">
-                <h3>Web Development</h3>
-            </div>
-            </a>
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-             <div class="explore-category-single-card">
-                <h3>Marketing</h3>
-            </div>
-            </a>
-             
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-             <div class="explore-category-single-card">
-                <h3>Personal Development</h3>
-            </div>
-            </a>
 
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-            <div class="explore-category-single-card">
-                <h3>Marketing</h3>
-            </div>
-            </a>
-            
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-             <div class="explore-category-single-card">
-                <h3>Web Development</h3>
-            </div>
-            </a>
+        <?php 
+            $categories = get_terms(array(
+                'taxonomy' => 'course_category',
+                'hide_empty' => true,
+            )); 
+            if( !empty($categories) && is_array($categories)):
+                
+           foreach ($categories as $catagory): ?>
 
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-             <div class="explore-category-single-card">
-                <h3>Marketing</h3>
-            </div>
-            </a>
+<a href="<?php echo esc_url(
+    get_post_type_archive_link('courses')); ?>">
+    <div class="explore-category-single-card">
+        <h3><?php echo esc_html($catagory->name); ?></h3>
+    </div>
+</a>
 
-             <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-             <div class="explore-category-single-card">
-                <h3>Personal Development</h3>
-            </div>
-            </a>
-
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-            <div class="explore-category-single-card">
-                <h3>Marketing</h3>
-            </div>
-            </a>  
+            <?php 
+        endforeach; 
+        endif;?>
         </div>
     </div>
 </div>

@@ -113,6 +113,13 @@ svg {
   padding: 5px 0px;
 }
 
+.common-heading-two{
+  color: #171100;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 166.667%;
+}
+
 /* scroll button */
 .scroll-top-btn {
   position: fixed;
@@ -145,5 +152,7 @@ svg {
 .scroll-top-btn svg {
   color: white;
 }
+
+
 
 

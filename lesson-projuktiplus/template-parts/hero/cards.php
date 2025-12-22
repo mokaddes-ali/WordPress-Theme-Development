@@ -9,7 +9,7 @@
 
                                 <div class="text">
                                     <span><?php echo esc_html(get_theme_mod('uiux_courses_count', '20')); ?> Courses</span>
-                                    <p>UI/UX Design</p>
+                                    <p class="common-heading-two">UI/UX Design</p>
                                 </div>
                             </div>
 

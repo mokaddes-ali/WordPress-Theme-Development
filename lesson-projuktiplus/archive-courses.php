@@ -12,6 +12,14 @@
     get_header();
 
     get_template_part('sections/pageTitle');
+
+    if (isset($_POST['selected_category'])) {
+    $_SESSION['selected_category'] = intval($_POST['selected_category']);
+}
+
+$selected_category = $_SESSION['selected_category'] ?? 0;
+
+
  ?>
 
 
@@ -34,15 +42,25 @@
         <div class="courses-all-wrapper">
 
             <?php
-
-            $couses = new WP_Query(array(
+            $args = array(
                 "post_type" => "courses",
                 'post_status' => 'publish',
                 'orderby'        => 'date',
                 'order' => 'DESC',
                 'posts_per_page' => get_option('posts_per_page'),
                 'paged' => $paged,
-            ));
+            );
+
+            if ($selected_category) {
+            $args['tax_query'] = array(
+           array(
+            'taxonomy' => 'course_category',
+            'field'    => 'term_id',
+            'terms'    => [$selected_category],
+        ),
+    );
+}
+            $couses = new WP_Query($args);
             
             if ($couses->have_posts()):
                 while ($couses->have_posts()): $couses->the_post();
