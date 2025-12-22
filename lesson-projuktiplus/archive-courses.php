@@ -50,16 +50,7 @@ $selected_category = $_SESSION['selected_category'] ?? 0;
                 'posts_per_page' => get_option('posts_per_page'),
                 'paged' => $paged,
             );
-
-            if ($selected_category) {
-            $args['tax_query'] = array(
-           array(
-            'taxonomy' => 'course_category',
-            'field'    => 'term_id',
-            'terms'    => [$selected_category],
-        ),
-    );
-}
+            
             $couses = new WP_Query($args);
             
             if ($couses->have_posts()):

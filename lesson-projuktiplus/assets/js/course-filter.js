@@ -36,7 +36,49 @@ jQuery(function ($) {
 
     $('.clear-filters-btn').on('click', function () {
         $('input[type="checkbox"]').prop('checked', false);
+        localStorage.removeItem('selected_course_category');
         loadCourses();
     });
 
+ const selectedCategory = localStorage.getItem('selected_course_category');
+
+    if (selectedCategory) {
+        const checkbox = document.getElementById('catagory-' + selectedCategory);
+
+        if (checkbox) {
+            checkbox.checked = true;
+
+            // 🔥 AJAX trigger
+            $(checkbox).trigger('change');
+        }
+    }
+
 });
+
+
+document.querySelectorAll('.home-category-link')?.forEach(link => {
+    link.addEventListener('click', function () {
+        const categoryId = this.getAttribute('data-category-id');
+        if (categoryId) {
+            localStorage.setItem('selected_course_category', categoryId);
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const selectedCategory = localStorage.getItem('selected_course_category');
+
+    if (selectedCategory) {
+        const checkbox = document.getElementById('catagory-' + selectedCategory);
+
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    }
+
+});
+
+
+

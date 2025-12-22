@@ -25,7 +25,6 @@
     class="all-courses-filter-category-input"
     value="<?php echo $catagory->term_id; ?>"
     id="catagory-<?php echo $catagory->term_id; ?>"
-    <?php checked($selected_category, $catagory->term_id); ?>
 >
 
 

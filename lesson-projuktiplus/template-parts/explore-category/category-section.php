@@ -27,7 +27,7 @@
                 
            foreach ($categories as $catagory): ?>
 
-<a href="<?php echo esc_url(
+<a class="home-category-link" data-category-id="<?php echo esc_attr($catagory->term_id); ?>" href="<?php echo esc_url(
     get_post_type_archive_link('courses')); ?>">
     <div class="explore-category-single-card">
         <h3><?php echo esc_html($catagory->name); ?></h3>
