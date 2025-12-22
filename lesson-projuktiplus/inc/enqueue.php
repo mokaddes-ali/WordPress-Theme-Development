@@ -58,6 +58,21 @@ function lessonlms_theme_enqueue_styles() {
         // ajax-review-js
     wp_enqueue_script( 'ajax-review-js', get_template_directory_uri() . '/assets/js/ajax-review.js', ['jquery', 'sweetalert-js'], null, true );
 
+            wp_enqueue_script(
+    'course-filter-js',
+    get_template_directory_uri() . '/assets/js/course-filter.js',
+    ['jquery'],
+    null,
+    true
+);
+
+wp_localize_script('course-filter-js', 'lessonlms_filter', [
+    'ajax_url' => admin_url('admin-ajax.php'),
+]);
+
+
+    
+
     wp_localize_script( 'ajax-review-js', 'lessonlms_ajax_review_obj',[
       'ajax_url' => admin_url('admin-ajax.php'),
        'nonce' => wp_create_nonce('lessonlms_ajax_review_nonce')

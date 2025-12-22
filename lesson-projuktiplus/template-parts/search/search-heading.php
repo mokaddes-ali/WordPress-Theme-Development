@@ -21,7 +21,10 @@ $title = get_the_title();
           <h1 class="page-title" data-aos="fade-down"
              data-aos-easing="linear"
              data-aos-duration="1000">
-             <?php printf(esc_html__('Search Results for: %s', 'lessonlms'), '<span>' . get_search_query() . '</span>');?>
+             <?php
+              printf( wp_kses_post( __( 'Search Results for: %s', 'lessonlms' ) ),
+               '<span>' . esc_html( get_search_query() ) . '</span>');
+               ?>
           </h1>
       <?php endif; ?>
 
@@ -30,7 +33,7 @@ $title = get_the_title();
                 data-aos-duration="1000">
                 <ul>
                     <li>
-                        <a href="<?php echo home_url(); ?>">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                             <?php echo esc_html__('Home', 'lessonlms'); ?>
                         </a>
                     </li>
@@ -41,9 +44,15 @@ $title = get_the_title();
                         </svg>
                     </li>
                     <li>
-                        <a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>">
-                            <?php echo __('Blog', 'lessonlms'); ?>
-                        </a>
+                       <?php
+$page_for_posts = get_option( 'page_for_posts' );
+if ( $page_for_posts ) :
+?>
+<a href="<?php echo esc_url( get_permalink( $page_for_posts ) ); ?>">
+    <?php echo esc_html__( 'Blog', 'lessonlms' ); ?>
+</a>
+<?php endif; ?>
+
 
                     </li>
                     <li class="breadcrumb-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

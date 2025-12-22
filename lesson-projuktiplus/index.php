@@ -46,54 +46,12 @@ $blog_page_description = get_theme_mod("blog_page_description", "Read our regula
             $blog_post = new WP_Query($args);
             if ($blog_post->have_posts()):
                 while ($blog_post->have_posts()) : $blog_post->the_post();
-            ?>
-            <div class="sngle-blog">
-                <div class="img">
-                    <a href="<?php the_permalink(); ?>">
-                        <?php
-                                if (has_post_thumbnail()) {
-                                    the_post_thumbnail('post_custom-thumb', [
-                                        'alt' => esc_attr(get_the_title()),
-                                    ]);
-                                } else {
-                                    echo '<img src="' . get_template_directory_uri() . '/assets/images/blog-img1.png" alt="Default Image">';
-                                }
-                                ?>
-                    </a>
-                </div>
-
-
-                <div class="single-blog-details">
-                    <div class="date">
-                        <div class="yellow-cercel"></div>
-                        <span>
-                            <?php echo get_the_date('d F Y'); ?>
-                        </span>
-                    </div>
-
-                    <hr>
-
-                    <div class="blog-title">
-                        <span>
-                            <a href="<?php the_permalink(); ?>">
-                                <?php the_title(); ?>
-                            </a>
-                        </span>
-                    </div>
-
-                    <div class="black-btn read-more">
-                        <a href="<?php the_permalink(); ?>">
-                            <?php _e('Read More', 'lessonlms'); ?>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <?php
+               get_template_part("template-parts/commom/blog", "card");
                 endwhile;
             endif;
             ?>
         </div>
-        <?php echo lessonlms_all_pagenav(); ?>
+        <?php echo lessonlms_all_pagination(); ?>
              
         </div>
        

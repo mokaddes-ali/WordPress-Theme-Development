@@ -7,13 +7,12 @@
 
     echo '<div class="" style="margin-top: -60px">';
     get_header();
-    echo '</div>'
-    ?>
+    echo '</div>';
 
- <?php get_template_part('template-parts/single-course/single-course', 'breadcrumb'); ?>
+    get_template_part('template-parts/single-course/single-course', 'breadcrumb');
+    $post_id = get_the_ID();
 
- <?php
-    $total_enrolled_student = get_post_meta(get_the_ID(), '_enrolled_students', true) ?: 0;
+    $total_enrolled_student = get_post_meta( $post_id, '_enrolled_students', true) ?: 0;
 
     ?>
  <section class="single-courses">
@@ -25,7 +24,7 @@
          <div class="average-rating-student">
              <div class="student">
                  <?php
-                    $stats = lessonlms_get_review_stats(get_the_ID());
+                    $stats = lessonlms_get_review_stats($post_id);
                     $total_reviews = $stats['total_reviews'];
                     $avg_rating = $stats['average_rating'];
                     ?>
@@ -169,7 +168,10 @@
              const courseId = this.getAttribute('data-course-id');
              const courseElement = document.querySelector('.student-entrolled');
              const loginUrl = "<?php echo esc_url(wp_login_url()); ?>";
-             const startLearningUrl = "<?php echo esc_url(home_url("/start-your-learning"));?>"
+
+             const startLearningUrl = "<?php echo esc_url(home_url("/start-your-learning/?course_id=" . get_the_ID()));
+
+            ?>"
 
               const Toast = Swal.mixin({
                             toast: true,
@@ -204,11 +206,9 @@
                           }
 
                      if (data.success) {
-                         courseElement.textContent = data.data + ' student enrolled';
-                         this.textContent = "Start Learning";
                          this.disabled = false;
                          this.style.cursor = "pointer";
-                         this.outerHTML = `<a href="${startLearningUrl}"  class="enroll-btn enrolled"> Start Learning </a>`;
+                         this.innerHTML = `<a href="${startLearningUrl}"  class=""> Start Learning </a>`;
                          document.querySelector(".review-warning").style.display = "none";
                           document.querySelector(".student-form-wrapper").style.display = "block";
                             Toast.fire({

@@ -3,12 +3,8 @@
 /**
  * Default Pagination
  */
-?>
 
-
-<?php
-
-function lessonlms_all_pagenav()
+function lessonlms_all_pagination()
 {
     global $wp_query, $wp_rewrite;
     $pages = '';

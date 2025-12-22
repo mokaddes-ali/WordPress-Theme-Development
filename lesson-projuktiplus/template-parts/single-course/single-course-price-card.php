@@ -48,9 +48,10 @@ $course_id = get_the_ID();
 $user_enrollments = get_user_meta($current_user_id, '_user_enrollments', true);
 $is_enrolled = false;
 
-if (is_array($user_enrollments)) {
+if (!empty($user_enrollments) && is_array($user_enrollments)) {
     foreach ($user_enrollments as $enrollment) {
-        if (intval($enrollment['course_id']) === $course_id) {
+        $user_enroll_course_id = intval($enrollment['course_id']);
+        if ($user_enroll_course_id === $course_id) {
             $is_enrolled = true;
             break;
         }
@@ -68,15 +69,14 @@ if (is_array($user_enrollments)) {
 
     <?php elseif ($is_enrolled): ?>
         <!-- Logged in + Enrolled -->
-            <a href="<?php echo esc_url(home_url('/start-your-learning')); ?>"
+            <a href="<?php echo esc_url(home_url('/start-your-learning/?course_id=' . $user_enroll_course_id)); ?>"
            class="enroll-btn black-btn">
             Start Learning
         </a>
 
     <?php else: ?>
         <!-- Logged in but NOT enrolled -->
-        <button class="enroll-btn yellow-bg-btn"
-                data-course-id="<?php echo esc_attr($course_id); ?>">
+        <button class="enroll-btn yellow-bg-btn" data-course-id="<?php echo esc_attr($course_id); ?>">
             Enroll Now
         </button>
     <?php endif; ?>

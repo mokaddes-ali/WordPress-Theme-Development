@@ -134,3 +134,64 @@ function save_custom_register_data($user_id) {
     }
 }
 
+
+add_action('wp_ajax_filter_courses', 'lessonlms_filter_courses');
+add_action('wp_ajax_nopriv_filter_courses', 'lessonlms_filter_courses');
+
+function lessonlms_filter_courses(){
+
+    $tax_query = [];
+    $meta_query = [];
+
+    if (!empty($_POST['category'])) {
+        $tax_query[] = [
+            'taxonomy' => 'course_category',
+            'field' => 'term_id',
+            'terms' => array_map('intval', $_POST['category']),
+        ];
+    }
+
+    if (!empty($_POST['level'])) {
+        $tax_query[] = [
+            'taxonomy' => 'course_level',
+            'field' => 'term_id',
+            'terms' => array_map('intval', $_POST['level']),
+        ];
+    }
+
+    if (!empty($_POST['language'])) {
+        $meta_query[] = [
+            'key' => 'language',
+            'value' => array_map('sanitize_text_field', $_POST['language']),
+            'compare' => 'IN',
+        ];
+    }
+
+    $args = [
+        'post_type' => 'courses',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+    ];
+
+    if (!empty($tax_query)) {
+        $args['tax_query'] = array_merge(['relation' => 'AND'], $tax_query);
+    }
+
+    if (!empty($meta_query)) {
+        $args['meta_query'] = $meta_query;
+    }
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            get_template_part('template-parts/commom/course', 'card');
+        endwhile;
+    else :
+        echo '<h2>Courses Not Found</h2>';
+    endif;
+
+    wp_die();
+}
+
+

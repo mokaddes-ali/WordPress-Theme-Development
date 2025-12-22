@@ -22,7 +22,7 @@
             if ($courses->have_posts()):
                 while ($courses->have_posts()):
                     $courses->the_post();
-                    get_template_part('template-parts/courses/course', 'item');
+                   get_template_part('template-parts/commom/course','card');
                 endwhile;
                 wp_reset_postdata();
             else:

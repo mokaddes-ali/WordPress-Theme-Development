@@ -159,6 +159,7 @@ function lessonlms_register_course_level_taxonomy() {
         'menu_name'         => 'Course Level',
     );
 
+
     register_taxonomy('course_level', 'courses', array(
         'labels'            => $labels,
         'hierarchical'      => true,

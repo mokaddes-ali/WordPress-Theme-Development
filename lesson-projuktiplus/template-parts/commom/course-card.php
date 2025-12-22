@@ -1,12 +1,19 @@
 <?php 
 /**
- * Template Name: Featured Courses Item
+ * Template Name: Common Course Card Design
  * 
  * @package lessonlms
- */
+*/
 
 $stats = lessonlms_get_review_stats(get_the_ID());
 $average_rating = $stats['average_rating']; 
+$stats = lessonlms_get_review_stats(get_the_ID());
+$price  = get_post_meta(get_the_ID(), "regular_price", true);
+$price = !empty($price) ? $price : '0.00';
+$avg_rating = $stats['average_rating'];
+$avg_rating = !empty($avg_rating) ? $avg_rating : '0.0';
+
+ 
 ?>
 
 <div class="course">
@@ -45,10 +52,6 @@ $average_rating = $stats['average_rating'];
 
         <!-- price & button -->
         <div class="price-btn">
-            <?php
-            $price = get_post_meta(get_the_ID(), 'regular_price', true);
-            $price = !empty($price) ? $price : '0.00';
-            ?>
             <span class="price">$<?php echo esc_html($price); ?></span>
 
             <div class="black-btn book-now">

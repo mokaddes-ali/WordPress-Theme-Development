@@ -17,7 +17,7 @@
             if ($blog_posts->have_posts()):
                 while ($blog_posts->have_posts()):
                     $blog_posts->the_post();
-                    get_template_part('template-parts/blog/blog', 'item');
+             get_template_part("template-parts/commom/blog", "card");
                 endwhile;
                 wp_reset_postdata();
             else:
