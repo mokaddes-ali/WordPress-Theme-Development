@@ -50,14 +50,14 @@
 
 .card-box {
   background-color: #FFFFFF;
-  width: 270px;
-  height: 244px;
+  width: 320px;
+  height: 264px;
   border-radius: 12px;
   box-shadow: 0px 16px 32px 0px rgba(0, 0, 0, 0.05);
   position: absolute;
   bottom: 55px;
   right: -100px;
-  padding: 24px;
+  padding: 26px;
   display: flex;
   flex-direction: column;
   gap: 13px;
