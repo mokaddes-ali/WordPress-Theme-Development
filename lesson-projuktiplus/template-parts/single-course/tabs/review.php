@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template Name: Single Course Review
+ * Template Name: Review
  * 
- * @package LessonLMS
+ * @package lessonlms
  */
   $user_id = get_current_user_id();
   $course_id = get_the_ID();

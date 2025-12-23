@@ -1,8 +1,8 @@
 <?php 
 /**
- * Template Name: Single Course Overview
+ * Template Name: Overview
  * 
- * @package lessonLMS
+ * @package lessonlms
  */
 ?>
 

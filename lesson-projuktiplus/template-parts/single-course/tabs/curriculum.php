@@ -1,6 +1,6 @@
 <?php 
 /**
- * Template Name: Course Curricullum
+ * Template Name: Curricullum
  * 
  * @package lessonlms
  */

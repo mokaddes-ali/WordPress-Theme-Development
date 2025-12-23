@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template Name: Single Course Breadcrumb
+ * Template Name: Breadcrumb
  * 
- * @package LessonLMS
+ * @package lessonlms
  */
 
 $default_image = get_template_directory_uri() . '/assets/images/courses-image1.png';

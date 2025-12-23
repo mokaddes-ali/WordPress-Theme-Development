@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template Name: Single Courses Tab
+ * Template Name: Tab
  * 
- * @package LessonLMS
+ * @package lessonlms
  */
 ?>
 

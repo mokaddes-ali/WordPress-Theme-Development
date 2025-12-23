@@ -1,20 +1,22 @@
  <?php
     /**
-     * Template Name: Single Course
+     * Template Name: Main Section
      * 
-     * @package LessonLMS
+     * @package lessonlms
      */
 
     echo '<div class="" style="margin-top: -60px">';
     get_header();
     echo '</div>';
 
-    get_template_part('template-parts/single-course/single-course', 'breadcrumb');
+    get_template_part('template-parts/single-course/breadcrumb');
+
     $post_id = get_the_ID();
 
     $total_enrolled_student = get_post_meta( $post_id, '_enrolled_students', true) ?: 0;
 
     ?>
+
  <section class="single-courses">
      <div class="container">
          <!-- course title -->
@@ -89,34 +91,33 @@
              <div class="course-level">
                 <h4> Level: Intermediate </h4>
              </div>
-
          </div>
 
          <div class="single-courses-wrapper">
 
              <!-- left -->
              <div class="left-courses-image-details">
-                 <?php get_template_part('template-parts/single-course/single-course-image', 'card'); ?>
+                 <?php get_template_part('template-parts/single-course/price-image', 'card'); ?>
 
-                <?php get_template_part('template-parts/single-course/single-course', 'tab'); ?>
+                <?php get_template_part('template-parts/single-course/tabs/tab'); ?>
 
                  <div class="courses-tab-content" id="overview">
-                     <?php get_template_part('template-parts/single-course/course', 'overview'); ?>
+                     <?php get_template_part('template-parts/single-course/tabs/overview'); ?>
                  </div>
                  
                  <div class="courses-tab-content" id="curriculum">
-                     <?php get_template_part('template-parts/single-course/single-course', 'curriculum'); ?>
+                     <?php get_template_part('template-parts/single-course/tabs/curriculum'); ?>
                 </div>
                  <div class="courses-tab-content" id="instructor">Instructor Content</div>
 
-                 <?php get_template_part('template-parts/single-course/single-course', 'review'); ?>
+                 <?php get_template_part('template-parts/single-course/tabs/review'); ?>
 
              </div>
              <!-- right -->
              <div class="courses-card-right">
 
                  <!-- first card -->
-                 <?php get_template_part('template-parts/single-course/course', 'details'); ?>
+                 <?php get_template_part('template-parts/single-course/details'); ?>
 
                  <!-- second card -->
                  <div class="course-right-info-card2">

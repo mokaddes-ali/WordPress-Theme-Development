@@ -4,7 +4,7 @@
  */
  get_header();?>   
  <main>
-     <?php get_template_part('template-parts/hero/hero', 'section'); ?>
+     <?php get_template_part('template-parts/hero-section/hero', 'section'); ?>
 
      <?php get_template_part('template-parts/explore-category/category', 'section'); ?>
 

@@ -1,8 +1,8 @@
   <?php
     /**
-     * Template Name: Course Details Card
+     * Template Name: Details
      * 
-     * @package LessonLMS
+     * @package lessonlms
      */
 
     $video_hours  = get_post_meta(get_the_ID(), "video_hours", true) ?: '0.00';
@@ -15,7 +15,7 @@
       <h2>Course Details</h2>
       <div class="course-right-info-card1-items item1">
 
-          <?php get_template_part('template-parts/single-course/svg/video-time', 'svg'); ?>
+        <?php get_template_part('assets/svg/single-course/video-time', 'svg'); ?>
 
           <div class="text">
               <span>
@@ -31,7 +31,7 @@
 
       <div class="course-right-info-card1-items item2">
 
-          <?php get_template_part('template-parts/single-course/svg/updated-date', 'svg'); ?>
+          <?php get_template_part('assets/svg/single-course/updated-date', 'svg'); ?>
 
           <div class="text">
               <span>
@@ -45,7 +45,7 @@
 
       <div class="course-right-info-card1-items item3">
 
-          <?php get_template_part('template-parts/single-course/svg/language', 'svg'); ?>
+          <?php get_template_part('assets/svg/single-course/language', 'svg'); ?>
 
 
           <div class="text">
@@ -61,7 +61,7 @@
       </div>
 
       <div class="course-right-info-card1-items item4">
-          <?php get_template_part('template-parts/single-course/svg/subtitle', 'svg'); ?>
+          <?php get_template_part('assets/svg/single-course/subtitle', 'svg'); ?>
 
           <div class="text">
               <span>

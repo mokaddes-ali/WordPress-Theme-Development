@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Template Name: Single Course Price Card
+ * Template Name: Price Image Card
  * 
- * @package LessonLMS
+ * @package lessonlms
  */
 
 $regular_price  = get_post_meta(get_the_ID(), "regular_price", true) ?: '0.00';
@@ -20,6 +20,14 @@ if ($original_price > $regular_price && !empty($regular_price)) {
 
 
 ?>
+
+<div class="single-couses-image-box">
+    <?php
+    if (has_post_thumbnail()): ?>
+
+        <?php the_post_thumbnail('full'); ?>
+
+    <?php endif; ?>
 
 <div class="courses-card-box">
 
@@ -143,4 +151,5 @@ if (!empty($user_enrollments) && is_array($user_enrollments)) {
             </p>
         </div>
     </div>
+</div>
 </div>

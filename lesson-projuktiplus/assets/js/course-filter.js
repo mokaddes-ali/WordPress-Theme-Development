@@ -32,6 +32,23 @@ jQuery(function ($) {
         });
     }
 
+    /* ==================================
+       CATEGORY CHECK / UNCHECK HANDLER
+    =================================== */
+
+    $('.all-courses-filter-category-input').on('change', function () {
+
+        if (this.checked) {
+            // ✅ checked → save to localStorage
+            localStorage.setItem('selected_course_category', this.value);
+        } else {
+            // ❌ unchecked → remove from localStorage
+            localStorage.removeItem('selected_course_category');
+        }
+
+        loadCourses();
+    });
+
     $('input[type="checkbox"]').on('change', loadCourses);
 
     $('.clear-filters-btn').on('click', function () {
@@ -66,19 +83,7 @@ document.querySelectorAll('.home-category-link')?.forEach(link => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
 
-    const selectedCategory = localStorage.getItem('selected_course_category');
-
-    if (selectedCategory) {
-        const checkbox = document.getElementById('catagory-' + selectedCategory);
-
-        if (checkbox) {
-            checkbox.checked = true;
-        }
-    }
-
-});
 
 
 
