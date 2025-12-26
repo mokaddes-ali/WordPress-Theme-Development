@@ -5,6 +5,21 @@
  * @package lessonlms
  */
 
+$hero_title = get_theme_mod('hero_section_title','Learn without limits and spread knowledge.');
+
+$hero_description = get_theme_mod('hero_section_description','Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.');
+
+$course_url = get_post_type_archive_link('courses');
+$course_btn_text = get_theme_mod('courses_button_text','See Courses');
+
+$see_vedio_btn = get_theme_mod('watch_button_text','Watch Video');
+$see_vedio_btn_url = get_theme_mod('watch_button_url','#');
+
+$engagement_text = get_theme_mod('recent_engagement_text','Recent engagement');
+$student_label = get_theme_mod('student_label_text','Students');
+$course_label = get_theme_mod('course_label_text','Courses');
+
+
 global $wpdb;
 $total_course_count = $wpdb->get_var(
     " SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'courses' AND post_status = 'publish'"
@@ -14,49 +29,54 @@ $total_enrollments = $wpdb->get_var(
     "SELECT SUM( meta_value ) FROM $wpdb->postmeta WHERE meta_key = '_enrolled_students'"
 );
 
-if(!empty($total_enrollments) && $total_enrollments >=999){
-    return $total_enrollments;
-}elseif(!empty($total_enrollments) && $total_enrollments <= 1000 && $total_enrollments >=10000){
-    $total_enrollments = $total_enrollments/1000 . 'K';
-    return $total_enrollments;
-
+if(!empty($total_course_count)){
+    $format_total_course_count = lessonlms_count_number_format($total_course_count); 
 }
-
+if(!empty($total_enrollments)){
+    $format_total_enrollments =lessonlms_count_number_format($total_enrollments);
+}
 ?>
 
 <div class="hero-text-box">
-    <h1><?php echo esc_html(get_theme_mod('hero_section_title','Learn without limits and spread knowledge.')); ?></h1>
-    <p><?php echo esc_html(get_theme_mod('hero_section_description','Build new skills for that “this is my year” feeling...')); ?></p>
+    <h1><?php echo esc_html( $hero_title ); ?></h1>
+    <p><?php echo esc_html( $hero_description ); ?></p>
 
     <div class="hero-btns">
         <div class="yellow-bg-btn See-Courses-btn">
-            <a href="<?php echo esc_url(get_post_type_archive_link('courses')); ?>">
-                <?php echo esc_html(get_theme_mod('courses_button_text','See Courses')); ?>
+            <a href="<?php echo esc_url( $course_url ); ?>">
+                <?php echo esc_html( $course_btn_text ); ?>
             </a>
         </div>
 
         <div class="watch-video-btn">
             <div class="play-btn">
-                <svg width="10" height="12">...</svg>
+                <?php get_template_part("assets/svg/hero-section/see-video");?>
             </div>
             <span>
-                <a href="<?php echo esc_url(get_theme_mod('watch_button_url','#')); ?>">
-                    <?php echo esc_html(get_theme_mod('watch_button_text','Watch Video')); ?>
+                <a href="<?php echo esc_url( $see_vedio_btn_url ); ?>">
+                    <?php echo esc_html( $see_vedio_btn ); ?>
                 </a>
             </span>
         </div>
     </div>
 
     <div class="engagement">
-        <span><?php echo esc_html(get_theme_mod('recent_engagement_text','Recent engagement')); ?></span>
+        <span>
+            <?php echo esc_html( $engagement_text ); ?>
+        </span>
         <div class="engagement-wrapper">
-            <h3><?php echo esc_html($total_enrollments); ?> 
-                <span><?php echo esc_html(get_theme_mod('student_label_text','Students')); ?></span>
+            <h3>
+                <?php echo esc_html($format_total_enrollments); ?> 
+                <span>
+                    <?php echo esc_html( $student_label ); ?>
+                </span>
             </h3>
             <h3>
-                <?php echo $total_course_count . get_template_part("assets/svg/hero-section/plus-icon");  ?>
-        
-                <span><?php echo esc_html(get_theme_mod('course_label_text','Courses')); ?></span>
+                <?php echo esc_html( $format_total_course_count ); ?>
+                <span>
+                    <?php get_template_part("assets/svg/hero-section/plus-icon");  ?>
+                    <?php echo esc_html( $course_label ); ?>
+                </span>
             </h3>
         </div>
     </div>

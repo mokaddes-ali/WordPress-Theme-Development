@@ -2,6 +2,8 @@
 
 /**
  * CTA Customizer
+ * 
+ * @package lessonlms
  */
 
    function lessonlms_cta_customize_register($wp_customize) {
