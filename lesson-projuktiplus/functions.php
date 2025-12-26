@@ -17,19 +17,20 @@ include_once get_template_directory() .'/inc/enroll.php';
 
 
 // Custom Post Type
-include_once get_template_directory() .'/inc/CPT/courses.php';
-include_once get_template_directory() .'/inc/CPT/testimonial.php';
+get_template_part('inc/admin/CPT/courses');
+get_template_part('inc/admin/CPT/testimonial');
 
 // Customizer
-include_once get_template_directory() ."/inc/customizer/hero.php";
-include_once get_template_directory() ."/inc/customizer/courses.php";
-include_once get_template_directory() ."/inc/customizer/blog.php";
-include_once get_template_directory() ."/inc/customizer/blogpage.php";
-include_once get_template_directory() ."/inc/customizer/coursespage.php";
-include_once get_template_directory() ."/inc/customizer/cta.php";
-include_once get_template_directory() ."/inc/customizer/features.php";
-include_once get_template_directory() ."/inc/customizer/footer.php";
-require_once get_template_directory() . '/inc/customer-user-register.php';
+get_template_part("/inc/customizer/hero");
+get_template_part("/inc/admin/customizer/courses");
+get_template_part("/inc/admin/customizer/blog");
+get_template_part("/inc/admin/customizer/blogpage");
+get_template_part("/inc/admin/customizer/coursespage");
+get_template_part("/inc/admin/customizer/cta");
+get_template_part("/inc/admin/customizer/features");
+get_template_part("/inc/admin/customizer/footer");
+
+get_template_part( '/inc/admin/customer-user-register');
 
 get_template_part('inc/helpers/number-format');
 
