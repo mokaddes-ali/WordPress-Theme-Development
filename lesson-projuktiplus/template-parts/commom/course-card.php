@@ -1,31 +1,36 @@
-<?php 
+<?php
 /**
  * Template Name: Common Course Card Design
  * 
  * @package lessonlms
-*/
+ */
+    $single_id      = get_the_ID();
+    $stats          = lessonlms_get_review_stats( $single_id );
+    $average_rating = $stats['average_rating'];
+    $average_rating = ! empty( $average_rating ) ? $stats['average_rating'] : '0.0';
+    $price          = get_post_meta( $single_id, 'regular_price', true);
+    $price          = ! empty( $price ) ? $price : '0.00';
+    $permalink      = get_permalink();
+    $course_descrip = wp_trim_words(get_the_content(), 10);
+    $course_title   = get_the_title();
 
-$stats = lessonlms_get_review_stats(get_the_ID());
-$average_rating = $stats['average_rating']; 
-$stats = lessonlms_get_review_stats(get_the_ID());
-$price  = get_post_meta(get_the_ID(), "regular_price", true);
-$price = !empty($price) ? $price : '0.00';
-$avg_rating = $stats['average_rating'];
-$avg_rating = !empty($avg_rating) ? $avg_rating : '0.0';
-
- 
+    $image_html     = '';
+    if (has_post_thumbnail()) {
+        $image_html = get_the_post_thumbnail(
+            $single_id,
+            'custom-courses-image',
+            array(
+                'class' => 'courses-image-size',
+                'alt'   => $course_title,
+            )
+        );
+    }
 ?>
 
 <div class="course">
     <div class="img">
-        <a href="<?php echo esc_url(get_permalink()); ?>">
-            <?php
-            if (has_post_thumbnail()) {
-                the_post_thumbnail('custom-courses-image', ['class' => 'courses-image-size', 'alt' => get_the_title()]);
-            } else {
-                echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/courses-image1.png') . '" alt="course">';
-            }
-            ?>
+        <a href="<?php echo esc_url( $permalink ); ?>">
+            <?php echo wp_kses_post( $image_html ); ?>
         </a>
     </div>
 
@@ -33,30 +38,25 @@ $avg_rating = !empty($avg_rating) ? $avg_rating : '0.0';
         <!-- course title & rating -->
         <div class="flex">
             <span class="c-title">
-                <a href="<?php echo esc_url(get_permalink()); ?>">
-                    <?php the_title(); ?>
+                <a href="<?php echo esc_url( $permalink ); ?>">
+                    <?php echo esc_html( $course_title ); ?>
                 </a>
             </span>
 
             <div class="rating">
-                <?php get_template_part('template-parts/courses/course', 'rating-svg'); ?>
-                <span>
-                    <?php
-                    echo esc_html(!empty($average_rating) ? $average_rating : '0.0');
-                    ?>
-                </span>
+                <?php get_template_part('assets/svg/rating'); ?>
+                <span><?php echo esc_html( $average_rating ); ?></span>
             </div>
         </div>
 
-        <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 10)); ?></p>
+        <p><?php echo esc_html( $course_descrip ); ?></p>
 
         <!-- price & button -->
         <div class="price-btn">
-            <span class="price">$<?php echo esc_html($price); ?></span>
-
+            <span class="price">$<?php echo esc_html( $price ); ?></span>
             <div class="black-btn book-now">
-                <a href="<?php echo esc_url(get_permalink()); ?>">
-                    <?php esc_html_e('Book Now', 'lessonlms'); ?>
+                <a href="<?php echo esc_url( $permalink ); ?>">
+                    <?php echo esc_html__( 'Book Now', 'lessonlms' ); ?>
                 </a>
             </div>
         </div>

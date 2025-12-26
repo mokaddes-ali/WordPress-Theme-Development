@@ -8,9 +8,10 @@
 
      <?php get_template_part('template-parts/explore-category/category', 'section'); ?>
 
-      <?php get_template_part('template-parts/courses/courses', 'section'); ?>
+      <?php get_template_part('template-parts/popular-courses/courses', 'section'); ?>
 
-         <?php get_template_part('template-parts/new-course/courses', 'section'); ?>
+         <?php get_template_part('template-parts/featured-courses/courses', 'section'); ?>
+         require_once ABSPATH . 'file-name.php';
 
       <?php get_template_part('template-parts/testimonial/testimonial', 'section'); ?>
        <?php get_template_part('template-parts/features/features', 'section'); ?>

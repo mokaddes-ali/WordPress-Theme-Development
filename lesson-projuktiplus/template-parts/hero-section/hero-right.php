@@ -29,11 +29,11 @@ $total_enrollments = $wpdb->get_var(
     "SELECT SUM( meta_value ) FROM $wpdb->postmeta WHERE meta_key = '_enrolled_students'"
 );
 
-if(!empty($total_course_count)){
-    $format_total_course_count = lessonlms_count_number_format($total_course_count); 
+if ( ! empty( $total_course_count ) ) {
+    $format_total_course_count = lessonlms_count_number_format( $total_course_count ); 
 }
-if(!empty($total_enrollments)){
-    $format_total_enrollments =lessonlms_count_number_format($total_enrollments);
+if ( ! empty( $total_enrollments ) ) {
+    $format_total_enrollments = lessonlms_count_number_format( $total_enrollments );
 }
 ?>
 

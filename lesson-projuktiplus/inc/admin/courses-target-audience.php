@@ -38,8 +38,27 @@ function lessonlms_courses_target_audience_callback( $post ){
         </div>
 
         <!-- show list -->
-         <div class
-         "></div>
+         <?php if(!empty($audience) && is_array($audience)):?>
+         <div class="audience-list">
+            <ul id="audience-listed">
+                <?php foreach( $audience as $single_audience):?>
+                    <li data-index="<?php echo esc_attr($single_audience)?>">
+                        <input type="hidden" name="course_target_audience[]" value="<?php echo esc_attr($single_audience)?>">
+                        <span class="audience-text">
+                            <?php echo esc_html($single_audience);?>
+                        </span>
+                        <div class="audience-action">
+                            <button class="edit-audience" type="button"> Edit</button>
+                            <button type="button"class="delete-audience">
+                             Delete
+                            </button>
+                        </div>
+                    </li>
+
+                <?php endforeach;?>
+            </ul>
+         </div>
+         <?php endif;?>
     </div>
 
 <?php
