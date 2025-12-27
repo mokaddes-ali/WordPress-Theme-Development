@@ -1,26 +1,25 @@
 <?php
-
 /**
  * Home Page Template
+ * 
+ * @package lessonlms
  */
    get_header();
    echo '<main>';
-   
-   get_template_part('template-parts/hero-section/hero', 'section');
-
-   get_template_part('template-parts/explore-category/category', 'section');
-
-   get_template_part('template-parts/popular-courses/courses', 'section');
-
-   get_template_part('template-parts/featured-courses/courses', 'section');
-
-   get_template_part('template-parts/testimonial/testimonial', 'section');
-
-   get_template_part('template-parts/features/features', 'section');
-
-   get_template_part('template-parts/cta/cta', 'section');
-
-   get_template_part('template-parts/blog/blog', 'section');
-
+   if ( is_front_page() ) :
+   $sections = array(
+    'hero-section/hero',
+    'explore-category/category',
+    'popular-courses/courses',
+    'featured-courses/courses',
+    'testimonial/testimonial',
+    'features/features',
+    'cta/cta',
+    'blog/blog',
+   );
+   foreach ( $sections as $section ) :
+   get_template_part("template-parts/$section", 'section');
+   endforeach;
+   endif;
    echo '</main>';
    get_footer();

@@ -10,7 +10,6 @@
     // Core functions
     include_once $theme_dir . '/inc/enqueue.php';
     include_once $theme_dir . '/inc/default.php';
-    include_once $theme_dir . '/inc/widget.php'; // spelling: widget
 
     // Pagination
     include_once $theme_dir . '/inc/pagination.php';
@@ -20,7 +19,7 @@
     include_once $theme_dir . '/inc/enroll.php';
 
     // Submit feedback
-    include_once $theme_dir . '/inc/submit-feedback.php'; // .php ঠিক রাখা উচিত
+    include_once $theme_dir . '/inc/submit-feedback.php'; 
 
     // Custom Post Types
     include_once $theme_dir . '/inc/admin/CPT/courses.php';
