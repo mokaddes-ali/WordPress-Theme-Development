@@ -1,38 +1,46 @@
 <?php
+/**
+ * Theme Function
+ * 
+ * @package lessonlms
+ */
+    // Theme includes
+    $theme_dir = get_template_directory();
 
-include_once get_template_directory() .'/inc/enqueue.php';
+    // Core functions
+    include_once $theme_dir . '/inc/enqueue.php';
+    include_once $theme_dir . '/inc/default.php';
+    include_once $theme_dir . '/inc/widget.php'; // spelling: widget
 
-include_once get_template_directory() .'/inc/default.php';
+    // Pagination
+    include_once $theme_dir . '/inc/pagination.php';
 
-include_once get_template_directory() .'/inc/wideget.php';
+    // Reviews & enroll
+    include_once $theme_dir . '/inc/reviews.php';
+    include_once $theme_dir . '/inc/enroll.php';
 
-// Default pagination
-include_once get_template_directory() .'/inc/pagination.php';
+    // Submit feedback
+    include_once $theme_dir . '/inc/submit-feedback.php'; // .php ঠিক রাখা উচিত
 
-include_once get_template_directory() .'/inc/reviews.php';
-include_once get_template_directory() .'/inc/enroll.php';
+    // Custom Post Types
+    include_once $theme_dir . '/inc/admin/CPT/courses.php';
+    include_once $theme_dir . '/inc/admin/CPT/testimonial.php';
 
- get_template_part('inc/submit-feedback');
+    // Customizer
+    include_once $theme_dir . '/inc/customizer/hero.php';
+    include_once $theme_dir . '/inc/admin/customizer/courses.php';
+    include_once $theme_dir . '/inc/admin/customizer/blog.php';
+    include_once $theme_dir . '/inc/admin/customizer/blogpage.php';
+    include_once $theme_dir . '/inc/admin/customizer/coursespage.php';
+    include_once $theme_dir . '/inc/admin/customizer/cta.php';
+    include_once $theme_dir . '/inc/admin/customizer/features.php';
+    include_once $theme_dir . '/inc/admin/customizer/footer.php';
 
+    // Customer registration
+    include_once $theme_dir . '/inc/admin/customer-user-register.php';
 
-
-// Custom Post Type
-get_template_part('inc/admin/CPT/courses');
-get_template_part('inc/admin/CPT/testimonial');
-
-// Customizer
-get_template_part("/inc/customizer/hero");
-get_template_part("/inc/admin/customizer/courses");
-get_template_part("/inc/admin/customizer/blog");
-get_template_part("/inc/admin/customizer/blogpage");
-get_template_part("/inc/admin/customizer/coursespage");
-get_template_part("/inc/admin/customizer/cta");
-get_template_part("/inc/admin/customizer/features");
-get_template_part("/inc/admin/customizer/footer");
-
-get_template_part( '/inc/admin/customer-user-register');
-
-get_template_part('inc/helpers/number-format');
+    // Helpers
+    include_once $theme_dir . '/inc/helpers/number-format.php';
 
 
 
