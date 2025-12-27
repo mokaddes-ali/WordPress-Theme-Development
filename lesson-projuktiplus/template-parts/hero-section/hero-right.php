@@ -1,40 +1,31 @@
 <?php 
-/**
- * Template Name: Hero Section Right Text
- * 
- * @package lessonlms
- */
+    /**
+     * Template Name: Hero Section Right Text
+     * 
+     * @package lessonlms
+     */
 
-$hero_title = get_theme_mod('hero_section_title','Learn without limits and spread knowledge.');
+    $hero_title         = get_theme_mod( 'hero_section_title','Learn without limits and spread knowledge.' );
+    $hero_description   = get_theme_mod(
+        'hero_section_description',
+        'Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.' );
+    $course_url         = get_post_type_archive_link( 'courses' );
+    $course_btn_text    = get_theme_mod( 'courses_button_text','See Courses' );
+    $see_vedio_btn      = get_theme_mod( 'watch_button_text','Watch Video' );
+    $see_vedio_btn_url  = get_theme_mod( 'watch_button_url','#' );
+    $engagement_text    = get_theme_mod( 'recent_engagement_text','Recent engagement' );
+    $student_label      = get_theme_mod( 'student_label_text','Students' );
+    $course_label       = get_theme_mod( 'course_label_text','Courses' );
+    $data               = total_enroll_course_count();
+    $total_course_count = $data['courses'];
+    $total_enrollments  = $data['enrollments'];
 
-$hero_description = get_theme_mod('hero_section_description','Build new skills for that “this is my year” feeling with courses, certificates, and degrees from world-class universities and companies.');
-
-$course_url = get_post_type_archive_link('courses');
-$course_btn_text = get_theme_mod('courses_button_text','See Courses');
-
-$see_vedio_btn = get_theme_mod('watch_button_text','Watch Video');
-$see_vedio_btn_url = get_theme_mod('watch_button_url','#');
-
-$engagement_text = get_theme_mod('recent_engagement_text','Recent engagement');
-$student_label = get_theme_mod('student_label_text','Students');
-$course_label = get_theme_mod('course_label_text','Courses');
-
-
-global $wpdb;
-$total_course_count = $wpdb->get_var(
-    " SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type = 'courses' AND post_status = 'publish'"
-);
-
-$total_enrollments = $wpdb->get_var(
-    "SELECT SUM( meta_value ) FROM $wpdb->postmeta WHERE meta_key = '_enrolled_students'"
-);
-
-if ( ! empty( $total_course_count ) ) {
-    $format_total_course_count = lessonlms_count_number_format( $total_course_count ); 
-}
-if ( ! empty( $total_enrollments ) ) {
-    $format_total_enrollments = lessonlms_count_number_format( $total_enrollments );
-}
+    if ( ! empty( $total_course_count ) && ! is_array( $total_course_count ) ) {
+        $format_total_course_count = lessonlms_count_number_format( $total_course_count ); 
+    }
+    if ( ! empty( $total_enrollments ) && ! is_array( $total_enrollments ) ) {
+        $format_total_enrollments = lessonlms_count_number_format( $total_enrollments );
+    }
 ?>
 
 <div class="hero-text-box">

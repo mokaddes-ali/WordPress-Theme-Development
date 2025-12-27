@@ -2,14 +2,11 @@
 /**
  * Template Name: Course Learning Page
  */
-
-get_header();
-
 if ( ! is_user_logged_in() ) {
     wp_redirect( wp_login_url() );
     exit;
 }
-
+get_header();
 $course_id = isset($_GET['course_id']) ? intval($_GET['course_id']) : 0;
 
 if ( $course_id <= 0 ) {

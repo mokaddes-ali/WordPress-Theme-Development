@@ -1,14 +1,3 @@
-<?php
-
-/**
- * Template Name: Language SVG Icon
- * 
- * @package LessonLMS
- */
-
-?>
-
-
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" class="size-6">
     <!-- Background -->
     <rect width="24" height="24" rx="4" fill="#f3b841" />

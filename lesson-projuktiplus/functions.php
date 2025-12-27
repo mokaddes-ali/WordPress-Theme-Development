@@ -40,7 +40,36 @@
 
     // Helpers
     include_once $theme_dir . '/inc/helpers/number-format.php';
+    include_once $theme_dir . '/inc/helpers/image-structure.php';
+    include_once $theme_dir . '/inc/helpers/enroll-course-count.php';
 
+
+if ( isset( $_POST['student_change_password_submit'] ) ) {
+
+    if ( ! isset( $_POST['student_change_password_nonce'] ) 
+        || ! wp_verify_nonce( $_POST['student_change_password_nonce'], 'student_change_password' ) ) {
+        wp_die( esc_html__( 'Security check failed.', 'lessonlms' ) );
+    }
+
+    $current_user = wp_get_current_user();
+    $current_password = sanitize_text_field( $_POST['current_password'] );
+    $new_password     = sanitize_text_field( $_POST['new_password'] );
+    $confirm_password = sanitize_text_field( $_POST['confirm_password'] );
+
+    // Check current password
+    if ( ! wp_check_password( $current_password, $current_user->user_pass, $current_user->ID ) ) {
+        echo '<p style="color:red;">' . esc_html__( 'Current password is incorrect.', 'lessonlms' ) . '</p>';
+    } 
+    // Check new password match
+    elseif ( $new_password !== $confirm_password ) {
+        echo '<p style="color:red;">' . esc_html__( 'New passwords do not match.', 'lessonlms' ) . '</p>';
+    } 
+    // Change password
+    else {
+        wp_set_password( $new_password, $current_user->ID );
+        echo '<p style="color:green;">' . esc_html__( 'Password changed successfully.', 'lessonlms' ) . '</p>';
+    }
+}
 
 
 // Modify default register form
