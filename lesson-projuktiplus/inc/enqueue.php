@@ -92,6 +92,8 @@ wp_localize_script('course-filter-js', 'lessonlms_filter', [
 
     // Custom JS
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
+    // student-tab.js
+     wp_enqueue_script('student-tab', get_template_directory_uri() . '/assets/js/student-tab.js', array('jquery'), time(), true);
 }
 add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
 

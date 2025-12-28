@@ -240,3 +240,74 @@ add_action('init', function () {
 
 
 
+function my_ajax_function() {
+    if( isset($_POST['nonce']) && wp_verify_nonce($_POST['nonce'], 'my_ajax_action') ) :
+        // echo 'Test';
+          $arg = array(
+            // 'post_type' => 'post',
+            'post_type' => 'page',
+            'post_per_page' => 1,
+            'p' => $_POST['page_id_get'],
+            // 'post_per_page' => 3,
+            'post_status' => 'publish',
+            'order' => 'date',
+            'orderby' => 'DESC',
+          );
+    $blog_posts = new WP_Query( $arg );
+    if ( $blog_posts->have_posts() ):
+                while ( $blog_posts->have_posts() ):
+                    $blog_posts->the_post();
+                    ?>
+                    <li><?php echo esc_html(get_the_content()); ?></li>
+                    <?php
+                endwhile;
+                wp_reset_postdata();
+                else : '<p> No post found';
+            endif;
+    else :
+        echo 'error';
+    endif;
+    wp_die();
+}
+add_action( 'wp_ajax_my_ajax_action', 'my_ajax_function' );
+add_action( 'wp_ajax_nopriv_my_ajax_action', 'my_ajax_function' );
+
+function my_shortcode() {
+    ob_start();
+    ?>
+ <!-- <button data-nonce="<?php echo wp_create_nonce( 'my_ajax_action' )?>" class="my-ajax-trigger">Test</button> -->
+ <button data_id="8" data-nonce="<?php echo wp_create_nonce( 'my_ajax_action' )?>" class="my-ajax-trigger">Test</button>
+ <ul class="show-data"></ul>
+    <script>
+    jQuery(document).ready(function($){
+    $(".my-ajax-trigger").on("click", function(){
+        const $nonce = $(this).data('nonce');
+        // const $data = $(this).data('id');
+        const $data = $(this).attr('data_id');
+        $.ajax({
+            url: '<?php echo esc_url( admin_url("admin-ajax.php")); ?>',
+            type : 'POST',
+            data : {
+                action: 'my_ajax_action',
+                nonce: $nonce,
+                page_id_get : $data,
+            },
+            beforeSend: function( reponse){
+                $(".show-data").empty();
+                $(".show-data").append( 'loading.....' );
+            },
+            success: function( response ){
+               $(".show-data").empty();
+               $(".show-data").append( response );
+            }
+        })
+    });
+});
+    </script>
+<?php
+return ob_get_clean();
+}
+add_shortcode( 'contact_test', 'my_shortcode' );
+
+
+

@@ -8,8 +8,7 @@
 ?>
 
         <!-- Dashboard-->
-        <div class="student-dashboard-main">
-
+        <div class="student-dashboard-main" id="dashboard">
             <div class="dashboard-cards-grid">
                 
                 <div class="dashboard-card-box">
@@ -30,3 +29,5 @@
             </div>
 
         </div>
+
+

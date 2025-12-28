@@ -7,36 +7,16 @@
 <!-- LEFT SIDEBAR -->
     <div class="dashboard-left-sidebar">
 
-        <ul class="sidebar-menu-items">
-
-            <li class="active">
-                <a href="<?php echo site_url('/student-dashboard'); ?>">
-                    <i class="fa-solid fa-gauge"></i> 
-                    <?php echo esc_html__('Dashboard', 'lessonlms'); ?>
-                </a>
+        <ul class="sidebar-menu-tabs-items">
+            <li class="active-menu" data-sidetab="dashboard" data-nonce="<?php echo wp_create_nonce('sidebar_menu_ajax_action'); ?>">
+                Dashboard
             </li>
-
-            <li>
-                <a href="<?php echo site_url('/my-account'); ?>">
-                    <i class="fa-solid fa-user"></i>
-                    <?php echo esc_html__('My Account', 'lessonlms'); ?>
-                </a>
+            <li data-sidetab="profile" data-nonce="<?php echo wp_create_nonce( 'sidebar_menu_ajax_action' )?>">
+                Profile
             </li>
-
-            <li>
-                <a href="<?php echo site_url('/my-enrollments'); ?>">
-                    <i class="fa-solid fa-list"></i>
-                 <?php echo esc_html__('My Enrollments', 'lessonlms'); ?> 
-                </a>
+            <li data-sidetab="enrollments" data-nonce="<?php echo wp_create_nonce( 'sidebar_menu_ajax_action' )?>">
+                Enrollments
             </li>
-
-            <li>
-                <a href="<?php echo site_url('/change-password'); ?>">
-                 <i class="fa-solid fa-key"></i> 
-                 <?php echo esc_html__('Change Password', 'lessonlms'); ?> 
-                </a>
-            </li>
-
             <li>
                 <a href="<?php echo esc_url(wp_logout_url(), 'lessonlms'); ?>">
                     <i class="fa-solid fa-right-from-bracket"></i>

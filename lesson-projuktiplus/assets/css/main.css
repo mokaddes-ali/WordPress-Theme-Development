@@ -36,6 +36,19 @@
 
 @import url('all-courses.css');
 
+.student-sidebar-tab {
+    display: none;
+}
+
+.student-sidebar-tab.student-active {
+    display: block;
+}
+
+.loading {
+    padding: 20px;
+    font-weight: 600;
+}
+
 
 
 

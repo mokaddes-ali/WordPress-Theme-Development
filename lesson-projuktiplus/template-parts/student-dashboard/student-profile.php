@@ -1,12 +1,13 @@
 <?php 
 /**
- * Template Name: Student Password
+ * Template Name: Student Profile
  * 
  * @package lessonlms
  *
  */
 ?>
 
+<div>
 <form method="post" class="student-change-password-form">
 
     <p>
@@ -31,5 +32,5 @@
             <?php esc_html_e('Change Password', 'lessonlms'); ?>
         </button>
     </p>
-
 </form>
+</div>
