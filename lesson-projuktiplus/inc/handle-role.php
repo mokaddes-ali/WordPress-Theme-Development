@@ -15,7 +15,8 @@ function lessonlms_login_redirect( $redirect_to, $request, $user ) {
         if ( in_array( 'administrator', $user->roles ) || in_array( 'instructor', $user->roles ) ) {
             return admin_url();
         } elseif ( in_array( 'student', $user->roles ) ) {
-            return wp_redirect( home_url('/student-dashboard') );
+            return home_url('/student-dashboard');
+            //  wp_redirect( home_url('/student-dashboard') );
         }
     }
     return $redirect_to;
@@ -54,3 +55,4 @@ function lessonlms_show_own_course_only( $query ) {
     }
 }
 add_action( 'pre_get_posts', 'lessonlms_show_own_course_only' );
+
