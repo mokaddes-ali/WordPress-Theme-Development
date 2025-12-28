@@ -94,6 +94,10 @@ wp_localize_script('course-filter-js', 'lessonlms_filter', [
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
     // student-tab.js
      wp_enqueue_script('student-tab', get_template_directory_uri() . '/assets/js/student-tab.js', array('jquery'), time(), true);
+      wp_localize_script( 'student-tab', 'studentDashboard', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('sidebar_menu_ajax_action'),
+    ));
 }
 add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
 

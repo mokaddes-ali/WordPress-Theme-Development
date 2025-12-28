@@ -36,7 +36,15 @@
 
                     <!----- sign-up-btn ----->
                     <div class="button btn-black">
-                        <a href="#">Sign Up</a>
+                        <?php
+                        $user_login = is_user_logged_in();
+                        $user_dashboard = home_url( '/student-dashboard' );
+                         if ( $user_login ) : 
+                         ?>
+                            <a href="<?php echo esc_url( $user_dashboard ); ?>"> Dashboard </a>
+                        <?php else : ?>
+                        <a href="<?php echo esc_url( wp_registration_url() ); ?>">Sign Up</a>
+                        <?php endif; ?>
                     </div>
 
 

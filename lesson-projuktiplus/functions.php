@@ -10,6 +10,7 @@
     // Core functions
     include_once $theme_dir . '/inc/enqueue.php';
     include_once $theme_dir . '/inc/default.php';
+    include_once $theme_dir . '/inc/handle-role.php';
 
     // Pagination
     include_once $theme_dir . '/inc/pagination.php';
@@ -308,6 +309,38 @@ function my_shortcode() {
 return ob_get_clean();
 }
 add_shortcode( 'contact_test', 'my_shortcode' );
+
+function sidebar_menu_ajax_handler() {
+
+    check_ajax_referer(
+        'sidebar_menu_ajax_action',
+        'nonce'
+    );
+
+    if ( empty($_POST['tab']) ) {
+        wp_send_json_error('No tab found');
+    }
+
+    $tab = sanitize_text_field($_POST['tab']);
+
+    ob_start();
+
+    if ( $tab === 'dashboard' ) {
+        get_template_part('template-parts/student-dashboard/student', 'dashboard');
+    }
+
+    if ( $tab === 'profile' ) {
+        get_template_part('template-parts/student-dashboard/student', 'profile');
+    }
+
+    if ( $tab === 'enrollments' ) {
+        get_template_part('template-parts/student-dashboard/student', 'enrollemts');
+    }
+
+    wp_send_json_success( ob_get_clean() );
+}
+add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
+
 
 
 

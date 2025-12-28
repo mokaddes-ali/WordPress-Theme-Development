@@ -1,39 +1,39 @@
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
 
-    $(".sidebar-menu-tabs-items li[data-sidetab]").on("click", function(){
+    $(".sidebar-menu-tabs-items li[data-sidetab]").on("click", function () {
 
-        const tab   = $(this).data("sidetab");
-        const nonce = $(this).data("nonce");
+        const tab = $(this).data("sidetab");
+        //? Nonce create in html
+        // const nonce = $(this).data("nonce");
 
-        // Active menu
         $(".sidebar-menu-tabs-items li").removeClass("active-menu");
         $(this).addClass("active-menu");
 
-        // Show tab container
         $(".student-sidebar-tab").removeClass("student-active");
         $("#" + tab).addClass("student-active");
 
-        // AJAX call
         $.ajax({
-            url: ajaxurl, // WordPress global
+            url: studentDashboard.ajaxurl,
             type: "POST",
             data: {
                 action: "sidebar_menu_ajax_action",
-                nonce: nonce,
+                //? nonce from enqueue wp_localize
+                nonce: studentDashboard.nonce,
                 tab: tab
             },
-            beforeSend: function(){
+            beforeSend: function () {
+                $("#" + tab).empty();
                 $("#" + tab).html('<p class="loading">Loading...</p>');
             },
-            success: function(response){
-                if ( response.success ) {
-                    $("#" + tab).html( response.data );
+            success: function (response) {
+                if (response.success) {
+                    $("#" + tab).empty();
+                    $("#" + tab).html(response.data);
                 } else {
-                    $("#" + tab).html('<p>Error loading data</p>');
+                    $("#" + tab).html('<p>' + response.data + '</p>');
                 }
             }
         });
-
     });
 
 });
