@@ -21,19 +21,18 @@
             endif;
             ?>
         </div>
-    </div>
-
-    <div class="testimonial-submit">
+    <div class="testimonial-submit-btn">
 
         <div class="show-all-testimonial yellow-bg-btn See-Courses-btn">
-           <a href="<?php echo esc_url( get_post_type_archive_link('testimonials')); ?>">
+           <a href="<?php echo esc_url( home_url('/reviews')); ?>">
              All Testimonial
             </a>
         </div>
 
 
-        <div class="testimonial-submit-form black-btn See-Courses-btn">
+        <div class="testimonial-submit-form green-btn See-Courses-btn">
             <a href="<?php echo home_url('/testimonial-submit');?>">Submit Feedback </a>
         </div>
+    </div>
     </div>
 </section>

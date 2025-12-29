@@ -9,6 +9,7 @@ function lessonlms_add_custom_roles() {
     add_role( 'instructor', 'Instructor', get_role( 'author' )->capabilities );
 }
 add_action( 'init', 'lessonlms_add_custom_roles' );
+if ( is_admin() ) {
 
 function lessonlms_login_redirect( $redirect_to, $request, $user ) {
     if ( isset( $user->roles ) && is_array( $user->roles ) ) {
@@ -22,6 +23,7 @@ function lessonlms_login_redirect( $redirect_to, $request, $user ) {
     return $redirect_to;
 }
 add_filter( 'login_redirect', 'lessonlms_login_redirect', 10, 3 );
+}
 
 function lessonlms_block_student_admin_access() {
     if ( is_user_logged_in() && is_admin() && ! defined( 'DOING_AJAX' ) ) {

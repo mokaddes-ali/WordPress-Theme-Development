@@ -37,12 +37,25 @@ svg {
   max-width: 1170px;
   margin: 0 auto;
 }
-
 .yellow-bg-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #FFB900;
+  color: #FFF;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.hidden{
+  visibility: hidden;
+}
+.green-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4CAF4F;
   color: #FFF;
   cursor: pointer;
   position: relative;
@@ -71,6 +84,20 @@ svg {
   top: 0;
   left: 0;
   background-color: #171100;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: all 0.3s;
+  z-index: -2;
+}
+
+.green-btn::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #FFB900;
   transform: scaleX(0);
   transform-origin: left;
   transition: all 0.3s;

@@ -4,11 +4,9 @@
  * 
  * @package lessonlms
  */
-
 get_header();
-get_template_part("/sections/pageTitle");
+get_template_part('template-parts/commom/breadcrumb');
 echo the_title();
 echo the_content();
-
 get_footer();
 ?>

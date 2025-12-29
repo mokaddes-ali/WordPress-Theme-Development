@@ -34,7 +34,9 @@ $title = get_the_title();
                     </li>
 
                     <li class="breadcrumb-icon">
-                        <?php get_template_part('template-parts/single-course/svg/breadcrumb', 'svg'); ?>
+                        <svg>
+                            <use href="#breadcrumb-icon" ></use>
+                        </svg>
                     </li>
 
                     <li>
@@ -45,7 +47,9 @@ $title = get_the_title();
                     </li>
 
                     <li class="breadcrumb-icon">
-                        <?php get_template_part('template-parts/single-course/svg/breadcrumb', 'svg'); ?>
+                        <svg>
+                            <use href="#breadcrumb-icon" ></use>
+                        </svg>
                     </li>
 
                     <li>

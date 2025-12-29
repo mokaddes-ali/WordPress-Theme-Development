@@ -153,8 +153,6 @@
                              <span>Products manager</span>
                          </div>
                      </div>
-
-
                  </div>
 
              </div>
@@ -252,4 +250,8 @@
  </script>
 
 
- <?php get_footer(); ?>
+ <?php
+ //? load svg file
+    get_template_part('template-parts/single-course/svg/all-svg');
+  get_footer();
+  ?>

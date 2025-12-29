@@ -1,7 +1,7 @@
 
 /*----- testimonial section -----*/
 section.testimonial {
-  height: 380px;
+  /* height: 380px; */
   background-color: #2E2100;
   padding-top: 97px;
 }
@@ -152,5 +152,11 @@ section.testimonial {
     cursor: pointer;
     border: none;
     border-radius: 30px;
+}
+
+.testimonial-submit-btn{
+  display: flex;
+  gap: 20px;
+  padding: 30px 0px;
 }
 

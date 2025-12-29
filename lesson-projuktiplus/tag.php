@@ -2,5 +2,6 @@
 /**
  * 
  */
-?>
-<h1>Tags Page</h1>
+get_header();
+get_template_part('template-parts/commom/breadcrumb');
+get_footer();

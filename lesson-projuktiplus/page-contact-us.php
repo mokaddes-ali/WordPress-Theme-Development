@@ -5,6 +5,6 @@
  * @package lessonlms
  */
 get_header();
-the_content();
+get_template_part('template-parts/commom/breadcrumb');
 get_footer();
 ?>

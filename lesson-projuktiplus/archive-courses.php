@@ -1,17 +1,14 @@
 <?php
 /**
- * Template Name: Archive Courses
+ * Template Name: Show All Courses
  * 
  * @package lessonlms
  */
 
     $page_title =  get_theme_mod('courses_page_title', 'All Courses');
-    $page_description = get_theme_mod('courses_page_description', 'Build new skills with new trendy courses and shine for the next future career.');
-                    
-
+    $page_description = get_theme_mod('courses_page_description', 'Build new skills with new trendy courses and shine for the next future career.');             
     get_header();
-
-    get_template_part('sections/pageTitle');
+    get_template_part('template-parts/commom/breadcrumb');
 
     if (isset($_POST['selected_category'])) {
     $_SESSION['selected_category'] = intval($_POST['selected_category']);

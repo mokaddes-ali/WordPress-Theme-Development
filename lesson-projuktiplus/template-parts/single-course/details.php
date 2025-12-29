@@ -8,15 +8,15 @@
     $video_hours  = get_post_meta(get_the_ID(), "video_hours", true) ?: '0.00';
     $language  = get_post_meta(get_the_ID(), "language", true) ?: 'English';
     $sub_title_language  = get_post_meta(get_the_ID(), "sub_title_language", true) ?: 'English';
-
+  
     ?>
 
   <div class="course-right-info-card1">
       <h2>Course Details</h2>
       <div class="course-right-info-card1-items item1">
-
-        <?php get_template_part('assets/svg/single-course/video-time', 'svg'); ?>
-
+         <svg>
+            <use href="#video-time-icon"/>
+        </svg>
           <div class="text">
               <span>
                   <?php echo esc_html_e('Duration', 'lessonlms') ?>
@@ -30,9 +30,9 @@
       </div>
 
       <div class="course-right-info-card1-items item2">
-
-          <?php get_template_part('assets/svg/single-course/updated-date', 'svg'); ?>
-
+        <svg>
+            <use href="#updated-date-icon"/>
+        </svg>
           <div class="text">
               <span>
                 <?php echo esc_html_e('Last Updated', 'lessonlms'); ?>
@@ -44,10 +44,9 @@
       </div>
 
       <div class="course-right-info-card1-items item3">
-
-          <?php get_template_part('assets/svg/single-course/language', 'svg'); ?>
-
-
+        <svg>
+            <use width="30" height="30" href="#language-icon"/>
+        </svg>
           <div class="text">
               <span>
                 <?php echo esc_html_e('Language', 'lessonlms'); ?>
@@ -61,15 +60,16 @@
       </div>
 
       <div class="course-right-info-card1-items item4">
-          <?php get_template_part('assets/svg/single-course/subtitle', 'svg'); ?>
-
+        <svg >
+            <use width="32" height="32" href="#subtitle-icon"/>
+        </svg>
           <div class="text">
               <span>
                 <?php echo esc_html_e('Sub titles', 'lessonlms'); ?>
              </span>
-              <?php if ($language): ?>
+              <?php if ( $sub_title_language ) : ?>
                   <p>
-                      <?php echo esc_html($sub_title_language); ?>
+                      <?php echo esc_html( $sub_title_language ); ?>
                   </p>
               <?php endif; ?>
           </div>
