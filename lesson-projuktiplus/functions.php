@@ -6,11 +6,11 @@
  */
     // Theme includes
     $theme_dir = get_template_directory();
+    $user = wp_get_current_user();
 
     // Core functions
     include_once $theme_dir . '/inc/enqueue.php';
     include_once $theme_dir . '/inc/default.php';
-    include_once $theme_dir . '/inc/handle-role.php';
 
     // Pagination
     include_once $theme_dir . '/inc/pagination.php';
@@ -23,21 +23,36 @@
     include_once $theme_dir . '/inc/submit-feedback.php'; 
 
     // Custom Post Types
-    include_once $theme_dir . '/inc/admin/CPT/courses.php';
-    include_once $theme_dir . '/inc/admin/CPT/testimonial.php';
+    include_once $theme_dir . '/inc/cpt/courses.php';
+    include_once $theme_dir . '/inc/cpt/testimonial.php';
 
     // Customizer
-    include_once $theme_dir . '/inc/customizer/hero.php';
-    include_once $theme_dir . '/inc/admin/customizer/courses.php';
-    include_once $theme_dir . '/inc/admin/customizer/blog.php';
-    include_once $theme_dir . '/inc/admin/customizer/blogpage.php';
-    include_once $theme_dir . '/inc/admin/customizer/coursespage.php';
-    include_once $theme_dir . '/inc/admin/customizer/cta.php';
-    include_once $theme_dir . '/inc/admin/customizer/features.php';
-    include_once $theme_dir . '/inc/admin/customizer/footer.php';
+    include_once $theme_dir . './inc/customizer.php';
 
     // Customer registration
     include_once $theme_dir . '/inc/admin/customer-user-register.php';
+
+    if ( is_admin() && ! wp_doing_ajax() ) {
+
+        $admin_paths = array(
+        '/inc/admin/admin-access-control.php',
+        '/inc/admin/dashboard-redirect.php',
+        '/inc/admin/post-capabilities.php',
+        '/inc/admin/user-roles.php',
+    );
+       foreach ( $admin_paths as $admin ) {
+        require_once $theme_dir . $admin;
+    }
+}
+
+if ( 
+    ! is_admin() 
+    && is_user_logged_in() 
+    && in_array( 'student', (array) $user->roles, true )
+) {
+	require_once $theme_dir . '/inc/admin/hide-admin-bar.php';
+}
+
 
     // Helpers
     include_once $theme_dir . '/inc/helpers/number-format.php';
