@@ -49,6 +49,32 @@
     font-weight: 600;
 }
 
+/* Go to site link hide */
+body.login #backtoblog {
+    display: none;
+}
+/* WordPress logo hide */
+body.login h1 a {
+    display: none;
+}
+
+input#wp-submit {
+    background: linear-gradient(to right, #FFB900 50%, #171100 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+input#wp-submit:hover {
+    background-position: left bottom; /* left to right animation */
+    color: #171100;
+}
+
+
 
 
 

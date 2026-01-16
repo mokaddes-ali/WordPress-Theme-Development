@@ -4,6 +4,17 @@
  * 
  * @package lessonlms
  */
+function lessonlms_login_header() {
+get_header();
+}
+add_action( 'login_header', 'lessonlms_login_header' );
+
+function lessonlms_login_footer() {
+ get_footer();
+}
+add_action( 'login_footer', 'lessonlms_login_footer' );
+
+
     // Theme includes
     $theme_dir = get_template_directory();
     $user = wp_get_current_user();
@@ -94,30 +105,22 @@ function custom_register_fields() {
     ?>
     <style>
         /* Hide username field */
-        #user_login {
+        /* #user_login {
             display: none;
-        }
+        } */
 
-        .custom-register-wrap p {
+        /* .custom-register-wrap p {
             margin-bottom: 12px;
-        }
-
-        .custom-register-wrap input {
+        } */
+        /* .custom-register-wrap input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 6px;
-        }
+        } */
     </style>
 
     <div class="custom-register-wrap">
-
-        <p>
-            <label>Full Name<br>
-                <input type="text" name="full_name"
-                       value="<?php echo esc_attr($_POST['full_name'] ?? ''); ?>">
-            </label>
-        </p>
 
         <p>
             <label>Password<br>
@@ -138,9 +141,9 @@ function custom_register_fields() {
 add_filter('registration_errors', 'custom_register_validation', 10, 3);
 function custom_register_validation($errors, $sanitized_user_login, $user_email) {
 
-    if (empty($_POST['full_name'])) {
-        $errors->add('full_name_error', __('Full name is required.'));
-    }
+    // if (empty($_POST['full_name'])) {
+    //     $errors->add('full_name_error', __('Full name is required.'));
+    // }
 
     if (empty($_POST['password'])) {
         $errors->add('password_error', __('Password is required.'));
@@ -172,15 +175,6 @@ function generate_username_from_email($username) {
 
 add_action('user_register', 'save_custom_register_data');
 function save_custom_register_data($user_id) {
-
-    // Save full name
-    if (!empty($_POST['full_name'])) {
-        update_user_meta(
-            $user_id,
-            'full_name',
-            sanitize_text_field($_POST['full_name'])
-        );
-    }
 
     // Set password manually
     if (!empty($_POST['password'])) {
