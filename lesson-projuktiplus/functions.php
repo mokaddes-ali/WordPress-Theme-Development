@@ -99,94 +99,78 @@ if ( isset( $_POST['student_change_password_submit'] ) ) {
 }
 
 
-// Modify default register form
-add_action('register_form', 'custom_register_fields');
-function custom_register_fields() {
+function lessonlms_custom_register_fields() {
     ?>
-    <style>
-        /* Hide username field */
-        /* #user_login {
-            display: none;
-        } */
-
-        /* .custom-register-wrap p {
-            margin-bottom: 12px;
-        } */
-        /* .custom-register-wrap input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        } */
-    </style>
-
     <div class="custom-register-wrap">
-
         <p>
-            <label>Password<br>
-                <input type="password" name="password">
+            <label for="user_password">
+                 <?php echo esc_html__('Password', 'lessonlms') ?><br>
+                <input type="password" name="user_password" id="user_password" class="input" value="" size="20" autocapitalize="off" autocomplete="user_password">
             </label>
         </p>
 
         <p>
-            <label>Confirm Password<br>
-                <input type="password" name="confirm_password">
+            <label for="user_confirm_password">
+                <?php echo esc_html__('Confirm Password', 'lessonlms') ?>
+                <br>
+                <input type="password" id="user_confirm_password" autocomplete="off" autocapitalize="off" name="user_confirm_password">
             </label>
         </p>
 
     </div>
+     <div id="otp-box-id" class="otp-box-container">
+        <h1>Enter OTP</h1>
+        <div id="otp-box-list-id" class="otp-box-list">
+            <input type="text" class="otp-box" maxlength="1" />
+            <input type="text" class="otp-box" maxlength="1" />
+            <input type="text" class="otp-box" maxlength="1" />
+            <input type="text" class="otp-box" maxlength="1" />
+        </div>
+
+        <p id="generated-otp-id" class="generated-otp">...</p>
+        <!-- <button onclick="generateOTP()">Generate OTP</button> -->
+         <!-- Add inside otp-box-id div -->
+<button id="send-otp-btn">Send New OTP</button>
+<button id="verify-otp-btn" style="display: none;">Verify OTP</button>
+
+        <p id="result-id" class="otp-validate-message"></p>
+        <p id="otp-expires-id"></p>
+    </div>
     <?php
 }
+add_action('register_form', 'lessonlms_custom_register_fields');
 
-add_filter('registration_errors', 'custom_register_validation', 10, 3);
-function custom_register_validation($errors, $sanitized_user_login, $user_email) {
+function lessonlms_custom_register_validation( $errors, $sanitized_user_login, $user_email ) {
 
-    // if (empty($_POST['full_name'])) {
-    //     $errors->add('full_name_error', __('Full name is required.'));
-    // }
-
-    if (empty($_POST['password'])) {
-        $errors->add('password_error', __('Password is required.'));
+    if ( empty( $_POST['user_password'] ) ) {
+        $errors->add( 'password_error', __('Password field is required.') );
     }
 
-    if ($_POST['password'] !== $_POST['confirm_password']) {
+    if ( $_POST['user_password'] !== $_POST['user_confirm_password']) {
         $errors->add('confirm_password_error', __('Passwords do not match.'));
     }
 
     return $errors;
 }
+add_filter( 'registration_errors', 'lessonlms_custom_register_validation', 10, 3 );
 
 
-add_filter('pre_user_login', 'generate_username_from_email');
-function generate_username_from_email($username) {
 
-    if (!empty($_POST['user_email'])) {
-        $email = sanitize_email($_POST['user_email']);
-        $username = sanitize_user(current(explode('@', $email)));
+function save_custom_register_data( $user_id ) {
+
+    if ( ! empty( $_POST['user_password'] )) {
+        wp_set_password( $_POST['user_password'], $user_id );
     }
-
-    // If username exists, add random number
-    if (username_exists($username)) {
-        $username .= rand(100, 999);
-    }
-
-    return $username;
 }
-
 add_action('user_register', 'save_custom_register_data');
-function save_custom_register_data($user_id) {
-
-    // Set password manually
-    if (!empty($_POST['password'])) {
-        wp_set_password($_POST['password'], $user_id);
-    }
-}
 
 
 add_action('wp_ajax_filter_courses', 'lessonlms_filter_courses');
 add_action('wp_ajax_nopriv_filter_courses', 'lessonlms_filter_courses');
 
 function lessonlms_filter_courses(){
+
+    
 
     $tax_query = [];
     $meta_query = [];
@@ -350,6 +334,29 @@ function sidebar_menu_ajax_handler() {
 }
 add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
 
+//! Handle login for not verified otp user
+function lessonlms_block_unverified_otp_user_login( $user, $username, $password) {
+    if ( is_wp_error( $user ) ) {
+        return $user;
+    }
 
+    if ( in_array( 'instructor', (array) $user->roles, true) || in_array( 'administrator', (array) $user->roles, true ) ) {
+        return $user;
+    }
+    if ( empty( $username ) || empty( $password ) ) {
+        return $user;
+    }
+
+    if ( in_array( 'instructor', (array) $user->roles, true) ) {
+        $verified = get_user_meta( $user->ID, 'lessonlms_verified', true );
+        if ( $verified !== '1' || $verified !== 1  ) {
+            return new WP_Error(
+            'lessonlms_otp_not_verified',
+            __( 'Your account is not verified. Please verify OTP first.', 'lessonlms' )
+        );
+        }
+    }
+}
+add_filter( 'authenticate', 'lessonlms_block_unverified_otp_user_login', 30, 3 );
 
 
