@@ -23,7 +23,9 @@ jQuery(document).ready(function($){
         let form = $(this);
         let data = form.serialize();
         let submit_btn = $('#review_submit_btn');
+        //! php function name lessonlms_ajax_review
 
+        //! lessonlms_ajax_review_obj wp localize register
         data += '&action=lessonlms_ajax_review'; 
         data += '&security=' + lessonlms_ajax_review_obj.nonce;
 

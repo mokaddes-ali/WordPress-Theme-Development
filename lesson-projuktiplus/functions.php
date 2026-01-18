@@ -98,73 +98,6 @@ if ( isset( $_POST['student_change_password_submit'] ) ) {
     }
 }
 
-
-function lessonlms_custom_register_fields() {
-    ?>
-    <div class="custom-register-wrap">
-        <p>
-            <label for="user_password">
-                 <?php echo esc_html__('Password', 'lessonlms') ?><br>
-                <input type="password" name="user_password" id="user_password" class="input" value="" size="20" autocapitalize="off" autocomplete="user_password">
-            </label>
-        </p>
-
-        <p>
-            <label for="user_confirm_password">
-                <?php echo esc_html__('Confirm Password', 'lessonlms') ?>
-                <br>
-                <input type="password" id="user_confirm_password" autocomplete="off" autocapitalize="off" name="user_confirm_password">
-            </label>
-        </p>
-
-    </div>
-     <div id="otp-box-id" class="otp-box-container">
-        <h1>Enter OTP</h1>
-        <div id="otp-box-list-id" class="otp-box-list">
-            <input type="text" class="otp-box" maxlength="1" />
-            <input type="text" class="otp-box" maxlength="1" />
-            <input type="text" class="otp-box" maxlength="1" />
-            <input type="text" class="otp-box" maxlength="1" />
-        </div>
-
-        <p id="generated-otp-id" class="generated-otp">...</p>
-        <!-- <button onclick="generateOTP()">Generate OTP</button> -->
-         <!-- Add inside otp-box-id div -->
-<button id="send-otp-btn">Send New OTP</button>
-<button id="verify-otp-btn" style="display: none;">Verify OTP</button>
-
-        <p id="result-id" class="otp-validate-message"></p>
-        <p id="otp-expires-id"></p>
-    </div>
-    <?php
-}
-add_action('register_form', 'lessonlms_custom_register_fields');
-
-function lessonlms_custom_register_validation( $errors, $sanitized_user_login, $user_email ) {
-
-    if ( empty( $_POST['user_password'] ) ) {
-        $errors->add( 'password_error', __('Password field is required.') );
-    }
-
-    if ( $_POST['user_password'] !== $_POST['user_confirm_password']) {
-        $errors->add('confirm_password_error', __('Passwords do not match.'));
-    }
-
-    return $errors;
-}
-add_filter( 'registration_errors', 'lessonlms_custom_register_validation', 10, 3 );
-
-
-
-function save_custom_register_data( $user_id ) {
-
-    if ( ! empty( $_POST['user_password'] )) {
-        wp_set_password( $_POST['user_password'], $user_id );
-    }
-}
-add_action('user_register', 'save_custom_register_data');
-
-
 add_action('wp_ajax_filter_courses', 'lessonlms_filter_courses');
 add_action('wp_ajax_nopriv_filter_courses', 'lessonlms_filter_courses');
 
@@ -334,29 +267,180 @@ function sidebar_menu_ajax_handler() {
 }
 add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
 
+add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
+add_filter( 'wp_new_user_notification_email_user', '__return_false' );
+
 //! Handle login for not verified otp user
-function lessonlms_block_unverified_otp_user_login( $user, $username, $password) {
-    if ( is_wp_error( $user ) ) {
-        return $user;
+function lessonlms_block_unverified_otp_user_login() {
+
+    check_ajax_referer( 'lessonlms_ajax_nonce', 'security' );
+
+    $username = sanitize_user( $_POST['log'] );
+    $password = $_POST['pwd'];
+    $remember = ! empty( $_POST['rememberme'] );
+
+        if ( empty( $username ) || empty( $password ) ) {
+        wp_send_json_error(['message' => 'Username or password is empty']);
     }
 
-    if ( in_array( 'instructor', (array) $user->roles, true) || in_array( 'administrator', (array) $user->roles, true ) ) {
-        return $user;
-    }
-    if ( empty( $username ) || empty( $password ) ) {
-        return $user;
-    }
-
-    if ( in_array( 'instructor', (array) $user->roles, true) ) {
-        $verified = get_user_meta( $user->ID, 'lessonlms_verified', true );
-        if ( $verified !== '1' || $verified !== 1  ) {
-            return new WP_Error(
-            'lessonlms_otp_not_verified',
-            __( 'Your account is not verified. Please verify OTP first.', 'lessonlms' )
+        $credential_data = array(
+            'user_login' => $username,
+            'user_password' => $password,
+            'remember' => $remember,
         );
+
+     $user = wp_signon( $credential_data, false );
+
+    if ( is_wp_error( $user ) ) {
+        wp_send_json_error([ 'message' => $user->get_error_message() ] );
+    }
+
+    $roles = (array) $user->roles;
+
+    if ( in_array( 'instructor',$roles , true) || in_array( 'administrator', (array) $user->roles, true ) ) {
+        // nothing do
+    }
+
+    if ( in_array( 'student', $roles, true) ) {
+
+        $verified = get_user_meta( $user->ID, 'otp_verified', true );
+
+        if ( (int) $verified !== 1  ) {
+            wp_send_json_error(['message' => 'Your account is not verified. Please verify OTP first.']);
         }
     }
+
+    wp_send_json_success( array(
+        'message'      => 'Login successful.',
+        'redirect_url' => home_url('/student-dashboard/')
+    ) );
 }
-add_filter( 'authenticate', 'lessonlms_block_unverified_otp_user_login', 30, 3 );
+add_action('wp_ajax_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login');
+add_action('wp_ajax_nopriv_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login');
+
+
+
+function lessonlms_custom_register_fields() {
+    ?>
+    <div class="custom-register-wrap">
+        <p>
+            <label for="user_password">
+                 <?php echo esc_html__('Password', 'lessonlms') ?><br>
+                <input type="password" name="user_password" id="user_password" class="input" value="" size="20" autocapitalize="off" autocomplete="user_password">
+            </label>
+        </p>
+
+        <p>
+            <label for="user_confirm_password">
+                <?php echo esc_html__('Confirm Password', 'lessonlms') ?>
+                <br>
+                <input type="password" id="user_confirm_password" autocomplete="off" autocapitalize="off" name="user_confirm_password">
+            </label>
+        </p>
+
+    </div>
+    <?php
+}
+add_action('register_form', 'lessonlms_custom_register_fields');
+
+function lessonlms_custom_register_validation( $errors, $login, $email ) {
+
+    if ( empty( $_POST['user_password'] ) ) {
+        $errors->add( 'password_error', __('Password field is required.') );
+    }
+
+    if ( $_POST['user_password'] !== $_POST['user_confirm_password']) {
+        $errors->add('confirm_password_error', __('Passwords do not match.'));
+    }
+
+    return $errors;
+}
+add_filter( 'registration_errors', 'lessonlms_custom_register_validation', 10, 3 );
+
+function save_custom_register_data( $user_id ) {
+
+    if ( ! empty( $_POST['user_password'] )) {
+        wp_set_password( $_POST['user_password'], $user_id );
+    }
+}
+add_action('user_register', 'save_custom_register_data');
+add_filter('registration_redirect', 'lessonlms_after_register_redirect');
+function lessonlms_after_register_redirect() {
+    return home_url('/verify-otp/');
+}
+
+
+function lessonlms_send_otp_register_user_unverified( $user_id ) {
+    if ( is_admin() ) {
+        return;
+    }
+    update_user_meta( $user_id, 'lessonlms_otp_verified', 0 );
+    lessonlms_generate_otp_send_otp( $user_id );
+}
+add_action('user_register', 'lessonlms_send_otp_register_user_unverified');
+
+function lessonlms_generate_otp_send_otp( $user_id ) {
+
+    $generate_otp = rand( 1000, 9999 );
+    update_user_meta( $user_id, 'store_user_otp', $generate_otp );
+    update_user_meta( $user_id, 'store_user_time', time() );
+
+    $user_data = get_userdata( $user_id );
+    if ( ! $user_data ) {
+        return;
+    }
+    wp_mail(
+          $user_data->user_email,
+         'Verify your account',
+        "Hello {$user_data->user_login}\n\nYour OTP is: {$generate_otp}\nThis OTP is valid for 5 minutes.",
+    );
+}
+
+//delete otp after 5minute expire
+function lessonlms_otp_expire_after_five_minute( $user_id ) {
+    $get_otp_time = get_user_meta( $user_id, 'store_user_time', time() );
+
+    if ( ! $get_otp_time ) {
+        return true;
+    }
+
+    if ( time() - (int) $get_otp_time > 300 ) {
+    delete_user_meta( $user_id, 'store_user_otp', true);
+    delete_user_meta( $user_id, 'store_user_time', true );
+    return true;
+    }
+    return false;
+}
+
+//! verify otp
+function lessonlms_verify_user_otp( $user_id,  $input_otp ) {
+    $stored_otp  = get_user_meta( $user_id, 'store_user_otp', true );
+    $stored_time = get_user_meta( $user_id, 'store_user_time', true );
+
+     if ( ! $stored_otp || ! $stored_time ) {
+        return new WP_Error( 'otp_missing', 'OTP not found. Please resend OTP.' );
+    }
+
+     // Expire check (5 minutes = 300 sec)
+    if ( time() - (int) $stored_time > 300 ) {
+
+        delete_user_meta( $user_id, 'store_user_otp' );
+        delete_user_meta( $user_id, 'store_user_time' );
+
+        return new WP_Error( 'otp_expired', 'OTP expired. Please resend OTP.' );
+    }
+
+    if ( (string) $stored_otp !== (string) $input_otp ) {
+        return new WP_Error( 'otp_invalid', 'Invalid OTP.' );
+    }
+
+    // SUCCESS
+    update_user_meta( $user_id, 'lessonlms_otp_verified', 1 );
+
+    delete_user_meta( $user_id, 'store_user_otp' );
+    delete_user_meta( $user_id, 'store_user_time' );
+    return true;
+}
+
 
 

@@ -5,13 +5,13 @@
  * 
  * @package lessonlms
  */
-  $user_id = get_current_user_id();
-  $course_id = get_the_ID();
-  $user_review = lessonlms_get_user_review($course_id, $user_id);
-  $button_text = $user_review ? "Update Review" : "Submit Review";
- $old_name   = $user_review ? $user_review['name'] : "";
-$old_text   = $user_review ? $user_review['review'] : "";
-$old_rating = $user_review ? $user_review['rating'] : "";
+    $user_id = get_current_user_id();
+    $course_id = get_the_ID();
+    $user_review = lessonlms_get_user_review($course_id, $user_id);
+    $button_text = $user_review ? "Update Review" : "Submit Review";
+    $old_name   = $user_review ? $user_review['name'] : "";
+    $old_text   = $user_review ? $user_review['review'] : "";
+    $old_rating = $user_review ? $user_review['rating'] : "";
 
 
   $user_enrollments = get_user_meta($user_id, '_user_enrollments', true);

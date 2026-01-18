@@ -1,5 +1,4 @@
-jQuery(function ($) {
-
+jQuery(document).ready(function($){
     function getFilters() {
         return {
             action: 'filter_courses',
@@ -69,9 +68,7 @@ jQuery(function ($) {
             $(checkbox).trigger('change');
         }
     }
-
 });
-
 
 document.querySelectorAll('.home-category-link')?.forEach(link => {
     link.addEventListener('click', function () {
@@ -80,7 +77,8 @@ document.querySelectorAll('.home-category-link')?.forEach(link => {
             localStorage.setItem('selected_course_category', categoryId);
         }
     });
-});
+})
+
 
 
 

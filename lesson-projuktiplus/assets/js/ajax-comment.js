@@ -65,7 +65,6 @@ jQuery(document).ready(function($){
             error: function(){
                 submit_btn.prop('disabled', false);
                 submit_btn.val('Submit Comment');
-
                 Toast.fire({
                     icon: 'error',
                     title: 'Something went wrong.'

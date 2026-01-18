@@ -37,6 +37,7 @@
 @import url('all-courses.css');
 
 @import url('login-register.css');
+@import url('otp-form.css');
 
 .student-sidebar-tab {
     display: none;

@@ -54,15 +54,33 @@ function lessonlms_theme_enqueue_styles() {
       'ajax_url' => admin_url('admin-ajax.php'),
        'nonce' => wp_create_nonce('lessonlms_ajax_comment_nonce')
     ]);
+// Login AJAX script
+wp_enqueue_script(
+    'login-ajax-js',
+    get_stylesheet_directory_uri().'/assets/js/login-ajax.js',
+    array('jquery', 'sweetalert-js'),
+    null,
+    true
+);
+
+wp_localize_script('login-ajax-js', 'lessonlms_ajax_login_object', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce' => wp_create_nonce('lessonlms_ajax_nonce')
+));
 
 
         // ajax-review-js
     wp_enqueue_script( 'ajax-review-js', get_template_directory_uri() . '/assets/js/ajax-review.js', ['jquery', 'sweetalert-js'], null, true );
 
-            wp_enqueue_script(
+   wp_localize_script( 'ajax-review-js', 'lessonlms_ajax_review_obj',[
+      'ajax_url' => admin_url('admin-ajax.php'),
+       'nonce' => wp_create_nonce('lessonlms_ajax_review_nonce')
+    ]);
+
+    wp_enqueue_script(
     'course-filter-js',
     get_template_directory_uri() . '/assets/js/course-filter.js',
-    ['jquery'],
+    [ 'jquery', 'sweetalert-js' ],
     null,
     true
 );
@@ -71,11 +89,6 @@ wp_localize_script('course-filter-js', 'lessonlms_filter', [
     'ajax_url' => admin_url('admin-ajax.php'),
 ]);
 
-
-    wp_localize_script( 'ajax-review-js', 'lessonlms_ajax_review_obj',[
-      'ajax_url' => admin_url('admin-ajax.php'),
-       'nonce' => wp_create_nonce('lessonlms_ajax_review_nonce')
-    ]);
 
           // ajax-feedback-js
     wp_enqueue_script( 'ajax-feedback-js', get_template_directory_uri() . '/assets/js/ajax-feedback.js', ['jquery', 'sweetalert-js'], null, true );
@@ -92,6 +105,8 @@ wp_localize_script('course-filter-js', 'lessonlms_filter', [
 
     // Custom JS
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
+    // OTp veify js
+     wp_enqueue_script('otp-verify-js', get_template_directory_uri() . '/assets/js/otp-verify.js', array(), time(), true);
     // student-tab.js
      wp_enqueue_script('student-tab', get_template_directory_uri() . '/assets/js/student-tab.js', array('jquery'), time(), true);
       wp_localize_script( 'student-tab', 'studentDashboard', array(

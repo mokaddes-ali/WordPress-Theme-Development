@@ -1,11 +1,11 @@
 
-body.login h1 a,
+ body.login h1 a,
 body.login #backtoblog,
 p#reg_passmail,
 .notice.notice-info.message,
 div#login_error {
     display: none;
-}
+} 
 
 input#wp-submit {
     background: linear-gradient(to right, #FFB900 50%, #171100 50%);
