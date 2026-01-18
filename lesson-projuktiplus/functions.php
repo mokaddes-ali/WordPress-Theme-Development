@@ -266,59 +266,134 @@ function sidebar_menu_ajax_handler() {
     wp_send_json_success( ob_get_clean() );
 }
 add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
+function lessonlms_reset_password_link_action() {
 
-add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
-add_filter( 'wp_new_user_notification_email_user', '__return_false' );
+    check_ajax_referer( 'lessonlms_reset_password_nonce', 'security' );
 
-//! Handle login for not verified otp user
+    $user_login = sanitize_text_field( $_POST['user_login'] ?? '' );
+
+    if ( ! $user_login ) {
+        wp_send_json_error( [
+            'message' => 'User name / Email field is required.',
+        ] );
+    }
+
+    // Check user by login or email
+    $user = get_user_by( 'login', $user_login );
+    if ( ! $user ) {
+        $user = get_user_by( 'email', $user_login );
+    }
+
+    if ( ! $user ) {
+        wp_send_json_error( [
+            'message' => 'User not found with this username or email.',
+        ] );
+    }
+    
+    $otp = rand( 1000, 9999 );
+    update_user_meta( $user->ID, 'store_user_otp', $otp );
+    update_user_meta( $user->ID, 'store_user_time', time() );
+
+    $message = "Hello {$user->user_login},\n\n";
+    $message .= "You requested a password reset. Click the link below to reset your password:\n";
+    $message .= "use this OTP to reset your password: {$otp}\n\n";
+    $message .= "This OTP is valid for 10 minutes.";
+
+    wp_mail(
+        $user->user_email,
+        'Password Reset Request',
+        $message,
+        [ 'Content-Type: text/plain; charset=UTF-8' ]
+    );
+
+    wp_send_json_success( [
+        'message'      => 'Password reset link sent successfully. Please check your email.',
+        'redirect_url' => home_url('/verify-otp/'),
+    ] );
+}
+
+add_action( 'wp_ajax_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
+add_action( 'wp_ajax_nopriv_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
+
+add_filter( 'send_password_change_email', '__return_false' );
+add_filter( 'send_email_change_email', '__return_false' );
+
+
+
 function lessonlms_block_unverified_otp_user_login() {
 
     check_ajax_referer( 'lessonlms_ajax_nonce', 'security' );
 
-    $username = sanitize_user( $_POST['log'] );
-    $password = $_POST['pwd'];
+    $username = sanitize_user( $_POST['log'] ?? '' );
+    $password = $_POST['pwd'] ?? '';
     $remember = ! empty( $_POST['rememberme'] );
 
-        if ( empty( $username ) || empty( $password ) ) {
-        wp_send_json_error(['message' => 'Username or password is empty']);
+    if ( empty( $username ) || empty( $password ) ) {
+        wp_send_json_error([ 'message' => 'Username or password is empty' ]);
     }
 
-        $credential_data = array(
-            'user_login' => $username,
-            'user_password' => $password,
-            'remember' => $remember,
-        );
+    $user = get_user_by( 'login', $username );
+    if ( ! $user ) {
+        $user = get_user_by( 'email', $username );
+    }
 
-     $user = wp_signon( $credential_data, false );
-
-    if ( is_wp_error( $user ) ) {
-        wp_send_json_error([ 'message' => $user->get_error_message() ] );
+    if ( ! $user ) {
+        wp_send_json_error([ 'message' => 'Invalid username or password' ]);
     }
 
     $roles = (array) $user->roles;
 
-    if ( in_array( 'instructor',$roles , true) || in_array( 'administrator', (array) $user->roles, true ) ) {
-        // nothing do
-    }
+    if ( in_array( 'student', $roles, true ) ) {
 
-    if ( in_array( 'student', $roles, true) ) {
+        $verified = (int) get_user_meta( $user->ID, 'otp_verified', true );
 
-        $verified = get_user_meta( $user->ID, 'otp_verified', true );
-
-        if ( (int) $verified !== 1  ) {
-            wp_send_json_error(['message' => 'Your account is not verified. Please verify OTP first.']);
+        if ( $verified !== 1 ) {
+            lessonlms_generate_otp_send_otp( $user->ID );
+             wp_send_json_success([
+        'message'      => 'OTP sent successfully.',
+        'redirect_url' => home_url('/verify-otp/'),
+    ]);
+            // wp_send_json_error([
+            //     'message' => 'Your account is not verified. Please verify OTP first.'
+            // ]);
         }
     }
 
-    wp_send_json_success( array(
-        'message'      => 'Login successful.',
-        'redirect_url' => home_url('/student-dashboard/')
-    ) );
+    $credential_data = [
+        'user_login'    => $username,
+        'user_password' => $password,
+        'remember'      => $remember,
+    ];
+
+    $signed_user = wp_signon( $credential_data, false );
+
+    if ( is_wp_error( $signed_user ) ) {
+        wp_send_json_error([
+            'message' => $signed_user->get_error_message()
+        ]);
+    }
+
+    if (
+        in_array( 'administrator', $roles, true ) ||
+        in_array( 'instructor', $roles, true )
+    ) {
+        wp_send_json_success( array(
+            'redirect_url' => admin_url(),
+        ) );
+    }
+
+    wp_send_json_success([
+        'message'      => 'Login successful',
+        'redirect_url' => home_url('/student-dashboard/'),
+    ]);
 }
-add_action('wp_ajax_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login');
-add_action('wp_ajax_nopriv_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login');
 
+add_action( 'wp_ajax_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login' );
+add_action( 'wp_ajax_nopriv_lessonlms_block_unverified_otp_user_login', 'lessonlms_block_unverified_otp_user_login' );
 
+// Disable default registration email
+add_filter( 'wp_new_user_notification_email', '__return_false' );
+add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
 
 function lessonlms_custom_register_fields() {
     ?>
@@ -343,58 +418,100 @@ function lessonlms_custom_register_fields() {
 }
 add_action('register_form', 'lessonlms_custom_register_fields');
 
-function lessonlms_custom_register_validation( $errors, $login, $email ) {
+function lessonlms_custom_register_validation_action() {
 
-    if ( empty( $_POST['user_password'] ) ) {
-        $errors->add( 'password_error', __('Password field is required.') );
+    // Verify nonce first
+    check_ajax_referer( 'lessonlms_custom_register_nonce', 'security' );
+
+    // Sanitize form inputs
+    $user_name       = sanitize_text_field( $_POST['user_login'] ?? '' );
+    $user_email      = sanitize_email( $_POST['user_email'] ?? '' );
+    $user_pass       = $_POST['user_password'] ?? '';
+    $user_confi_pass = $_POST['user_confirm_password'] ?? '';
+
+    // Validation
+    if ( ! $user_name ) {
+        wp_send_json_error([ 'message' => 'User name field is required.' ]);
+    }
+    if ( ! $user_email ) {
+        wp_send_json_error([ 'message' => 'User email field is required.' ]);
+    }
+    if ( ! $user_pass ) {
+        wp_send_json_error([ 'message' => 'Password field is required.' ]);
+    }
+    if ( $user_pass !== $user_confi_pass ) {
+        wp_send_json_error([ 'message' => 'Passwords do not match.' ]);
     }
 
-    if ( $_POST['user_password'] !== $_POST['user_confirm_password']) {
-        $errors->add('confirm_password_error', __('Passwords do not match.'));
+    // Check if username or email exists
+    if ( username_exists( $user_name ) ) {
+        wp_send_json_error([ 'message' => 'Username already exists.' ]);
+    }
+    if ( email_exists( $user_email ) ) {
+        wp_send_json_error([ 'message' => 'Email already exists.' ]);
     }
 
-    return $errors;
-}
-add_filter( 'registration_errors', 'lessonlms_custom_register_validation', 10, 3 );
-
-function save_custom_register_data( $user_id ) {
-
-    if ( ! empty( $_POST['user_password'] )) {
-        wp_set_password( $_POST['user_password'], $user_id );
+    // Create user
+    $user_id = wp_create_user( $user_name, $user_pass, $user_email );
+    if ( is_wp_error( $user_id ) ) {
+        wp_send_json_error([ 'message' => $user_id->get_error_message() ]);
     }
-}
-add_action('user_register', 'save_custom_register_data');
-add_filter('registration_redirect', 'lessonlms_after_register_redirect');
-function lessonlms_after_register_redirect() {
-    return home_url('/verify-otp/');
-}
 
-
-function lessonlms_send_otp_register_user_unverified( $user_id ) {
-    if ( is_admin() ) {
-        return;
-    }
+    // Mark unverified and generate OTP
     update_user_meta( $user_id, 'lessonlms_otp_verified', 0 );
     lessonlms_generate_otp_send_otp( $user_id );
-}
-add_action('user_register', 'lessonlms_send_otp_register_user_unverified');
 
+    // Return JSON success
+    wp_send_json_success([
+        'message'      => 'OTP sent successfully.',
+        'redirect_url' => home_url('/verify-otp/'),
+    ]);
+}
+add_action( 'wp_ajax_lessonlms_custom_register_validation_action', 'lessonlms_custom_register_validation_action' );
+add_action( 'wp_ajax_nopriv_lessonlms_custom_register_validation_action', 'lessonlms_custom_register_validation_action' );
+
+
+/**
+ *  Generate OTP & send custom email
+ */
 function lessonlms_generate_otp_send_otp( $user_id ) {
 
+    // Generate random 4-digit OTP
     $generate_otp = rand( 1000, 9999 );
     update_user_meta( $user_id, 'store_user_otp', $generate_otp );
     update_user_meta( $user_id, 'store_user_time', time() );
 
+    // Get user data
     $user_data = get_userdata( $user_id );
-    if ( ! $user_data ) {
-        return;
-    }
+    if ( ! $user_data ) return;
+
+    // Send custom OTP email
     wp_mail(
-          $user_data->user_email,
-         'Verify your account',
-        "Hello {$user_data->user_login}\n\nYour OTP is: {$generate_otp}\nThis OTP is valid for 5 minutes.",
+        $user_data->user_email,
+        'Verify your account',
+        "Hello {$user_data->user_login},\n\nYour OTP is: {$generate_otp}\nThis OTP is valid for 5 minutes.",
+        [ 'Content-Type: text/plain; charset=UTF-8' ]
     );
 }
+
+
+/**
+ *  Disable default WordPress new user registration emails
+ */
+add_filter( 'wp_new_user_notification_email', '__return_false' );
+add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
+
+
+/**
+ * Save user password after registration
+ */
+function save_custom_register_data( $user_id ) {
+    if ( ! empty( $_POST['user_password'] ) ) {
+        wp_set_password( $_POST['user_password'], $user_id );
+    }
+}
+add_action( 'user_register', 'save_custom_register_data' );
+
 
 //delete otp after 5minute expire
 function lessonlms_otp_expire_after_five_minute( $user_id ) {

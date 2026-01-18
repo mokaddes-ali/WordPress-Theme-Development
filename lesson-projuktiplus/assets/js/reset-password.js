@@ -14,21 +14,17 @@ jQuery("document").ready(function ($) {
     },
   });
 
-  $("#loginform").on("submit", function (e) {
-    // const username = $("#user_login").val();
-    //  if (username && !username.includes("@student")) {
-    //         return true;
-    //     }
+  $("#lostpasswordform").on("submit", function (e) {
     e.preventDefault();
     const form = $(this);
     let data = form.serialize();
     const submitButton = $("#wp-submit");
 
-    data += "&action=lessonlms_block_unverified_otp_user_login";
-    data += "&security=" + lessonlms_ajax_login_object.nonce;
+    data += "&action=lessonlms_reset_password_link_action";
+    data += "&security=" + lessonlms_ajax_reset_password_object.nonce;
 
     $.ajax({
-      url: lessonlms_ajax_login_object.ajax_url,
+      url: lessonlms_ajax_reset_password_object.ajax_url,
       type: "POST",
       data: data,
 
@@ -39,9 +35,13 @@ jQuery("document").ready(function ($) {
 
       success: function (response) {
          submitButton.prop("disabled", false);
-          submitButton.val("Log In");
+          submitButton.val("Reset Password");
         if (response.success) {
-                  window.location.href = response.data.redirect_url;
+        //     Toast.fire({
+        //     icon: 'success',
+        //     title: response.data.message,
+        // });  
+        window.location.href = response.data.redirect_url;
         return;
         } else {
           Toast.fire({
@@ -52,7 +52,7 @@ jQuery("document").ready(function ($) {
       },
       error: function () {
         submitButton.prop("disabled", false);
-        submitButton.val("Log In");
+        submitButton.val("Reset Password");
         Toast.fire({
           icon: "error",
           title: "Something went wrong",

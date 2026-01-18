@@ -67,6 +67,32 @@ wp_localize_script('login-ajax-js', 'lessonlms_ajax_login_object', array(
     'ajax_url' => admin_url('admin-ajax.php'),
     'nonce' => wp_create_nonce('lessonlms_ajax_nonce')
 ));
+// Register AJAX script
+wp_enqueue_script(
+    'register-ajax-js',
+    get_stylesheet_directory_uri().'/assets/js/register-ajax.js',
+    array('jquery', 'sweetalert-js'),
+    null,
+    true
+);
+
+wp_localize_script('register-ajax-js', 'lessonlms_ajax_register_object', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce' => wp_create_nonce('lessonlms_custom_register_nonce')
+));
+
+wp_enqueue_script(
+    'restet-password-js',
+    get_stylesheet_directory_uri().'/assets/js/reset-password.js',
+    array('jquery', 'sweetalert-js'),
+    null,
+    true
+);
+
+wp_localize_script('restet-password-js', 'lessonlms_ajax_reset_password_object', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce' => wp_create_nonce('lessonlms_reset_password_nonce'),
+));
 
 
         // ajax-review-js
