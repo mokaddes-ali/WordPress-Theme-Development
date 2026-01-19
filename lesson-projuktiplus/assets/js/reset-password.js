@@ -4,7 +4,7 @@ jQuery(document).ready(function ($) {
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 3000,
+    timer: 5000,
     timerProgressBar: true,
   });
 
@@ -28,10 +28,14 @@ jQuery(document).ready(function ($) {
       },
 
       success: function (response) {
+        console.log(response);
         submitButton.prop("disabled", false).val("Reset Password");
 
         if (response.success) {
-          window.location.href = response.data.redirect_url;
+          Toast.fire({
+            icon: "success",
+            title: response.data.message,
+          })
         } else {
           Toast.fire({
             icon: "error",

@@ -311,6 +311,7 @@ add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
 function lessonlms_reset_password_link_action() {
 
     check_ajax_referer( 'lessonlms_reset_password_nonce', 'security' );
+
     $user_login = sanitize_text_field( $_POST['user_login'] ?? '' );
 
     if ( ! $user_login ) {
@@ -326,15 +327,16 @@ function lessonlms_reset_password_link_action() {
             'message' => 'User not found with this username or email.',
         ] );
     }
-
-    $generate_otp = rand( 1000, 9999 );
-    update_user_meta( $user->ID, 'store_user_otp', $generate_otp );
-    update_user_meta( $user->ID, 'store_user_time', time() );
-
+    $key = get_password_reset_key( $user );
+    $reset_link = network_site_url(
+        'wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user->user_login ),
+        'login'
+    );
     $message = "Hello {$user->user_login},\n\n";
     $message .= "You requested a password reset.\n";
-    $message .= "Use this OTP to reset your password: {$generate_otp}\n\n";
-    $message .= "This OTP is valid for 5 minutes.";
+    $message .= "Click the link below to set your new password:\n\n";
+    $message .= $reset_link . "\n\n";
+    $message .= "If you did not request this, please ignore this email.";
 
     wp_mail(
         $user->user_email,
@@ -343,13 +345,9 @@ function lessonlms_reset_password_link_action() {
         [ 'Content-Type: text/plain; charset=UTF-8' ]
     );
 
-    // SET USER ID IN SESSION, COOKIE, TRANSET BACKUP
-    lessonlms_set_otp_user_session( $user->ID );
-    wp_send_json_success( [
+    wp_send_json_success( array(
         'message'      => 'Password reset link sent successfully. Please check your email.',
-        'user_id'      => $user->ID,
-        'redirect_url' => home_url( '/verify-otp/?user_id=' . $user->ID ),
-    ] );
+     ) );
 }
 
 add_action( 'wp_ajax_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
