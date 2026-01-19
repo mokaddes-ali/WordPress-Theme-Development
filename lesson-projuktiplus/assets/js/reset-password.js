@@ -1,21 +1,16 @@
-jQuery("document").ready(function ($) {
+jQuery(document).ready(function ($) {
+
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    customClass: {
-      popup: "custom-toast",
-    },
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
   });
 
   $("#lostpasswordform").on("submit", function (e) {
     e.preventDefault();
+
     const form = $(this);
     let data = form.serialize();
     const submitButton = $("#wp-submit");
@@ -29,20 +24,14 @@ jQuery("document").ready(function ($) {
       data: data,
 
       beforeSend: function () {
-              submitButton.prop("disabled", true);
-              submitButton.val("Submitting...");
+        submitButton.prop("disabled", true).val("Submitting...");
       },
 
       success: function (response) {
-         submitButton.prop("disabled", false);
-          submitButton.val("Reset Password");
+        submitButton.prop("disabled", false).val("Reset Password");
+
         if (response.success) {
-        //     Toast.fire({
-        //     icon: 'success',
-        //     title: response.data.message,
-        // });  
-        window.location.href = response.data.redirect_url;
-        return;
+          window.location.href = response.data.redirect_url;
         } else {
           Toast.fire({
             icon: "error",
@@ -50,14 +39,16 @@ jQuery("document").ready(function ($) {
           });
         }
       },
+
       error: function () {
-        submitButton.prop("disabled", false);
-        submitButton.val("Reset Password");
+        submitButton.prop("disabled", false).val("Reset Password");
         Toast.fire({
           icon: "error",
           title: "Something went wrong",
         });
       },
     });
+
+    return false;
   });
 });

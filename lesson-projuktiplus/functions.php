@@ -4,6 +4,7 @@
  * 
  * @package lessonlms
  */
+
 function lessonlms_login_header() {
 get_header();
 }
@@ -69,7 +70,56 @@ if (
     include_once $theme_dir . '/inc/helpers/number-format.php';
     include_once $theme_dir . '/inc/helpers/image-structure.php';
     include_once $theme_dir . '/inc/helpers/enroll-course-count.php';
+/**
+ * lessonlms start session with checking
+ */
+function lessonlms_start_session() {
+    if ( session_status() === PHP_SESSION_NONE && ! headers_sent() ) {
+        session_start();
+    }
+}
+add_action( 'init', 'lessonlms_start_session' );
 
+/**
+ * Set Session and Cookie
+ */
+function lessonlms_set_otp_user_session( $user_id ) {
+    
+    if ( session_status() === PHP_SESSION_NONE ) {
+        session_start();
+    }
+
+    $_SESSION['lessonlms_otp_user_id'] = $user_id;
+
+    set_transient('lessonlms_otp_user_' . $user_id, $user_id, 5 * MINUTE_IN_SECONDS );
+    //cookie set for 0.5hour or 30minute or 1800second
+    setcookie( 'lessonlms_otp_user_id', $user_id, time() + 1800, '/');
+}
+
+function lessonlms_get_otp_user_id() {
+
+    if ( isset( $_SESSION['lessonlms_otp_user_id'] ) ) {
+        return intval( $_SESSION['lessonlms_otp_user_id'] );
+    }
+
+    if ( isset( $_GET['user_id'] ) ) {
+        $user_id = intval( $_GET['user_id'] );
+        lessonlms_set_otp_user_session( $user_id );
+        return $user_id;
+    }
+
+    if ( isset( $_COOKIE['lessonlms_otp_user_id'] ) ) {
+        return intval( $_COOKIE['lessonlms_otp_user_id'] );
+    }
+    return 0;
+}
+
+function lessonlms_clear_otp_user_session() {
+
+    unset( $_SESSION['lessonlms_otp_user_id'] );
+
+    setcookie( 'lessonlms_otp_user_id', '', time() - 1800, '/' );
+}
 
 if ( isset( $_POST['student_change_password_submit'] ) ) {
 
@@ -102,9 +152,6 @@ add_action('wp_ajax_filter_courses', 'lessonlms_filter_courses');
 add_action('wp_ajax_nopriv_filter_courses', 'lessonlms_filter_courses');
 
 function lessonlms_filter_courses(){
-
-    
-
     $tax_query = [];
     $meta_query = [];
 
@@ -158,13 +205,6 @@ function lessonlms_filter_courses(){
 
     wp_die();
 }
-
-add_action('init', function () {
-    if (!session_id()) {
-        session_start();
-    }
-});
-
 
 
 function my_ajax_function() {
@@ -266,38 +306,35 @@ function sidebar_menu_ajax_handler() {
     wp_send_json_success( ob_get_clean() );
 }
 add_action( 'wp_ajax_sidebar_menu_ajax_action', 'sidebar_menu_ajax_handler' );
+
+// Reset Password Function
 function lessonlms_reset_password_link_action() {
 
     check_ajax_referer( 'lessonlms_reset_password_nonce', 'security' );
-
     $user_login = sanitize_text_field( $_POST['user_login'] ?? '' );
 
     if ( ! $user_login ) {
         wp_send_json_error( [
-            'message' => 'User name / Email field is required.',
+            'message' => 'User name / Email is required.',
         ] );
     }
 
-    // Check user by login or email
-    $user = get_user_by( 'login', $user_login );
-    if ( ! $user ) {
-        $user = get_user_by( 'email', $user_login );
-    }
+    $user = get_user_by( 'login', $user_login ) ?? get_user_by( 'email', $user_login );
 
     if ( ! $user ) {
         wp_send_json_error( [
             'message' => 'User not found with this username or email.',
         ] );
     }
-    
-    $otp = rand( 1000, 9999 );
-    update_user_meta( $user->ID, 'store_user_otp', $otp );
+
+    $generate_otp = rand( 1000, 9999 );
+    update_user_meta( $user->ID, 'store_user_otp', $generate_otp );
     update_user_meta( $user->ID, 'store_user_time', time() );
 
     $message = "Hello {$user->user_login},\n\n";
-    $message .= "You requested a password reset. Click the link below to reset your password:\n";
-    $message .= "use this OTP to reset your password: {$otp}\n\n";
-    $message .= "This OTP is valid for 10 minutes.";
+    $message .= "You requested a password reset.\n";
+    $message .= "Use this OTP to reset your password: {$generate_otp}\n\n";
+    $message .= "This OTP is valid for 5 minutes.";
 
     wp_mail(
         $user->user_email,
@@ -306,9 +343,12 @@ function lessonlms_reset_password_link_action() {
         [ 'Content-Type: text/plain; charset=UTF-8' ]
     );
 
+    // SET USER ID IN SESSION, COOKIE, TRANSET BACKUP
+    lessonlms_set_otp_user_session( $user->ID );
     wp_send_json_success( [
         'message'      => 'Password reset link sent successfully. Please check your email.',
-        'redirect_url' => home_url('/verify-otp/'),
+        'user_id'      => $user->ID,
+        'redirect_url' => home_url( '/verify-otp/?user_id=' . $user->ID ),
     ] );
 }
 
@@ -318,8 +358,7 @@ add_action( 'wp_ajax_nopriv_lessonlms_reset_password_link_action', 'lessonlms_re
 add_filter( 'send_password_change_email', '__return_false' );
 add_filter( 'send_email_change_email', '__return_false' );
 
-
-
+// Login Function
 function lessonlms_block_unverified_otp_user_login() {
 
     check_ajax_referer( 'lessonlms_ajax_nonce', 'security' );
@@ -332,30 +371,28 @@ function lessonlms_block_unverified_otp_user_login() {
         wp_send_json_error([ 'message' => 'Username or password is empty' ]);
     }
 
-    $user = get_user_by( 'login', $username );
-    if ( ! $user ) {
-        $user = get_user_by( 'email', $username );
-    }
+    $user = get_user_by( 'login', $username ) ?? get_user_by( 'email', $username );
 
     if ( ! $user ) {
-        wp_send_json_error([ 'message' => 'Invalid username or password' ]);
+        wp_send_json_error([ 'message' => 'Invalid username or password. This data not found in database.' ]);
     }
 
     $roles = (array) $user->roles;
 
     if ( in_array( 'student', $roles, true ) ) {
-
-        $verified = (int) get_user_meta( $user->ID, 'otp_verified', true );
+        $verified = (int) get_user_meta( $user->ID, 'lessonlms_otp_verified', true );
 
         if ( $verified !== 1 ) {
             lessonlms_generate_otp_send_otp( $user->ID );
-             wp_send_json_success([
-        'message'      => 'OTP sent successfully.',
-        'redirect_url' => home_url('/verify-otp/'),
-    ]);
-            // wp_send_json_error([
-            //     'message' => 'Your account is not verified. Please verify OTP first.'
-            // ]);
+            
+            // SET USER ID IN SESSION
+            lessonlms_set_otp_user_session( $user->ID );
+            
+            wp_send_json_success([
+                'message'      => 'OTP sent successfully.',
+                'user_id'      => $user->ID,
+                'redirect_url' => home_url('/verify-otp/?user_id=' . $user->ID),
+            ]);
         }
     }
 
@@ -412,12 +449,12 @@ function lessonlms_custom_register_fields() {
                 <input type="password" id="user_confirm_password" autocomplete="off" autocapitalize="off" name="user_confirm_password">
             </label>
         </p>
-
     </div>
     <?php
 }
 add_action('register_form', 'lessonlms_custom_register_fields');
 
+// Registration Function 
 function lessonlms_custom_register_validation_action() {
 
     // Verify nonce first
@@ -461,21 +498,23 @@ function lessonlms_custom_register_validation_action() {
     update_user_meta( $user_id, 'lessonlms_otp_verified', 0 );
     lessonlms_generate_otp_send_otp( $user_id );
 
+    // SET USER ID IN SESSION - FIXED
+    lessonlms_set_otp_user_session( $user_id );
+
     // Return JSON success
     wp_send_json_success([
         'message'      => 'OTP sent successfully.',
-        'redirect_url' => home_url('/verify-otp/'),
+        'user_id'      => $user_id,
+        'redirect_url' => home_url('/verify-otp/?user_id=' . $user_id),
     ]);
 }
 add_action( 'wp_ajax_lessonlms_custom_register_validation_action', 'lessonlms_custom_register_validation_action' );
 add_action( 'wp_ajax_nopriv_lessonlms_custom_register_validation_action', 'lessonlms_custom_register_validation_action' );
 
-
 /**
  *  Generate OTP & send custom email
  */
 function lessonlms_generate_otp_send_otp( $user_id ) {
-
     // Generate random 4-digit OTP
     $generate_otp = rand( 1000, 9999 );
     update_user_meta( $user_id, 'store_user_otp', $generate_otp );
@@ -494,14 +533,6 @@ function lessonlms_generate_otp_send_otp( $user_id ) {
     );
 }
 
-
-/**
- *  Disable default WordPress new user registration emails
- */
-add_filter( 'wp_new_user_notification_email', '__return_false' );
-add_filter( 'wp_new_user_notification_email_admin', '__return_false' );
-
-
 /**
  * Save user password after registration
  */
@@ -512,52 +543,207 @@ function save_custom_register_data( $user_id ) {
 }
 add_action( 'user_register', 'save_custom_register_data' );
 
-
 //delete otp after 5minute expire
 function lessonlms_otp_expire_after_five_minute( $user_id ) {
-    $get_otp_time = get_user_meta( $user_id, 'store_user_time', time() );
+    $get_otp_time = get_user_meta( $user_id, 'store_user_time', true );
 
     if ( ! $get_otp_time ) {
         return true;
     }
 
     if ( time() - (int) $get_otp_time > 300 ) {
-    delete_user_meta( $user_id, 'store_user_otp', true);
-    delete_user_meta( $user_id, 'store_user_time', true );
-    return true;
+        delete_user_meta( $user_id, 'store_user_otp' );
+        delete_user_meta( $user_id, 'store_user_time' );
+        return true;
     }
     return false;
 }
 
-//! verify otp
-function lessonlms_verify_user_otp( $user_id,  $input_otp ) {
-    $stored_otp  = get_user_meta( $user_id, 'store_user_otp', true );
-    $stored_time = get_user_meta( $user_id, 'store_user_time', true );
+// Verify OTP Function
+function lessonlms_verify_user_otp( $user_id = null, $input_otp = null ) {
 
-     if ( ! $stored_otp || ! $stored_time ) {
-        return new WP_Error( 'otp_missing', 'OTP not found. Please resend OTP.' );
+    if ( ! $user_id ) {
+        $user_id = intval( $_POST['user_id'] ?? 0 );
     }
 
-     // Expire check (5 minutes = 300 sec)
-    if ( time() - (int) $stored_time > 300 ) {
+    if ( ! $input_otp ) {
+        $input_otp = sanitize_text_field( $_POST['otp'] ?? '');
+    }
 
-        delete_user_meta( $user_id, 'store_user_otp' );
-        delete_user_meta( $user_id, 'store_user_time' );
-
+    // First check if OTP is expired
+    if ( lessonlms_otp_expire_after_five_minute( $user_id ) ) {
         return new WP_Error( 'otp_expired', 'OTP expired. Please resend OTP.' );
     }
 
+    $stored_otp  = get_user_meta( $user_id, 'store_user_otp', true );
+    $stored_time = get_user_meta( $user_id, 'store_user_time', true );
+
+    if ( ! $stored_otp || ! $stored_time ) {
+        return new WP_Error( 'otp_missing', 'OTP not found. Please resend OTP.' );
+    }
+
     if ( (string) $stored_otp !== (string) $input_otp ) {
-        return new WP_Error( 'otp_invalid', 'Invalid OTP.' );
+        return new WP_Error('otp_invalid', 'Invalid OTP.');
     }
 
     // SUCCESS
     update_user_meta( $user_id, 'lessonlms_otp_verified', 1 );
-
     delete_user_meta( $user_id, 'store_user_otp' );
     delete_user_meta( $user_id, 'store_user_time' );
+    
+    // Clear session after verification
+    lessonlms_clear_otp_user_session();
+    
+    // Auto login user after verification
+    if ( ! is_user_logged_in() ) {
+        $user = get_user_by( 'ID', $user_id );
+        if ( $user ) {
+            wp_clear_auth_cookie();
+            wp_set_current_user( $user_id );
+            wp_set_auth_cookie( $user_id );
+        }
+    }
+    
     return true;
 }
 
+/**
+ * AJAX: Resend OTP
+ */
+function lessonlms_resend_otp() {
 
+    check_ajax_referer('lessonlms_otp_nonce', 'security');
+    
+    // Get user_id from POST or session
+    $user_id = intval( $_POST['user_id'] ?? 0 );
+    
+    if ( ! $user_id ) {
+        $user_id = lessonlms_get_otp_user_id();
+    }
+    
+    if ( ! $user_id || $user_id <= 0 ) {
+        wp_send_json_error( array(
+            'message' => 'User ID not found. Please try again.',
+        ) );
+    }
+    
+    lessonlms_generate_otp_send_otp( $user_id );
+    
+    // Update session
+    lessonlms_set_otp_user_session( $user_id );
+    
+    wp_send_json_success([
+        'message' => 'OTP resent successfully', 
+        'expires_in' => 300,
+        'user_id' => $user_id,
+    ]);
+}
+add_action('wp_ajax_lessonlms_resend_otp', 'lessonlms_resend_otp');
+add_action('wp_ajax_nopriv_lessonlms_resend_otp', 'lessonlms_resend_otp');
 
+/**
+ * AJAX: Verify OTP
+ */
+function lessonlms_verify_otp_ajax() {
+
+    check_ajax_referer('lessonlms_otp_nonce', 'security');
+    
+    // Get user_id from POST or session
+    $user_id = intval( $_POST['user_id'] ?? 0 );
+    
+    if ( ! $user_id ) {
+        $user_id = lessonlms_get_otp_user_id();
+    }
+    
+    $input_otp = sanitize_text_field( $_POST['otp'] ?? '' );
+
+    if ( ! $user_id || $user_id <= 0 ) {
+        wp_send_json_error( array(
+            'message' => 'User ID not found. Please try again.',
+        ) );
+    }
+    
+    if ( ! $input_otp ) {
+        wp_send_json_error( array(
+            'message' => 'OTP field required',
+        ) );
+    }
+
+    $verify = lessonlms_verify_user_otp( $user_id, $input_otp );
+
+    if ( is_wp_error( $verify ) ) {
+        wp_send_json_error( array(
+            'message' => $verify->get_error_message()
+        ) );
+    }
+
+    wp_send_json_success([
+        'message' => 'OTP verified successfully',
+        'redirect_url' => home_url('/student-dashboard/')
+    ]);
+}
+add_action('wp_ajax_lessonlms_verify_otp', 'lessonlms_verify_otp_ajax');
+add_action('wp_ajax_nopriv_lessonlms_verify_otp', 'lessonlms_verify_otp_ajax');
+
+// Add this to handle redirect after verification
+add_action('template_redirect', 'lessonlms_check_otp_verification');
+function lessonlms_check_otp_verification() {
+    if ( is_page( 'verify-otp' ) && is_user_logged_in() ) {
+        $user_id = get_current_user_id();
+        $verified = get_user_meta( $user_id, 'lessonlms_otp_verified', true );
+        
+        if ( $verified == 1 ) {
+            wp_redirect( home_url('/student-dashboard/') );
+            exit;
+        }
+    }
+}
+
+/**
+ * Preloader Function
+ */
+
+function smokeWings_Preloader() { 
+    if(!is_admin() &&  $GLOBALS["pagenow"] !== "wp-login.php" ) { 
+	
+        $delay = 1;	
+        $loader = 'http://localhost:10008/wp-content/uploads/2025/10/ripples.svg';
+        $overlayColor = '#FFF4EE';	
+	
+        echo '
+        <div class="Preloader"><img src="'.$loader.'" alt="loading" style="height: 150px;"></div>
+
+        <style>
+        .Preloader {
+            position: fixed;
+            inset: 0;
+            background-color: '.$overlayColor.';
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+        .Preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        </style>
+
+        <script>
+        document.body.style.overflow = "hidden";
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                const preloader = document.querySelector(".Preloader");
+                preloader.classList.add("fade-out");
+                setTimeout(() => {
+                    preloader.remove();
+                    document.body.style.overflow = "visible";
+                }, 600);
+            }, '.$delay.' * 1000);
+        });
+        </script>';
+    }
+}
+add_action( "wp_footer", "smokeWings_Preloader" );

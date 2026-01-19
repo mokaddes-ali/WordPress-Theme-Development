@@ -131,8 +131,22 @@ wp_localize_script('course-filter-js', 'lessonlms_filter', [
 
     // Custom JS
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/script.js', array('jquery'), time(), true);
-    // OTp veify js
-     wp_enqueue_script('otp-verify-js', get_template_directory_uri() . '/assets/js/otp-verify.js', array(), time(), true);
+
+    // OTP verify js
+wp_enqueue_script('otp-verify-js', get_template_directory_uri() . '/assets/js/otp-verify.js', array('jquery'), time(), true);
+
+// Pass ajax object & nonce to JS
+wp_localize_script('otp-verify-js', 'lessonlms_ajax_object', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce'    => wp_create_nonce('lessonlms_otp_nonce')
+));
+
+// Also localize for OTP specific
+wp_localize_script('otp-verify-js', 'lessonlms_otp_ajax_object', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce'    => wp_create_nonce('lessonlms_otp_nonce')
+));
+
     // student-tab.js
      wp_enqueue_script('student-tab', get_template_directory_uri() . '/assets/js/student-tab.js', array('jquery'), time(), true);
       wp_localize_script( 'student-tab', 'studentDashboard', array(

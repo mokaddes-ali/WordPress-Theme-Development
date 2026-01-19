@@ -1,106 +1,204 @@
-let generatedOTP;
-let intervalId; // Interval ID স্টোর করার জন্য
-let timeoutId;  // Timeout ID স্টোর করার জন্য
+jQuery(document).ready(function($){
+    const sendOTPBtn = $('#send-otp-btn');
+    const verifyOTPBtn = $('#verify-otp-btn');
+    const otpExpireElem = $('#otp-expires-id');
+    const otpBoxes = $('#otp-box-list-id .otp-box');
+    const resendLink = $('#resend-otp-link');
+    const otpMessage = $('#otp-message');
+    
+    let intervalId, timeoutId;
+    let expiresIn = 300;
+    
+    // Get user ID from hidden field
+    let currentUserId = $('#lessonlms-user-id').val();
+    
+    console.log('Current User ID:', currentUserId);
+    
+    // If user ID exists, show verify button immediately
+    if (currentUserId && currentUserId > 0) {
+        sendOTPBtn.hide();
+        verifyOTPBtn.show();
+        startTimer(); // Start timer immediately
+    }
 
-const otpExpireElem = document.getElementById('otp-expires-id');
-
-const sendOTPBtn = document.getElementById("send-otp-btn");
-const verifyOTPBtn = document.getElementById("verify-otp-btn");
-
-sendOTPBtn.addEventListener("click", function () {
-    generateOTP();
-    sendOTPBtn.style.display = "none";       // Hide send OTP
-    verifyOTPBtn.style.display = "none";     // Hide verify OTP initially
-});
-
-verifyOTPBtn.addEventListener("click", function () {
-    validateOTP();
-});
-
-function expireOTP() {
-    clearInterval(intervalId);
-    clearTimeout(timeoutId);
-
-    let slice = 300;
-
-    intervalId = setInterval(function () {
-        otpExpireElem.innerText = `OTP will expire in ${slice} seconds`;
-        slice = slice - 1;
-
-        if (slice < 0) {
-            clearInterval(intervalId);
+    // Digit-by-digit auto-focus
+    otpBoxes.on('input', function(){
+        let val = $(this).val();
+        if (isNaN(val)) {
+            $(this).val('');
+        } else {
+            if ($(this).next('.otp-box').length > 0) {
+                $(this).next('.otp-box').focus();
+            }
         }
-    }, 1000);
+    });
 
-    timeoutId = setTimeout(function () {
-        otpExpireElem.innerText = "OTP Expired";
+    // Allow backspace navigation
+    otpBoxes.on('keydown', function(e){
+        if(e.keyCode === 8 && $(this).val() === '' && $(this).prev('.otp-box').length > 0){
+            $(this).prev('.otp-box').focus();
+        }
+    });
 
-        sendOTPBtn.style.display = "inline-block";  // Show send button again
-        verifyOTPBtn.style.display = "inline-block"; // Allow verify
-    }, 15000);
-}
+    // Generic send OTP function
+    function sendOTP(userId){
+        showMessage('Sending OTP...', 'info');
+        
+        $.ajax({
+            url: lessonlms_ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'lessonlms_resend_otp',
+                security: lessonlms_ajax_object.nonce,
+                user_id: userId
+            },
+            success: function(res){
+                if(res.success){
+                    showMessage(res.data.message, 'success');
+                    expiresIn = res.data.expires_in || 300;
+                    startTimer();
+                    sendOTPBtn.hide();
+                    verifyOTPBtn.show();
+                    otpBoxes.val('');
+                    otpBoxes.first().focus();
+                } else {
+                    showMessage(res.data.message, 'error');
+                }
+            },
+            error: function(){
+                showMessage('Network error. Please try again.', 'error');
+            }
+        });
+    }
 
+    // Show message function
+    function showMessage(message, type){
+        otpMessage.removeClass('alert-success alert-danger alert-info')
+                 .addClass('alert-' + (type === 'error' ? 'danger' : type))
+                 .text(message)
+                 .show();
+        
+        setTimeout(function(){
+            otpMessage.fadeOut();
+        }, 5000);
+    }
 
+    // Send / Resend OTP click
+    sendOTPBtn.on('click', function(){
+        if(!currentUserId || currentUserId <= 0){
+            showMessage('User ID missing. Please try again.', 'error');
+            return;
+        }
+        
+        sendOTPBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Sending...');
+        sendOTP(currentUserId);
+        
+        setTimeout(function() {
+            sendOTPBtn.prop('disabled', false).html('<i class="fas fa-paper-plane"></i> Send OTP');
+        }, 3000);
+    });
 
-function tackleOTPBoxes() {
-    const boxes = document.getElementById('otp-box-list-id');
-    boxes.addEventListener('input', function (e) {
-        const target = e.target;
-        const value = target.value;
+    // Resend OTP link
+    resendLink.on('click', function(e){
+        e.preventDefault();
+        
+        if(!currentUserId || currentUserId <= 0){
+            showMessage('User ID missing. Please try again.', 'error');
+            return;
+        }
+        
+        sendOTP(currentUserId);
+    });
 
-        if (isNaN(value)) {
-            target.value = "";
+    // Verify OTP
+    verifyOTPBtn.on('click', function(){
+        if(!currentUserId || currentUserId <= 0){
+            showMessage('User ID missing. Please try again.', 'error');
             return;
         }
 
-        const nextElement = target.nextElementSibling;
+        let otp = '';
+        otpBoxes.each(function(){ 
+            otp += $(this).val(); 
+        });
 
-        if (nextElement) {
-            nextElement.focus();
+        if(!otp || otp.length !== otpBoxes.length){
+            showMessage('Please enter complete OTP.', 'error');
+            otpBoxes.first().focus();
+            return;
         }
 
-        validateOTP();
+        verifyOTPBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Verifying...');
+        
+        $.ajax({
+            url: lessonlms_ajax_object.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'lessonlms_verify_otp',
+                security: lessonlms_ajax_object.nonce,
+                user_id: currentUserId,
+                otp: otp
+            },
+            success: function(res){
+                if(res.success){
+                    showMessage(res.data.message, 'success');
+                    
+                    // Redirect after 2 seconds
+                    setTimeout(function(){
+                        if(res.data.redirect_url){
+                            window.location.href = res.data.redirect_url;
+                        } else {
+                            window.location.href = '<?php echo home_url("/student-dashboard/"); ?>';
+                        }
+                    }, 2000);
+                    
+                    sendOTPBtn.hide();
+                    verifyOTPBtn.hide();
+                    otpExpireElem.text('');
+                } else {
+                    showMessage(res.data.message, 'error');
+                    verifyOTPBtn.prop('disabled', false).html('<i class="fas fa-check"></i> Verify OTP');
+                }
+            },
+            error: function(){
+                showMessage('Network error. Please try again.', 'error');
+                verifyOTPBtn.prop('disabled', false).html('<i class="fas fa-check"></i> Verify OTP');
+            }
+        });
     });
-}
 
-function generateOTP() {
-    generatedOTP = Math.floor(1000 + Math.random() * 9000);
-    const otpElem = document.getElementById('generated-otp-id');
-    otpElem.innerText = `Your OTP: ${generatedOTP}`;
+    // Timer function
+    function startTimer(){
+        clearInterval(intervalId);
+        clearTimeout(timeoutId);
 
-    // Reset all input boxes
-    const inputs = document.querySelectorAll('.otp-box');
-    inputs.forEach(input => input.value = "");
-    inputs[0].focus();
+        // Reset expiresIn if needed
+        if (expiresIn <= 0) {
+            expiresIn = 300;
+        }
 
-    expireOTP();
-}
+        intervalId = setInterval(function(){
+            let minutes = Math.floor(expiresIn / 60);
+            let seconds = expiresIn % 60;
+            otpExpireElem.text(`OTP expires in ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
+            expiresIn--;
+            
+            if(expiresIn < 0) {
+                clearInterval(intervalId);
+            }
+        }, 1000);
 
-function validateOTP() {
-    let typedNumber = "";
-    const boxListElem = document.getElementById("otp-box-list-id");
-    [...boxListElem.children].forEach((elem) => {
-        typedNumber += elem.value;
-    });
-
-    const result = (generatedOTP === parseInt(typedNumber, 10));
-    const resultElem = document.getElementById('result-id');
-
-    if (result) {
-        resultElem.innerText = "OTP is validated successfully";
-        resultElem.classList.remove("fail");
-        resultElem.classList.add("success");
-    } else {
-        resultElem.innerText = "OTP is invalid";
-        resultElem.classList.remove("success");
-        resultElem.classList.add("fail");
+        timeoutId = setTimeout(function(){
+            otpExpireElem.text('OTP expired. Click "Send OTP" to get a new one.');
+            sendOTPBtn.show();
+            verifyOTPBtn.hide();
+            clearInterval(intervalId);
+        }, expiresIn * 1000);
     }
-}
 
-function init() {
-    console.log('JS initialization!!');
-    tackleOTPBoxes();
-    setTimeout(generateOTP, 2000);
-}
-
-init();
+    // Auto-focus first OTP box
+    if (currentUserId && currentUserId > 0) {
+        otpBoxes.first().focus();
+        otpExpireElem.text('Enter the OTP sent to your email');
+    }
+});
