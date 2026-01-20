@@ -313,11 +313,18 @@ function lessonlms_reset_password_link_action() {
     check_ajax_referer( 'lessonlms_reset_password_nonce', 'security' );
 
     $user_login = sanitize_text_field( $_POST['user_login'] ?? '' );
+     $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
 
     if ( ! $user_login ) {
         wp_send_json_error( [
             'message' => 'User name / Email is required.',
         ] );
+    }
+
+    if ( empty( $recaptcha_response ) ) {
+        wp_send_json_error([
+            'message' => 'Please verify reCAPTCHA.',
+        ]);
     }
 
     $user = get_user_by( 'login', $user_login ) ?? get_user_by( 'email', $user_login );
@@ -327,12 +334,34 @@ function lessonlms_reset_password_link_action() {
             'message' => 'User not found with this username or email.',
         ] );
     }
+
     $key = get_password_reset_key( $user );
+    wp_schedule_single_event(
+        time(),
+        'lessonlms_send_reset_password_email',
+        array( $user->ID, $key )
+    );
+    wp_send_json_success( array(
+        'message'      => 'If the account exists, a password reset link will be sent shortly. Please check your email',
+     ) );
+}
+
+add_action( 'wp_ajax_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
+add_action( 'wp_ajax_nopriv_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
+
+function lessonlms_send_reset_password_email_callback( $user_id, $key ) {
+
+    $user = get_user_by( 'ID', $user_id );
+    if ( ! $user ) {
+        return;
+    }
+
     $reset_link = network_site_url(
         'wp-login.php?action=rp&key=' . $key . '&login=' . rawurlencode( $user->user_login ),
         'login'
     );
-    $message = "Hello {$user->user_login},\n\n";
+
+    $message  = "Hello {$user->user_login},\n\n";
     $message .= "You requested a password reset.\n";
     $message .= "Click the link below to set your new password:\n\n";
     $message .= $reset_link . "\n\n";
@@ -344,14 +373,9 @@ function lessonlms_reset_password_link_action() {
         $message,
         [ 'Content-Type: text/plain; charset=UTF-8' ]
     );
-
-    wp_send_json_success( array(
-        'message'      => 'Password reset link sent successfully. Please check your email.',
-     ) );
 }
+add_action( 'lessonlms_send_reset_password_email', 'lessonlms_send_reset_password_email_callback', 10, 2 );
 
-add_action( 'wp_ajax_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
-add_action( 'wp_ajax_nopriv_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
 
 add_filter( 'send_password_change_email', '__return_false' );
 add_filter( 'send_email_change_email', '__return_false' );
@@ -364,9 +388,16 @@ function lessonlms_block_unverified_otp_user_login() {
     $username = sanitize_user( $_POST['log'] ?? '' );
     $password = $_POST['pwd'] ?? '';
     $remember = ! empty( $_POST['rememberme'] );
+    $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
 
     if ( empty( $username ) || empty( $password ) ) {
         wp_send_json_error([ 'message' => 'Username or password is empty' ]);
+    }
+
+    if ( empty( $recaptcha_response ) ) {
+        wp_send_json_error([
+            'message' => 'Please verify reCAPTCHA.',
+        ] );
     }
 
     $user = get_user_by( 'login', $username ) ?? get_user_by( 'email', $username );
@@ -463,6 +494,7 @@ function lessonlms_custom_register_validation_action() {
     $user_email      = sanitize_email( $_POST['user_email'] ?? '' );
     $user_pass       = $_POST['user_password'] ?? '';
     $user_confi_pass = $_POST['user_confirm_password'] ?? '';
+    $recaptcha_response = $_POST['g-recaptcha-response'] ?? '';
 
     // Validation
     if ( ! $user_name ) {
@@ -476,6 +508,12 @@ function lessonlms_custom_register_validation_action() {
     }
     if ( $user_pass !== $user_confi_pass ) {
         wp_send_json_error([ 'message' => 'Passwords do not match.' ]);
+    }
+
+      if ( empty( $recaptcha_response ) ) {
+        wp_send_json_error([
+            'message' => 'Please verify reCAPTCHA.',
+        ]);
     }
 
     // Check if username or email exists
