@@ -1,9 +1,7 @@
-
- body.login h1 a,
+body.login h1 a,
 body.login #backtoblog,
 p#reg_passmail,
-.notice.notice-info.message,
-div#login_error {
+.notice.notice-info.message.register{
     display: none;
 } 
 
@@ -54,6 +52,7 @@ p#nav a {
     margin-right: 10px;
 }
 
+.notice.notice-info.message.reset-pass p>a,
 a.wp-login-register,
 a.wp-login-log-in,
 a.wp-login-lost-password{
@@ -67,9 +66,10 @@ a.wp-login-lost-password{
     cursor: pointer;
     transition: all 0.5s ease;
 }
+.notice.notice-info.message.reset-pass p>a:hover,
 a.wp-login-register:hover,
 a.wp-login-log-in:hover,
 a.wp-login-lost-password:hover{
-   background-position: left bottom; /* left to right animation */
+   background-position: left bottom;
     color: white !important;
 }

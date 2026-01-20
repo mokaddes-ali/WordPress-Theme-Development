@@ -92,20 +92,6 @@ wp_localize_script('restet-password-js', 'lessonlms_ajax_reset_password_object',
     'ajax_url' => admin_url('admin-ajax.php'),
     'nonce' => wp_create_nonce('lessonlms_reset_password_nonce'),
 ));
-
-wp_enqueue_script(
-    'set-password-js',
-    get_stylesheet_directory_uri().'/assets/js/set-password.js',
-    array('jquery', 'sweetalert-js'),
-    null,
-    true
-);
-wp_localize_script('set-password-js', 'lessonlms_ajax_set_password_object', array(
-    'ajax_url' => admin_url('admin-ajax.php'),
-    'nonce' => wp_create_nonce('lessonlms_set_password_nonce'),
-));
-
-
         // ajax-review-js
     wp_enqueue_script( 'ajax-review-js', get_template_directory_uri() . '/assets/js/ajax-review.js', ['jquery', 'sweetalert-js'], null, true );
 

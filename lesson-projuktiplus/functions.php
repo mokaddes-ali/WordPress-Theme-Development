@@ -353,37 +353,6 @@ function lessonlms_reset_password_link_action() {
 add_action( 'wp_ajax_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
 add_action( 'wp_ajax_nopriv_lessonlms_reset_password_link_action', 'lessonlms_reset_password_link_action' );
 
-// AJAX: Set Password via Reset Form using hidden fields
-function lessonlms_set_password_action() {
-    check_ajax_referer( 'lessonlms_set_password_nonce', 'security' );
-
-    $password   = $_POST['pass1'] ?? '';
-    $login      = $_POST['user_login'] ?? '';
-    $key        = $_POST['rp_key'] ?? '';
-
-    if ( empty( $password ) ) {
-        wp_send_json_error(['message' => 'Password field is required.']);
-    }
-
-    // Check reset key and get user
-    $user = check_password_reset_key( $key, $login );
-
-    if ( is_wp_error( $user ) ) {
-        wp_send_json_error(['message' => $user->get_error_message()]);
-    }
-
-    // Set the new password
-    reset_password( $user, $password );
-
-    wp_send_json_success(['message' => 'Password reset successfully. Please login now.']);
-}
-
-add_action( 'wp_ajax_lessonlms_set_password_action', 'lessonlms_set_password_action' );
-add_action( 'wp_ajax_nopriv_lessonlms_set_password_action', 'lessonlms_set_password_action' );
-
-
-
-
 add_filter( 'send_password_change_email', '__return_false' );
 add_filter( 'send_email_change_email', '__return_false' );
 
