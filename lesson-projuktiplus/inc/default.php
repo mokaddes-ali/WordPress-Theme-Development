@@ -23,6 +23,7 @@ function lessonlms_theme_register(){
     'mobile_menu' => __('LMS Mobile Menu','lessonlms'),
      'footer_menu1' => __('LMS Footer Menu1','lessonlms'),
       'footer_menu2' => __('LMS Footer Menu2','lessonlms'),
+      'footer_menu3' => __('LMS Footer Menu3','lessonlms'),
     ));
      }
 }
