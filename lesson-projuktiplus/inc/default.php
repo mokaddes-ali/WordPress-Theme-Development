@@ -11,20 +11,20 @@ function lessonlms_theme_register(){
 
     add_theme_support('custom-logo',array(
         'height' => 34,
-        'width'=> 85,
+        'width'  => 85,
     ));
      
     add_image_size('custom-courses-image',370,278,true);
     add_image_size('custom-blog-image',370,250,true);
     
 
-    register_nav_menus(array(
-    'header_menu' => __('LMS Header Menu','lessonlms'),
-    'mobile_menu' => __('LMS Mobile Menu','lessonlms'),
-     'footer_menu1' => __('LMS Footer Menu1','lessonlms'),
-      'footer_menu2' => __('LMS Footer Menu2','lessonlms'),
-      'footer_menu3' => __('LMS Footer Menu3','lessonlms'),
-    ));
+    register_nav_menus( array(
+    'header_menu'  => __('LMS Header Menu','lessonlms'),
+    'mobile_menu'  => __('LMS Mobile Menu','lessonlms'),
+    'footer_menu1' => __('LMS Footer Menu1','lessonlms'),
+    'footer_menu2' => __('LMS Footer Menu2','lessonlms'),
+    'footer_menu3' => __('LMS Footer Menu3','lessonlms'),
+    ) );
      }
 }
 

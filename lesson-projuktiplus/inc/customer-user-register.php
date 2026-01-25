@@ -5,7 +5,7 @@
  * @package lesonlms
  */
 
-if(!defined("ABSPATH")){
+if ( ! defined("ABSPATH")){
    exit;
 }
 
@@ -23,42 +23,42 @@ function wpcur__registeration_handler(){
 
 function lessonlms_wpcur_custom_registeration_page(){
     ?>
-    <form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">
-        <p>
-            <label for="first_name"> First Name: </label>
-            <input type="text" name="first_name" id="first_name" placeholder="First Name">
-        </p>
+<form action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">
+    <p>
+        <label for="first_name"> First Name: </label>
+        <input type="text" name="first_name" id="first_name" placeholder="First Name">
+    </p>
 
-        <p>
-            <label for="last_name"> First Name: </label>
-            <input type="text" name="last_name" id="last_name" placeholder="Last Name">
-        </p>
+    <p>
+        <label for="last_name"> First Name: </label>
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name">
+    </p>
 
-        <p>
-            <label for="email"> Email: </label>
-            <input type="email" name="email" id="email" placeholder="Email">
-        </p>
+    <p>
+        <label for="email"> Email: </label>
+        <input type="email" name="email" id="email" placeholder="Email">
+    </p>
 
-        <p>
-            <label for="password">
-                Password:
-            </label>
-            <input type="password" name="password" id="password" placeholder="password" >
-        </p>
+    <p>
+        <label for="password">
+            Password:
+        </label>
+        <input type="password" name="password" id="password" placeholder="password">
+    </p>
 
-        <p>
-            <label for="confirm_password">
-                Confirm Password:
-            </label>
-            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
-        </p>
+    <p>
+        <label for="confirm_password">
+            Confirm Password:
+        </label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+    </p>
 
-        <p>
-            <button name="btn_user_register_page" type="submit">
-                Submit
-            </button>
-        </p>
-    </form>
+    <p>
+        <button name="btn_user_register_page" type="submit">
+            Submit
+        </button>
+    </p>
+</form>
 
 <?php
 }
@@ -147,5 +147,3 @@ function  lessonlms_add_user_in_site( $first_name, $last_name, $email, $password
     }
 }
 ?>
-
-
