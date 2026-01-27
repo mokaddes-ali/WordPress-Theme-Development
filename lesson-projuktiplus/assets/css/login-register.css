@@ -1,6 +1,7 @@
 body.login h1 a,
 body.login #backtoblog,
 p#reg_passmail,
+#login_error,
 .notice.notice-info.message.register{
     display: none;
 } 
