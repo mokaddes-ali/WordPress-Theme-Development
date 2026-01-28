@@ -24,6 +24,8 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     include_once $theme_dir . '/inc/enqueue.php';
     include_once $theme_dir . '/inc/default.php';
 
+    include_once $theme_dir . '/def.php';
+
     // Pagination
     include_once $theme_dir . '/inc/pagination.php';
 
@@ -35,7 +37,7 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     include_once $theme_dir . '/inc/submit-feedback.php'; 
 
     // Custom Post Types
-    include_once $theme_dir . '/inc/cpt/courses.php';
+    // include_once $theme_dir . '/inc/cpt/courses.php';
     include_once $theme_dir . '/inc/cpt/testimonial.php';
 
     // Customizer
@@ -869,7 +871,7 @@ function lessonlms_register_course_post_type() {
         'show_in_rest' => true,
     );
 
-    register_post_type('course', $args);
+    // register_post_type('course', $args);
 }
 add_action('init', 'lessonlms_register_course_post_type');
 
