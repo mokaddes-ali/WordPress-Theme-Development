@@ -1,10 +1,4 @@
 <?php
-/**
- * AMARS LMS - Complete Learning Management System
- * Author: Your Name
- * Version: 1.0.0
- */
-
 // ============================================
 // 1. ENQUEUE SCRIPTS & STYLES
 // ============================================
@@ -84,55 +78,9 @@ function amars_register_custom_post_types() {
             'show_in_rest' => true,
         )
     );
-    
-    // 3. MODULE Taxonomy (for Lessons)
-    register_taxonomy(
-        'amars_module',
-        array('amars_lesson'),
-        array(
-            'labels' => array(
-                'name' => 'Modules',
-                'singular_name' => 'Module',
-                'search_items' => 'Search Modules',
-                'all_items' => 'All Modules',
-                'edit_item' => 'Edit Module',
-                'update_item' => 'Update Module',
-                'add_new_item' => 'Add New Module',
-                'new_item_name' => 'New Module Name',
-                'menu_name' => 'Modules'
-            ),
-            'hierarchical' => false,
-            'show_ui' => true,
-            'show_admin_column' => true,
-            'query_var' => true,
-            'rewrite' => false,
-            'show_in_rest' => false,
-            'public' => false,
-            'meta_box_cb' => false,
-        )
-    );
 }
 add_action('init', 'amars_register_custom_post_types');
 
-// ============================================
-// 3. INSTRUCTOR ROLE & CAPABILITIES
-// ============================================
-
-// Create Instructor Role
-function amars_create_instructor_role() {
-    add_role('amars_instructor', 'Instructor',
-        array(
-            'read' => true,
-            'edit_posts' => true,
-            'delete_posts' => true,
-            'publish_posts' => true,
-            'upload_files' => true,
-            'edit_published_posts' => true,
-            'delete_published_posts' => true,
-        )
-    );
-}
-add_action('init', 'amars_create_instructor_role');
 
 // Set Course Capabilities
 function amars_set_course_capabilities() {
@@ -1698,45 +1646,6 @@ function amars_display_course_content($content) {
             <?php endif; ?>
         </div>
         
-        <style>
-        .amars-course-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .course-modules {
-            margin-top: 40px;
-        }
-        .module {
-            background: #f8f9fa;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            border-left: 5px solid #0073aa;
-        }
-        .module h3 {
-            color: #0073aa;
-            margin-top: 0;
-        }
-        .module-lessons {
-            margin-top: 15px;
-        }
-        .module-lessons ul {
-            list-style: none;
-            padding: 0;
-        }
-        .module-lessons li {
-            padding: 10px;
-            background: white;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
-        .lesson-duration {
-            float: right;
-            color: #666;
-            font-size: 0.9em;
-        }
-        </style>
         <?php
         return ob_get_clean();
     }
@@ -1861,50 +1770,6 @@ function amars_display_lesson_content($content) {
             </div>
         </div>
         
-        <style>
-        .amars-lesson-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .lesson-meta {
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .meta-item {
-            flex: 1;
-            min-width: 200px;
-        }
-        .lesson-video {
-            margin: 20px 0;
-            text-align: center;
-        }
-        .lesson-video iframe {
-            max-width: 100%;
-        }
-        .nav-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #eee;
-        }
-        .nav-links a {
-            padding: 10px 20px;
-            background: #0073aa;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .nav-links a:hover {
-            background: #005a87;
-        }
-        </style>
         <?php
         return ob_get_clean();
     }
@@ -1981,55 +1846,6 @@ function amars_courses_list_shortcode($atts) {
     wp_reset_postdata();
     
     ?>
-    <style>
-    .amars-courses-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-    }
-    .course-card {
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        overflow: hidden;
-        transition: transform 0.3s;
-    }
-    .course-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    .course-thumbnail img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-    }
-    .course-content {
-        padding: 20px;
-    }
-    .course-content h3 {
-        margin-top: 0;
-    }
-    .course-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 15px;
-    }
-    .modules-count {
-        background: #0073aa;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 3px;
-        font-size: 14px;
-    }
-    .course-link {
-        background: #28a745;
-        color: white;
-        padding: 8px 15px;
-        border-radius: 5px;
-        text-decoration: none;
-    }
-    </style>
     <?php
     
     return ob_get_clean();
@@ -2186,20 +2002,3 @@ function amars_module_consistency_checker() {
     <?php
 }
 
-// ============================================
-// 13. INITIALIZATION
-// ============================================
-
-// Flush rewrite rules on activation
-function amars_lms_activate() {
-    amars_register_custom_post_types();
-    amars_create_instructor_role();
-    flush_rewrite_rules();
-}
-register_activation_hook(__FILE__, 'amars_lms_activate');
-
-// Flush rewrite rules on deactivation
-function amars_lms_deactivate() {
-    flush_rewrite_rules();
-}
-register_deactivation_hook(__FILE__, 'amars_lms_deactivate');

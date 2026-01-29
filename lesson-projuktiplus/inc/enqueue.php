@@ -198,3 +198,13 @@ function lessonlms_theme_enqueue_styles()
     );
 }
 add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
+
+function lessonlms_admin_styles() {
+    wp_enqueue_style(
+        'lessonlms-admin-css',
+        get_template_directory_uri() . '/assets/css/admin.css',
+        array(),
+        time()
+    );
+}
+add_action( 'admin_enqueue_scripts', 'lessonlms_admin_styles' );

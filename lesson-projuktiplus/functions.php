@@ -37,7 +37,7 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     include_once $theme_dir . '/inc/submit-feedback.php'; 
 
     // Custom Post Types
-    // include_once $theme_dir . '/inc/cpt/courses.php';
+    include_once $theme_dir . '/inc/cpt/courses.php';
     include_once $theme_dir . '/inc/cpt/testimonial.php';
 
     // Customizer
