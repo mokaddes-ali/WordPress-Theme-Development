@@ -39,45 +39,5 @@
         register_post_type('testimonials', $args);
     }
     add_action('init', 'lessonlms_testimonial_register');
-
-    function lessonlms_testimonial_add_meta_box()
-    {
-        add_meta_box(
-            'testimonial_details',
-            'Testimonial Details',
-            'lessonlms_testimonial_add_meta_box_callback',
-            'testimonials',
-            'normal',
-            'high'
-        );
-
-    }
-    add_action('add_meta_boxes', 'lessonlms_testimonial_add_meta_box');
-
-    function lessonlms_testimonial_add_meta_box_callback($post)
-    {
-
-        $student_designation = get_post_meta($post->ID, 'student_designation', true);
-        ?>
-        <div class="">
-            <label for="student_designation"> Student Destination / Course Name </label>
-            <input type="text" name="student_designation" id="student_designation" value="<?php echo esc_attr($student_designation);?>">
-        </div>
-        <?php
-    }
-
-    function lessonlms_testimonial_save_meta_data($post_id)
-    {
-        $fields = [
-            'student_designation',
-        ];
-        
-        foreach($fields as $field){
-            if(isset($_POST[$field])) {
-                update_post_meta($post_id, $field, sanitize_text_field($_POST[$field]));
-
-            }
-        }
-    }
-    add_action('save_post_testimonials', 'lessonlms_testimonial_save_meta_data');
+     require_once get_template_directory() . '/inc/meta-boxes/testimonial-meta-box.php';
 

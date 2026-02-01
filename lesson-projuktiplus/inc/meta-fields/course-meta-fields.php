@@ -73,3 +73,61 @@ function lessonlms_get_course_meta_fields() {
     );
 
 }
+
+
+/**
+ * Courses Meta Box Callback
+ */
+function lessonlms_couses_add_meta_box_callback($post) {
+    wp_nonce_field( 'lessonlms_courses_meta_nonce', 'lessonlms_courses_meta_nonce_field' );
+
+    $section_fields = lessonlms_get_course_meta_fields();
+
+    foreach( $section_fields as $section_key => $fields ) :
+    ?>
+    <div class="lessonlms-meta-section lessonlms-meta-section-<?php echo esc_attr( $section_key ); ?>">
+
+        <h3 class="lessonlms-section-title">
+            <?php echo esc_html( ( $section_key === 'pricing' ) ? 'Pricing' : 'Course Details' ); ?>
+        </h3>
+
+        <div class="lessonlms-fields-wrap">
+            <?php foreach ( $fields as $key => $field ) :
+                $field_value = get_post_meta( $post->ID, $key, true );
+            ?>
+                <div class="lessonlms-field">
+                    <label for="<?php echo esc_attr( $key ); ?>">
+                        <?php echo esc_html( $field['label'] ); ?>
+                    </label>
+
+                    <?php if ( $field['type'] === 'textarea' ) : ?>
+                        <textarea
+                            name="<?php echo esc_attr( $key ); ?>"
+                            id="<?php echo esc_attr( $key ); ?>"
+                            rows="<?php echo esc_attr( $field['rows'] ); ?>"
+                            <?php if ( isset( $field['required'] ) && $field['required'] ) : ?>
+                                required
+                            <?php endif; ?>
+                        ><?php echo esc_textarea( $field_value ); ?></textarea>
+                    <?php else : ?>
+                        <input
+                            type="<?php echo esc_attr( $field['type'] ); ?>"
+                            name="<?php echo esc_attr( $key ); ?>"
+                            id="<?php echo esc_attr( $key ); ?>"
+                            value="<?php echo esc_attr( $field_value ); ?>"
+                            <?php if ( isset( $field['step'] ) ) : ?>
+                                step="<?php echo esc_attr( $field['step'] ); ?>"
+                            <?php endif; ?>
+                            <?php if ( isset( $field['required'] ) && $field['required'] ) : ?>
+                                required
+                            <?php endif; ?>
+                        >
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+    </div>
+    <?php
+    endforeach;
+}
