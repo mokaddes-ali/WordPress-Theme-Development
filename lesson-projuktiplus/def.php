@@ -1517,13 +1517,13 @@ function amars_lesson_details_metabox_callback($post) {
 
 // Save lesson meta
 function amars_save_lesson_meta($post_id) {
-    if (!isset($_POST['amars_lesson_details_nonce']) || 
-        !wp_verify_nonce($_POST['amars_lesson_details_nonce'], 'amars_lesson_details_save')) {
-        return;
-    }
+    // if (!isset($_POST['amars_lesson_details_nonce']) || 
+    //     !wp_verify_nonce($_POST['amars_lesson_details_nonce'], 'amars_lesson_details_save')) {
+    //     return;
+    // }
     
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    if (!current_user_can('edit_post', $post_id)) return;
+    // if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    // if (!current_user_can('edit_post', $post_id)) return;
     
     if (isset($_POST['amars_lesson_course'])) {
         update_post_meta($post_id, '_amars_lesson_course', intval($_POST['amars_lesson_course']));
