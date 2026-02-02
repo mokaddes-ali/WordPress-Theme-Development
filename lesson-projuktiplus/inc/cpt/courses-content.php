@@ -43,3 +43,5 @@ function lessonlms_custom_courses_content_post_type() {
     register_post_type( 'courses_contents', $args );
 }
 add_action( 'init', 'lessonlms_custom_courses_content_post_type' );
+
+require_once get_template_directory() . '/inc/meta-boxes/courses-content-meta-box.php';
