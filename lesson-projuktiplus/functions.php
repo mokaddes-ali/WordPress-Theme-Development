@@ -55,6 +55,7 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
         '/inc/admin/dashboard-redirect.php',
         '/inc/admin/post-capabilities.php',
         '/inc/admin/user-roles.php',
+        '/inc/admin/module-admin-menu.php'
     );
        foreach ( $admin_paths as $admin ) {
         require_once $theme_dir . $admin;
