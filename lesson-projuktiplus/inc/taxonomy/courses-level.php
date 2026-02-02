@@ -18,13 +18,13 @@ function lessonlms_register_course_level_taxonomy() {
         'menu_name'         => 'Course Level',
     );
 
-    register_taxonomy('course_level', 'courses', array(
+    register_taxonomy( 'course_level', 'courses', array(
         'labels'            => $labels,
         'hierarchical'      => true,
         'show_ui'           => true,
         'show_admin_column' => true,
         'show_in_rest'      => true,
-        'rewrite'           => array('slug' => 'course-level'),
+        'rewrite'           => array( 'slug' => 'course-level' ),
     ));
 }
-add_action('init', 'lessonlms_register_course_level_taxonomy');
+add_action( 'init', 'lessonlms_register_course_level_taxonomy' );

@@ -6,16 +6,24 @@
  */
 function lessonlms_register_course_category() {
     $labels = array(
-        'name' => 'Course Categories',
-        'singular_name' => 'Course Category',
-        'menu_name' => 'Course Categories'
+        'name'              => 'Courses Categories',
+        'singular_name'     => 'Course Category',
+        'search_items'      => 'Search Course Categories',
+        'all_items'         => 'All Course Categories',
+        'edit_item'         => 'Edit Course Category',
+        'update_item'       => 'Update Course Category',
+        'add_new_item'      => 'Add New Course Category',
+        'new_item_name'     => 'New Category Course Name',
+        'menu_name'         => 'Courses Categories',
     );
-    register_taxonomy('course_category', 'courses', array(
-        'labels' => $labels,
+    register_taxonomy( 'course_category', 'courses', array(
+        'labels'       => $labels,
         'hierarchical' => true,
-        'show_ui' => true,
+        'show_ui'      => true,
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'course-category'),
-    ));
+        'rewrite'      => array(
+            'slug' => 'course-category'
+            ),
+    ) );
 }
-add_action('init', 'lessonlms_register_course_category');
+add_action( 'init', 'lessonlms_register_course_category' );

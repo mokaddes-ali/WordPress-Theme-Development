@@ -200,6 +200,22 @@ function lessonlms_theme_enqueue_styles()
 add_action('wp_enqueue_scripts', 'lessonlms_theme_enqueue_styles');
 
 function lessonlms_admin_styles() {
+
+    wp_enqueue_style('amars-admin-css', get_template_directory_uri() . '/css/amars-admin.css', array(), '1.0.0');
+
+       // jQuery
+    wp_enqueue_script('jquery');
+    // sweetalert-js
+    wp_enqueue_script(
+        'sweetalert-js',
+        'https://cdn.jsdelivr.net/npm/sweetalert2@11',
+        array('jquery'),
+        null,
+        true
+    );
+    
+    // Custom Admin JS
+    wp_enqueue_script('amars-admin-js', get_template_directory_uri() . '/js/amars-admin.js', array('jquery', 'sweetalert-js'), '1.0.0', true);
     wp_enqueue_style(
         'lessonlms-admin-css',
         get_template_directory_uri() . '/assets/css/admin.css',

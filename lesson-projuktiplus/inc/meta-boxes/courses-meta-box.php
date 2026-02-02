@@ -25,13 +25,13 @@ add_action('add_meta_boxes', 'lessonlms_courses_add_meta_box');
 /**
  * Save Courses Meta Data
  */
-function lessonlms_courses_save_meta_data($post_id){
+function lessonlms_courses_save_meta_data( $post_id ){
 
-    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
-    if ( ! current_user_can('edit_post', $post_id) ) return;
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+    if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
     if (
-        ! isset($_POST['lessonlms_courses_meta_nonce_field']) ||
+        ! isset( $_POST[ 'lessonlms_courses_meta_nonce_field' ] ) ||
         ! wp_verify_nonce(
             $_POST['lessonlms_courses_meta_nonce_field'],
             'lessonlms_courses_meta_nonce'

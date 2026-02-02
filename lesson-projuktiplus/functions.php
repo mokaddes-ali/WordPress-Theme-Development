@@ -24,7 +24,7 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     include_once $theme_dir . '/inc/enqueue.php';
     include_once $theme_dir . '/inc/default.php';
 
-    include_once $theme_dir . '/def.php';
+    // include_once $theme_dir . '/def.php';
 
     // Pagination
     include_once $theme_dir . '/inc/pagination.php';
@@ -39,6 +39,8 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
     // Custom Post Types
     include_once $theme_dir . '/inc/cpt/courses.php';
     include_once $theme_dir . '/inc/cpt/testimonial.php';
+    include_once $theme_dir . '/inc/cpt/courses-content.php';
+   
 
     // Customizer
     include_once $theme_dir . '/inc/customizer.php';

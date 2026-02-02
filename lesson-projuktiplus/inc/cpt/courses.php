@@ -29,7 +29,7 @@ function lessonlms_custome_courses_register(){
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-         'rewrite'            => array( 'slug' => 'courses'),
+         'rewrite'            => array( 'slug' => 'courses' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,
@@ -37,12 +37,12 @@ function lessonlms_custome_courses_register(){
         'menu_position'      => 20,
         'supports'           => array( 'title', 'editor', 'thumbnail', 'author' ),
         'taxonomies'         => array( 'course_category', 'course_level'),
-        'show_in_rest'       => true
+        'show_in_rest'       => true,
     );
   
     register_post_type('courses', $args);
 }
-add_action('init', 'lessonlms_custome_courses_register');
+add_action( 'init', 'lessonlms_custome_courses_register' );
 
 require_once get_template_directory() . '/inc/taxonomy/courses-category.php';
 

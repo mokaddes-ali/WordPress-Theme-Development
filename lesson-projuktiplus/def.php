@@ -4,17 +4,6 @@
 // ============================================
 
 function amars_lms_enqueue_assets() {
-    // SweetAlert 2 CSS
-    wp_enqueue_style('sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css', array(), '11.4.37');
-    
-    // SweetAlert 2 JS
-    wp_enqueue_script('sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11', array(), '11.4.37', true);
-    
-    // Custom Admin CSS
-    wp_enqueue_style('amars-admin-css', get_template_directory_uri() . '/css/amars-admin.css', array(), '1.0.0');
-    
-    // Custom Admin JS
-    wp_enqueue_script('amars-admin-js', get_template_directory_uri() . '/js/amars-admin.js', array('jquery', 'sweetalert2'), '1.0.0', true);
     
     // Localize script
     wp_localize_script('amars-admin-js', 'amars_ajax', array(
@@ -726,7 +715,7 @@ function amars_get_modules_list_ajax() {
 add_action('wp_ajax_amars_get_modules_list', 'amars_get_modules_list_ajax');
 
 function amars_create_module_ajax() {
-    check_ajax_referer('amars_create_module', 'amars_module_nonce');
+    // check_ajax_referer('amars_create_module', 'amars_module_nonce');
     
     $module_name = sanitize_text_field($_POST['module_name']);
     $course_id = intval($_POST['module_course']);
