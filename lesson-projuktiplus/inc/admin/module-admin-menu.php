@@ -1,228 +1,209 @@
 <?php
+
 /**
  * Course Module In Admin Dashboard with Edit/Delete
  * 
  * @package lessonlms
  */
 
-function lessonlms_add_course_module_in_admin() {
+function lessonlms_add_course_module_in_admin()
+{
     add_menu_page(
         'Course Modules',
         'Course Modules',
         'manage_options',
-        'courses-modules',
+        'lesslms_courses_modules_slug',
         'lessonlms_add_module_callback',
         'dashicons-welcome-learn-more',
-        43
+        35
     );
 }
-add_action( 'admin_menu', 'lessonlms_add_course_module_in_admin' );
+add_action('admin_menu', 'lessonlms_add_course_module_in_admin');
 
+add_action( 'admin_post_lessonlms_save_module', 'lessonlms_save_course_module' );
+function lessonlms_save_course_module() {
 
-function lessonlms_add_module_callback() {
-    ?>
-    <div class="wrap lessonlms-wrap">
-        <h1>Course Modules</h1>
+    // 1️⃣ Nonce verify
+    if ( ! isset( $_POST['lessonlms_course_module_nonce_field'] ) 
+        || ! wp_verify_nonce( $_POST['lessonlms_course_module_nonce_field'], 'lessonlms_course_module_nonce' ) ) {
+        wp_die( 'Nonce verification failed!' );
+    }
 
-        <form id="lessonlms-module-form">
-            <?php wp_nonce_field( 'lessonlms_course_module_nonce', 'lessonlms_course_module_nonce_field' ); ?>
-            <input type="hidden" name="module_id" id="module_id" value="">
+    // 2️⃣ Capability check
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_die( 'You are not allowed to do this.' );
+    }
 
-            <p>
-                <label for="select_courses"><strong>Select Course</strong></label>
-                <select name="lessonlms_select_course" id="select_courses" required>
-                    <option value="">— Select Course —</option>
-                    <?php
-                    $courses = get_posts(array(
-                        'post_type' => 'courses',
-                        'posts_per_page' => -1,
-                        'orderby' => 'date',
-                        'order' => 'DESC',
-                        'post_status' => 'publish',
-                        'author' => get_current_user_id()
-                    ));
-                    foreach($courses as $course) {
-                        echo '<option value="'.esc_attr($course->ID).'">'.esc_html($course->post_title).'</option>';
-                    }
-                    ?>
-                </select>
-            </p>
+    // 3️⃣ Sanitize input
+    $module_id   = isset( $_POST['course_module_id'] ) ? intval( $_POST['course_module_id'] ) : 0;
+    $course_id   = isset( $_POST['lessonlms_select_course'] ) ? intval( $_POST['lessonlms_select_course'] ) : 0;
+    $module_name = isset( $_POST['course_modules_name'] ) ? sanitize_text_field( $_POST['course_modules_name'] ) : '';
+    $status      = isset( $_POST['lessonlms_course_status'] ) ? 'enabled' : 'disabled';
 
-            <p>
-                <label for="course_modules_name">Module Name</label>
-                <input type="text" name="course_modules_name" id="course_modules_name" required>
-            </p>
+    // 4️⃣ Save as custom post (module)
+    $module_data = array(
+        'post_title'  => $module_name,
+        'post_type'   => 'course_modules',
+        'post_status' => 'publish',
+        'post_author' => get_current_user_id(),
+    );
 
-            <p>
-                <label>
-                    <input type="checkbox" name="lessonlms_course_status" value="enabled"> Enable this Course Module
-                </label>
-            </p>
+    // Update or insert
+    if ( $module_id > 0 ) {
+        $module_data['ID'] = $module_id;
+        $module_id = wp_update_post( $module_data );
+    } else {
+        $module_id = wp_insert_post( $module_data );
+    }
 
-            <p>
-                <button type="submit" class="button button-primary">Save Module</button>
-            </p>
-        </form>
+    if ( $module_id ) {
+        // save course relation & status as post meta
+        update_post_meta( $module_id, '_lessonlms_course_id', $course_id );
+        update_post_meta( $module_id, '_lessonlms_module_status', $status );
+    }
+
+    // 5️⃣ Redirect back with message
+    $redirect_url = add_query_arg( 'message', 'saved', wp_get_referer() );
+    wp_redirect( $redirect_url );
+    exit;
+}
+
+add_action( 'admin_notices', function() {
+    if ( isset($_GET['message']) && $_GET['message'] === 'saved' ) {
+        echo '<div class="notice notice-success is-dismissible"><p>Module saved successfully!</p></div>';
+    }
+});
+
+function lessonlms_add_module_callback()
+{
+    $user_id = get_current_user_id();
+?>
+    <div class="lessonlms-wrap">
+        <div class="course-module-form">
+            <h2><?php echo esc_html__( 'Add Course Module', 'lessonlms' ); ?></h2>
+
+            <form id="lessonlms-module-form" method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
+                <input type="hidden" name="action" value="lessonlms_save_module">
+                <input type="hidden" name="course_module_id" value="">
+                <?php wp_nonce_field('lessonlms_course_module_nonce', 'lessonlms_course_module_nonce_field'); ?>
+
+                <p>
+                    <label for="select_courses"><?php echo esc_html__( 'Select Course', 'lessonlms' ); ?></label>
+                    <select name="lessonlms_select_course" id="select_courses" required>
+                        <option value=""> --- <?php echo esc_html__( 'Select Course', 'lessonlms' ); ?> --- </option>
+                        <?php
+                        $courses = get_posts( array(
+                            'post_type'      => 'courses',
+                            'posts_per_page' => -1,
+                            'orderby'        => 'date',
+                            'order'          => 'DESC',
+                            'post_status'    => 'publish',
+                            'author'         => $user_id,
+                        ) );
+                        foreach ( $courses as $course ) :
+                        ?>
+                            <option value="<?php echo esc_attr( $course->ID ); ?>">
+                                <?php echo esc_html( $course->post_title ); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="course_modules_name"><?php echo esc_html__( 'Module Name', 'lessonlms' ); ?></label>
+                    <input type="text" name="course_modules_name" id="course_modules_name" required>
+                </p>
+
+                <p>
+                    <label>
+                        <input type="checkbox" name="lessonlms_course_status" value="enabled">
+                        <?php echo esc_html__( 'Enable this Course Module', 'lessonlms' ); ?>
+                    </label>
+                </p>
+
+                <p>
+                    <button type="submit" class="button button-primary">
+                        <?php echo esc_html__( 'Save Module', 'lessonlms' ); ?>
+                    </button>
+                </p>
+            </form>
+        </div>
 
         <div class="modules-lists">
-            <h2>Modules List</h2>
+            <h2>
+                <?php echo esc_html__( 'Modules List', 'lessonlms' ); ?>
+            </h2>
             <table class="wp-list-table widefat fixed striped modules-table" id="course-modules-table">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Course</th>
-                        <th>Module Name</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th>
+                            <?php echo esc_html__( 'Course', 'lessonlms' ); ?>
+                        </th>
+                        <th>
+                            <?php echo esc_html__( 'Module Name', 'lessonlms' ); ?>
+                        </th>
+                        <th>
+                            <?php echo esc_html__( 'Status', 'lessonlms' ); ?>
+                        </th>
+                        <th>
+                            <?php echo esc_html__( 'Actions', 'lessonlms' ); ?>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $modules = get_posts(array(
-                        'post_type' => 'courses_contents',
+                    $modules = get_posts( array(
+                        'post_type'      => 'course_modules',
                         'posts_per_page' => -1,
-                        'orderby' => 'date',
-                        'order' => 'DESC',
-                        'author' => get_current_user_id()
-                    ));
+                        'orderby'        => 'date',
+                        'order'          => 'DESC',
+                        'author'         => $user_id,
+                    ) );
 
-                    if($modules) {
-                        foreach($modules as $module) {
-                            $course_title = get_the_title(get_post_meta($module->ID,'_lessonlms_selected_course_module',true));
-                            $module_name = get_post_meta($module->ID,'_lessonlms_module_name',true);
-                            $status = get_post_meta($module->ID,'_lessonlms_course_module_status',true);
-                            ?>
-                            <tr data-id="<?php echo esc_attr($module->ID); ?>">
-                                <td><?php echo esc_html($module->ID); ?></td>
-                                <td><?php echo esc_html($course_title); ?></td>
-                                <td class="module-name"><?php echo esc_html($module_name); ?></td>
-                                <td class="module-status"><?php echo esc_html(ucfirst($status)); ?></td>
-                                <td>
-                                    <button class="button lessonlms-edit" data-id="<?php echo esc_attr($module->ID); ?>">Edit</button>
-                                    <button class="button lessonlms-delete" data-id="<?php echo esc_attr($module->ID); ?>">Delete</button>
-                                </td>
-                            </tr>
-                            <?php
-                        }
-                    } else {
-                        echo '<tr><td colspan="5">No modules found.</td></tr>';
-                    }
+                    if ( ! empty( $modules ) ) :
+                        foreach ( $modules as $module ) :
+                            $course_id = get_post_meta($module->ID, '_lessonlms_course_id', true);
+                            $course_title = $course_id ? get_the_title($course_id) : '-';
+                            $module_name  = $module->post_title;
+                            $status       = get_post_meta($module->ID, '_lessonlms_module_status', true);
+                    ?>
+                        <tr data-id="<?php echo esc_attr( $module->ID ); ?>">
+                            <td>
+                                <?php echo esc_html( $course_title ); ?>
+                            </td>
+                            <td class="module-name">
+                                <?php echo esc_html( $module_name ); ?>
+                            </td>
+                            <td class="module-status">
+                                <?php echo esc_html( ucfirst($status) ); ?>
+                            </td>
+                            <td>
+                                <button class="button lessonlms-edit" 
+                                        data-nonce="<?php echo wp_create_nonce( 'module-edit-nonce' ); ?>" 
+                                        data-id="<?php echo esc_attr( $module->ID ); ?>">
+                                    <?php echo esc_html__( 'Edit', 'lessonlms' ); ?>
+                                </button>
+                                <button class="button lessonlms-delete"
+                                        data-nonce="<?php echo wp_create_nonce( 'module-delete-nonce' ); ?>" 
+                                        data-id="<?php echo esc_attr( $module->ID ); ?>">
+                                    <?php echo esc_html__( 'Delete', 'lessonlms' ); ?>
+                                </button>
+                            </td>
+                        </tr>
+                    <?php
+                        endforeach;
+                    else :
+                    ?>
+                        <tr>
+                            <td colspan="4"><?php echo esc_html__( 'No modules found.', 'lessonlms' ); ?></td>
+                        </tr>
+                    <?php
+                    endif;
                     ?>
                 </tbody>
             </table>
         </div>
     </div>
-
-    <style>
-        .lessonlms-wrap { max-width: 900px; background: #fff; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-        .lessonlms-wrap input[type="text"], .lessonlms-wrap select { width:100%; padding:8px; border-radius:4px; border:1px solid #ccc; margin-bottom:12px; }
-        .modules-table th, .modules-table td { padding:8px 12px; }
-    </style>
-
-    <script>
-    jQuery(document).ready(function($){
-        // Save or update module
-        $('#lessonlms-module-form').on('submit', function(e){
-            e.preventDefault();
-            var data = {
-                action: 'lessonlms_save_module_ajax',
-                security: '<?php echo wp_create_nonce("lessonlms_module_ajax_nonce"); ?>',
-                module_id: $('#module_id').val(),
-                course_id: $('#select_courses').val(),
-                module_name: $('#course_modules_name').val(),
-                status: $('input[name="lessonlms_course_status"]').is(':checked') ? 'enabled' : 'disabled'
-            };
-
-            $.post(ajaxurl, data, function(response){
-                if(response.success){
-                    alert(response.data.message);
-                    location.reload(); // Reload to show updated table
-                } else {
-                    alert(response.data.message);
-                }
-            });
-        });
-
-        // Edit button
-        $('.lessonlms-edit').on('click', function(){
-            var row = $(this).closest('tr');
-            var id = $(this).data('id');
-            var course = row.find('td:nth-child(2)').text();
-            var name = row.find('.module-name').text();
-            var status = row.find('.module-status').text().toLowerCase();
-
-            $('#module_id').val(id);
-            $('#course_modules_name').val(name);
-            $('#select_courses option').filter(function(){ return $(this).text() === course; }).prop('selected', true);
-            $('input[name="lessonlms_course_status"]').prop('checked', status === 'enabled');
-        });
-
-        // Delete button
-        $('.lessonlms-delete').on('click', function(){
-            if(!confirm('Are you sure to delete this module?')) return;
-            var id = $(this).data('id');
-            $.post(ajaxurl, {
-                action: 'lessonlms_delete_module_ajax',
-                security: '<?php echo wp_create_nonce("lessonlms_module_ajax_nonce"); ?>',
-                module_id: id
-            }, function(response){
-                if(response.success){
-                    alert(response.data.message);
-                    location.reload();
-                } else {
-                    alert(response.data.message);
-                }
-            });
-        });
-    });
-    </script>
-    <?php
+<?php
 }
-
-// AJAX save/update module
-add_action('wp_ajax_lessonlms_save_module_ajax', function(){
-    check_ajax_referer('lessonlms_module_ajax_nonce','security');
-
-    $module_id = intval($_POST['module_id']);
-    $course_id = intval($_POST['course_id']);
-    $module_name = sanitize_text_field($_POST['module_name']);
-    $status = sanitize_text_field($_POST['status']);
-
-    if($module_id) {
-        // Update existing
-        wp_update_post(array('ID'=>$module_id, 'post_title'=>$module_name));
-        update_post_meta($module_id,'_lessonlms_selected_course_module',$course_id);
-        update_post_meta($module_id,'_lessonlms_module_name',$module_name);
-        update_post_meta($module_id,'_lessonlms_course_module_status',$status);
-        wp_send_json_success(array('message'=>'Module updated successfully!'));
-    } else {
-        // Create new
-        $new_module_id = wp_insert_post(array(
-            'post_type'=>'courses_contents',
-            'post_title'=>$module_name,
-            'post_status'=>'publish',
-            'post_author'=>get_current_user_id()
-        ));
-        if($new_module_id){
-            update_post_meta($new_module_id,'_lessonlms_selected_course_module',$course_id);
-            update_post_meta($new_module_id,'_lessonlms_module_name',$module_name);
-            update_post_meta($new_module_id,'_lessonlms_course_module_status',$status);
-            wp_send_json_success(array('message'=>'Module created successfully!'));
-        } else {
-            wp_send_json_error(array('message'=>'Failed to create module.'));
-        }
-    }
-});
-
-// AJAX delete module
-add_action('wp_ajax_lessonlms_delete_module_ajax', function(){
-    check_ajax_referer('lessonlms_module_ajax_nonce','security');
-
-    $module_id = intval($_POST['module_id']);
-    if($module_id && wp_delete_post($module_id, true)){
-        wp_send_json_success(array('message'=>'Module deleted successfully!'));
-    } else {
-        wp_send_json_error(array('message'=>'Failed to delete module.'));
-    }
-});
 

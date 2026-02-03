@@ -83,11 +83,7 @@ function lessonlms_handle_review_submission() {
 }
 add_action('init', 'lessonlms_handle_review_submission');
 
-
-
-
 /*==== Course Review Total Count and get Average Rating Update ====*/
-
 function lessonlms_update_review_stats($course_id)
 {
     $reviews = get_post_meta($course_id, '_course_reviews', true);

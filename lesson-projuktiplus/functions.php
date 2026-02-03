@@ -22,6 +22,7 @@ add_action( 'login_footer', 'lessonlms_login_footer' );
 
     // Core functions
     include_once $theme_dir . '/inc/enqueue.php';
+    include_once $theme_dir . '/inc/admin/admin-enqueue.php';
     include_once $theme_dir . '/inc/default.php';
 
     // include_once $theme_dir . '/def.php';

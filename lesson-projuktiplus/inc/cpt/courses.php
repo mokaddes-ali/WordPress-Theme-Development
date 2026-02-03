@@ -29,7 +29,7 @@ function lessonlms_custome_courses_register(){
         'show_ui'            => true,
         'show_in_menu'       => true,
         'query_var'          => true,
-         'rewrite'            => array( 'slug' => 'courses' ),
+         'rewrite'            => array( 'slug' => 'lessonlms_courses_slug' ),
         'capability_type'    => 'post',
         'has_archive'        => true,
         'hierarchical'       => false,

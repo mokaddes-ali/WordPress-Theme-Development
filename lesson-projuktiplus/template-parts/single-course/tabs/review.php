@@ -30,15 +30,18 @@
 
 <!-- Reviews Section -->
 <div class="courses-tab-content" id="reviews">
-    <h2 class="section-title">Students Review</h2>
+    <h2 class="section-title">
+        <?php echo esc_html__( 'Students Review', 'lessonlms' ); ?>
+    </h2>
 
     <!-- Warning (default: visible if not enrolled) -->
-    <p class="review-warning" style="<?php echo (!empty($is_enrolled)) ? 'display:none;' : 'display:block;'; ?>">
-        Please purchase course and login to submit a review.
+    <p class="review-warning" style="<?php echo (! empty( $is_enrolled ) ) ? 'display:none;' : 'display:block;'; ?>">
+         <?php echo esc_html__( 'Please purchase course and login to submit a review.', 'lessonlms' ); ?>
     </p>
 
    <!-- Review Form -->
-    <div class="student-form-wrapper" style="<?php echo (!empty($is_enrolled)) ? 'display:block;' : 'display:none;'; ?>">
+    <div class="student-form-wrapper" 
+    style="<?php echo ( ! empty($is_enrolled)) ? 'display:block;' : 'display:none;'; ?>">
     <div class="student-form">
         <h2 class="form-title"> 
             <?php echo esc_attr__("Add Review", "lessonlms");?>
@@ -63,13 +66,15 @@
             <div class="form-group">
                 <label for="reviewer_name">Your Name <span>*</span></label>
                 <input type="text" name="reviewer_name" id="reviewer_name"
-       value="<?php echo esc_attr($old_name); ?>" />
+                value="<?php echo esc_attr($old_name); ?>" />
             </div>
 
             <!-- Message -->
             <div class="form-group">
                 <label for="review_text">Your Message <span>*</span></label>
-                <textarea name="review_text" id="review_text"><?php echo esc_textarea($old_text); ?></textarea>
+                <textarea name="review_text" id="review_text">
+                    <?php echo esc_textarea($old_text); ?>
+            </textarea>
             </div>
 
             <!-- Submit Button -->
@@ -78,7 +83,7 @@
             </button>
         </form>
     </div>
-    </div>
+</div>
 
     <!-- Reviews List -->
     <div class="student-reviews">
