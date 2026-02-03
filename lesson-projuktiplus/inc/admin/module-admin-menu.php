@@ -131,19 +131,16 @@ function lessonlms_add_module_callback()
 
         <div class="modules-lists">
             <h2>
-                <?php echo esc_html__( 'Modules List', 'lessonlms' ); ?>
+                <?php echo esc_html__( 'Course List with module', 'lessonlms' ); ?>
             </h2>
             <table class="wp-list-table widefat fixed striped modules-table" id="course-modules-table">
                 <thead>
                     <tr>
                         <th>
-                            <?php echo esc_html__( 'Course', 'lessonlms' ); ?>
+                            <?php echo esc_html__( 'Course Name', 'lessonlms' ); ?>
                         </th>
                         <th>
-                            <?php echo esc_html__( 'Module Name', 'lessonlms' ); ?>
-                        </th>
-                        <th>
-                            <?php echo esc_html__( 'Status', 'lessonlms' ); ?>
+                            <?php echo esc_html__( 'Module Count', 'lessonlms' ); ?>
                         </th>
                         <th>
                             <?php echo esc_html__( 'Actions', 'lessonlms' ); ?>
@@ -152,46 +149,53 @@ function lessonlms_add_module_callback()
                 </thead>
                 <tbody>
                     <?php
-                    $modules = get_posts( array(
-                        'post_type'      => 'course_modules',
-                        'posts_per_page' => -1,
-                        'orderby'        => 'date',
-                        'order'          => 'DESC',
-                        'author'         => $user_id,
-                    ) );
+                      $courses = get_posts( array(
+                            'post_type'      => 'courses',
+                            'posts_per_page' => -1,
+                            'orderby'        => 'date',
+                            'order'          => 'DESC',
+                            'post_status'    => 'publish',
+                            'author'         => $user_id,
+                        ) );
+                        if ( ! empty( $courses ) ) :
+                        foreach ( $courses as $course ) :
+                            $modules_count = count( get_posts( array(
+                                'post_type'      => 'course_modules',
+                                'meta_key'       => '_lessonlms_course_id',
+                                'meta_value'     => $course->ID,
+                                'posts_per_page' => -1,
+                                'author'         => $user_id,
+                            ) ) );
 
-                    if ( ! empty( $modules ) ) :
-                        foreach ( $modules as $module ) :
-                            $course_id = get_post_meta($module->ID, '_lessonlms_course_id', true);
-                            $course_title = $course_id ? get_the_title($course_id) : '-';
-                            $module_name  = $module->post_title;
-                            $status       = get_post_meta($module->ID, '_lessonlms_module_status', true);
+                            if ( $modules_count === 0 ) {
+                                continue;
+                            }
+                            $has_module = true;
+                            $course_title = $course->post_title ? $course->post_title : '-';
                     ?>
-                        <tr data-id="<?php echo esc_attr( $module->ID ); ?>">
+                        <tr>
                             <td>
                                 <?php echo esc_html( $course_title ); ?>
                             </td>
                             <td class="module-name">
-                                <?php echo esc_html( $module_name ); ?>
-                            </td>
-                            <td class="module-status">
-                                <?php echo esc_html( ucfirst($status) ); ?>
+                                <?php echo esc_html( $modules_count ); ?>
                             </td>
                             <td>
-                                <button class="button lessonlms-edit" 
-                                        data-nonce="<?php echo wp_create_nonce( 'module-edit-nonce' ); ?>" 
-                                        data-id="<?php echo esc_attr( $module->ID ); ?>">
-                                    <?php echo esc_html__( 'Edit', 'lessonlms' ); ?>
-                                </button>
-                                <button class="button lessonlms-delete"
-                                        data-nonce="<?php echo wp_create_nonce( 'module-delete-nonce' ); ?>" 
-                                        data-id="<?php echo esc_attr( $module->ID ); ?>">
-                                    <?php echo esc_html__( 'Delete', 'lessonlms' ); ?>
-                                </button>
+                            <a href="<?php echo admin_url('admin.php?page=lessonlms_show_modules&course_id=' . $course->ID); ?>">
+                                <?php echo esc_html__( 'View Modules', 'lessonlms' ); ?>
+                            </a>
+
                             </td>
                         </tr>
                     <?php
                         endforeach;
+                        if ( ! $has_module ) :
+                    ?>
+                    <tr>
+                        <td colspan="3"><?php echo esc_html__( 'No courses with modules found.', 'lessonlms' ); ?></td>
+                    </tr>
+                    <?php
+                    endif;
                     else :
                     ?>
                         <tr>
@@ -206,4 +210,21 @@ function lessonlms_add_module_callback()
     </div>
 <?php
 }
+
+add_action('admin_menu', function() {
+    add_submenu_page(
+        null,
+        'Course Modules', 
+        'Course Modules', 
+        'manage_options',
+        'lessonlms_show_modules',
+        'lessonlms_modules_page_callback'
+    );
+});
+
+require __DIR__ . '/modules-list.php';
+
+
+
+
 

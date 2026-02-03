@@ -4,10 +4,13 @@
  * 
  * @package  lessonlms
  */
+function lessonlms_admin_enqueue() {
+    
+require __DIR__ . '/css-enqueue.php';
+require __DIR__ . '/js-enqueue.php';
 
-$stye_loader = require __DIR__ . '/css-enqueue.php';
-
-add_action( 'admin_enqueue_scripts', $stye_loader );
+}
+add_action( 'admin_enqueue_scripts', 'lessonlms_admin_enqueue' );
 
 // add_action( 'admin_enqueue_scripts', $stye_loader );
 // function lessonlms_admin_enqueue_css_js() {
