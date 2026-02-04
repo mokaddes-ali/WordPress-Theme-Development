@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
 
-    $(document).on('click', '.lessonlms-module-delete', function(e) {
+    $('.lessonlms-module-delete').on('click', function(e) {
         e.preventDefault();
 
         const deleteBtn = $(this);
@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
         if (!confirm('Are you sure? This module will be permanently deleted!')) return;
 
         $.ajax({
-            url: lessonlms_ajax_delete_module_obj.ajax_url,
+            url: ajaxurl,
             type: 'POST',
             data: {
                 action: 'lessonlms_delete_module',
