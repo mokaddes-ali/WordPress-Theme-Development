@@ -74,6 +74,8 @@ require_once get_template_directory() . '/inc/admin/ajax-function/add-module.php
 require_once get_template_directory() . '/inc/admin/add-menu-pages/module-details.php';
 require_once get_template_directory() . '/inc/admin/add-menu-pages/course-module-page.php';
 
+include_once get_template_directory() . '/inc/admin/callback-function/course-module-list.php';
+
     // Helpers
     include_once $theme_dir . '/inc/helpers/number-format.php';
     include_once $theme_dir . '/inc/helpers/image-structure.php';
