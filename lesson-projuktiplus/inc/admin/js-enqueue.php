@@ -17,10 +17,10 @@ wp_enqueue_script(
     true
 );
 
-wp_localize_script(
-    'admin-module-js',
-    'lessonlms_ajax_delete_module_obj',
-    array(
-        'ajax_url' => admin_url('admin-ajax.php')
-    )
+wp_enqueue_script(
+    'add-module-js',
+    $theme_uri . '/assets/js/admin/add-module.js',
+    array('jquery'),
+    time(),
+    true
 );

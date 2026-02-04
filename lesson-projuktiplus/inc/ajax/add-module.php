@@ -1,65 +1,21 @@
 <?php
-/**
- * Add Course Module
- * 
- * @package lessonlms
- */
+add_action( 'wp_ajax_lessonlms_add_module', 'lessonlms_add_course_module' );
+
 function lessonlms_add_course_module() {
-        $id       = 'course_module_box';
-        $title    = 'Add Course Modules';
-        $callback = 'lessonlms_add_course_module_callback';
-        $screen   = 'courses';
-        $context  = 'normal';
-        $priority = 'high';
 
-    add_meta_box( 
-        $id,
-        $title,
-        $callback,
-        $screen,
-        $context,
-        $priority,
-     );
-}
-
-function lessonlms_add_course_module_callback( $post ) {
-    $modules = get_post_meta( $post->ID, 'course_modules', true );
-    if ( ! is_array( $modules ) ) {
-        $modules = array();
+    if (
+        ! isset( $_POST['lessonlms_add_module_nonce_field'] ) ||
+        ! wp_verify_nonce(
+            $_POST['lessonlms_add_module_nonce_field'],
+            'lessonlms_add_module_nonce'
+        )
+    ) {
+        wp_send_json_error( 'Security check failed' );
     }
 
-    wp_nonce_field( 'save_course_modules', 'course_modules_nonce' );
-}
-?>
-
-<div class="add-module-button">
-    <button id="add-module-btn" type="button" class="black-btn">
-        Add Module
-    </button>
-</div>
-
-<script>
-    $add_module_btn =document.querySelector( '#add-module-btn' );
-    const inputOptions = new Promise((resolve) => {
-  setTimeout(() => {
-    resolve({
-      "#ff0000": "Red",
-      "#00ff00": "Green",
-      "#0000ff": "Blue"
-    });
-  }, 1000);
-});
-const { value: color } = await Swal.fire({
-  title: "Select color",
-  input: "radio",
-  inputOptions,
-  inputValidator: (value) => {
-    if (!value) {
-      return "You need to choose something!";
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( 'Permission denied' );
     }
-  }
-});
-if (color) {
-  Swal.fire({ html: `You selected: ${color}` });
+
+    wp_send_json_success( 'AJAX handler reached successfully 🎯' );
 }
-</script>

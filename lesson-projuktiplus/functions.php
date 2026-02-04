@@ -70,7 +70,9 @@ if (
 ) {
 	require_once $theme_dir . '/inc/admin/hide-admin-bar.php';
 }
-
+require_once get_template_directory() . '/inc/admin/ajax-function/add-module.php';
+require_once get_template_directory() . '/inc/admin/add-menu-pages/module-details.php';
+require_once get_template_directory() . '/inc/admin/add-menu-pages/course-module-page.php';
 
     // Helpers
     include_once $theme_dir . '/inc/helpers/number-format.php';
